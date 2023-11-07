@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,7 +9,9 @@ namespace Player
     public partial class Player : MonoBehaviour
     {
         public static Player Instance { get; private set; }
-
+    
+        [SerializeField,Tooltip("Table")]  KeybindTable _KeybindTable;
+        
         [ContextMenu("Call Start Function")]
         void Start()
         {
@@ -23,7 +26,7 @@ namespace Player
 
         void FixedUpdate()
         {
-            Move();
+            Movement();
         }
     }
 
@@ -33,12 +36,14 @@ namespace Player
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            if (GUILayout.Button("Reset Player"))
+            if (GUILayout.Button("Reset Player Variables"))
             {
                 var player = Player.Instance;
                 //TO DO
                 Debug.Log("Player variables has ben reset.");
             }
+
+
         }
     }
 
