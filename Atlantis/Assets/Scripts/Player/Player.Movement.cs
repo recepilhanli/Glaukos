@@ -61,9 +61,9 @@ namespace MainCharacter
             _Rigidbody.velocity = Vector2.ClampMagnitude(_Rigidbody.velocity, 25f);
             if (pos.x != 0)
             {
-                Vector3 euler = transform.eulerAngles;
+                Vector3 euler = transform.localEulerAngles;
                 euler.y = (pos.x < 0) ? 180 : 0;
-                transform.eulerAngles = euler;
+                transform.localEulerAngles = euler;
             }
 
         }
