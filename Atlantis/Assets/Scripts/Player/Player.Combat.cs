@@ -19,6 +19,9 @@ namespace MainCharacter
 
     public partial class Player : Entity
     {
+        public float Health = 100f;
+        public float Focus = 0.001f;
+
         public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
         {
             entity.OnTakeDamage(damage, type);
