@@ -31,9 +31,10 @@ public abstract class Entity : MonoBehaviour
     public virtual void OnDeath()
     {
         Debug.Log(gameObject.name + " is death.");
+        Destroy(gameObject);
     }
 
-    public virtual void TakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
+    public virtual void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
         Debug.Log(gameObject.name + " took a damage.");
     }

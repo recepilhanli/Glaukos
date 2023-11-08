@@ -26,7 +26,7 @@ namespace MainCharacter
 
         [SerializeField, Range(0, 1500), Tooltip("Maximum Speed of the Player")] float _Speed = 10f;
 
-        [SerializeField, Tooltip("Rigidbody of the Player")] Rigidbody2D _Rigidbody;
+        [Tooltip("Rigidbody of the Player")] public Rigidbody2D _Rigidbody;
 
         [SerializeField, Tooltip("Rigidbody of the Player")] SpriteRenderer _PlayerRenderer;
 
@@ -70,7 +70,7 @@ namespace MainCharacter
 
         void Jump()
         {
-            _Rigidbody.AddForce(new Vector2(0, 750), ForceMode2D.Impulse);
+            _Rigidbody.AddForce(new Vector2(0, 1000), ForceMode2D.Impulse);
         }
 
 

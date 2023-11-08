@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    ".NETStandard,Version=v2.1": {
-      "FolderIconsEditor/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "compile": {
-          "bin/placeholder/FolderIconsEditor.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FolderIconsEditor.dll": {}
-        }
-      }
-    }
+    ".NETStandard,Version=v2.1": {}
   },
-  "libraries": {
-    "FolderIconsEditor/1.0.0": {
-      "type": "project",
-      "path": "FolderIconsEditor.csproj",
-      "msbuildProject": "FolderIconsEditor.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    ".NETStandard,Version=v2.1": [
-      "FolderIconsEditor >= 1.0.0"
-    ]
+    ".NETStandard,Version=v2.1": []
   },
   "packageFolders": {
     "C:\\Users\\recep\\.nuget\\packages\\": {},
@@ -33,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\Assembly-CSharp.csproj",
-      "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\Assembly-CSharp.csproj",
+      "projectUniqueName": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\FolderIconsEditor.csproj",
+      "projectName": "FolderIconsEditor",
+      "projectPath": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\FolderIconsEditor.csproj",
       "packagesPath": "C:\\Users\\recep\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\obj\\",
       "projectStyle": "PackageReference",
@@ -57,11 +38,7 @@
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
-          "projectReferences": {
-            "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\FolderIconsEditor.csproj": {
-              "projectPath": "C:\\Users\\recep\\OneDrive\\Belgeler\\GitHub\\Atlantis\\Atlantis\\FolderIconsEditor.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

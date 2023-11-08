@@ -24,17 +24,18 @@ namespace MainCharacter
             Application.targetFrameRate = 60;
             Instance = this;
             Physics2D.IgnoreLayerCollision(3, 6);
-             Physics2D.IgnoreLayerCollision(6, 3);    
+            Physics2D.IgnoreLayerCollision(6, 3);
         }
 
         void Update()
         {
+            Movement();
         }
 
 
         void FixedUpdate()
         {
-            Movement();
+
         }
 
         public override EntityFlags GetEntityFlag()

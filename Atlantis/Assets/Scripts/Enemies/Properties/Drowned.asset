@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39c8962286d42c540b13c6d60b5f5fa0, type: 3}
-  m_Name: Shark
+  m_Name: Drowned
   m_EditorClassIdentifier: 
   Health: 100
-  Speed: 0.25
+  Speed: 500
   Damage: 10
-  CanSwim: 1
+  CanSwim: 0
