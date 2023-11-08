@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -46,8 +47,9 @@ public class LevelEditorGUI : Editor
 {
     public override void OnInspectorGUI()
     {
-        GUILayout.Label("Active Level/Scene: \n" + SceneManager.GetActiveScene().name + "\n\n");
-
+     
+        GUILayout.Label("\nActive Level/Scene:  " + SceneManager.GetActiveScene().name + "\n", EditorStyles.boldLabel);
+      
         base.OnInspectorGUI();
 
         if (LevelManager.Instance == null)
@@ -67,6 +69,7 @@ public class LevelEditorGUI : Editor
             LevelManager.Instance.GravityScale = 1;
             LevelManager.Instance.OrientGravity();
         }
+
 
     }
 }

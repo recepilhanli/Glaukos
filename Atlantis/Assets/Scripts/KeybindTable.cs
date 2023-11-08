@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Keybinds/Create Keybind Table", order = 1)]
+[CreateAssetMenu(fileName = "Keybind Table Example", menuName = "Atlantis/Keybinds/Create Keybind Table", order = 1)]
 public class KeybindTable : ScriptableObject
 {
 

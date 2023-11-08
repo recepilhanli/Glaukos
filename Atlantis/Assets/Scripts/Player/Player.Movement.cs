@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
-namespace Player
+namespace MainCharacter
 {
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Player
     /// </summary>
 
     [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(BoxCollider2D))]
-    public partial class Player : MonoBehaviour
+    public partial class Player : Entity
     {
 
         [Space]
@@ -28,35 +28,53 @@ namespace Player
 
         [SerializeField, Tooltip("Rigidbody of the Player")] Rigidbody2D _Rigidbody;
 
+        [SerializeField, Tooltip("Rigidbody of the Player")] SpriteRenderer _PlayerRenderer;
+
+        [SerializeField, Tooltip("Grounded Function's Layer Mask")] LayerMask _GroundMask;
+
+        [SerializeField, Tooltip("Grounded Function's Box' Bounds")] BoxCollider2D _PlayerCollider;
+
         private Vector3 m_Velocity = Vector3.zero;
-
-        [SerializeField, Tooltip("Layer Mask")] LayerMask groundMask;
-
-        [SerializeField, Tooltip("For Is Grounded Function")] Vector2 groundBox = new Vector2(0.5f, 0.2f);
 
         void Movement()
         {
             float x = Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime * _Speed;
             float y = Input.GetAxisRaw("Vertical") * Time.fixedDeltaTime * _Speed;
 
-            if (Input.GetKeyDown(_KeybindTable.JumpKey) && isGrounded() && LevelManager.Instance.GravityScale != 0)
+            bool grounded = isGrounded();
+
+            if (Input.GetKeyDown(_KeybindTable.JumpKey) && LevelManager.Instance.GravityScale != 0 && grounded)
             {
                 Jump();
             }
 
-            Vector3 targetVelocity = new Vector2(x * 10f,(LevelManager.Instance.GravityScale == 0) ? y * 10: _Rigidbody.velocity.y);
-            _Rigidbody.velocity = Vector3.SmoothDamp(_Rigidbody.velocity, targetVelocity, ref m_Velocity, .05f);
-            _Rigidbody.velocity = Vector3.ClampMagnitude(_Rigidbody.velocity, 25f);
+            Vector2 targetVelocity = new Vector2(x * 10f, (LevelManager.Instance.GravityScale == 0) ? y * 10 : _Rigidbody.velocity.y);
+            if (!grounded && LevelManager.Instance.GravityScale != 0) targetVelocity.x *= 0.75f;
+
+            Move(targetVelocity);
+        }
+
+
+        public override void Move(Vector2 pos)
+        {
+            _Rigidbody.velocity = Vector3.SmoothDamp(_Rigidbody.velocity, pos, ref m_Velocity, .05f);
+            _Rigidbody.velocity = Vector2.ClampMagnitude(_Rigidbody.velocity, 25f);
+            if (pos.x != 0)
+            {
+                Vector3 euler = transform.eulerAngles;
+                euler.y = (pos.x < 0) ? 180 : 0;
+                transform.eulerAngles = euler;
+            }
 
         }
 
         void Jump()
         {
-            _Rigidbody.AddForce(new Vector2(0, 120), ForceMode2D.Impulse);
+            _Rigidbody.AddForce(new Vector2(0, 750), ForceMode2D.Impulse);
         }
 
 
-        bool isGrounded() => Physics2D.BoxCast(transform.position, groundBox, 0, -transform.up, 0.5f, groundMask);
+        bool isGrounded() => Physics2D.BoxCast(_PlayerCollider.bounds.center, _PlayerCollider.bounds.size, 0, Vector2.down, 0.1f, _GroundMask);
 
 
     }

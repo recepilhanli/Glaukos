@@ -4,19 +4,27 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Player
+namespace MainCharacter
 {
-    public partial class Player : MonoBehaviour
+    public partial class Player : Entity
     {
         public static Player Instance { get; private set; }
-    
-        [SerializeField,Tooltip("Table")]  KeybindTable _KeybindTable;
-        
+
+        [SerializeField, Tooltip("Keybinding Table")] KeybindTable _KeybindTable;
+
+        [SerializeField, Tooltip("Entity Flag")] EntityFlags _Flag;
+
+        [SerializeField] LayerMask PlayerMask;
+        [SerializeField] LayerMask EnemyMask;
+
+
         [ContextMenu("Call Start Function")]
         void Start()
         {
             Application.targetFrameRate = 60;
             Instance = this;
+            Physics2D.IgnoreLayerCollision(3, 6);
+             Physics2D.IgnoreLayerCollision(6, 3);    
         }
 
         void Update()
@@ -27,6 +35,11 @@ namespace Player
         void FixedUpdate()
         {
             Movement();
+        }
+
+        public override EntityFlags GetEntityFlag()
+        {
+            return _Flag;
         }
     }
 
