@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.PlayerSettings;
@@ -25,6 +26,10 @@ namespace MainCharacter
 
         public Spear _Spear;
         public Transform _RightHand;
+
+        public AudioSource _Source;
+
+        public List<AudioClip> _Clips = new List<AudioClip>();
         void Combat()
         {
 
@@ -38,7 +43,12 @@ namespace MainCharacter
 
             if (_Spear._ThrowState != 0)
             {
-                if (Input.GetKeyDown(_KeybindTable.HeavyAttack)) _Spear.GetBackToThePlayer(false);
+                if (Input.GetKeyDown(_KeybindTable.HeavyAttack))
+                {
+                    _Spear.GetBackToThePlayer(false);
+                    _Source.clip = _Clips[2];
+                    _Source.Play();
+                }
                 return;
             }
 
@@ -55,12 +65,17 @@ namespace MainCharacter
                     worldPosition.z = 0;
                     _Spear.Throw(worldPosition);
 
+                    _Source.clip = _Clips[0];
+                    _Source.Play();
                     return;
                 }
                 _Animator.ResetTrigger("attack_standart");
                 _Animator.SetTrigger("attack_standart");
                 
                 _Spear._Animator.SetTrigger("Attack_Light");
+
+                _Source.clip = _Clips[1];
+                _Source.Play();
             }
 
 
@@ -70,6 +85,9 @@ namespace MainCharacter
                 _Animator.SetTrigger("attack_standart");
 
                 _Spear._Animator.SetTrigger("Attack_Heavy");
+
+                _Source.clip = _Clips[0];
+                _Source.Play();
             }
 
 

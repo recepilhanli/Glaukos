@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MainCharacter;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class Spear : MonoBehaviour
 {
@@ -45,7 +46,10 @@ public class Spear : MonoBehaviour
             float TempY = Player.Instance.transform.eulerAngles.y;
             euler.y = TempY;
             euler.z = -90;
-            transform.parent.localEulerAngles = euler;
+            transform.parent.eulerAngles= euler;
+
+
+ 
         }
         else
         {
