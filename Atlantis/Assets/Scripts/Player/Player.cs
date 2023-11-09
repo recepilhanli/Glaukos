@@ -10,12 +10,14 @@ namespace MainCharacter
     {
         public static Player Instance { get; private set; }
 
+        [Space]
+        [Header("Player")]
         [SerializeField, Tooltip("Keybinding Table")] KeybindTable _KeybindTable;
 
         [SerializeField, Tooltip("Entity Flag")] EntityFlags _Flag;
-
+        [SerializeField, Tooltip("Renderer of the Player's Sprite")] SpriteRenderer _PlayerRenderer;
         [SerializeField] LayerMask PlayerMask;
-        [SerializeField] LayerMask EnemyMask;
+        public LayerMask EnemyMask;
 
 
         [ContextMenu("Call Start Function")]
@@ -30,6 +32,7 @@ namespace MainCharacter
         void Update()
         {
             Movement();
+            Combat();
         }
 
 

@@ -10,12 +10,15 @@ public class Shark : Entity, IEnemyAI
 
     [SerializeField, Tooltip("Properties of the entity's")] EntityProperties _Properties;
 
-
+    [SerializeField] SpriteRenderer _Renderer;
     [SerializeField] float _NoticeDistance = 20f;
 
     [SerializeField] float _SeenDuration = 1f;
 
     [SerializeField] float MaxRoamingDistance = 40f;
+
+
+
 
     Vector3 m_Velocity = Vector3.zero;
 
@@ -77,7 +80,7 @@ public class Shark : Entity, IEnemyAI
             }
             else
             {
-                if (Vector2.Distance(_entity.transform.position, transform.position) < 1.3f) Attack(_entity, _DamageForPerAttack);
+                if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, _DamageForPerAttack);
                 else
                 {
                     Vector3 euler = transform.eulerAngles;
@@ -103,8 +106,6 @@ public class Shark : Entity, IEnemyAI
         entity.OnTakeDamage(damage, type);
         _IgnoreEntitesDuration = 2f + Time.time;
         _isEntitySeen = false;
-
-
     }
 
     public void OnDetected(Entity _entity)
@@ -116,13 +117,18 @@ public class Shark : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
-        _IgnoreEntitesDuration = 0;
+        _IgnoreEntitesDuration -= 0.5f;
+        Player.Instance.Focus += 15;
         _Health -= _h;
         if (_Health < 0) OnDeath();
+
+        StartCoroutine(DamageEffect());
     }
 
     public override void OnDeath()
     {
+        if(Player.Instance._Spear._ThrowState != 0) Player.Instance._Spear.GetBackToThePlayer(false);
+
         Destroy(gameObject);
     }
 
@@ -131,4 +137,11 @@ public class Shark : Entity, IEnemyAI
         return EntityFlags.Flag_Enemy;
     }
 
+    IEnumerator DamageEffect()
+    {
+        _Renderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        _Renderer.color = Color.white;
+        yield return null;
+    }
 }

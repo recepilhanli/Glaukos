@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using MainCharacter;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,10 +13,10 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-
-        FocusBar.value = 100 / Player.Instance.Focus;
-        HealthBar.value = 100 / Player.Instance.Health;
-
+        if(Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Menu");
+        
+        FocusBar.value = Player.Instance.Focus / 100;
+        HealthBar.value = Player.Instance.Health / 100;
 
     }
 }

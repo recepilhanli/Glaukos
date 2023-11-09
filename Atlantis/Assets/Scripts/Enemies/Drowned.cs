@@ -7,12 +7,14 @@ public class Drowned : Entity, IEnemyAI
 {
 
     [SerializeField, Tooltip("Properties of the entity's")] EntityProperties _Properties;
-    bool _isEntitySeen = false;
+
+    [SerializeField] SpriteRenderer _Renderer;
     [SerializeField] float _NoticeDistance = 10f;
 
     [SerializeField] float _SeenDuration = 0f;
 
     [SerializeField] Rigidbody2D _Rigidbody;
+    bool _isEntitySeen = false;
 
     float DamageDuration = 0f;
 
@@ -118,10 +120,18 @@ public class Drowned : Entity, IEnemyAI
     {
         _Health -= _h;
         if (_Health < 0) OnDeath();
+
+        Player.Instance.Focus += 10;
+
+        StartCoroutine(DamageEffect());
     }
 
     public override void OnDeath()
     {
+
+        if (Player.Instance._Spear._ThrowState != 0) Player.Instance._Spear.GetBackToThePlayer(false);
+
+
         Destroy(gameObject);
     }
 
@@ -130,5 +140,13 @@ public class Drowned : Entity, IEnemyAI
         return EntityFlags.Flag_Enemy;
     }
 
+
+    IEnumerator DamageEffect()
+    {
+        _Renderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        _Renderer.color = Color.white;
+        yield return null;
+    }
 
 }

@@ -8,12 +8,12 @@ namespace MainCharacter
 
     /// <summary>
     /// 
-    /// 
     /// Player.Movement.cs:
     /// Functions:
+    /// Movement();
     /// Move();
-    /// Gravity();
-    /// 
+    /// Jump();
+    /// isGrounded();
     /// 
     /// </summary>
 
@@ -28,7 +28,6 @@ namespace MainCharacter
 
         [Tooltip("Rigidbody of the Player")] public Rigidbody2D _Rigidbody;
 
-        [SerializeField, Tooltip("Rigidbody of the Player")] SpriteRenderer _PlayerRenderer;
 
         [SerializeField, Tooltip("Grounded Function's Layer Mask")] LayerMask _GroundMask;
 
