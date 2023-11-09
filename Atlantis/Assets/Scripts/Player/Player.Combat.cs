@@ -23,11 +23,7 @@ namespace MainCharacter
         public float Focus = 0f;
 
         public Spear _Spear;
-
-
-
-        public Cinemachine.CinemachineVirtualCamera virtualCamera;
-
+        public Transform _RightHand;
         void Combat()
         {
 
@@ -36,6 +32,7 @@ namespace MainCharacter
                 Focus -= 10;
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
+                Focus = Mathf.Clamp(Focus, 0, 100);
             }
 
             if (_Spear._ThrowState != 0)
@@ -50,8 +47,8 @@ namespace MainCharacter
                 {
                     Debug.Log("Throw Spear");
                     _Spear.transform.parent.SetParent(null);
-
-
+                    _Animator.ResetTrigger("attack_throw");
+                    _Animator.SetTrigger("attack_throw");
                     Vector3 mousePosition = Input.mousePosition;
                     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
                     worldPosition.z = 0;
@@ -61,13 +58,18 @@ namespace MainCharacter
 
                     return;
                 }
-
+                _Animator.ResetTrigger("attack_standart");
+                _Animator.SetTrigger("attack_standart");
+                
                 _Spear._Animator.SetTrigger("Attack_Light");
             }
 
 
             if (Input.GetKeyUp(_KeybindTable.HeavyAttack))
             {
+                _Animator.ResetTrigger("attack_standart");
+                _Animator.SetTrigger("attack_standart");
+
                 _Spear._Animator.SetTrigger("Attack_Heavy");
             }
 

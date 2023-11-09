@@ -38,7 +38,7 @@ public class Spear : MonoBehaviour
     {
         if (_instantly)
         {
-            transform.parent.SetParent(Player.Instance.transform);
+            transform.parent.SetParent(Player.Instance._RightHand);
             transform.parent.localPosition = SpearOffset;
             _ThrowState = 0;
             var euler = transform.parent.eulerAngles;

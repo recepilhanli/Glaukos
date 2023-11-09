@@ -28,10 +28,11 @@ namespace MainCharacter
 
         [Tooltip("Rigidbody of the Player")] public Rigidbody2D _Rigidbody;
 
-
         [SerializeField, Tooltip("Grounded Function's Layer Mask")] LayerMask _GroundMask;
 
         [SerializeField, Tooltip("Grounded Function's Box' Bounds")] BoxCollider2D _PlayerCollider;
+
+        [SerializeField, Tooltip("Player'^s Animator")] Animator _Animator;
 
         private Vector3 m_Velocity = Vector3.zero;
 
@@ -49,6 +50,10 @@ namespace MainCharacter
 
             Vector2 targetVelocity = new Vector2(x * 10f, (LevelManager.Instance.GravityScale == 0) ? y * 10 : _Rigidbody.velocity.y);
             if (!grounded && LevelManager.Instance.GravityScale != 0) targetVelocity.x *= 0.75f;
+
+
+            _Animator.SetBool("moving", (x != 0));
+            _Animator.SetBool("swimming", (LevelManager.Instance.GravityScale == 0));
 
             Move(targetVelocity);
         }
