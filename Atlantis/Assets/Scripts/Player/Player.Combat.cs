@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.PlayerSettings;
 
 namespace MainCharacter
 {
@@ -53,8 +54,6 @@ namespace MainCharacter
                     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
                     worldPosition.z = 0;
                     _Spear.Throw(worldPosition);
-
-
 
                     return;
                 }

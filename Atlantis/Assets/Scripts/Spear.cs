@@ -41,10 +41,11 @@ public class Spear : MonoBehaviour
             transform.parent.SetParent(Player.Instance._RightHand);
             transform.parent.localPosition = SpearOffset;
             _ThrowState = 0;
-            var euler = transform.parent.eulerAngles;
+            var euler = Vector3.zero;
             float TempY = Player.Instance.transform.eulerAngles.y;
             euler.y = TempY;
-            transform.parent.eulerAngles = euler;
+            euler.z = -90;
+            transform.parent.localEulerAngles = euler;
         }
         else
         {
@@ -101,6 +102,7 @@ public class Spear : MonoBehaviour
 
             var lerpedPos = Vector3.MoveTowards(transform.parent.position, _ThrowedPosition, 0.5f);
             transform.parent.position = lerpedPos;
+            transform.parent.Rotate(0, 0, Time.deltaTime * 800);
             return;
         }
 
@@ -109,6 +111,7 @@ public class Spear : MonoBehaviour
         {
             var lerpedPos = Vector3.Lerp(transform.parent.position, _ThrowedPosition, Time.deltaTime * 3);
             transform.parent.position = lerpedPos;
+           //ransform.parent.Rotate(0, 0, Time.deltaTime * 800);
         }
         else if (LevelManager.Instance.GravityScale != 0)
         {

@@ -88,7 +88,7 @@ public class Shark : Entity, IEnemyAI
                     else euler.y = 0;
                     transform.eulerAngles = euler;
 
-                    transform.position = Vector2.Lerp(transform.position, _entity.transform.position, _Properties.Speed / 2);
+                    transform.position = Vector2.Lerp(transform.position, _entity.transform.position, _Properties.Speed / 3);
 
                 }
             }
@@ -118,6 +118,10 @@ public class Shark : Entity, IEnemyAI
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
         _IgnoreEntitesDuration -= 0.5f;
+        if(_IgnoreEntitesDuration < Time.time)
+        {
+            OnDetected(Player.Instance);
+        }
         Player.Instance.Focus += 15;
         _Health -= _h;
         if (_Health < 0) OnDeath();
