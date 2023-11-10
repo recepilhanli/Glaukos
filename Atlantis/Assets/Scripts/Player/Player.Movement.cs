@@ -32,7 +32,7 @@ namespace MainCharacter
 
         [SerializeField, Tooltip("Grounded Function's Box' Bounds")] BoxCollider2D _PlayerCollider;
 
-        [SerializeField, Tooltip("Player'^s Animator")] Animator _Animator;
+        [Tooltip("Player'^s Animator")] public Animator PlayerAnimator;
 
         private Vector3 m_Velocity = Vector3.zero;
 
@@ -52,8 +52,12 @@ namespace MainCharacter
             if (!grounded && LevelManager.Instance.GravityScale != 0) targetVelocity.x *= 0.75f;
 
 
-            _Animator.SetBool("moving", (x != 0));
-            _Animator.SetBool("swimming", (LevelManager.Instance.GravityScale == 0));
+            PlayerAnimator.SetBool("moving", (x != 0) || (y != 0 && LevelManager.Instance.GravityScale == 0));
+
+
+
+
+            PlayerAnimator.SetBool("swimming", (LevelManager.Instance.GravityScale == 0));
 
             Move(targetVelocity);
         }

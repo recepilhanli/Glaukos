@@ -7,153 +7,162 @@ using static Unity.VisualScripting.Member;
 
 public class Spear : MonoBehaviour
 {
-    public Animator _Animator;
 
-    public byte _ThrowState { get; private set; } = 0;
+    public ThrowStates _ThrowState { get; private set; } = ThrowStates.STATE_NONE;
 
     private Vector2 _ThrowedPosition = Vector2.zero;
 
     [HideInInspector] public Vector2 SpearOffset = Vector2.zero;
 
+
+    public enum ThrowStates
+    {
+        STATE_NONE,
+        STATE_THROWING,
+        STATE_OVERLAPPED,
+        STATE_FLOATING,
+        STATE_GETTING_BACK,
+    }
+
     private void Start()
     {
-        SpearOffset = transform.parent.localPosition;
+        SpearOffset = transform.localPosition;
     }
 
     public void Throw(Vector2 pos)
     {
+        transform.SetParent(null);
         _ThrowedPosition = pos;
 
-        var euler = transform.parent.eulerAngles;
+        var euler = transform.eulerAngles;
         float tempY = (pos.x > 0) ? 0 : 180;
         euler.y = tempY;
-        transform.parent.eulerAngles = euler;
+        transform.eulerAngles = euler;
 
-        _ThrowState = 1;
-        _Animator.ResetTrigger("Attack_Light");
-        _Animator.ResetTrigger("Attack_Heavy");
-
+        _ThrowState = ThrowStates.STATE_THROWING;
     }
 
     public void GetBackToThePlayer(bool _instantly = false)
     {
         if (_instantly)
         {
-            transform.parent.SetParent(Player.Instance._RightHand);
-            transform.parent.localPosition = SpearOffset;
+            transform.SetParent(Player.Instance._RightHand);
+            transform.localPosition = SpearOffset;
             _ThrowState = 0;
             var euler = Vector3.zero;
             float TempY = Player.Instance.transform.eulerAngles.y;
             euler.y = TempY;
             euler.z = -90;
-            transform.parent.eulerAngles= euler;
-
-
- 
+            transform.eulerAngles = euler;
         }
         else
         {
-            transform.parent.SetParent(null);
-            _ThrowState = 5;
-
+            transform.SetParent(null);
+            _ThrowState = ThrowStates.STATE_GETTING_BACK;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+
+
+    void CollisionReaction(GameObject other)
     {
         if (_ThrowState == 0) return;
-        Debug.LogWarning(other.gameObject.tag);
-        if (other.gameObject.CompareTag("Player") && _ThrowState == 1) return;
-        else if (other.isTrigger) return;
+        var _other = other.GetComponent<Collider2D>();
+        if (_other == null) return;
 
-        if (other.gameObject.CompareTag("Player"))
+        else if (_other.isTrigger) return;
+
+        if (other.CompareTag("Player") && _ThrowState != ThrowStates.STATE_THROWING)
         {
             GetBackToThePlayer(true);
             return;
         }
-        if (_ThrowState == 5) return;
+        else if (other.CompareTag("Player") && _ThrowState == ThrowStates.STATE_THROWING) return;
+
+        if (_ThrowState == ThrowStates.STATE_GETTING_BACK) return;
 
 
+        Debug.Log(other + " -> throwing hit");
+        _ThrowState = ThrowStates.STATE_OVERLAPPED;
 
-        Debug.Log(other.gameObject + " -> throwing hit");
-        _ThrowState = 2;
 
-
-        if (other.gameObject.CompareTag("Puzzle"))
+        if (other.CompareTag("Puzzle"))
         {
             return;
         }
 
-        SendDamage(20f, true);
+        SendDamage(20f, true,_other);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        CollisionReaction(other.gameObject);
     }
 
 
     void Update()
     {
-        if (_ThrowState != 1 && _ThrowState != 3 && _ThrowState != 5) return;
+        if (_ThrowState != ThrowStates.STATE_THROWING && _ThrowState != ThrowStates.STATE_FLOATING && _ThrowState != ThrowStates.STATE_GETTING_BACK) return;
 
-        if (Vector2.Distance(Player.Instance.transform.position, transform.parent.position) <= 1.5f && _ThrowState == 5)
+        if (Vector2.Distance(Player.Instance.transform.position, transform.position) <= 1.5f && _ThrowState == ThrowStates.STATE_GETTING_BACK)
         {
             GetBackToThePlayer(true);
             return;
         }
-        else if (_ThrowState == 5)
+        else if (_ThrowState == ThrowStates.STATE_GETTING_BACK)
         {
             _ThrowedPosition = Player.Instance.transform.position;
-            var euler = transform.parent.eulerAngles;
+            var euler = transform.eulerAngles;
             float tempY = (_ThrowedPosition.x > 0) ? 180 : 0;
             euler.y = tempY;
-            transform.parent.eulerAngles = euler;
+            transform.eulerAngles = euler;
 
-            var lerpedPos = Vector3.MoveTowards(transform.parent.position, _ThrowedPosition, 0.5f);
-            transform.parent.position = lerpedPos;
-            transform.parent.Rotate(0, 0, Time.deltaTime * 800);
+            var lerpedPos = Vector3.MoveTowards(transform.position, _ThrowedPosition, 0.5f);
+            transform.position = lerpedPos;
+            transform.Rotate(0, 0, Time.deltaTime * 1000);
             return;
         }
 
 
-        if (Vector2.Distance(_ThrowedPosition, transform.parent.position) > 1 && _ThrowState != 3)
+        if (Vector2.Distance(_ThrowedPosition, transform.position) > 1 && _ThrowState != ThrowStates.STATE_FLOATING)
         {
-            var lerpedPos = Vector3.Lerp(transform.parent.position, _ThrowedPosition, Time.deltaTime * 3);
-            transform.parent.position = lerpedPos;
-           //ransform.parent.Rotate(0, 0, Time.deltaTime * 800);
-        }
-        else if (LevelManager.Instance.GravityScale != 0)
-        {
-            Debug.Log("Falling");
-            _ThrowState = 3;
-            var pos = transform.parent.position;
-            pos -= new Vector3(0, 1 * Time.deltaTime * 4, 0);
-            transform.parent.position = pos;
+            var lerpedPos = Vector3.Lerp(transform.position, _ThrowedPosition, Time.deltaTime * 3);
+            transform.position = lerpedPos;
         }
         else
         {
-            _ThrowState = 3;
+            Debug.Log("Floating");
+            _ThrowState = ThrowStates.STATE_FLOATING;
+            transform.Rotate(0, 0, Time.deltaTime * 30);
         }
 
     }
 
-    public void SendDamage(float damage, bool attach = false)
+    public void SendDamage(float damage, bool attach = false, Collider2D other = null)
     {
         if (damage == 0) return;
-        Debug.LogWarning("Damage");
+        Debug.Log("overlapping");
 
-        var other = Physics2D.OverlapCircle(transform.position, 1, Player.Instance.EnemyMask);
+        if (other == null) other = Physics2D.OverlapCircle(transform.position, 1.5f, Player.Instance.EnemyMask);
 
         if (!other) return;
+
+        Debug.Log("Overallped");
 
         if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Puzzle"))
         {
             var entity = other.gameObject.GetComponent<Entity>();
-            Debug.LogWarning("Damage object");
+
             if (entity != null)
             {
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
 
-                if (attach && entity != null && _ThrowState != 5)
+                if (attach && entity != null && _ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
-                    _ThrowState = 2;
-                    transform.parent.SetParent(entity.transform);
+                    _ThrowState = ThrowStates.STATE_OVERLAPPED;
+                    transform.SetParent(entity.transform);
                 }
 
             }

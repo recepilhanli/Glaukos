@@ -57,9 +57,8 @@ namespace MainCharacter
                 if (Input.GetKey(_KeybindTable.HeavyAttack))
                 {
                     Debug.Log("Throw Spear");
-                    _Spear.transform.parent.SetParent(null);
-                    _Animator.ResetTrigger("attack_throw");
-                    _Animator.SetTrigger("attack_throw");
+                    AttackState(2);
+
                     Vector3 mousePosition = Input.mousePosition;
                     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
                     worldPosition.z = 0;
@@ -69,10 +68,8 @@ namespace MainCharacter
                     _Source.Play();
                     return;
                 }
-                _Animator.ResetTrigger("attack_standart");
-                _Animator.SetTrigger("attack_standart");
-                
-                _Spear._Animator.SetTrigger("Attack_Light");
+                AttackState(1);
+
 
                 _Source.clip = _Clips[1];
                 _Source.Play();
@@ -81,10 +78,7 @@ namespace MainCharacter
 
             if (Input.GetKeyUp(_KeybindTable.HeavyAttack))
             {
-                _Animator.ResetTrigger("attack_standart");
-                _Animator.SetTrigger("attack_standart");
-
-                _Spear._Animator.SetTrigger("Attack_Heavy");
+                AttackState(1);
 
                 _Source.clip = _Clips[0];
                 _Source.Play();
@@ -130,6 +124,17 @@ namespace MainCharacter
             yield return null;
         }
 
+        void AttackState(int state)
+        {
+            StartCoroutine(AttackAnim(state));
+        }
+        IEnumerator AttackAnim(int state)
+        {
+            PlayerAnimator.SetInteger("attack_state", state);
+            yield return new WaitForSeconds(0.5f);
+            PlayerAnimator.SetInteger("attack_state", 0);
+            yield return null;
+        }
     }
 
 }
