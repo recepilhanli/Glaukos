@@ -15,10 +15,18 @@ namespace MainCharacter
         [SerializeField, Tooltip("Keybinding Table")] KeybindTable _KeybindTable;
 
         [SerializeField, Tooltip("Entity Flag")] EntityFlags _Flag;
+
+
+        [Space]
+        [Header("Visual")]
         [SerializeField, Tooltip("Renderer of the Player's Sprite")] SpriteRenderer _PlayerRenderer;
         [SerializeField] LayerMask PlayerMask;
         public LayerMask EnemyMask;
 
+        Cinemachine.CinemachineVirtualCamera _VirtualCamera;
+        float _LensSize = 8;
+
+        [SerializeField] Texture2D _CursorTexture;
 
         [ContextMenu("Call Start Function")]
         void Start()
@@ -27,6 +35,8 @@ namespace MainCharacter
             Instance = this;
             Physics2D.IgnoreLayerCollision(3, 6);
             Physics2D.IgnoreLayerCollision(6, 3);
+            _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+            //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 
         void Update()

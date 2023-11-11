@@ -30,16 +30,24 @@ namespace MainCharacter
         public AudioSource _Source;
 
         public List<AudioClip> _Clips = new List<AudioClip>();
+
+
+
         void Combat()
         {
+            _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 5);
+
+            if (Input.GetKey(_KeybindTable.HeavyAttack)) _LensSize = 11;
+            else _LensSize = 8;
+
 
             if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
             {
+                Focus = Mathf.Clamp(Focus, 0, 100);
                 Focus -= 10;
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
-                Focus = Mathf.Clamp(Focus, 0, 100);
-                UIManager.Instance.Fade(0,0.9f,0.1f);
+                UIManager.Instance.Fade(0, 0.9f, 0.1f);
             }
 
             if (_Spear._ThrowState != 0)
@@ -62,9 +70,11 @@ namespace MainCharacter
 
                     Vector3 mousePosition = Input.mousePosition;
                     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.lockState = CursorLockMode.None;
                     worldPosition.z = 0;
                     _Spear.Throw(worldPosition);
-
+                    _LensSize = 8;
                     _Source.clip = _Clips[0];
                     _Source.Play();
                     return;
@@ -77,12 +87,12 @@ namespace MainCharacter
             }
 
 
-            if (Input.GetKeyUp(_KeybindTable.HeavyAttack))
+            if (Input.GetKeyUp(_KeybindTable.HeavyAttack) && _VirtualCamera.m_Lens.OrthographicSize < 8.75f)
             {
                 AttackState(1);
-
                 _Source.clip = _Clips[0];
                 _Source.Play();
+                _LensSize = 8;
             }
 
 
@@ -111,10 +121,10 @@ namespace MainCharacter
             if (Health <= 0) OnDeath();
 
             Focus -= _h / 2;
-            Focus = Mathf.Clamp(Health, 0, 100);
+            Focus = Mathf.Clamp(Focus, 0, 100);
 
             StartCoroutine(DamageEffect());
-            UIManager.Instance.Fade(1,0f,0,4);
+            UIManager.Instance.Fade(1, 0f, 0, 4);
         }
 
 
