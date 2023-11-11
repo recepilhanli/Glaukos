@@ -39,6 +39,7 @@ namespace MainCharacter
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
                 Focus = Mathf.Clamp(Focus, 0, 100);
+                UIManager.Instance.Fade(0,0.9f,0.1f);
             }
 
             if (_Spear._ThrowState != 0)
@@ -113,6 +114,7 @@ namespace MainCharacter
             Focus = Mathf.Clamp(Health, 0, 100);
 
             StartCoroutine(DamageEffect());
+            UIManager.Instance.Fade(1,0f,0,4);
         }
 
 

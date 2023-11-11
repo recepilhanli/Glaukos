@@ -7,16 +7,50 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+
+    public static UIManager Instance = null;
+
     [SerializeField] Slider HealthBar;
     [SerializeField] Slider FocusBar;
 
+    [SerializeField] GameObject Focus_HealthIcon;
+    [SerializeField] GameObject Focus_RageIcon;
+
+    [SerializeField] Image FadeImage;
+    float fadeMultiplier;
+    public void Fade(float r, float g, float b, float speed = 2)
+    {
+        var color = new Color(r, g, b, 1f);
+        FadeImage.color = color;
+        fadeMultiplier = speed;
+    }
+
+    private void Start()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Menu");
-        
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Menu");
+
         FocusBar.value = Player.Instance.Focus / 100;
         HealthBar.value = Player.Instance.Health / 100;
+
+
+        if (Player.Instance.Focus >= 10 && Focus_HealthIcon.activeInHierarchy == false) Focus_HealthIcon.SetActive(true);
+        else if (Player.Instance.Focus < 10 && Focus_HealthIcon.activeInHierarchy == true) Focus_HealthIcon.SetActive(false);
+
+        if (Player.Instance.Focus >= 30 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
+        else if (Player.Instance.Focus < 30 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
+
+        if (FadeImage.color.a != 0)
+        {
+            var color = FadeImage.color;
+            color.a -= Time.deltaTime * fadeMultiplier;
+            color.a = Mathf.Clamp(color.a, 0, 1);
+            FadeImage.color = color;
+        }
 
     }
 }
