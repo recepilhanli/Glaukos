@@ -37,7 +37,7 @@ namespace MainCharacter
         {
             _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 5);
 
-            if (Input.GetKey(_KeybindTable.HeavyAttack)) _LensSize = 11;
+            if (Input.GetKey(_KeybindTable.HeavyAttack)) _LensSize = 12;
             else _LensSize = 8;
 
 
