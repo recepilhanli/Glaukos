@@ -122,7 +122,7 @@ public class Shark : Entity, IEnemyAI
         {
             OnDetected(Player.Instance);
         }
-        Player.Instance.Focus += 15;
+        if(type != AttackTypes.Attakc_Tornado) Player.Instance.Focus += 5;
         _Health -= _h;
         if (_Health < 0) OnDeath();
 
@@ -131,7 +131,7 @@ public class Shark : Entity, IEnemyAI
 
     public override void OnDeath()
     {
-        if(Player.Instance._Spear._ThrowState != 0) Player.Instance._Spear.GetBackToThePlayer(false);
+        if(Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
         Destroy(gameObject);
     }

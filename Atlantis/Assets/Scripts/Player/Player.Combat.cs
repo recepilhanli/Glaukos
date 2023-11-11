@@ -33,14 +33,17 @@ namespace MainCharacter
 
 
 
-        void Combat()
+        void CameraSize()
         {
-            _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 5);
+            _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 10);
 
             if (Input.GetKey(_KeybindTable.HeavyAttack)) _LensSize = 12;
             else _LensSize = 8;
+        }
 
 
+        void Consumable()
+        {
             if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
@@ -50,7 +53,31 @@ namespace MainCharacter
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
             }
 
-            if (_Spear._ThrowState != 0)
+
+            if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25)
+            {
+                Focus = Mathf.Clamp(Focus, 0, 100);
+                Focus -= 25;
+                _Spear.CreateTornado();
+                UIManager.Instance.Fade(1, 1, 1);
+            }
+
+
+            if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40)
+            {
+                Focus = Mathf.Clamp(Focus, 0, 100);
+                Focus -= 40;
+                _Spear.CreateSpearRain();
+                UIManager.Instance.Fade(1, 1, 1);
+            }
+
+        }
+
+
+        void Attacking()
+        {
+
+            if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE) //call back
             {
                 if (Input.GetKeyDown(_KeybindTable.HeavyAttack))
                 {
@@ -101,7 +128,16 @@ namespace MainCharacter
                 Debug.Log("Special Attack");
             }
 
+        }
 
+
+        void Combat()
+        {
+            CameraSize();
+
+            Consumable();
+
+            Attacking();
         }
 
         public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)

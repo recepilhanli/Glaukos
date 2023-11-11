@@ -33,8 +33,6 @@ namespace MainCharacter
         {
             Application.targetFrameRate = 60;
             Instance = this;
-            Physics2D.IgnoreLayerCollision(3, 6);
-            Physics2D.IgnoreLayerCollision(6, 3);
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }

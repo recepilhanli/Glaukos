@@ -18,6 +18,17 @@ public class LevelManager : MonoBehaviour
         Instance = this;
 
         OrientGravity();
+
+        Physics2D.IgnoreLayerCollision(3, 6);
+        Physics2D.IgnoreLayerCollision(6, 3);
+
+        Physics2D.IgnoreLayerCollision(3, 8);
+        Physics2D.IgnoreLayerCollision(8, 3);
+        Physics2D.IgnoreLayerCollision(6, 8);
+        Physics2D.IgnoreLayerCollision(8, 6);
+        Physics2D.IgnoreLayerCollision(7, 8);
+        Physics2D.IgnoreLayerCollision(8, 8);
+
     }
 
     // Update is called once per frame
@@ -47,9 +58,9 @@ public class LevelEditorGUI : Editor
 {
     public override void OnInspectorGUI()
     {
-     
+
         GUILayout.Label("\nActive Level/Scene:  " + SceneManager.GetActiveScene().name + "\n", EditorStyles.boldLabel);
-      
+
         base.OnInspectorGUI();
 
         if (LevelManager.Instance == null)

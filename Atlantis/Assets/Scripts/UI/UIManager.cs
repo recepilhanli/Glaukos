@@ -17,6 +17,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject Focus_RageIcon;
 
     [SerializeField] Image FadeImage;
+
+    [SerializeField] Image[] Consumables = new Image[3];
+
+    [SerializeField] Color AvailableColor;
+    [SerializeField] Color UnavailableColor;
+
+
+
     float fadeMultiplier;
     public void Fade(float r, float g, float b, float speed = 2)
     {
@@ -51,6 +59,13 @@ public class UIManager : MonoBehaviour
             color.a = Mathf.Clamp(color.a, 0, 1);
             FadeImage.color = color;
         }
+
+
+        if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
+        else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;
+
+        if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
+        else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
 
     }
 }
