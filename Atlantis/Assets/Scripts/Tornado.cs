@@ -43,9 +43,13 @@ public class Tornado : MonoBehaviour
 
     void Update()
     {
+        Player.Instance.CameraShake(1, 0.5f);
+
         foreach (var enemy in Enemies)
         {
             if (enemy == null) continue;
+
+
             _Body.velocity = Vector3.SmoothDamp(_Body.velocity, transform.right * Time.deltaTime * _TornadoSpeed, ref m_Velocity, .05f);
 
             if (Vector2.Distance(enemy.transform.position, transform.position) <= _AffectingDistance)

@@ -31,6 +31,7 @@ namespace MainCharacter
         [SerializeField] Texture2D _CursorTexture;
 
         [ContextMenu("Call Start Function")]
+
         void Start()
         {
             Application.targetFrameRate = 60;

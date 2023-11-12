@@ -149,7 +149,7 @@ public class Shark : Entity, IEnemyAI
 
         var pos = Vector3.zero;
         pos = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
-        transform.position = Vector3.SmoothDamp(transform.position, pos * 20, ref m_Velocity, 0.5f);
+        transform.position = Vector3.SmoothDamp(transform.position, pos * 100, ref m_Velocity, 5f);
 
 
         StartCoroutine(DamageEffect());
