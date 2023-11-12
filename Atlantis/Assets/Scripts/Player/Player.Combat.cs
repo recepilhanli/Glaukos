@@ -172,7 +172,7 @@ namespace MainCharacter
             yield return null;
         }
 
-        void AttackState(int state)
+        public void AttackState(int state)
         {
             StartCoroutine(AttackAnim(state));
         }

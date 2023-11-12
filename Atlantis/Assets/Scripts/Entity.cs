@@ -10,6 +10,7 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
 
+    [HideInInspector] public bool isDeath = false;
     public enum AttackTypes
     {
         Attack_Standart,

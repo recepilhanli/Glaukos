@@ -17,8 +17,11 @@ public class Shark : Entity, IEnemyAI
 
     [SerializeField] float MaxRoamingDistance = 40f;
 
+    [SerializeField] Sprite _DeathSprite;
 
+    [SerializeField] AudioSource _Source;
 
+    [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
 
     Vector3 m_Velocity = Vector3.zero;
 
@@ -47,6 +50,14 @@ public class Shark : Entity, IEnemyAI
 
     void Update()
     {
+        if (isDeath)
+        {
+            transform.Translate(0, -1 * Time.fixedDeltaTime, 0);
+            var _color = _Renderer.color;
+            _color.a -= Time.deltaTime / 4;
+            _Renderer.color = _color;
+            return;
+        }
         if (LevelManager.Instance.GravityScale != 0 && _Properties.CanSwim) OnDeath();
 
         var _entity = Player.Instance; //Could be changed with GetNearestEntity()
@@ -106,7 +117,16 @@ public class Shark : Entity, IEnemyAI
         entity.OnTakeDamage(damage, type);
         _IgnoreEntitesDuration = 2f + Time.time;
         _isEntitySeen = false;
+        PlaySound(0);
     }
+
+    void PlaySound(int index)
+    {
+        if (isDeath) return;
+        _Source.clip = _Clips[index];
+        _Source.Play();
+    }
+
 
     public void OnDetected(Entity _entity)
     {
@@ -117,23 +137,30 @@ public class Shark : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
+        if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if(_IgnoreEntitesDuration < Time.time)
+        if (_IgnoreEntitesDuration < Time.time)
         {
             OnDetected(Player.Instance);
         }
-        if(type != AttackTypes.Attakc_Tornado) Player.Instance.Focus += 5;
+        if (type != AttackTypes.Attakc_Tornado) Player.Instance.Focus += 5;
         _Health -= _h;
         if (_Health < 0) OnDeath();
+
+
 
         StartCoroutine(DamageEffect());
     }
 
     public override void OnDeath()
     {
-        if(Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
+        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
-        Destroy(gameObject);
+        _Renderer.sprite = _DeathSprite;
+        _Renderer.flipY = true;
+
+        isDeath = true;
+        gameObject.AddComponent<Destroyer>();
     }
 
     public override EntityFlags GetEntityFlag()
@@ -143,6 +170,9 @@ public class Shark : Entity, IEnemyAI
 
     IEnumerator DamageEffect()
     {
+        int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
+        PlaySound(randomindex);
+
         _Renderer.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         _Renderer.color = Color.white;

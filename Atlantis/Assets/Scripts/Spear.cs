@@ -77,6 +77,7 @@ public class Spear : MonoBehaviour
             euler.y = TempY;
             euler.z = -90;
             transform.eulerAngles = euler;
+            Player.Instance.AttackState(1);
         }
         else
         {
@@ -102,7 +103,11 @@ public class Spear : MonoBehaviour
         }
         else if (other.CompareTag("Player") && ThrowState == ThrowStates.STATE_THROWING) return;
 
-        if (ThrowState == ThrowStates.STATE_GETTING_BACK) return;
+        if (ThrowState == ThrowStates.STATE_GETTING_BACK)
+        {
+            SendDamage(2f, false, _other);
+            return;
+        }
 
 
         Debug.Log(other + " -> throwing hit");
@@ -179,6 +184,7 @@ public class Spear : MonoBehaviour
 
             if (entity != null)
             {
+                if (entity.isDeath) return;
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
                 Instantiate(BloodEffectPrefab, transform.position, quaternion.identity);
