@@ -78,6 +78,7 @@ public class Spear : MonoBehaviour
             euler.z = -90;
             transform.eulerAngles = euler;
             Player.Instance.AttackState(1);
+            Player.Instance.CameraShake(2,0.5f,0.001f);
         }
         else
         {

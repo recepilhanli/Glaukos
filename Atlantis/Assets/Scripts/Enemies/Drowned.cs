@@ -121,7 +121,7 @@ public class Drowned : Entity, IEnemyAI
         _Health -= _h;
         if (_Health < 0) OnDeath();
 
-        if(type != AttackTypes.Attakc_Tornado) Player.Instance.Focus += 10;
+        if (type != AttackTypes.Attakc_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 4;
 
         StartCoroutine(DamageEffect());
     }

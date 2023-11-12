@@ -12,6 +12,7 @@ public class KeybindTable : ScriptableObject
     public KeyCode HeavyAttack = KeyCode.Mouse1;
     public KeyCode SpecialAttack = KeyCode.Mouse2;
     public KeyCode HealKey = KeyCode.H;
+    public KeyCode RageKey = KeyCode.R;
     public KeyCode Using_Item_1 = KeyCode.Alpha1;
     public KeyCode Using_Item_2 = KeyCode.Alpha2;
     public KeyCode Using_Item_3 = KeyCode.Alpha3;

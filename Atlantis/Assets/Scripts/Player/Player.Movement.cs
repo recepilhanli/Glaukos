@@ -40,8 +40,9 @@ namespace MainCharacter
 
         void Movement()
         {
-            float x = Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime * _Speed;
-            float y = Input.GetAxisRaw("Vertical") * Time.fixedDeltaTime * _Speed;
+            float speed = (_Rage) ? _Speed * 2 : _Speed;
+            float x = Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime * speed;
+            float y = Input.GetAxisRaw("Vertical") * Time.fixedDeltaTime * speed;
 
             bool grounded = isGrounded();
 
@@ -92,7 +93,7 @@ namespace MainCharacter
         }
         IEnumerator Shake(float _t = 1f)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_t);
             _Perlin.m_AmplitudeGain = 0.75f;
             _Perlin.m_FrequencyGain = 0.05f;
             yield return null;

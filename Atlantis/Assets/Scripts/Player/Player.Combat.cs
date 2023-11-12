@@ -29,9 +29,43 @@ namespace MainCharacter
 
         public AudioSource _Source;
 
-        public List<AudioClip> _Clips = new List<AudioClip>();
+        [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
 
-  
+        [SerializeField] List<GameObject> _RageEffects = new List<GameObject>();
+
+        public bool _Rage { get; private set; } = false;
+
+        void RageCombat()
+        {
+            StartCoroutine(Rage());
+        }
+
+        IEnumerator Rage()
+        {
+            CameraShake(3, 0.8f, 0.01f);
+            UIManager.Instance.Fade(0.35f, 1f, 0.9f);
+            UIManager.Instance.StopFading = true;
+            _LensSize = 12f;
+
+            foreach (var _re in _RageEffects)
+            {
+                _re.SetActive(true);
+            }
+            _Rage = true;
+
+
+            yield return new WaitForSeconds(10f);
+
+            UIManager.Instance.StopFading = false;
+            _Rage = false;
+            foreach (var _re in _RageEffects)
+            {
+                _re.SetActive(false);
+            }
+
+            _LensSize = 8f;
+            yield return null;
+        }
 
         void CameraSize()
         {
@@ -60,6 +94,7 @@ namespace MainCharacter
                 Focus -= 25;
                 _Spear.CreateTornado();
                 UIManager.Instance.Fade(1, 1, 1);
+                CameraShake(2.0f, 0.5f, 0.01f);
             }
 
 
@@ -69,6 +104,15 @@ namespace MainCharacter
                 Focus -= 40;
                 _Spear.CreateSpearRain();
                 UIManager.Instance.Fade(1, 1, 1);
+                CameraShake(2.0f, 0.5f, 0.01f);
+            }
+
+
+            if (Input.GetKeyDown(_KeybindTable.RageKey) && Focus >= 85)
+            {
+                Focus = Mathf.Clamp(Focus, 0, 100);
+                Focus -= 85;
+                RageCombat();
             }
 
         }
@@ -104,6 +148,7 @@ namespace MainCharacter
                     _LensSize = 8;
                     _Source.clip = _Clips[0];
                     _Source.Play();
+                    CameraShake(2, 0.5f, 0.001f);
                     return;
                 }
                 AttackState(1);
@@ -143,8 +188,17 @@ namespace MainCharacter
         public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
         {
             if (damage == 0) return;
-            entity.OnTakeDamage(damage, type);
-            CameraShake(1.5f,0.5f,0.25f);
+            float _dmg = (_Rage) ? damage * 1.5f : damage;
+            entity.OnTakeDamage(_dmg, type);
+
+
+            if (_Rage)
+            {
+                Health += damage;
+                Mathf.Clamp(Health, 0, 100);
+                CameraShake(2f, 0.6f, 0.025f);
+            }
+            else CameraShake(1.75f, 0.5f, 0.02f);
         }
 
         public override void OnDeath()
@@ -154,6 +208,8 @@ namespace MainCharacter
 
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
         {
+            if (_Rage) return;
+
             Health -= _h;
             if (Health <= 0) OnDeath();
 
@@ -162,7 +218,7 @@ namespace MainCharacter
 
             StartCoroutine(DamageEffect());
             UIManager.Instance.Fade(1, 0f, 0, 4);
-            CameraShake(2.5f,0.75f,0.4f);
+            CameraShake(2.5f, 0.8f, 0.03f);
         }
 
 

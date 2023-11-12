@@ -24,10 +24,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] Color UnavailableColor;
 
 
+    public bool StopFading = false;
 
     float fadeMultiplier;
     public void Fade(float r, float g, float b, float speed = 2)
     {
+        if (StopFading) return;
         var color = new Color(r, g, b, 1f);
         FadeImage.color = color;
         fadeMultiplier = speed;
@@ -49,10 +51,10 @@ public class UIManager : MonoBehaviour
         if (Player.Instance.Focus >= 10 && Focus_HealthIcon.activeInHierarchy == false) Focus_HealthIcon.SetActive(true);
         else if (Player.Instance.Focus < 10 && Focus_HealthIcon.activeInHierarchy == true) Focus_HealthIcon.SetActive(false);
 
-        if (Player.Instance.Focus >= 30 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
-        else if (Player.Instance.Focus < 30 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
+        if (Player.Instance.Focus >= 85 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
+        else if (Player.Instance.Focus < 85 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
 
-        if (FadeImage.color.a != 0)
+        if (FadeImage.color.a != 0 && !StopFading)
         {
             var color = FadeImage.color;
             color.a -= Time.deltaTime * fadeMultiplier;

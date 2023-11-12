@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MainCharacter;
 using Unity.Mathematics;
+using UnityEditor.Build.Player;
 
 
 public class Shark : Entity, IEnemyAI
@@ -141,7 +142,7 @@ public class Shark : Entity, IEnemyAI
         {
             OnDetected(Player.Instance);
         }
-        if (type != AttackTypes.Attakc_Tornado) Player.Instance.Focus += 5;
+        if (type != AttackTypes.Attakc_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 5;
         _Health -= _h;
         if (_Health < 0) OnDeath();
 
@@ -149,7 +150,7 @@ public class Shark : Entity, IEnemyAI
 
         var pos = Vector3.zero;
         pos = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
-        transform.position = Vector3.SmoothDamp(transform.position, pos * 100, ref m_Velocity, 5f);
+        transform.position -= pos * 1.5f;
 
 
         StartCoroutine(DamageEffect());
