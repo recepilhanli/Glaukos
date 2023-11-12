@@ -75,11 +75,10 @@ public class Shark : Entity, IEnemyAI
                 }
                 else
                 {
-                    _RoamingPos = -transform.right * MaxRoamingDistance + transform.position;
-                    Vector3 euler = transform.eulerAngles;
-                    if ((_RoamingPos.x - transform.position.x) < 0) euler.y = 180;
-                    else euler.y = 0;
-                    transform.eulerAngles = euler;
+                    Vector3 right = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
+                    _RoamingPos = -right * MaxRoamingDistance + transform.position;
+                    if ((_RoamingPos.x - transform.position.x) < 0) _Renderer.flipX = true;
+                    else _Renderer.flipX = false;
                 }
             }
         }
@@ -94,10 +93,9 @@ public class Shark : Entity, IEnemyAI
                 if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, _DamageForPerAttack);
                 else
                 {
-                    Vector3 euler = transform.eulerAngles;
-                    if ((_entity.transform.position.x - transform.position.x) < 0) euler.y = 180;
-                    else euler.y = 0;
-                    transform.eulerAngles = euler;
+
+                    if ((_entity.transform.position.x - transform.position.x) < 0) _Renderer.flipX = true;
+                    else _Renderer.flipX = false;
 
                     transform.position = Vector2.Lerp(transform.position, _entity.transform.position, _Properties.Speed / 3);
 
@@ -147,6 +145,11 @@ public class Shark : Entity, IEnemyAI
         _Health -= _h;
         if (_Health < 0) OnDeath();
 
+        _HealthBar.value = _Health / 100;
+
+        var pos = Vector3.zero;
+        pos = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
+        transform.position = Vector3.SmoothDamp(transform.position, pos * 20, ref m_Velocity, 0.5f);
 
 
         StartCoroutine(DamageEffect());
@@ -161,6 +164,9 @@ public class Shark : Entity, IEnemyAI
 
         isDeath = true;
         gameObject.AddComponent<Destroyer>();
+        if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
+        Destroy(_HealthBar.gameObject);
+
     }
 
     public override EntityFlags GetEntityFlag()

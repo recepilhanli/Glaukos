@@ -24,6 +24,8 @@ namespace MainCharacter
         public LayerMask EnemyMask;
 
         Cinemachine.CinemachineVirtualCamera _VirtualCamera;
+        Cinemachine.CinemachineBasicMultiChannelPerlin _Perlin;
+
         float _LensSize = 8;
 
         [SerializeField] Texture2D _CursorTexture;
@@ -34,6 +36,7 @@ namespace MainCharacter
             Application.targetFrameRate = 60;
             Instance = this;
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+            _Perlin = _VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 

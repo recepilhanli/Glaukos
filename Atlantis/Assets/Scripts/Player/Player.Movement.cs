@@ -81,6 +81,20 @@ namespace MainCharacter
             _Rigidbody.AddForce(new Vector2(0, 1000), ForceMode2D.Impulse);
         }
 
+        public void CameraShake(float _a, float _f, float _t = 1f)
+        {
+            _Perlin.m_AmplitudeGain = _a;
+            _Perlin.m_FrequencyGain = _f;
+            StartCoroutine(Shake(_t));
+        }
+        IEnumerator Shake(float _t = 1f)
+        {
+            yield return new WaitForSeconds(1f);
+            _Perlin.m_AmplitudeGain = 0.75f;
+            _Perlin.m_FrequencyGain = 0.05f;            
+            yield return null;
+        }
+
 
         bool isGrounded() => Physics2D.BoxCast(_PlayerCollider.bounds.center, _PlayerCollider.bounds.size, 0, Vector2.down, 0.1f, _GroundMask);
 

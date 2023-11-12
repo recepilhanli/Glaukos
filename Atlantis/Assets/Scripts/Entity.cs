@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -10,7 +11,13 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
 
+    [Header("Entity Presets")]
+    [SerializeField] protected Slider _HealthBar = null;
+
     [HideInInspector] public bool isDeath = false;
+
+    protected Coroutine HealthBarCoroutine = null;
+
     public enum AttackTypes
     {
         Attack_Standart,
@@ -28,6 +35,22 @@ public abstract class Entity : MonoBehaviour
         Flag_Friendly,
         Flag_Neutral
 
+    }
+
+    public void OnHealthBarValueChanged()
+    {
+        if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
+        HealthBarCoroutine = StartCoroutine(HealthBarEffect());
+
+    }
+
+    IEnumerator HealthBarEffect()
+    {
+        _HealthBar.transform.eulerAngles = Vector3.zero;
+        _HealthBar.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        if (_HealthBar != null) _HealthBar.gameObject.SetActive(false);
+        yield return null;
     }
 
     public virtual void OnDeath()
@@ -52,6 +75,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     public abstract EntityFlags GetEntityFlag();
+
 }
 
 

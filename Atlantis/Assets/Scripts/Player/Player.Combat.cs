@@ -144,6 +144,7 @@ namespace MainCharacter
         {
             if (damage == 0) return;
             entity.OnTakeDamage(damage, type);
+            CameraShake(1,0.5f,0.5f);
         }
 
         public override void OnDeath()
@@ -161,6 +162,7 @@ namespace MainCharacter
 
             StartCoroutine(DamageEffect());
             UIManager.Instance.Fade(1, 0f, 0, 4);
+            CameraShake(1.25f,0.75f,0.6f);
         }
 
 
