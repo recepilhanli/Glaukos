@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
@@ -17,6 +18,7 @@ public class Spear : MonoBehaviour
 
     [HideInInspector] public Vector2 SpearOffset = Vector2.zero;
 
+    [SerializeField] GameObject BloodEffectPrefab;
 
     public enum ThrowStates
     {
@@ -179,7 +181,7 @@ public class Spear : MonoBehaviour
             {
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
-
+                Instantiate(BloodEffectPrefab, transform.position, quaternion.identity);
                 if (attach && entity != null && ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
                     ThrowState = ThrowStates.STATE_OVERLAPPED;

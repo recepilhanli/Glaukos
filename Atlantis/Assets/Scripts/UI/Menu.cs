@@ -2,9 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+
+    [SerializeField] Button ContinueButton;
+
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("g_Scene"))
+        {
+            ContinueButton.interactable = true;
+        }
+    }
 
     public void GetFirstLevel()
     {
@@ -17,8 +29,24 @@ public class Menu : MonoBehaviour
     }
 
 
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+
     public void Quit()
     {
         Application.Quit();
     }
+
+    public void Continue()
+    {
+        LevelManager.isLoadingGame = true;
+        string levelName = PlayerPrefs.GetString("g_Scene");
+        SceneManager.LoadScene(levelName);
+    }
+
+
+
 }

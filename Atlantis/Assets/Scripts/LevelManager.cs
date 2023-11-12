@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using MainCharacter;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     [Range(-2, 2)] public float GravityScale = 1f;
+
+    public static bool isLoadingGame = false;
 
     void Start()
     {
@@ -28,6 +31,11 @@ public class LevelManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 6);
         Physics2D.IgnoreLayerCollision(7, 8);
         Physics2D.IgnoreLayerCollision(8, 8);
+
+        if (isLoadingGame)
+        {
+            LoadGame();
+        }
 
     }
 
@@ -50,6 +58,44 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
+
+
+    #region  Temp Save-Load System
+
+    public static void SaveGame()
+    {
+        var pos = Player.Instance.transform.position;
+        PlayerPrefs.SetFloat("g_Pos_X", pos.x);
+        PlayerPrefs.SetFloat("g_Pos_Y", pos.y);
+        PlayerPrefs.SetFloat("g_Pos_Z", pos.z);
+
+        PlayerPrefs.SetFloat("g_Health", Player.Instance.Health);
+        PlayerPrefs.SetFloat("g_Focus", Player.Instance.Focus);
+
+        PlayerPrefs.SetString("g_Scene", SceneManager.GetActiveScene().name);
+
+        PlayerPrefs.Save();
+    }
+
+
+
+    public static void LoadGame()
+    {
+        Vector3 pos = Vector3.zero;
+        pos.x = PlayerPrefs.GetFloat("g_Pos_X");
+        pos.y = PlayerPrefs.GetFloat("g_Pos_Y");
+        pos.z = PlayerPrefs.GetFloat("g_Pos_Z");
+
+        Player.Instance.Health = PlayerPrefs.GetFloat("g_Health");
+        Player.Instance.Focus = PlayerPrefs.GetFloat("g_Focus");
+
+        Player.Instance.transform.position = pos;
+        isLoadingGame = false;
+    }
+
+    #endregion
+
 }
 
 
@@ -81,6 +127,18 @@ public class LevelEditorGUI : Editor
             LevelManager.Instance.OrientGravity();
         }
 
+        GUILayout.Space(2);
+        GUILayout.Label("\nSave & Load System:");
+
+        if (GUILayout.Button("Save Game"))
+        {
+            LevelManager.SaveGame();
+        }
+
+        if (GUILayout.Button("Load Game"))
+        {
+            LevelManager.LoadGame();
+        }
 
     }
 }

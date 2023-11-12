@@ -31,7 +31,7 @@ namespace MainCharacter
 
         public List<AudioClip> _Clips = new List<AudioClip>();
 
-
+  
 
         void CameraSize()
         {
@@ -148,7 +148,7 @@ namespace MainCharacter
 
         public override void OnDeath()
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Death");
         }
 
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
