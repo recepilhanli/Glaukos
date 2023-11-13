@@ -34,6 +34,7 @@ namespace MainCharacter
 
         void Start()
         {
+            Type = EntityType.Type_Player;
             Application.targetFrameRate = 60;
             Instance = this;
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();

@@ -36,27 +36,21 @@ public class Tornado : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision other)
-    {
-
-    }
-
     void Update()
     {
         Player.Instance.CameraShake(1, 0.5f);
+        _Body.velocity = Vector3.SmoothDamp(_Body.velocity, transform.right * Time.deltaTime * _TornadoSpeed, ref m_Velocity, .085f);
+
 
         foreach (var enemy in Enemies)
         {
             if (enemy == null) continue;
 
-
-            _Body.velocity = Vector3.SmoothDamp(_Body.velocity, transform.right * Time.deltaTime * _TornadoSpeed, ref m_Velocity, .05f);
-
             if (Vector2.Distance(enemy.transform.position, transform.position) <= _AffectingDistance)
             {
                 Vector2 toPos = enemy.transform.position - transform.position;
                 toPos.y = 0;
-                enemy.Move(-toPos * _TornadoSpeed);
+                if (enemy.Type != Entity.EntityType.Type_Shark) enemy.Move(-toPos * _TornadoSpeed);
                 if (_TornadoDamageTime <= Time.time) enemy.OnTakeDamage(5, Entity.AttackTypes.Attakc_Tornado);
             }
         }

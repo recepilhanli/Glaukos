@@ -14,9 +14,12 @@ public abstract class Entity : MonoBehaviour
     [Header("Entity Presets")]
     [SerializeField] protected Slider _HealthBar = null;
 
-    [HideInInspector] public bool isDeath = false;
+    [HideInInspector] public bool isDeath {get; protected set;} = false;
 
     protected Coroutine HealthBarCoroutine = null;
+
+    [HideInInspector] public EntityType Type { get; protected set; }
+
 
     public enum AttackTypes
     {
@@ -36,6 +39,15 @@ public abstract class Entity : MonoBehaviour
         Flag_Neutral
 
     }
+    public enum EntityType
+    {
+        Type_Player,
+        Type_Drowned,
+        Type_Shark,
+
+    }
+
+
 
     public void OnHealthBarValueChanged()
     {

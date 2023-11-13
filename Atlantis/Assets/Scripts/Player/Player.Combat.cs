@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using static UnityEditor.PlayerSettings;
 
@@ -71,13 +72,14 @@ namespace MainCharacter
         {
             _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 10);
 
-            if (Input.GetKey(_KeybindTable.HeavyAttack)) _LensSize = 12;
-            else _LensSize = 8;
+            if (Input.GetKey(_KeybindTable.HeavyAttack) && !isDeath && !_Rage) _LensSize = 12;
+            else if (!_Rage && !isDeath) _LensSize = 8;
         }
 
 
         void Consumable()
         {
+
             if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
@@ -180,6 +182,8 @@ namespace MainCharacter
         {
             CameraSize();
 
+            if (isDeath) return;
+
             Consumable();
 
             Attacking();
@@ -203,12 +207,29 @@ namespace MainCharacter
 
         public override void OnDeath()
         {
+            isDeath = true;
+            StartCoroutine(DeathSequence());
+        }
+
+        IEnumerator DeathSequence()
+        {
+            var _g = GameObject.Find("Global Light 2D");
+            if (_g != null) _g.GetComponent<Light2D>().intensity = 0.25f;
+            _LensSize = 4f;
+            _PlayerRenderer.color = new Color(0.3f, 0.3f, 0.3f);
+            transform.eulerAngles = new Vector3(0, 0, 90);
+            _Rigidbody.isKinematic = true;
+            _Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            Time.timeScale = 0.4f;
+            yield return new WaitForSeconds(2f);
+            Time.timeScale = 1f;
             SceneManager.LoadScene("Death");
+            yield return null;
         }
 
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
         {
-            if (_Rage) return;
+            if (_Rage || isDeath) return;
 
             Health -= _h;
             if (Health <= 0) OnDeath();

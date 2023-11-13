@@ -40,6 +40,7 @@ namespace MainCharacter
 
         void Movement()
         {
+            if (isDeath) return;
             float speed = (_Rage) ? _Speed * 2 : _Speed;
             float x = Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime * speed;
             float y = Input.GetAxisRaw("Vertical") * Time.fixedDeltaTime * speed;

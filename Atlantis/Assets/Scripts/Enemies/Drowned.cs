@@ -22,15 +22,16 @@ public class Drowned : Entity, IEnemyAI
 
     float _Health = 100f;
 
+    float _Right = 1;
+
+    private Vector3 m_Velocity = Vector3.zero;
+
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
         _DamageForPerAttack = _properties.Damage;
+        Type = EntityType.Type_Drowned;
     }
-
-    float _Right = 1;
-
-    private Vector3 m_Velocity = Vector3.zero;
 
     void Start()
     {
@@ -118,8 +119,12 @@ public class Drowned : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
+
+
         _Health -= _h;
         if (_Health < 0) OnDeath();
+
+        _HealthBar.value = _Health / 100;
 
         if (type != AttackTypes.Attakc_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 4;
 
@@ -131,6 +136,7 @@ public class Drowned : Entity, IEnemyAI
 
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
+        Destroy(_HealthBar.gameObject);
 
         Destroy(gameObject);
     }

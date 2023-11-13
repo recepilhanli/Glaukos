@@ -40,6 +40,7 @@ public class Shark : Entity, IEnemyAI
     {
         _Health = _properties.Health;
         _DamageForPerAttack = _properties.Damage;
+        Type = EntityType.Type_Shark;
     }
 
 
@@ -70,16 +71,13 @@ public class Shark : Entity, IEnemyAI
             {
                 if (_RoamingPos != Vector2.zero)
                 {
-                    transform.position = Vector3.SmoothDamp(transform.position, _RoamingPos, ref m_Velocity, 1 / _Properties.Speed);
+                    Move(_RoamingPos);
                     if (Vector2.Distance(transform.position, _RoamingPos) < 2f) _RoamingPos = Vector2.zero;
-
                 }
                 else
                 {
                     Vector3 right = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
                     _RoamingPos = -right * MaxRoamingDistance + transform.position;
-                    if ((_RoamingPos.x - transform.position.x) < 0) _Renderer.flipX = true;
-                    else _Renderer.flipX = false;
                 }
             }
         }
@@ -92,17 +90,26 @@ public class Shark : Entity, IEnemyAI
             else
             {
                 if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, _DamageForPerAttack);
-                else
-                {
+                else Move(_entity.transform.position);
 
-                    if ((_entity.transform.position.x - transform.position.x) < 0) _Renderer.flipX = true;
-                    else _Renderer.flipX = false;
 
-                    transform.position = Vector2.Lerp(transform.position, _entity.transform.position, _Properties.Speed / 3);
-
-                }
             }
         }
+    }
+
+
+    public override void Move(Vector2 pos)
+    {
+        if ((pos.x - transform.position.x) < 0) _Renderer.flipX = true;
+        else _Renderer.flipX = false;
+
+        float speed = (_isEntitySeen) ? _Properties.Speed * 40 : _Properties.Speed * 2.5f;
+        transform.position = Vector3.SmoothDamp(transform.position, pos, ref m_Velocity, 1 / speed);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == 0) _RoamingPos = Vector2.zero;
     }
 
 
@@ -138,7 +145,7 @@ public class Shark : Entity, IEnemyAI
     {
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if (_IgnoreEntitesDuration < Time.time)
+        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attakc_Tornado)
         {
             OnDetected(Player.Instance);
         }
