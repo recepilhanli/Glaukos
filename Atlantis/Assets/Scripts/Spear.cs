@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
-public class Spear : MonoBehaviour
+public class Spear : Weapons
 {
 
     public ThrowStates ThrowState { get; private set; } = ThrowStates.STATE_NONE;
@@ -49,6 +49,7 @@ public class Spear : MonoBehaviour
 
     private void Start()
     {
+        Type = Weapon_Types.Type_Spear;
         SpearOffset = transform.localPosition;
     }
 
@@ -78,7 +79,7 @@ public class Spear : MonoBehaviour
             euler.z = -90;
             transform.eulerAngles = euler;
             Player.Instance.AttackState(1);
-            Player.Instance.CameraShake(2,0.5f,0.001f);
+            Player.Instance.CameraShake(2, 0.5f, 0.001f);
         }
         else
         {
@@ -179,7 +180,7 @@ public class Spear : MonoBehaviour
 
         Debug.Log("Overallped");
 
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Puzzle"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             var entity = other.gameObject.GetComponent<Entity>();
 
@@ -197,6 +198,14 @@ public class Spear : MonoBehaviour
 
             }
         }
+
+        if (other.gameObject.CompareTag("Props"))
+        {
+            var prop = other.gameObject.GetComponent<Props>();
+            if (prop != null) prop.Break();
+        }
+
+
     }
 
 

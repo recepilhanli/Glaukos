@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Color AvailableColor;
     [SerializeField] Color UnavailableColor;
 
+    [SerializeField] GameObject TitlePrefab;
 
     public bool StopFading = false;
 
@@ -42,7 +43,11 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Menu");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
+            else SceneManager.LoadScene("Menu");
+        }
 
         FocusBar.value = Player.Instance.Focus / 100;
         HealthBar.value = Player.Instance.Health / 100;
@@ -69,5 +74,12 @@ public class UIManager : MonoBehaviour
         if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
         else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
 
+    }
+
+
+    public void ShowTitle(string text)
+    {
+        var go = Instantiate(TitlePrefab);
+        go.GetComponent<Title>().ShowTitle(text, .4f);
     }
 }

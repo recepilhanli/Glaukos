@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         if (PlayerPrefs.HasKey("g_Scene"))
         {
             ContinueButton.interactable = true;

@@ -83,7 +83,7 @@ namespace MainCharacter
             if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
-                Focus -= 10;
+                GiveFocusPoints(-10);
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
@@ -93,7 +93,7 @@ namespace MainCharacter
             if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
-                Focus -= 25;
+                GiveFocusPoints(-25);
                 _Spear.CreateTornado();
                 UIManager.Instance.Fade(1, 1, 1);
                 CameraShake(2.0f, 0.5f, 0.01f);
@@ -103,7 +103,7 @@ namespace MainCharacter
             if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
-                Focus -= 40;
+                GiveFocusPoints(-40);
                 _Spear.CreateSpearRain();
                 UIManager.Instance.Fade(1, 1, 1);
                 CameraShake(2.0f, 0.5f, 0.01f);
@@ -113,7 +113,7 @@ namespace MainCharacter
             if (Input.GetKeyDown(_KeybindTable.RageKey) && Focus >= 85)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
-                Focus -= 85;
+                GiveFocusPoints(-85);
                 RageCombat();
             }
 
@@ -262,6 +262,13 @@ namespace MainCharacter
             PlayerAnimator.SetInteger("attack_state", 0);
             yield return null;
         }
-    }
 
+
+        public void GiveFocusPoints(float point)
+        {
+            Instance.Focus += point; //Instance using for events
+            Mathf.Clamp(Instance.Focus, 0, 100);
+        }
+
+    }
 }

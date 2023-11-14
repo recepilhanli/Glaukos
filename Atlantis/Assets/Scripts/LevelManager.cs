@@ -34,10 +34,12 @@ public class LevelManager : MonoBehaviour
 
         if (isLoadingGame)
         {
-            LoadGame();
+            Invoke("LoadGame", 0.05f);
         }
 
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -63,7 +65,7 @@ public class LevelManager : MonoBehaviour
 
     #region  Temp Save-Load System
 
-    public static void SaveGame()
+    public void SaveGame()
     {
         var pos = Player.Instance.transform.position;
         PlayerPrefs.SetFloat("g_Pos_X", pos.x);
@@ -80,7 +82,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-    public static void LoadGame()
+    public void LoadGame()
     {
         Vector3 pos = Vector3.zero;
         pos.x = PlayerPrefs.GetFloat("g_Pos_X");
@@ -132,12 +134,14 @@ public class LevelEditorGUI : Editor
 
         if (GUILayout.Button("Save Game"))
         {
-            LevelManager.SaveGame();
+            if (!Application.isPlaying) return;
+            LevelManager.Instance.SaveGame();
         }
 
         if (GUILayout.Button("Load Game"))
         {
-            LevelManager.LoadGame();
+            if (!Application.isPlaying) return;
+            LevelManager.Instance.LoadGame();
         }
 
     }
