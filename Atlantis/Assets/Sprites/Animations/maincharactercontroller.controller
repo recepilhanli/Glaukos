@@ -361,6 +361,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -8179611191841068099}
     m_Position: {x: 120, y: 140, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6805198574220009026}
+    m_Position: {x: 155, y: 205, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 609661633772191064}
@@ -371,12 +374,12 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 609661633772191064}
-    second:
-    - {fileID: 411216774823721992}
   - first: {fileID: -1738430814663210973}
     second:
     - {fileID: 3312978755274780328}
+  - first: {fileID: 609661633772191064}
+    second:
+    - {fileID: 411216774823721992}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -200, y: 90, z: 0}
   m_EntryPosition: {x: 140, y: 80, z: 0}
@@ -717,6 +720,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &6805198574220009026
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DMEO
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: ae682f8be23f07c4d93c6158a5a4923e, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &7136660761360835894
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
