@@ -19,6 +19,8 @@ public class Spear : Weapons
     [HideInInspector] public Vector2 SpearOffset = Vector2.zero;
 
     [SerializeField] GameObject BloodEffectPrefab;
+    [SerializeField] GameObject BubbleEffect;
+
 
     public enum ThrowStates
     {
@@ -64,6 +66,9 @@ public class Spear : Weapons
         transform.eulerAngles = euler;
 
         ThrowState = ThrowStates.STATE_THROWING;
+
+        if (Player.Instance._Rigidbody.gravityScale == 0) BubbleEffect.SetActive(true);
+
     }
 
     public void GetBackToThePlayer(bool _instantly = false)
@@ -80,6 +85,7 @@ public class Spear : Weapons
             transform.eulerAngles = euler;
             Player.Instance.AttackState(1);
             Player.Instance.CameraShake(2, 0.5f, 0.001f);
+            BubbleEffect.SetActive(false);
         }
         else
         {

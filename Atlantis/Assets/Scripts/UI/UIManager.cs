@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject Focus_RageIcon;
 
     [SerializeField] Image FadeImage;
+    [SerializeField] Image DeathFade;
 
     [SerializeField] Image[] Consumables = new Image[3];
 
@@ -74,6 +75,12 @@ public class UIManager : MonoBehaviour
         if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
         else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
 
+        if (Player.Instance.isDeath)
+        {
+            var color = DeathFade.color;
+            color.a += Time.deltaTime/2;
+            DeathFade.color = color;
+        }
     }
 
 
