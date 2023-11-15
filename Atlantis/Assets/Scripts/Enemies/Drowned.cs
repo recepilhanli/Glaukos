@@ -8,12 +8,16 @@ public class Drowned : Entity, IEnemyAI
 
     [SerializeField, Tooltip("Properties of the entity's")] EntityProperties _Properties;
 
-    [SerializeField] SpriteRenderer _Renderer;
+    [SerializeField] GameObject DrownedSpriteParent;
     [SerializeField] float _NoticeDistance = 10f;
 
     [SerializeField] float _SeenDuration = 0f;
 
     [SerializeField] Rigidbody2D _Rigidbody;
+
+    [SerializeField] Animator _Animator;
+
+
     bool _isEntitySeen = false;
 
     float DamageDuration = 0f;
@@ -85,11 +89,14 @@ public class Drowned : Entity, IEnemyAI
 
     public override void Move(Vector2 pos)
     {
+        _Animator.SetBool("isSeen", _isEntitySeen);
         _Rigidbody.velocity = Vector3.SmoothDamp(_Rigidbody.velocity, pos, ref m_Velocity, .05f);
         _Rigidbody.velocity = Vector2.ClampMagnitude(_Rigidbody.velocity, 25f);
         if (pos.x != 0)
-        {  
-            _Renderer.flipX = (pos.x < 0) ? true : false;
+        {
+            var euler = DrownedSpriteParent.transform.eulerAngles;
+            euler.y = (pos.x < 0) ? 0 : 180;
+            DrownedSpriteParent.transform.eulerAngles = euler;
         }
 
     }
@@ -104,9 +111,12 @@ public class Drowned : Entity, IEnemyAI
         force.x = (euler.y == 0) ? 2000 : -2000;
         Player.Instance._Rigidbody.AddForce(force, ForceMode2D.Impulse);
 
-
         entity.OnTakeDamage(damage, type);
         DamageDuration = Time.time + 1.5f;
+
+        _Animator.ResetTrigger("attack");
+        _Animator.SetTrigger("attack");
+
     }
 
     public void OnDetected(Entity _entity)
@@ -147,9 +157,16 @@ public class Drowned : Entity, IEnemyAI
 
     IEnumerator DamageEffect()
     {
-        _Renderer.color = Color.red;
+        var Renderers = DrownedSpriteParent.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = Color.red;
+        }
         yield return new WaitForSeconds(0.2f);
-        _Renderer.color = Color.white;
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = Color.white;
+        }
         yield return null;
     }
 

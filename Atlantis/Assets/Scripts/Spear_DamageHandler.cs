@@ -7,6 +7,11 @@ public class Spear_DamageHandler : MonoBehaviour
 {
     public void HandleDamage(float dmg)
     {
-        Player.Instance._Spear.SendDamage(dmg);
+        if (dmg < 0)
+        {
+            Player.Instance._Spear.SendDamage(-dmg, false, null, true);
+            Debug.Log("Punch");
+        }
+        else Player.Instance._Spear.SendDamage(dmg, false, null, false);
     }
 }

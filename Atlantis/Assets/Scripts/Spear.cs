@@ -22,6 +22,7 @@ public class Spear : Weapons
     [SerializeField] GameObject BubbleEffect;
 
 
+
     public enum ThrowStates
     {
         STATE_NONE,
@@ -83,7 +84,7 @@ public class Spear : Weapons
             euler.y = TempY;
             euler.z = -90;
             transform.eulerAngles = euler;
-            Player.Instance.AttackState(1);
+            Player.Instance.AttackState(2);
             Player.Instance.CameraShake(2, 0.5f, 0.001f);
             BubbleEffect.SetActive(false);
         }
@@ -175,12 +176,18 @@ public class Spear : Weapons
 
     }
 
-    public void SendDamage(float damage, bool attach = false, Collider2D other = null)
+    public void SendDamage(float damage, bool attach = false, Collider2D other = null, bool fromPlayer = false)
     {
         if (damage == 0) return;
         Debug.Log("overlapping");
 
-        if (other == null) other = Physics2D.OverlapCircle(transform.position, 1.5f, Player.Instance.EnemyMask);
+        Vector3 pos = transform.position;
+        if (fromPlayer)
+        {
+            Debug.Log("From Player");
+            pos = Player.Instance.transform.position;
+        }
+        if (other == null) other = Physics2D.OverlapCircle(pos, 1.5f, Player.Instance.EnemyMask);
 
         if (!other) return;
 
@@ -195,7 +202,7 @@ public class Spear : Weapons
                 if (entity.isDeath) return;
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
-                Instantiate(BloodEffectPrefab, transform.position, transform.rotation);
+                Instantiate(BloodEffectPrefab, pos, transform.rotation);
                 if (attach && entity != null && ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
                     ThrowState = ThrowStates.STATE_OVERLAPPED;

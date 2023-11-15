@@ -36,6 +36,8 @@ namespace MainCharacter
 
         public bool _Rage { get; private set; } = false;
 
+        bool _PunchState = false;
+
         void RageCombat()
         {
             StartCoroutine(Rage());
@@ -68,7 +70,7 @@ namespace MainCharacter
             yield return null;
         }
 
-   
+
 
 
         void Consumable()
@@ -113,7 +115,6 @@ namespace MainCharacter
 
         }
 
-
         void Attacking()
         {
 
@@ -125,6 +126,20 @@ namespace MainCharacter
                     _Source.clip = _Clips[2];
                     _Source.Play();
                 }
+
+                if (Input.GetKeyDown(_KeybindTable.Attack))
+                {
+                    _PunchState = !_PunchState;
+
+                    AttackState((_PunchState) ? 10 : 20);
+
+                    _Source.clip = _Clips[0];
+                    _Source.Play();
+                }
+
+
+
+
                 return;
             }
 
@@ -157,7 +172,7 @@ namespace MainCharacter
 
             if (Input.GetKeyUp(_KeybindTable.HeavyAttack) && _VirtualCamera.m_Lens.OrthographicSize < 8.75f)
             {
-                AttackState(1);
+                AttackState(3);
                 _Source.clip = _Clips[0];
                 _Source.Play();
                 _LensSize = 8;
@@ -200,6 +215,7 @@ namespace MainCharacter
         public override void OnDeath()
         {
             isDeath = true;
+            AttackState(-1);
             StartCoroutine(DeathSequence());
         }
 
@@ -250,7 +266,7 @@ namespace MainCharacter
         IEnumerator AttackAnim(int state)
         {
             PlayerAnimator.SetInteger("attack_state", state);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             PlayerAnimator.SetInteger("attack_state", 0);
             yield return null;
         }
