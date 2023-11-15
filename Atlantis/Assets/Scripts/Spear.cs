@@ -187,7 +187,7 @@ public class Spear : Weapons
             Debug.Log("From Player");
             pos = Player.Instance.transform.position;
         }
-        if (other == null) other = Physics2D.OverlapCircle(pos, 1.5f, Player.Instance.EnemyMask);
+        if (other == null) other = Physics2D.OverlapCircle(pos, 1.75f, Player.Instance.EnemyMask);
 
         if (!other) return;
 
