@@ -8,7 +8,7 @@ public class TriggerBox : MonoBehaviour
     [SerializeField] string _Tag;
 
     [SerializeField] UnityEvent TriggerEvent;
-
+    [SerializeField] UnityEvent ExitTriggerEvent;
     private void Start()
     {
         if (TriggerEvent == null) TriggerEvent = new UnityEvent();
@@ -21,6 +21,16 @@ public class TriggerBox : MonoBehaviour
         {
             TriggerEvent.Invoke();
             Debug.Log("Triggered by: " + other.gameObject + " - " + other.gameObject.tag);
+        }
+    }
+
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag(_Tag))
+        {
+            ExitTriggerEvent.Invoke();
+            Debug.Log("Exit by: " + other.gameObject + " - " + other.gameObject.tag);
         }
     }
 

@@ -88,10 +88,8 @@ public class Drowned : Entity, IEnemyAI
         _Rigidbody.velocity = Vector3.SmoothDamp(_Rigidbody.velocity, pos, ref m_Velocity, .05f);
         _Rigidbody.velocity = Vector2.ClampMagnitude(_Rigidbody.velocity, 25f);
         if (pos.x != 0)
-        {
-            Vector3 euler = transform.eulerAngles;
-            euler.y = (pos.x < 0) ? 180 : 0;
-            transform.eulerAngles = euler;
+        {  
+            _Renderer.flipX = (pos.x < 0) ? true : false;
         }
 
     }

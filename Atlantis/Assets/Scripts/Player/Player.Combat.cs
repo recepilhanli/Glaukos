@@ -68,13 +68,7 @@ namespace MainCharacter
             yield return null;
         }
 
-        void CameraSize()
-        {
-            _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 10);
-
-            if (Input.GetKey(_KeybindTable.HeavyAttack) && !isDeath && !_Rage) _LensSize = 12;
-            else if (!_Rage && !isDeath) _LensSize = 8;
-        }
+   
 
 
         void Consumable()
@@ -180,8 +174,6 @@ namespace MainCharacter
 
         void Combat()
         {
-            CameraSize();
-
             if (isDeath) return;
 
             Consumable();

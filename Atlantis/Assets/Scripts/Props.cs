@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Props : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class Props : MonoBehaviour
             Instantiate(_GivingItemAfterBreakingPrefab, transform.position, Quaternion.identity);
         }
         Player.Instance.CameraShake(2, 0.5f, 0.01f);
-
+        var light = GetComponent<Light2D>();
+        if (light != null) light.enabled = false;
     }
 
     bool IsDamaging(GameObject go)

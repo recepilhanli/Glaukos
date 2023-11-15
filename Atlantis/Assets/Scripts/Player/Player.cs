@@ -23,11 +23,6 @@ namespace MainCharacter
         [SerializeField] LayerMask PlayerMask;
         public LayerMask EnemyMask;
 
-        Cinemachine.CinemachineVirtualCamera _VirtualCamera;
-        Cinemachine.CinemachineBasicMultiChannelPerlin _Perlin;
-
-        float _LensSize = 8;
-
         [SerializeField] Texture2D _CursorTexture;
 
         [ContextMenu("Call Start Function")]
@@ -37,13 +32,13 @@ namespace MainCharacter
             Type = EntityType.Type_Player;
             Application.targetFrameRate = 60;
             Instance = this;
-            _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
-            _Perlin = _VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+            InitCamera();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 
         void Update()
         {
+            CameraUpdate();
             Movement();
             Combat();
         }
