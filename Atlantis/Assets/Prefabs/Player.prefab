@@ -643,7 +643,6 @@ GameObject:
   - component: {fileID: 6861030160498466658}
   - component: {fileID: 6861030160498466659}
   - component: {fileID: 6861030160498466660}
-  - component: {fileID: 2111374782}
   - component: {fileID: 9114221094791440450}
   m_Layer: 3
   m_Name: Player
@@ -759,52 +758,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3070743, y: 2.5152292}
   m_EdgeRadius: 0
---- !u!114 &2111374782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861030160498466661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_ComponentVersion: 1
-  m_HasRenderer: 0
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 1
-  m_ApplyToSortingLayers: 00000000e90fc099
-  m_ShapePath:
-  - {x: -0.45878506, y: -0.95520544, z: 0}
-  - {x: -0.35765123, y: -0.19978726, z: 0}
-  - {x: -0.4286642, y: 0.7599845, z: 0}
-  - {x: -0.27779102, y: 0.90070236, z: 0}
-  - {x: 0.038483143, y: 0.8705809, z: 0}
-  - {x: 0.41499996, y: 1.0889609, z: 0}
-  - {x: 0.51649094, y: 0.8955307, z: 0}
-  - {x: 0.30957556, y: 0.6898528, z: 0}
-  - {x: 0.17402935, y: 0.54677635, z: 0}
-  - {x: 0.015891075, y: 0.1250771, z: 0}
-  - {x: 0.30204487, y: -0.25897005, z: 0}
-  - {x: 0.49783373, y: -0.31168237, z: 0}
-  - {x: 0.52042484, y: -0.46228924, z: 0}
-  - {x: 0.37734842, y: -0.51500165, z: 0}
-  - {x: 0.3809452, y: -0.9024931, z: 0}
-  - {x: 0.13637733, y: -0.94423103, z: 0}
-  - {x: 0.21168089, y: -0.5074712, z: 0}
-  - {x: -0.17236662, y: -0.48488015, z: 0}
-  - {x: -0.21754837, y: -0.6128961, z: 0}
-  - {x: -0.23260927, y: -0.92917037, z: 0}
-  m_ShapePathHash: -626756663
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 218036
-  m_LocalBounds:
-    m_Center: {x: 0.030819893, y: 0.06687772, z: 0}
-    m_Extent: {x: 0.48960495, y: 1.0220832, z: 0}
 --- !u!82 &9114221094791440450
 AudioSource:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public abstract class Entity : MonoBehaviour
     [Header("Entity Presets")]
     [SerializeField] protected Slider _HealthBar = null;
 
-    [HideInInspector] public bool isDeath {get; protected set;} = false;
+    [HideInInspector] public bool isDeath { get; protected set; } = false;
 
     protected Coroutine HealthBarCoroutine = null;
 
@@ -44,7 +44,7 @@ public abstract class Entity : MonoBehaviour
         Type_Player,
         Type_Drowned,
         Type_Shark,
-
+        Type_Kraken,
     }
 
 

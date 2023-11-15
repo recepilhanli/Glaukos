@@ -52,10 +52,25 @@ public class LevelManager : MonoBehaviour
         var rigids = GameObject.FindObjectsByType<Rigidbody2D>(FindObjectsSortMode.None);
         foreach (var rigid in rigids)
         {
-            if (GravityScale != 0) rigid.gravityScale = GravityScale;
+            if (GravityScale != 0)
+            {
+                if (rigid.gameObject.CompareTag("Enemy") && Application.isPlaying)
+                {
+                    var entity = rigid.gameObject.GetComponent<Entity>();
+                    if (entity.Type != Entity.EntityType.Type_Kraken) rigid.gravityScale = GravityScale;
+                }
+                else if (rigid.gameObject.CompareTag("Enemy") && !Application.isPlaying) continue;
+                else rigid.gravityScale = GravityScale;
+            }
             else
             {
                 if (rigid.gameObject.CompareTag("Props")) rigid.gravityScale = 0.05f;
+                if (rigid.gameObject.CompareTag("Enemy") && Application.isPlaying)
+                {
+                    var entity = rigid.gameObject.GetComponent<Entity>();
+                    if (entity.Type != Entity.EntityType.Type_Kraken) rigid.gravityScale = GravityScale;
+                }
+                else if (rigid.gameObject.CompareTag("Enemy") && !Application.isPlaying) continue;
                 else rigid.gravityScale = GravityScale;
             }
         }
