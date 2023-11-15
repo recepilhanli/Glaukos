@@ -189,7 +189,7 @@ public class Spear : Weapons
                 if (entity.isDeath) return;
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
-                Instantiate(BloodEffectPrefab, transform.position, quaternion.identity);
+                Instantiate(BloodEffectPrefab, transform.position, transform.rotation);
                 if (attach && entity != null && ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
                     ThrowState = ThrowStates.STATE_OVERLAPPED;
