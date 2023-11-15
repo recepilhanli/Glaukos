@@ -80,7 +80,10 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void LoadGame()
     {
