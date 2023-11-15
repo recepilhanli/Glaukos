@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
         Physics2D.IgnoreLayerCollision(3, 6);
         Physics2D.IgnoreLayerCollision(6, 3);
-
+        Physics2D.IgnoreLayerCollision(6, 6);
         Physics2D.IgnoreLayerCollision(3, 8);
         Physics2D.IgnoreLayerCollision(8, 3);
         Physics2D.IgnoreLayerCollision(6, 8);
