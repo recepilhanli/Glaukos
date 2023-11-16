@@ -1027,6 +1027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HudCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6381388047355952566, guid: a5a91d3720cc67a4aa7bb4da5a6687e6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5a91d3720cc67a4aa7bb4da5a6687e6, type: 3}
 --- !u!224 &326702337 stripped
