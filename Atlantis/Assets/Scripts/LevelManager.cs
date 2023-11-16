@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     [Range(-2, 2)] public float GravityScale = 1f;
 
     public static bool isLoadingGame = false;
-
+    public static string LastScene = "Menu";
     void Start()
     {
         Instance = this;
@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         {
             Invoke("LoadGame", 0.05f);
         }
-
+        LastScene = SceneManager.GetActiveScene().name;
     }
 
 

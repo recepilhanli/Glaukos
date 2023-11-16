@@ -14,16 +14,19 @@ namespace MainCharacter
 
         [SerializeField, Tooltip("Entity Flag")] EntityFlags _Flag;
 
+        public bool CanMove = true;
 
         [Space]
         [Header("Visual")]
         [SerializeField, Tooltip("Renderer of the Player's Sprite")] SpriteRenderer _PlayerRenderer;
         [SerializeField] LayerMask PlayerMask;
         public LayerMask EnemyMask;
-
+        public LayerMask BossMask;
         [SerializeField] Texture2D _CursorTexture;
 
         [ContextMenu("Call Start Function")]
+
+
 
         void Start()
         {
@@ -37,8 +40,12 @@ namespace MainCharacter
         void Update()
         {
             CameraUpdate();
-            Movement();
-            Combat();
+            if (CanMove)
+            {
+                Movement();
+                Combat();
+            }
+            else _Rigidbody.velocity = Vector2.zero;
         }
 
 

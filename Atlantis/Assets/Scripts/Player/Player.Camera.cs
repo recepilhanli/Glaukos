@@ -25,11 +25,11 @@ namespace MainCharacter
 
         void CameraSize()
         {
-            if (LockLensSize) _LensSize = 15;
+            if (LockLensSize) _LensSize = 10f;
             else if (!LockLensSize)
             {
                 if (Input.GetKey(_KeybindTable.HeavyAttack) && !isDeath && !_Rage) _LensSize = 9;
-                else if (!_Rage && !isDeath) _LensSize = 7;
+                else if (!_Rage && !isDeath) _LensSize = 8;
             }
             _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 10);
         }

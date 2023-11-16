@@ -9,7 +9,7 @@ using static Unity.VisualScripting.Member;
 public class Spear : Weapons
 {
 
-    public ThrowStates ThrowState { get; private set; } = ThrowStates.STATE_NONE;
+    public ThrowStates ThrowState = ThrowStates.STATE_NONE;
 
     [SerializeField] GameObject _TornadoPrefab;
 
@@ -188,7 +188,18 @@ public class Spear : Weapons
             pos = Player.Instance.transform.position;
         }
         if (other == null) other = Physics2D.OverlapCircle(pos, 1.75f, Player.Instance.EnemyMask);
-
+        if (other == null)
+        {
+            other = Physics2D.OverlapCircle(pos, 1.5f, Player.Instance.BossMask);
+            if (other != null)
+            {
+                if (other.gameObject.CompareTag("Boss"))
+                {
+                    Kraken.Instance.OnTakeDamage(damage);
+                    return;
+                }
+            }
+        }
         if (!other) return;
 
         Debug.Log("Overallped");

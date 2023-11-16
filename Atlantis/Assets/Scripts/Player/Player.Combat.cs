@@ -277,6 +277,10 @@ namespace MainCharacter
             Instance.Focus += point; //Instance using for events
             Mathf.Clamp(Instance.Focus, 0, 100);
         }
+        public void DamagePlayer(float dmg)
+        {
+            Instance.OnTakeDamage(dmg);
+        }
 
     }
 }
