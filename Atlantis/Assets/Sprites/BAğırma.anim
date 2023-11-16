@@ -2036,7 +2036,16 @@ AnimationClip:
     path: bone_36/bone_37/bone_41/bone_42
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: -8357181154353876953, guid: 1315581849404d045b0742e43efffe4b, type: 3}
+    - time: 0.2
+      value: {fileID: 0}
+    attribute: m_Sprite
+    path: Ton/Doygunluk 2 kopya 4
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -2136,6 +2145,13 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 3071487450
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
       path: 2525105334
       attribute: 1
       script: {fileID: 0}
@@ -2191,7 +2207,9 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: -8357181154353876953, guid: 1315581849404d045b0742e43efffe4b, type: 3}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

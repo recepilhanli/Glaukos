@@ -48,7 +48,7 @@ namespace MainCharacter
             CameraShake(3, 0.8f, 0.01f);
             UIManager.Instance.Fade(0.35f, 1f, 0.9f);
             UIManager.Instance.StopFading = true;
-            _LensSize = 12f;
+            _LensSize = 9f;
 
             foreach (var _re in _RageEffects)
             {
