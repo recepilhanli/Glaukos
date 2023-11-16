@@ -158,7 +158,7 @@ public class Kraken : Entity, IEnemyAI
                     if (InkDuration < Time.time)
                     {
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
-                        InkDuration = Time.time + 3f;
+                        InkDuration = Time.time + 2.5f;
                     }
                     break;
                 }
