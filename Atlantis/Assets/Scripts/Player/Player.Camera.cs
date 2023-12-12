@@ -13,9 +13,13 @@ namespace MainCharacter
 
         Cinemachine.CinemachineBasicMultiChannelPerlin _Perlin;
 
+        Coroutine ShakeCoroutine;
+
         float _LensSize = 8;
+        bool _WaitForCameraShake = false;
 
         public bool LockLensSize = false;
+
         void InitCamera()
         {
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
@@ -37,6 +41,28 @@ namespace MainCharacter
         void CameraUpdate()
         {
             CameraSize();
+        }
+
+
+        public void CameraShake(float _a, float _f, float _t = 1f, bool _wait = false)
+        {
+            if (ShakeCoroutine != null && _WaitForCameraShake == true) return;
+
+            if (ShakeCoroutine != null) StopCoroutine(ShakeCoroutine);
+            _Perlin.m_AmplitudeGain = _a;
+            _Perlin.m_FrequencyGain = _f;
+            _WaitForCameraShake = _wait;
+            ShakeCoroutine = StartCoroutine(Shake(_t));
+        }
+
+        IEnumerator Shake(float _t = 1f)
+        {
+            yield return new WaitForSeconds(_t);
+            _Perlin.m_AmplitudeGain = 0.75f;
+            _Perlin.m_FrequencyGain = 0.05f;
+            _WaitForCameraShake = false;
+            ShakeCoroutine = null;
+            yield return null;
         }
 
     }

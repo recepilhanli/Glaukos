@@ -19,7 +19,7 @@ public class Kraken_ArmTrigger : MonoBehaviour
     {
         Kraken.Instance.SetAnimState(Kraken.Kraken_AnimStates.State_Idle);
         Player.Instance.transform.SetParent(null);
-        transform.eulerAngles = Vector3.zero;
+         Player.Instance.transform.transform.eulerAngles = Vector3.zero;
         Player.Instance.CanMove = true;
     }
 

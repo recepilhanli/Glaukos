@@ -106,6 +106,7 @@ public class Spear : Weapons
         }
         else
         {
+            _Trail.enabled = true;
             transform.SetParent(null);
             ThrowState = ThrowStates.STATE_GETTING_BACK;
         }
@@ -139,7 +140,7 @@ public class Spear : Weapons
 
         Debug.Log(other + " -> throwing hit");
         ThrowState = ThrowStates.STATE_OVERLAPPED;
-
+        _Trail.enabled = false;
 
         if (other.CompareTag("Puzzle"))
         {

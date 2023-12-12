@@ -36,7 +36,7 @@ namespace MainCharacter
 
         private Vector3 m_Velocity = Vector3.zero;
 
-        Coroutine ShakeCoroutine;
+
 
         void Movement()
         {
@@ -85,21 +85,7 @@ namespace MainCharacter
             _Rigidbody.AddForce(new Vector2(0, 1000), ForceMode2D.Impulse);
         }
 
-        public void CameraShake(float _a, float _f, float _t = 1f)
-        {
-            if (ShakeCoroutine != null) StopCoroutine(ShakeCoroutine);
-            _Perlin.m_AmplitudeGain = _a;
-            _Perlin.m_FrequencyGain = _f;
-            ShakeCoroutine = StartCoroutine(Shake(_t));
-        }
-        IEnumerator Shake(float _t = 1f)
-        {
-            yield return new WaitForSeconds(_t);
-            _Perlin.m_AmplitudeGain = 0.75f;
-            _Perlin.m_FrequencyGain = 0.05f;
-            yield return null;
-        }
-
+   
 
         bool isGrounded() => Physics2D.BoxCast(_PlayerCollider.bounds.center, _PlayerCollider.bounds.size, 0, Vector2.down, 0.1f, _GroundMask);
 

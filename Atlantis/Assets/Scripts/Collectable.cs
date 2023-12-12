@@ -7,13 +7,24 @@ using UnityEngine.Events;
 public class Collectable : MonoBehaviour
 {
     [SerializeField] bool _FollowPlayer = false;
-
+    [SerializeField, Range(1, 250), Tooltip("Speed of the item")] float _Speed = 10f;
+    [Space(15)]
     public UnityEvent OnPlayerCollectItemEvent;
     private Vector3 m_Velocity = Vector3.zero;
+
+
     private void Start()
     {
         if (OnPlayerCollectItemEvent == null)
             OnPlayerCollectItemEvent = new UnityEvent();
+
+
+        if (!_FollowPlayer)
+        {
+            var newup = (transform.position - Player.Instance.transform.position).normalized;
+            transform.up = newup;
+            Destroy(gameObject, 10f);
+        }
     }
 
     void DebugTest()
@@ -35,7 +46,12 @@ public class Collectable : MonoBehaviour
     {
         if (_FollowPlayer)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, Player.Instance.transform.position, ref m_Velocity, 15 * Time.deltaTime);
+            var newpos = (transform.position - Player.Instance.transform.position).normalized;
+            transform.position = transform.position - (newpos * Time.deltaTime * _Speed);
+        }
+        else
+        {
+            transform.position = transform.position - (transform.up * Time.deltaTime * _Speed);
         }
     }
 }

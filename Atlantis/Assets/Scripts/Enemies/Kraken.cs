@@ -42,11 +42,13 @@ public class Kraken : Entity, IEnemyAI
 
     [SerializeField] GameObject GrabParent;
     [SerializeField] GameObject InkPrefab;
+    [SerializeField] GameObject InkPrefabNoFollowing;
+
     [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
     Vector3 m_Velocity = Vector3.zero;
 
 
-    float _Health = 100f;
+    [SerializeField] float _Health = 100f;
 
     float _IgnoreEntitesDuration = 0;
 
@@ -97,11 +99,10 @@ public class Kraken : Entity, IEnemyAI
 
         else if (dist > 22.5f && AnimWaitDuration < Time.time)
         {
-            AnimWaitDuration = Time.time + 2;
+            AnimWaitDuration = Time.time + 1.25f;
             SetAnimState(Kraken_AnimStates.State_InkAttack);
         }
 
-        Debug.Log("Player & Kraken dist: " + dist);
     }
 
     public void SetAnimState(Kraken_AnimStates state)
@@ -159,6 +160,16 @@ public class Kraken : Entity, IEnemyAI
                     {
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
                         InkDuration = Time.time + 2.5f;
+
+                        if (_Health <= 30)
+                        {
+                            Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 12, Quaternion.identity);
+                            Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 12, Quaternion.identity);
+                            Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 5, Quaternion.identity);
+                            Instantiate(InkPrefabNoFollowing, transform.position + Vector3.right * 12, Quaternion.identity);
+                            Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 5, Quaternion.identity);
+
+                        }
                     }
                     break;
                 }
@@ -190,14 +201,14 @@ public class Kraken : Entity, IEnemyAI
         else if (tag == "Harmful")
         {
             Destroy(_hitTransform.gameObject);
-            OnTakeDamage(2f);
+            OnTakeDamage(2f, AttackTypes.Attack_Rapid);
             Debug.Log("harmful");
         }
         else //player
         {
             if (_LastState == Kraken_AnimStates.State_Grab)
             {
-
+                Player.Instance.Focus -= 25;
                 Player.Instance.transform.position = GrabParent.transform.position;
                 Player.Instance.transform.SetParent(GrabParent.transform);
                 Player.Instance.CanMove = false;
@@ -217,6 +228,7 @@ public class Kraken : Entity, IEnemyAI
         _isEntitySeen = true;
         Player.Instance.LockLensSize = true;
         _KrakenCanvas.SetActive(true);
+        Player.Instance.CameraShake(.85f, .85f, 3f, true);
     }
 
 
@@ -258,12 +270,18 @@ public class Kraken : Entity, IEnemyAI
         {
             OnDetected(Player.Instance);
         }
-        if (type != AttackTypes.Attakc_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 5;
-        _Health -= _h / 3;
+        if (type != AttackTypes.Attakc_Tornado && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
+
         if (_Health < 0) OnDeath();
 
         _HealthBar.value = _Health / 100;
 
+        if (type == AttackTypes.Attack_Standart)
+        {
+            Player.Instance.Focus += _h / 10;
+            _Health -= _h / 12f;
+        }
+        else _Health -= _h / 2f;
         StartCoroutine(DamageEffect());
     }
 
