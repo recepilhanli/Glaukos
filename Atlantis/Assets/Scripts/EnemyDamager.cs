@@ -9,7 +9,7 @@ public class EnemyDamager : MonoBehaviour
 
     private void Awake()
     {
-        if(_Body != null) _Body.gravityScale = 4;
+        if (_Body != null) _Body.gravityScale = 4;
         Invoke("DestroyMe", 10f);
     }
 

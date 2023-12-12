@@ -15,12 +15,14 @@ public class Spear : Weapons
 
     [SerializeField] GameObject _SpearRainPrefab;
     private Vector2 _ThrowedPosition = Vector2.zero;
+    private Vector2 _ThrowedPositionNormalized = Vector2.zero;
 
     [HideInInspector] public Vector2 SpearOffset = Vector2.zero;
 
     [SerializeField] GameObject BloodEffectPrefab;
     [SerializeField] GameObject BubbleEffect;
 
+    [SerializeField] TrailRenderer _Trail;
 
 
     public enum ThrowStates
@@ -58,9 +60,11 @@ public class Spear : Weapons
 
     public void Throw(Vector2 pos)
     {
+        _Trail.enabled = true;
         transform.SetParent(null);
         _ThrowedPosition = pos;
-
+        _ThrowedPositionNormalized = (_ThrowedPosition - (Vector2)transform.position).normalized;
+        // transform.up = _ThrowedPositionNormalized;
         var euler = transform.eulerAngles;
         float tempY = (pos.x > 0) ? 0 : 180;
         euler.y = tempY;
@@ -87,6 +91,7 @@ public class Spear : Weapons
             Player.Instance.AttackState(2);
             Player.Instance.CameraShake(2, 0.5f, 0.001f);
             BubbleEffect.SetActive(false);
+            _Trail.enabled = false;
         }
         else
         {
@@ -112,6 +117,8 @@ public class Spear : Weapons
         }
         else if (other.CompareTag("Player") && ThrowState == ThrowStates.STATE_THROWING) return;
 
+
+
         if (ThrowState == ThrowStates.STATE_GETTING_BACK)
         {
             SendDamage(2f, false, _other);
@@ -129,12 +136,18 @@ public class Spear : Weapons
         }
 
         SendDamage(20f, true, _other);
+
+        if (other.CompareTag("Props") && ThrowState == ThrowStates.STATE_THROWING)
+        {
+            ThrowState = ThrowStates.STATE_FLOATING;
+        }
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         CollisionReaction(other.gameObject);
+        Debug.Log(other.gameObject);
     }
 
 
@@ -155,19 +168,19 @@ public class Spear : Weapons
             euler.y = tempY;
             transform.eulerAngles = euler;
 
-            var lerpedPos = Vector3.MoveTowards(transform.position, _ThrowedPosition, 0.5f);
+            var lerpedPos = Vector3.MoveTowards(transform.position, _ThrowedPosition, 0.8f);
             transform.position = lerpedPos;
             transform.Rotate(0, 0, Time.deltaTime * 1000);
             return;
         }
 
 
-        if (Vector2.Distance(_ThrowedPosition, transform.position) > 1 && ThrowState != ThrowStates.STATE_FLOATING)
+        if (ThrowState == ThrowStates.STATE_THROWING)
         {
-            var lerpedPos = Vector3.Lerp(transform.position, _ThrowedPosition, Time.deltaTime * 3);
-            transform.position = lerpedPos;
+            var lerpedPos = _ThrowedPositionNormalized * Time.fixedDeltaTime * 45;
+            transform.position = (Vector2)transform.position + lerpedPos;
         }
-        else
+        else if (ThrowState == ThrowStates.STATE_FLOATING)
         {
             Debug.Log("Floating");
             ThrowState = ThrowStates.STATE_FLOATING;
