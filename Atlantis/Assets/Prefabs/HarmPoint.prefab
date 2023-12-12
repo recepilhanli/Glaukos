@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4233601718464915608}
   - component: {fileID: 305377656645461556}
   - component: {fileID: 8199329364931134016}
+  - component: {fileID: 3534225847352697485}
   m_Layer: 0
   m_Name: HarmPoint
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,3 +192,33 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &3534225847352697485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713865838459048409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b173b78cade5e441b405032b1cf0980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BrokenSprite: {fileID: 0}
+  _Renderer: {fileID: 0}
+  _GivingItemAfterBreakingPrefab: {fileID: 0}
+  OnBreakProp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1713865838459048409}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

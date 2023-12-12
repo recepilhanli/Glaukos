@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
 public class Props : MonoBehaviour
@@ -11,7 +12,14 @@ public class Props : MonoBehaviour
     [SerializeField] SpriteRenderer _Renderer;
     [SerializeField] GameObject _GivingItemAfterBreakingPrefab;
 
+    [SerializeField] UnityEvent OnBreakProp = new UnityEvent();
+
     bool _Broken = false;
+
+     private void Awake()
+    {
+      if(_BrokenSprite == null)  OnBreakProp?.AddListener(DestroyProp);
+    }
 
 
     void OnTriggerEnter2D(Collider2D other)
@@ -23,7 +31,7 @@ public class Props : MonoBehaviour
     {
         if (_Broken) return;
         _Broken = true;
-        _Renderer.sprite = _BrokenSprite;
+        if(_BrokenSprite != null) _Renderer.sprite = _BrokenSprite;
         if (_GivingItemAfterBreakingPrefab != null)
         {
             Instantiate(_GivingItemAfterBreakingPrefab, transform.position, Quaternion.identity);
@@ -31,6 +39,7 @@ public class Props : MonoBehaviour
         Player.Instance.CameraShake(2, 0.5f, 0.01f);
         var light = GetComponent<Light2D>();
         if (light != null) light.enabled = false;
+        OnBreakProp?.Invoke();
     }
 
     bool IsDamaging(GameObject go)
@@ -65,4 +74,9 @@ public class Props : MonoBehaviour
         }
     }
 
+
+    void DestroyProp() //for events
+    {
+        Destroy(gameObject);
+    }
 }

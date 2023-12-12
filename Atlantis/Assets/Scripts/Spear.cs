@@ -24,6 +24,7 @@ public class Spear : Weapons
 
     [SerializeField] TrailRenderer _Trail;
 
+    float _ThrowingTime = 0f;
 
     public enum ThrowStates
     {
@@ -60,21 +61,31 @@ public class Spear : Weapons
 
     public void Throw(Vector2 pos)
     {
+        _ThrowingTime = 0.75f + Time.time;
         _Trail.enabled = true;
         transform.SetParent(null);
         _ThrowedPosition = pos;
         _ThrowedPositionNormalized = (_ThrowedPosition - (Vector2)transform.position).normalized;
-        // transform.up = _ThrowedPositionNormalized;
-        var euler = transform.eulerAngles;
-        float tempY = (pos.x > 0) ? 0 : 180;
-        euler.y = tempY;
-        transform.eulerAngles = euler;
+        transform.up = _ThrowedPositionNormalized;
 
         ThrowState = ThrowStates.STATE_THROWING;
 
         if (Player.Instance._Rigidbody.gravityScale == 0) BubbleEffect.SetActive(true);
 
     }
+
+    public void StopSpear()
+    {
+        var spear = Player.Instance._Spear;
+        spear.ThrowState = ThrowStates.STATE_OVERLAPPED;
+        spear._ThrowingTime = 0;
+        spear._ThrowedPositionNormalized = Vector2.zero;
+
+        Debug.Log("Spear stopped. " + gameObject);
+    }
+
+
+
 
     public void GetBackToThePlayer(bool _instantly = false)
     {
@@ -136,18 +147,13 @@ public class Spear : Weapons
         }
 
         SendDamage(20f, true, _other);
-
-        if (other.CompareTag("Props") && ThrowState == ThrowStates.STATE_THROWING)
-        {
-            ThrowState = ThrowStates.STATE_FLOATING;
-        }
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         CollisionReaction(other.gameObject);
-        Debug.Log(other.gameObject);
+
     }
 
 
@@ -179,11 +185,15 @@ public class Spear : Weapons
         {
             var lerpedPos = _ThrowedPositionNormalized * Time.fixedDeltaTime * 45;
             transform.position = (Vector2)transform.position + lerpedPos;
+            if (_ThrowingTime < Time.time)
+            {
+                ThrowState = ThrowStates.STATE_FLOATING;
+                Debug.Log("Set the spear state to floating.");
+            }
         }
         else if (ThrowState == ThrowStates.STATE_FLOATING)
         {
             Debug.Log("Floating");
-            ThrowState = ThrowStates.STATE_FLOATING;
             transform.Rotate(0, 0, Time.deltaTime * 30);
         }
 
