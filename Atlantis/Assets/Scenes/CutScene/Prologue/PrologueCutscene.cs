@@ -30,7 +30,7 @@ public class PrologueCutscene : MonoBehaviour
     private void OnStop(PlayableDirector director)
     {
         _Director.stopped -= OnStop;
-        _FadeFix.gameObject.SetActive(true);
+        _FadeFix?.gameObject.SetActive(true);
         SceneManager.LoadScene("Presentation_Level_1");
     }
 
