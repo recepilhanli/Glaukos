@@ -343,10 +343,32 @@ PrefabInstance:
       propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4287966483120456285, guid: 81e19c0c555982845bafba9726e0f71d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 81e19c0c555982845bafba9726e0f71d, type: 3}
 --- !u!4 &5543632599703070856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1000064222912673091, guid: 81e19c0c555982845bafba9726e0f71d, type: 3}
   m_PrefabInstance: {fileID: 4687685803660991947}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9207209563811362510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4524029885229099781, guid: 81e19c0c555982845bafba9726e0f71d, type: 3}
+  m_PrefabInstance: {fileID: 4687685803660991947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &2475269348081900180
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207209563811362510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32

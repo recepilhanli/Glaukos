@@ -3530,11 +3530,13 @@ MonoBehaviour:
   _KrakenCanvas: {fileID: 7009886538343702457}
   _Animator: {fileID: 5406873879479556784}
   GrabParent: {fileID: 3665252737170862504}
+  InkPrefab: {fileID: 1713865838459048409, guid: c7ee3010aaf9dac4887057ada8db9520, type: 3}
+  InkPrefabNoFollowing: {fileID: 0}
   _Clips:
   - {fileID: 8300000, guid: cdaaf73197bb7a74bb085cd94afccfba, type: 3}
   - {fileID: 8300000, guid: 22eab4df0bfb76b439118c30d20e43b9, type: 3}
   - {fileID: 8300000, guid: a9fe83366307d414ea5aec26a348f3ea, type: 3}
-  InkPrefab: {fileID: 1713865838459048409, guid: c7ee3010aaf9dac4887057ada8db9520, type: 3}
+  _Health: 100
 --- !u!50 &7728628242072454875
 Rigidbody2D:
   serializedVersion: 4

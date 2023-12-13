@@ -18,7 +18,14 @@ public class Shark : Entity, IEnemyAI
 
     [SerializeField] float MaxRoamingDistance = 40f;
 
+
+    [Space, SerializeField] TrailRenderer _TrailRenderer;
+
     [SerializeField] Sprite _DeathSprite;
+
+    [SerializeField] Sprite _AttackingSprite;
+
+    private Sprite _RegularSprite;
 
     [SerializeField] AudioSource _Source;
 
@@ -47,6 +54,8 @@ public class Shark : Entity, IEnemyAI
     void Start()
     {
         Init(_Properties);
+        _RegularSprite = _Renderer.sprite;
+        _TrailRenderer.enabled = false;
     }
 
 
@@ -115,6 +124,7 @@ public class Shark : Entity, IEnemyAI
 
     public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
     {
+        if (isDeath) return;
         Vector3 euler = transform.eulerAngles;
         Vector2 force = new Vector2(0, 0);
         force.x = (euler.y == 0) ? 2000 : -2000;
@@ -123,7 +133,16 @@ public class Shark : Entity, IEnemyAI
         entity.OnTakeDamage(damage, type);
         _IgnoreEntitesDuration = 2f + Time.time;
         _isEntitySeen = false;
+        Invoke("SetRegulerSprite", 2f);
         PlaySound(0);
+    }
+
+
+    void SetRegulerSprite()
+    {
+        if (isDeath) return;
+        _TrailRenderer.enabled = false;
+        _Renderer.sprite = _RegularSprite;
     }
 
     void PlaySound(int index)
@@ -139,6 +158,8 @@ public class Shark : Entity, IEnemyAI
         _SeenDuration = Time.time + 10f;
         _isEntitySeen = true;
         _RoamingPos = Vector2.zero;
+        _Renderer.sprite = _AttackingSprite;
+        _TrailRenderer.enabled = true;
     }
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
@@ -169,7 +190,7 @@ public class Shark : Entity, IEnemyAI
 
         _Renderer.sprite = _DeathSprite;
         _Renderer.flipY = true;
-
+        _TrailRenderer.enabled = false;
         isDeath = true;
         gameObject.AddComponent<Destroyer>();
         if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);

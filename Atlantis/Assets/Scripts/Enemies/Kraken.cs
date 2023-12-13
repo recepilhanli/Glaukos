@@ -228,7 +228,7 @@ public class Kraken : Entity, IEnemyAI
         _isEntitySeen = true;
         Player.Instance.LockLensSize = true;
         _KrakenCanvas.SetActive(true);
-        Player.Instance.CameraShake(.85f, .85f, 3f, true);
+        Player.Instance.CameraShake(1, .9f, 3f, true);
     }
 
 
