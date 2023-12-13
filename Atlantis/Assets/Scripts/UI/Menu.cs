@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour
 
     public void GetFirstLevel()
     {
-        SceneManager.LoadScene("Presentation_Level_1");
+        SceneManager.LoadScene("CS_Prologue");
     }
 
     public void GetDevLevel()
