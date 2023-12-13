@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace MainCharacter
 {
@@ -20,11 +22,16 @@ namespace MainCharacter
 
         public bool LockLensSize = false;
 
+        [SerializeField] Volume _PostProcess;
+
+        private ChromaticAberration _ChromaticAberration;
+
+
         void InitCamera()
         {
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
             _Perlin = _VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-
+            _PostProcess.profile.TryGet(out _ChromaticAberration);
         }
 
         void CameraSize()

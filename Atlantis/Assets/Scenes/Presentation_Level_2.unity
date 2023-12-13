@@ -795,7 +795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271769074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -32.986385, y: 14.495419, z: -19.649723}
+  m_LocalPosition: {x: -29.949661, y: 14.479328, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2701,6 +2701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1028063565}
   - component: {fileID: 1028063566}
+  - component: {fileID: 1028063567}
   m_Layer: 0
   m_Name: Post Processing
   m_TagString: Untagged
@@ -2739,7 +2740,20 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 925e4574838a2824c8dda85007e38b10, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 634f7088962783341ba6577a7dbf930b, type: 2}
+--- !u!114 &1028063567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028063564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42984bfdcaa1794cb5d5af5e42b4a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Volume: {fileID: 1028063566}
 --- !u!1 &1094256847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,6 +3263,10 @@ PrefabInstance:
       propertyPath: Focus
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6861030160498466658, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+      propertyPath: _PostProcess
+      value: 
+      objectReference: {fileID: 1028063566}
     - target: {fileID: 6861030160498466658, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: isInDeadZone
       value: 1

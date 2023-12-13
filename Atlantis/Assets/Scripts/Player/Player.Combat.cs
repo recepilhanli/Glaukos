@@ -17,7 +17,7 @@ namespace MainCharacter
     /// </summary>
 
     public partial class Player : Entity
-    {
+    {   
 
         [Space]
         [Header("Combat")]
@@ -194,6 +194,11 @@ namespace MainCharacter
             Consumable();
 
             Attacking();
+            if (_ChromaticAberration != null)
+            {
+                if (Health <= 25) _ChromaticAberration.intensity.value = 1f;
+                else _ChromaticAberration.intensity.value = 0f;
+            }
         }
 
         public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
