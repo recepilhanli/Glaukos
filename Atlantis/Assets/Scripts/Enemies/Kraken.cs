@@ -278,8 +278,8 @@ public class Kraken : Entity, IEnemyAI
 
         if (type == AttackTypes.Attack_Standart)
         {
-            Player.Instance.Focus += _h / 10;
-            _Health -= _h / 12f;
+            Player.Instance.Focus += _h / 7.5f;
+            _Health -= _h / 10f;
         }
         else _Health -= _h / 2f;
         StartCoroutine(DamageEffect());

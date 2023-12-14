@@ -77,6 +77,8 @@ public class Props : MonoBehaviour
 
     void DestroyProp() //for events
     {
+        UIManager.Instance.Fade(0, 1, 0, 4);
+        Player.Instance.Focus += 15f;
         Destroy(gameObject);
     }
 }
