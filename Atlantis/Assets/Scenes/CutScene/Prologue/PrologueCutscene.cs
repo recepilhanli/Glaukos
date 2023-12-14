@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-
+using Unity.VisualScripting;
 
 public class PrologueCutscene : MonoBehaviour
 {
@@ -25,27 +25,38 @@ public class PrologueCutscene : MonoBehaviour
     [SerializeField] Camera _MainCamera;
 
     [SerializeField] Transform _CamFollow;
-
+    private Coroutine _LevelCoroutine;
 
     void Start()
     {
         _PostProcessVolume.profile.TryGet(out _Vignette);
         _PostProcessVolume.profile.TryGet(out _ChromaticAberration);
-
-        _Director.stopped += OnStop;
     }
 
-    private void OnStop(PlayableDirector director)
-    {
-        _FadeFix?.gameObject.SetActive(true);
-        _Director.stopped -= OnStop;
-        SceneManager.LoadScene("Presentation_Level_1");
-    }
+ 
 
     void Update()
     {
+        
+        if (_Director.state == PlayState.Playing && Mathf.Abs((float) _Director.time - (float)_Director.duration) <= 0.1f  && _LevelCoroutine == null)
+        {
+            _Director.Pause();
+            _FadeFix?.gameObject.SetActive(true);
+            _LevelCoroutine = StartCoroutine(LevelChanger());
+        }
+
         _Vignette.intensity.value = _Value;
         _ChromaticAberration.intensity.value = _Value * 10;
+
+
+    }
+
+
+    IEnumerator LevelChanger()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Presentation_Level_1");
+        yield return null;
     }
 
 
