@@ -21,6 +21,11 @@ public class PrologueCutscene : MonoBehaviour
 
     [SerializeField] Image _FadeFix;
 
+    [SerializeField] Camera _MainCamera;
+
+    [SerializeField] Transform _CamFollow;
+
+
     void Start()
     {
         _PostProcessVolume.profile.TryGet(out _Vignette);
@@ -38,4 +43,13 @@ public class PrologueCutscene : MonoBehaviour
     {
         _Vignette.intensity.value = _Value;
     }
+
+
+    private void LateUpdate()
+    {
+        var pos = _MainCamera.transform.position;
+        pos.x =_CamFollow.transform.position.x;
+        _MainCamera.transform.position = pos;
+    }
+
 }
