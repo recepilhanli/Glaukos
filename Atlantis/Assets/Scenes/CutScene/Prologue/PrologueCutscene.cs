@@ -14,6 +14,7 @@ public class PrologueCutscene : MonoBehaviour
 
     [SerializeField] Volume _PostProcessVolume;
     private Vignette _Vignette;
+    private ChromaticAberration _ChromaticAberration;
 
     [SerializeField] PlayableDirector _Director;
 
@@ -29,19 +30,22 @@ public class PrologueCutscene : MonoBehaviour
     void Start()
     {
         _PostProcessVolume.profile.TryGet(out _Vignette);
+        _PostProcessVolume.profile.TryGet(out _ChromaticAberration);
+
         _Director.stopped += OnStop;
     }
 
     private void OnStop(PlayableDirector director)
     {
-        _Director.stopped -= OnStop;
         _FadeFix?.gameObject.SetActive(true);
+        _Director.stopped -= OnStop;
         SceneManager.LoadScene("Presentation_Level_1");
     }
 
     void Update()
     {
         _Vignette.intensity.value = _Value;
+        _ChromaticAberration.intensity.value = _Value * 10;
     }
 
 
