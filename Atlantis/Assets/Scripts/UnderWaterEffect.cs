@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>
+/// effect for underwater
+/// </summary>
 public class UnderWaterEffect : MonoBehaviour
 {
 
     [SerializeField] Volume _Volume;
     private LensDistortion _LensDistortion = null;
-
-    float multiplier = 1;
 
 
     void Start()

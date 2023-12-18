@@ -15,9 +15,12 @@ namespace MainCharacter
     /// Movement();
     /// 
     /// </summary>
-
+  
+    /// <summary>
+    /// This class is used to manage combat of the Player
+    /// </summary>
     public partial class Player : Entity
-    {   
+    {
 
         [Space]
         [Header("Combat")]

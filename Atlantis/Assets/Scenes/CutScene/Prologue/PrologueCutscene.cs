@@ -8,7 +8,9 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// this class is for the prologue cutscene
+/// </summary>
 public class PrologueCutscene : MonoBehaviour
 {
 

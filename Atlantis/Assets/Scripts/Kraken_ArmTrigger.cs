@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using MainCharacter;
 using UnityEngine;
 
+/// <summary>
+/// kraken arm trigger class
+/// </summary>
 public class Kraken_ArmTrigger : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)

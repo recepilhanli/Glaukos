@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// interface for the enemy AI
+/// </summary>
 public interface IEnemyAI
 {
     public void OnDetected(Entity _entity);

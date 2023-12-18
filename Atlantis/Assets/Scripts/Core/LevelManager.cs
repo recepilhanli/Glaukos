@@ -6,6 +6,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// level manager class
+/// </summary>
 [ExecuteInEditMode]
 public class LevelManager : MonoBehaviour
 {

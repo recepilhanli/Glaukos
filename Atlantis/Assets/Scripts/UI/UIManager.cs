@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// manage the UI of the game
+/// </summary>
 public class UIManager : MonoBehaviour
 {
 

@@ -5,6 +5,9 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// This class is used to manage the title text of the game.
+/// </summary>
 public class Title : MonoBehaviour
 {
 

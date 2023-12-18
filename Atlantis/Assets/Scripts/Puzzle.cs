@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// puzzle class
+/// </summary>
 public class Puzzle : MonoBehaviour
 {
 

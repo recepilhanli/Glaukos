@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// destroy the gameobject after a specific time
+/// </summary>
 public class Destroyer : MonoBehaviour
 {
     [SerializeField] float _DestroyTimeInSeconds = 5f;
     void Start()
     {
-        Invoke("DestroyMe", _DestroyTimeInSeconds);
+        Destroy(gameObject, _DestroyTimeInSeconds);
     }
 
-    void DestroyMe()
-    {
-        Destroy(gameObject);
-    }
 }

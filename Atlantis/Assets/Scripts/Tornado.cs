@@ -51,7 +51,7 @@ public class Tornado : MonoBehaviour
                 Vector2 toPos = enemy.transform.position - transform.position;
                 toPos.y = 0;
                 if (enemy.Type != Entity.EntityType.Type_Shark) enemy.Move(-toPos * _TornadoSpeed);
-                if (_TornadoDamageTime <= Time.time) enemy.OnTakeDamage(5, Entity.AttackTypes.Attakc_Tornado);
+                if (_TornadoDamageTime <= Time.time) enemy.OnTakeDamage(5, Entity.AttackTypes.Attack_Tornado);
             }
         }
         if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;

@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>
+/// this class is used to manage the props
+/// </summary>
 public class Props : MonoBehaviour
 {
     [SerializeField] Sprite _BrokenSprite;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// handle events when a specific object enters or exits the trigger
+/// </summary>
 public class TriggerBox : MonoBehaviour
 {
     [SerializeField] string _Tag;

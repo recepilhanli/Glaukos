@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
+/// <summary>
+/// this class is for the spear weapon
+/// </summary>
 public class Spear : Weapons
 {
 

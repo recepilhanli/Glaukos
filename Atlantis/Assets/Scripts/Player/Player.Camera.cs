@@ -7,7 +7,9 @@ using UnityEngine.Rendering.Universal;
 
 namespace MainCharacter
 {
-
+    /// <summary>
+    /// This class is used to manage the camera
+    /// </summary>
     public partial class Player : Entity
     {
         Cinemachine.CinemachineVirtualCamera _VirtualCamera;

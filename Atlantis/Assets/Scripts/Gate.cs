@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using MainCharacter;
 using UnityEngine;
 
+/// <summary>
+/// gate class for opening and closing the gate
+/// </summary>
 public class Gate : MonoBehaviour
 {
     private Vector3 _CurrentPos;

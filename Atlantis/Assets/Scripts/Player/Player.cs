@@ -2,14 +2,20 @@
 using UnityEditor;
 using UnityEngine;
 
+//this is the base player script
 namespace MainCharacter
 {
+    /// <summary>
+    /// This class is used to manage the player.
+    /// </summary>
     public partial class Player : Entity
     {
         public static Player Instance { get; private set; }
 
         [Space]
         [Header("Player")]
+
+
         [SerializeField, Tooltip("Keybinding Table")] KeybindTable _KeybindTable;
 
         [SerializeField, Tooltip("Entity Flag")] EntityFlags _Flag;
@@ -48,17 +54,28 @@ namespace MainCharacter
             else _Rigidbody.velocity = Vector2.zero;
         }
 
-
+        /// <summary>
+        /// This method is used to manage the physics of the player.
+        /// </summary>
         void FixedUpdate()
         {
 
         }
 
+
+        /// <summary>
+        /// This method is used to manage the player's movement.
+        /// </summary>
+        /// <returns>Flag of the Entity</returns>
         public override EntityFlags GetEntityFlag()
         {
             return _Flag;
         }
     }
+
+    /// <summary>
+    /// this class is used to manage the editor of the player.
+    /// </summary>
 
     [CustomEditor(typeof(Player))]
     public class EditorGUI : Editor

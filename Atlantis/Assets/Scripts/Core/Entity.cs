@@ -26,7 +26,7 @@ public abstract class Entity : MonoBehaviour
         Attack_Standart,
         Attack_Rapid,
         Attack_Heavy,
-        Attakc_Tornado,
+        Attack_Tornado,
         Attack_Special
     }
 

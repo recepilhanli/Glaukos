@@ -17,6 +17,11 @@ namespace MainCharacter
     /// 
     /// </summary>
 
+
+    /// <summary>
+    /// This class is used to manage movement of the Player
+    /// </summary>
+
     [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(BoxCollider2D))]
     public partial class Player : Entity
     {
@@ -85,7 +90,7 @@ namespace MainCharacter
             _Rigidbody.AddForce(new Vector2(0, 1000), ForceMode2D.Impulse);
         }
 
-   
+
 
         bool isGrounded() => Physics2D.BoxCast(_PlayerCollider.bounds.center, _PlayerCollider.bounds.size, 0, Vector2.down, 0.1f, _GroundMask);
 

@@ -166,11 +166,11 @@ public class Shark : Entity, IEnemyAI
     {
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attakc_Tornado)
+        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attack_Tornado)
         {
             OnDetected(Player.Instance);
         }
-        if (type != AttackTypes.Attakc_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 5;
+        if (type != AttackTypes.Attack_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 5;
         _Health -= _h;
         if (_Health < 0) OnDeath();
 

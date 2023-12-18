@@ -30,7 +30,6 @@ public class Kraken : Entity, IEnemyAI
 
     [SerializeField, Tooltip("Properties of the entity's")] EntityProperties _Properties;
 
-    [SerializeField] float _NoticeDistance = 20f;
 
     [SerializeField] Sprite _DeathSprite;
 
@@ -262,15 +261,15 @@ public class Kraken : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
-        if (type == AttackTypes.Attakc_Tornado) return;
+        if (type == AttackTypes.Attack_Tornado) return;
         Debug.Log("Kraken Takes damage");
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attakc_Tornado)
+        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attack_Tornado)
         {
             OnDetected(Player.Instance);
         }
-        if (type != AttackTypes.Attakc_Tornado && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
+        if (type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
 
         if (_Health < 0) OnDeath();
 

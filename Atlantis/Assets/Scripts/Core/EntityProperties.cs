@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Do not set variables in any script!
+/// This class is for the properties of an entity.
+///  Do not set variables in any script!
 /// </summary>
 [CreateAssetMenu(fileName = "Entity Properties Example", menuName = "Atlantis/Entity/Create a Entity's Properties", order = 1)]
 public class EntityProperties : ScriptableObject

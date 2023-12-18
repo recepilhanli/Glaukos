@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this class is for the keybind table
+/// </summary>
 [CreateAssetMenu(fileName = "Keybind Table Example", menuName = "Atlantis/Keybinds/Create Keybind Table", order = 1)]
 public class KeybindTable : ScriptableObject
 {

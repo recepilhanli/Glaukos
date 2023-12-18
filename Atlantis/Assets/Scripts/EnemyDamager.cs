@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// For Tor
+/// </summary>
 public class EnemyDamager : MonoBehaviour
 {
     [SerializeField] float _Damage = 5f;
@@ -20,8 +21,8 @@ public class EnemyDamager : MonoBehaviour
         {
             var enemy = other.GetComponent<Entity>();
             if (enemy != null)
-            {
-                enemy.OnTakeDamage(_Damage, Entity.AttackTypes.Attakc_Tornado);
+            {   
+                enemy.OnTakeDamage(_Damage, Entity.AttackTypes.Attack_Tornado);
                 DestroyMe();
             }
         }

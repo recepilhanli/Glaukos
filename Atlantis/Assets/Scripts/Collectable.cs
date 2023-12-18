@@ -4,6 +4,9 @@ using MainCharacter;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// This class is used to manage the collectable items.
+/// </summary>
 public class Collectable : MonoBehaviour
 {
     [SerializeField] bool _FollowPlayer = false;
