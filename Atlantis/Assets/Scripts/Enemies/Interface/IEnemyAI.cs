@@ -11,7 +11,7 @@ public interface IEnemyAI
     /// <summary>
     /// Do not set any variable of _properties in any script!
     /// </summary>
-    /// <param name="_properties"></param>
+    /// <param name="_properties">Initialize properties</param>
     public void Init(EntityProperties _properties);
 }
 

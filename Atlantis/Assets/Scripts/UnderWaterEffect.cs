@@ -22,13 +22,16 @@ public class UnderWaterEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     
         if (_LensDistortion == null)
         {
             Debug.LogError("Lens Distortion is null!");
             return;
         }
-        Debug.Log("Pulse");
-
+        
+        /// <summary>
+        /// 0.3f is the max value of intensity
+        /// </summary>
         float val = Mathf.PingPong(Time.time/6, 0.3f);
 
         _LensDistortion.intensity.value = val;
