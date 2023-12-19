@@ -17,7 +17,6 @@ public class Drowned : Entity, IEnemyAI
 
     [SerializeField] Animator _Animator;
 
-
     bool _isEntitySeen = false;
 
     float DamageDuration = 0f;
