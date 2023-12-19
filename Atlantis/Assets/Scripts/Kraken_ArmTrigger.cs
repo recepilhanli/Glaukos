@@ -18,6 +18,11 @@ public class Kraken_ArmTrigger : MonoBehaviour
         }
     }
 
+    //create a method that will be called from the kraken script
+    //this method will be called when the kraken arm hits the player
+    //this method will be called when the kraken arm hits the player
+
+
     public void DropPlayer()
     {
         Kraken.Instance.SetAnimState(Kraken.Kraken_AnimStates.State_Idle);

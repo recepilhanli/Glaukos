@@ -46,7 +46,6 @@ public class Kraken : Entity, IEnemyAI
     [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
     Vector3 m_Velocity = Vector3.zero;
 
-
     [SerializeField] float _Health = 100f;
 
     float _IgnoreEntitesDuration = 0;
@@ -153,8 +152,7 @@ public class Kraken : Entity, IEnemyAI
 
             case Kraken_AnimStates.State_InkAttack:
                 {
-                    _Animator.ResetTrigger("Attack_ink");
-                    _Animator.SetTrigger("Attack_ink");
+
                     if (InkDuration < Time.time)
                     {
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
@@ -162,12 +160,19 @@ public class Kraken : Entity, IEnemyAI
 
                         if (_Health <= 30)
                         {
+                            _Animator.ResetTrigger("Attack_ink3");
+                            _Animator.SetTrigger("Attack_ink3");
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 12, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 12, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 5, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.right * 12, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 5, Quaternion.identity);
 
+                        }
+                        else
+                        {
+                            _Animator.ResetTrigger("Attack_ink");
+                            _Animator.SetTrigger("Attack_ink");
                         }
                     }
                     break;
@@ -214,7 +219,7 @@ public class Kraken : Entity, IEnemyAI
                 SetAnimState(Kraken_AnimStates.State_GrabAndShake);
                 GrabDuration = Time.time + 20;
             }
-            else Player.Instance.OnTakeDamage(5f);
+            else Player.Instance.OnTakeDamage(3f);
         }
 
     }
