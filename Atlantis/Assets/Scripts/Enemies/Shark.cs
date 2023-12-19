@@ -189,7 +189,6 @@ public class Shark : Entity, IEnemyAI
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
         _Renderer.sprite = _DeathSprite;
-        _Renderer.flipY = true;
         _TrailRenderer.enabled = false;
         isDeath = true;
         gameObject.AddComponent<Destroyer>();
