@@ -640,7 +640,7 @@ PrefabInstance:
     - target: {fileID: 4766948352138285835, guid: 92879fdb17ff8114b8ff483d470ea2b1, type: 3}
       propertyPath: KrakenArm0.Array.data[0]
       value: 
-      objectReference: {fileID: 257106488}
+      objectReference: {fileID: 0}
     - target: {fileID: 4766948352138285835, guid: 92879fdb17ff8114b8ff483d470ea2b1, type: 3}
       propertyPath: KrakenArm0.Array.data[1]
       value: 
@@ -762,11 +762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d37b389702fffa44a5338959a1f3908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &257106488 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5452033550507448315, guid: 92879fdb17ff8114b8ff483d470ea2b1, type: 3}
-  m_PrefabInstance: {fileID: 257106486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &271769074
 GameObject:
   m_ObjectHideFlags: 0
