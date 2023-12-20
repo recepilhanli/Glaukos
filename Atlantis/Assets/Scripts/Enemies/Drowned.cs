@@ -29,6 +29,8 @@ public class Drowned : Entity, IEnemyAI
 
     private Vector3 m_Velocity = Vector3.zero;
 
+    float _RotateTime = 0f;
+
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
@@ -79,9 +81,11 @@ public class Drowned : Entity, IEnemyAI
 
         if (other.gameObject.CompareTag("Ground")) return;
 
-
-        _Right = (_Right == 1) ? -1 : 1;
-
+        if (_RotateTime < Time.time)
+        {
+            _Right = (_Right == 1) ? -1 : 1;
+            _RotateTime = Time.time + 0.5f;
+        }
     }
 
 

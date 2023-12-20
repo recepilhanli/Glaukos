@@ -45,6 +45,9 @@ public abstract class Entity : MonoBehaviour
         Type_Drowned,
         Type_Shark,
         Type_Kraken,
+
+        Type_JellyFish,
+        Type_SwordFish,
     }
 
 

@@ -100,7 +100,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        Loading.LoadScene(sceneName);
     }
 
     public void LoadGame()

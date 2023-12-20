@@ -15,7 +15,7 @@ namespace MainCharacter
     /// Movement();
     /// 
     /// </summary>
-  
+
     /// <summary>
     /// This class is used to manage combat of the Player
     /// </summary>
@@ -40,6 +40,24 @@ namespace MainCharacter
         public bool _Rage { get; private set; } = false;
 
         bool _PunchState = false;
+
+        bool _Poisoned = false;
+
+        public void PosionEffect()
+        {
+            StartCoroutine(PoisonCoroutine());
+        }
+
+        IEnumerator PoisonCoroutine()
+        {
+            _Poisoned = true;
+            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 1f;
+            yield return new WaitForSeconds(6f);
+            _Poisoned = false;
+            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 0f;
+            yield return null;
+        }
+
 
         void RageCombat()
         {
@@ -78,6 +96,7 @@ namespace MainCharacter
 
         void Consumable()
         {
+            if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE) return;
 
             if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
             {
@@ -87,7 +106,6 @@ namespace MainCharacter
                 Health = Mathf.Clamp(Health, 0, 100);
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
             }
-
 
             if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25)
             {
@@ -125,9 +143,13 @@ namespace MainCharacter
             {
                 if (Input.GetKeyDown(_KeybindTable.HeavyAttack))
                 {
+                    if (_Spear.Stuck == 0)
+                    {
+                        _Source.clip = _Clips[2];
+                        _Source.Play();
+                    }
                     _Spear.GetBackToThePlayer(false);
-                    _Source.clip = _Clips[2];
-                    _Source.Play();
+
                 }
 
                 if (Input.GetKeyDown(_KeybindTable.Attack))
@@ -197,7 +219,7 @@ namespace MainCharacter
             Consumable();
 
             Attacking();
-            if (_ChromaticAberration != null)
+            if (_ChromaticAberration != null && !_Poisoned)
             {
                 if (Health <= 25) _ChromaticAberration.intensity.value = 1f;
                 else _ChromaticAberration.intensity.value = 0f;

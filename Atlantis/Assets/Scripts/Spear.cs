@@ -29,6 +29,8 @@ public class Spear : Weapons
 
     float _ThrowingTime = 0f;
 
+    [HideInInspector] public int Stuck = 0;
+
     public enum ThrowStates
     {
         STATE_NONE,
@@ -107,9 +109,17 @@ public class Spear : Weapons
             Player.Instance.CameraShake(2, 0.5f, 0.001f);
             BubbleEffect.SetActive(false);
             _Trail.enabled = false;
+            ThrowState = ThrowStates.STATE_NONE;
         }
         else
         {
+            if (Stuck > 0)
+            {
+                UIManager.Instance.Fade(1, 1, 1, 3);
+                Stuck--;
+                transform.Rotate(0, 0, UnityEngine.Random.Range(-10, 10));
+                return;
+            }
             _Trail.enabled = true;
             transform.SetParent(null);
             ThrowState = ThrowStates.STATE_GETTING_BACK;
@@ -157,6 +167,7 @@ public class Spear : Weapons
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         CollisionReaction(other.gameObject);
 
     }
@@ -241,11 +252,17 @@ public class Spear : Weapons
                 if (entity.isDeath) return;
                 Debug.LogWarning("Damage entity");
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
-                Instantiate(BloodEffectPrefab, pos, transform.rotation);
+
                 if (attach && entity != null && ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
                     ThrowState = ThrowStates.STATE_OVERLAPPED;
                     transform.SetParent(entity.transform);
+                    if (entity.Type == Entity.EntityType.Type_JellyFish)
+                    {
+                        Stuck = 3;
+                        UIManager.Instance.Fade(1, 1, 1, 4);
+                    }
+                    else Instantiate(BloodEffectPrefab, pos, transform.rotation);
                 }
 
             }

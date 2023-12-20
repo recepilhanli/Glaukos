@@ -12,6 +12,9 @@ public class SwordFish : Entity, IEnemyAI
     [SerializeField, Tooltip("Properties of the entity's")] EntityProperties _Properties;
 
     [SerializeField] SpriteRenderer _Renderer;
+
+    [SerializeField] Animator _Animator;
+
     [SerializeField] float _NoticeDistance = 20f;
 
     [SerializeField] float _SeenDuration = 1f;
@@ -26,7 +29,7 @@ public class SwordFish : Entity, IEnemyAI
 
     Vector3 m_Velocity = Vector3.zero;
 
-    Vector2 _RoamingPos = Vector2.zero;
+    public Vector2 _RoamingPos = Vector2.zero;
 
     float _DamageForPerAttack = 1f;
 
@@ -38,11 +41,16 @@ public class SwordFish : Entity, IEnemyAI
 
     private Vector3 _MoveNormal = Vector3.zero;
 
+    private float _StartY = 0;
+
+
+
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
         _DamageForPerAttack = _properties.Damage;
-        Type = EntityType.Type_Shark;
+        Type = EntityType.Type_SwordFish;
+        _StartY = transform.position.y;
     }
 
     void Start()
@@ -50,6 +58,8 @@ public class SwordFish : Entity, IEnemyAI
         Init(_Properties);
         _TrailRenderer.enabled = false;
     }
+
+
 
 
     void Update()
@@ -74,14 +84,14 @@ public class SwordFish : Entity, IEnemyAI
             {
                 if (_RoamingPos != Vector2.zero)
                 {
-                    Move(((Vector2)transform.position - _RoamingPos).normalized);
+                    Move((_RoamingPos - (Vector2)transform.position).normalized * 2);
                     if (Vector2.Distance(transform.position, _RoamingPos) < 2f) _RoamingPos = Vector2.zero;
                 }
                 else
                 {
                     Debug.Log("New Roaming Pos");
-                    Vector3 right = (_Renderer.flipX) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
-                    _RoamingPos = -right * MaxRoamingDistance + transform.position;
+                    Vector3 right = ((_RoamingPos - (Vector2)transform.position).normalized.x >= 0) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
+                    _RoamingPos = -right * MaxRoamingDistance + new Vector3(transform.position.x, _StartY, 0);
                 }
             }
         }
@@ -93,8 +103,10 @@ public class SwordFish : Entity, IEnemyAI
             }
             else
             {
+                Debug.Log($"Velocity: {m_Velocity.magnitude}");
+
                 if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, _DamageForPerAttack);
-                else Move(_entity.transform.position);
+                else Move(_MoveNormal * 4);
 
 
             }
@@ -104,13 +116,10 @@ public class SwordFish : Entity, IEnemyAI
 
     public override void Move(Vector2 pos)
     {
-     
+        if (pos.x < 0) _Renderer.flipY = true;
+        else _Renderer.flipY = false;
 
-        transform.up = (Vector3) pos + new Vector3(0,-1,0);
-     
-
-
-
+        transform.up = (Vector3)pos;
 
         float speed = (_isEntitySeen) ? _Properties.Speed * 40 : _Properties.Speed * 2.5f;
         transform.position = Vector3.SmoothDamp(transform.position, transform.position + (Vector3)pos, ref m_Velocity, 1 / speed);
@@ -118,7 +127,12 @@ public class SwordFish : Entity, IEnemyAI
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == 0) _RoamingPos = Vector2.zero;
+        if (_isEntitySeen && other.gameObject.layer == 0)
+        {
+            _isEntitySeen = false;
+            Debug.Log("Stop");
+        }
+        else if (other.gameObject.layer == 0) _RoamingPos = Vector2.zero;
     }
 
 
@@ -159,10 +173,29 @@ public class SwordFish : Entity, IEnemyAI
     {
         Debug.Log("Detected");
         _MoveNormal = (_entity.transform.position - transform.position).normalized;
-        _SeenDuration = Time.time + 10f;
+        _SeenDuration = Time.time + 3;
         _isEntitySeen = true;
         _RoamingPos = Vector2.zero;
         _TrailRenderer.enabled = true;
+    }
+
+
+    public override void OnDeath()
+    {
+        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
+
+        _Animator.enabled = false;
+        _Renderer.flipY = false;
+        transform.eulerAngles = Vector3.zero;
+        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+        _Renderer.color = Color.gray;
+        _TrailRenderer.enabled = false;
+        isDeath = true;
+        gameObject.AddComponent<Destroyer>();
+        if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
+        Destroy(_HealthBar.gameObject);
+        GetComponent<PolygonCollider2D>().enabled = false;
+
     }
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
@@ -187,19 +220,6 @@ public class SwordFish : Entity, IEnemyAI
         StartCoroutine(DamageEffect());
     }
 
-    public override void OnDeath()
-    {
-        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
-
-        transform.localScale = new Vector3(1, -1, 1);
-        _Renderer.color = Color.gray;
-        _TrailRenderer.enabled = false;
-        isDeath = true;
-        gameObject.AddComponent<Destroyer>();
-        if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
-        Destroy(_HealthBar.gameObject);
-
-    }
 
     public override EntityFlags GetEntityFlag()
     {

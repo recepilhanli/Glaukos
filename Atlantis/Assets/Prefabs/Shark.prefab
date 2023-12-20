@@ -480,7 +480,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -667,7 +667,7 @@ RectTransform:
   m_GameObject: {fileID: 9207282066551211393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.039011486}
-  m_LocalScale: {x: 0.09836329, y: 0.08371344, z: 0.08371344}
+  m_LocalScale: {x: 0.1540074, y: 0.14909229, z: 0.13107014}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7046189408726644502}
@@ -676,7 +676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.933}
+  m_AnchoredPosition: {x: 0, y: 0.976}
   m_SizeDelta: {x: 8.5502, y: 1.0898}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1748221272561111928

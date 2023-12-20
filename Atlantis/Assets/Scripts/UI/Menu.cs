@@ -30,6 +30,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetFirstLevel()
     {
+        Debug.Log("New Level");
         SceneManager.LoadScene("CS_Prologue");
     }
     
@@ -38,7 +39,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetDevLevel()
     {
-        SceneManager.LoadScene("DeveloperScene");
+        Loading.LoadScene("DeveloperScene");
     }
 
     /// <summary>
@@ -64,7 +65,7 @@ public class Menu : MonoBehaviour
     {
         LevelManager.isLoadingGame = true;
         string levelName = PlayerPrefs.GetString("g_Scene");
-        SceneManager.LoadScene(levelName);
+        Loading.LoadScene(levelName);
     }
 
 
