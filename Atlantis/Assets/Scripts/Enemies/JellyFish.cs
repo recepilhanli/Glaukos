@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -13,8 +14,15 @@ public class JellyFish : Entity, IEnemyAI
 
     private Coroutine _JellyFishAttackCoroutine = null;
 
+    [SerializeField] Rigidbody2D _RigidBody;
+
+    private float _YPos;
+    private float _Val;
+    private bool _Pong = false;
+
     IEnumerator JellyFishAttack()
     {
+        Player.Instance.SetSlow(true);
         while (isPlayerInJellyFish)
         {
             Player.Instance.OnTakeDamage(2);
@@ -23,19 +31,33 @@ public class JellyFish : Entity, IEnemyAI
         }
 
         StopCoroutine(_JellyFishAttackCoroutine);
+        Player.Instance.SetSlow(false);
         _JellyFishAttackCoroutine = null;
 
     }
 
-
+    
     void Start()
     {
+        _YPos = transform.position.y;
         Init(null);
     }
 
+
     void Update()
     {
+       if(_Pong)
+        {
+            _Val += Time.deltaTime;
+            if (_Val > 4) _Pong = false;
+        }
+        else 
+        {
+            _Val -= Time.deltaTime;
+            if (_Val < -4) _Pong = true;
+        }
 
+        transform.position = new Vector3(transform.position.x, _YPos + _Val, 0);
 
         if (Vector2.Distance(transform.position, Player.Instance.transform.position) < 2f && _JellyFishAttackCoroutine == null)
         {

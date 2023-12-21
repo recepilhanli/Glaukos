@@ -39,6 +39,7 @@ namespace MainCharacter
             Type = EntityType.Type_Player;
             Application.targetFrameRate = 60;
             Instance = this;
+            _StartSpeed = _Speed;
             InitCamera();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }

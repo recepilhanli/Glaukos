@@ -41,7 +41,13 @@ namespace MainCharacter
 
         private Vector3 m_Velocity = Vector3.zero;
 
+        private float _StartSpeed = 0f;
 
+        public void SetSlow(bool toggle)
+        {
+            if (toggle) _Speed /= 3;
+            else _Speed = _StartSpeed;
+        }
 
         void Movement()
         {
