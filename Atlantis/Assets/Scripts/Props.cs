@@ -19,9 +19,9 @@ public class Props : MonoBehaviour
 
     bool _Broken = false;
 
-     private void Awake()
+    private void Awake()
     {
-      if(_BrokenSprite == null)  OnBreakProp?.AddListener(DestroyProp);
+        if (_BrokenSprite == null) OnBreakProp?.AddListener(DestroyProp);
     }
 
 
@@ -34,7 +34,7 @@ public class Props : MonoBehaviour
     {
         if (_Broken) return;
         _Broken = true;
-        if(_BrokenSprite != null) _Renderer.sprite = _BrokenSprite;
+        if (_BrokenSprite != null) _Renderer.sprite = _BrokenSprite;
         if (_GivingItemAfterBreakingPrefab != null)
         {
             Instantiate(_GivingItemAfterBreakingPrefab, transform.position, Quaternion.identity);
@@ -80,6 +80,11 @@ public class Props : MonoBehaviour
 
     void DestroyProp() //for events
     {
+        if (gameObject.layer == 1)
+        {
+            if (Kraken.Instance != null) Kraken.Instance.SpamCount++;
+            Debug.Log("Layer 1 prop");
+        }
         UIManager.Instance.Fade(0, 1, 0, 4);
         Player.Instance.Focus += 15f;
         Destroy(gameObject);

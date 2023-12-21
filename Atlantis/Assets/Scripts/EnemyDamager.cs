@@ -18,12 +18,13 @@ public class EnemyDamager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered");
+  
         if (other.gameObject.CompareTag("Enemy"))
         {
             var enemy = other.GetComponent<Entity>();
             if (enemy != null)
-            {   
+            {
+                Debug.Log("Triggered: " + enemy);
                 enemy.OnTakeDamage(_Damage, _Tyoe);
                 DestroyMe();
             }

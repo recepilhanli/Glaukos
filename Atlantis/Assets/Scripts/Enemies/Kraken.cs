@@ -12,6 +12,7 @@ public class Kraken : Entity, IEnemyAI
 
     public static Kraken Instance { get; private set; } = null;
 
+    public int SpamCount = 0;
 
     public enum Kraken_AnimStates
     {
@@ -158,8 +159,9 @@ public class Kraken : Entity, IEnemyAI
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
                         InkDuration = Time.time + 2.5f;
 
-                        if (_Health <= 30)
+                        if (_Health <= 30 || SpamCount >= 3)
                         {
+                            SpamCount = 0;
                             _Animator.ResetTrigger("Attack_ink3");
                             _Animator.SetTrigger("Attack_ink3");
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 12, Quaternion.identity);
@@ -270,22 +272,34 @@ public class Kraken : Entity, IEnemyAI
         Debug.Log("Kraken Takes damage");
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attack_Tornado)
+        if (_IgnoreEntitesDuration < Time.time)
         {
             OnDetected(Player.Instance);
         }
-        if (type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
+        if (type != AttackTypes.Attack_Rain && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
 
-        if (_Health < 0) OnDeath();
 
-        _HealthBar.value = _Health / 100;
 
-        if (type == AttackTypes.Attack_Standart)
+
+
+
+        if (type == AttackTypes.Attack_Rain)
+        {
+            _Health -= _h / 6f;
+            Debug.Log("Rain Attack");
+        }
+
+        else if (type == AttackTypes.Attack_Standart)
         {
             Player.Instance.Focus += _h / 7.5f;
             _Health -= _h / 10f;
+            Debug.Log("Standart Attack");
         }
-        else _Health -= _h / 2f;
+        else _Health -= _h / 25f;
+
+        _HealthBar.value = _Health / 100;
+        if (_Health < 0) OnDeath();
+
         StartCoroutine(DamageEffect());
     }
 
