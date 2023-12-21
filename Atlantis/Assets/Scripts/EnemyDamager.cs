@@ -7,6 +7,8 @@ public class EnemyDamager : MonoBehaviour
 {
     [SerializeField] float _Damage = 5f;
     [SerializeField] Rigidbody2D _Body;
+    [SerializeField] Entity.AttackTypes _Tyoe = Entity.AttackTypes.Attack_Tornado;
+
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class EnemyDamager : MonoBehaviour
             var enemy = other.GetComponent<Entity>();
             if (enemy != null)
             {   
-                enemy.OnTakeDamage(_Damage, Entity.AttackTypes.Attack_Tornado);
+                enemy.OnTakeDamage(_Damage, _Tyoe);
                 DestroyMe();
             }
         }

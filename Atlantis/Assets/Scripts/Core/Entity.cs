@@ -27,7 +27,7 @@ public abstract class Entity : MonoBehaviour
         Attack_Rapid,
         Attack_Heavy,
         Attack_Tornado,
-        Attack_Special
+        Attack_Rain
     }
 
     public enum EntityFlags
