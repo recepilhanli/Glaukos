@@ -638,8 +638,8 @@ MonoBehaviour:
   - {fileID: 3765128192547476202}
   - {fileID: 6330358255260103139}
   m_Bounds:
-    m_Center: {x: 0.0026265457, y: -0.005602151, z: -0.0000000037252903}
-    m_Extent: {x: 0.08340943, y: 0.0798554, z: 3.330669e-16}
+    m_Center: {x: 0.0026265457, y: -0.005602151, z: 0}
+    m_Extent: {x: 0.08340943, y: 0.0798554, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -872,8 +872,8 @@ MonoBehaviour:
   - {fileID: 4164618732513410411}
   - {fileID: 3696470971468653078}
   m_Bounds:
-    m_Center: {x: 0.10549511, y: -0.03831464, z: -0.0000000037252903}
-    m_Extent: {x: 0.09496932, y: 0.169593, z: 0}
+    m_Center: {x: 0.105493985, y: -0.03831476, z: 0}
+    m_Extent: {x: 0.094969146, y: 0.169593, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 708858299433188762}
   - component: {fileID: 8935815877795157734}
   - component: {fileID: 1546006271}
-  - component: {fileID: 1546006270}
+  - component: {fileID: 130893443}
   m_Layer: 6
   m_Name: OksijenTanki
   m_TagString: Props
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5345007308113636467}
   m_Bounds:
-    m_Center: {x: -0.009697862, y: -0.0019747764, z: -0.0000000037252903}
+    m_Center: {x: -0.009698816, y: -0.0019748956, z: 0}
     m_Extent: {x: 0.07016583, y: 0.1569386, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1083,20 +1083,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!136 &1546006270
-CapsuleCollider:
+--- !u!70 &130893443
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6306324272248428701}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.037541967
-  m_Height: 0.13482027
-  m_Direction: 1
-  m_Center: {x: -0.014250161, y: 0.045065645, z: -0.000000008355554}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0019901507, y: -0.015337187}
+  m_Size: {x: 0.12490858, y: 0.3406023}
+  m_Direction: 0
 --- !u!1 &6853110549170139948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1356,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0833565, y: 1.0003088}
+  m_Offset: {x: -0.63025457, y: 1.447772}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1365,7 +1367,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3045065, y: 5.7119627}
+  m_Size: {x: 2.091382, y: 6.606889}
   m_EdgeRadius: 0
 --- !u!114 &7497093668104321547
 MonoBehaviour:
@@ -1511,7 +1513,7 @@ MonoBehaviour:
   - {fileID: 9095337277773995108}
   - {fileID: 8045096483338141322}
   m_Bounds:
-    m_Center: {x: -0.036028177, y: -0.008375034, z: -0.0000000037252903}
+    m_Center: {x: -0.03602913, y: -0.008375153, z: 0}
     m_Extent: {x: 0.093547165, y: 0.14460604, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1654,8 +1656,8 @@ MonoBehaviour:
   - {fileID: 4979960937031598030}
   - {fileID: 5571065676038144464}
   m_Bounds:
-    m_Center: {x: -0.026681945, y: -0.0021910071, z: -0.00000000372529}
-    m_Extent: {x: 0.13011195, y: 0.1978089, z: 2.220446e-16}
+    m_Center: {x: -0.026681945, y: -0.0021911263, z: 0}
+    m_Extent: {x: 0.13011195, y: 0.1978089, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1763,8 +1765,8 @@ MonoBehaviour:
   - {fileID: 3469483824156671740}
   - {fileID: 5622874822270117009}
   m_Bounds:
-    m_Center: {x: 0.0066623166, y: 0.0047872066, z: -0.0000000037252903}
-    m_Extent: {x: 0.09693885, y: 0.109979615, z: 1.110223e-16}
+    m_Center: {x: 0.006660305, y: 0.0047870874, z: 0}
+    m_Extent: {x: 0.09693799, y: 0.109979615, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
