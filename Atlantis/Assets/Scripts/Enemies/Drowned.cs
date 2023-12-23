@@ -17,6 +17,7 @@ public class Drowned : Entity, IEnemyAI
 
     [SerializeField] Animator _Animator;
 
+    [SerializeField] GameObject _ExplodingBubble;
     bool _isEntitySeen = false;
 
     float DamageDuration = 0f;
@@ -31,6 +32,8 @@ public class Drowned : Entity, IEnemyAI
 
     float _RotateTime = 0f;
 
+    bool _Exploding = false;
+
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
@@ -44,8 +47,20 @@ public class Drowned : Entity, IEnemyAI
     }
 
 
+
+
     void Update()
     {
+       
+
+        if (_Exploding)
+        {
+            ExplodingBehaviour();
+            return;
+        }
+
+
+
         var _entity = Player.Instance; //Could be changed with GetNearestEntity()
 
         if (!_isEntitySeen)
@@ -80,6 +95,7 @@ public class Drowned : Entity, IEnemyAI
     {
 
         if (other.gameObject.CompareTag("Ground")) return;
+        else if (other.gameObject.CompareTag("Props")) return;
 
         if (_RotateTime < Time.time)
         {
@@ -131,6 +147,11 @@ public class Drowned : Entity, IEnemyAI
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
 
+        if(_Exploding)
+        {
+            OnDeath();
+            return;
+        }
 
         _Health -= _h;
         if (_Health < 0) OnDeath();
@@ -157,18 +178,45 @@ public class Drowned : Entity, IEnemyAI
         return EntityFlags.Flag_Enemy;
     }
 
+    public void Explode()
+    {
+        _ExplodingBubble.SetActive(true);
+        _Exploding = true;
+        _HealthBar.gameObject.SetActive(false);
+        transform.Rotate(0, 0, Random.Range(0, 360));
+        _Animator.SetTrigger("explode");
+        StartCoroutine(ExplodeEffect());
+    }
+
+    IEnumerator ExplodeEffect()
+    {
+        yield return new WaitForSeconds(Random.Range(3.5f,6f));
+
+        if (isDeath) yield return null;
+
+        OnDeath();
+
+        yield return null;
+    }
+    void ExplodingBehaviour()
+    {
+
+        transform.Rotate(0, 0, 60 * Time.deltaTime);
+        Move(transform.up * 600 * Time.deltaTime);
+
+    }
 
     IEnumerator DamageEffect()
     {
         var Renderers = DrownedSpriteParent.GetComponentsInChildren<SpriteRenderer>();
         foreach (var _renderer in Renderers)
         {
-            _renderer.color = Color.red;
+            if (_renderer != null) _renderer.color = Color.red;
         }
         yield return new WaitForSeconds(0.2f);
         foreach (var _renderer in Renderers)
         {
-            _renderer.color = Color.white;
+            if (_renderer != null) _renderer.color = Color.gray;
         }
         yield return null;
     }

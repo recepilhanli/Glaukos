@@ -117,7 +117,7 @@ public class Spear : Weapons
             {
                 UIManager.Instance.Fade(1, 1, 1, 3);
                 Stuck--;
-                transform.Rotate(0, 0, UnityEngine.Random.Range(-10, 10));
+                transform.Rotate(0, 0, UnityEngine.Random.Range(-30, 30));
                 return;
             }
             _Trail.enabled = true;

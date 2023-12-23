@@ -24,6 +24,7 @@ public abstract class Entity : MonoBehaviour
     public enum AttackTypes
     {
         Attack_Standart,
+        Attack_Explosion,
         Attack_Rapid,
         Attack_Heavy,
         Attack_Tornado,
