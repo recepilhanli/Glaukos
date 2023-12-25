@@ -37,6 +37,8 @@ namespace MainCharacter
 
         [SerializeField] List<GameObject> _RageEffects = new List<GameObject>();
 
+        [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
+
         public bool _Rage { get; private set; } = false;
 
         bool _PunchState = false;
@@ -161,10 +163,6 @@ namespace MainCharacter
                     _Source.clip = _Clips[0];
                     _Source.Play();
                 }
-
-
-
-
                 return;
             }
 
@@ -219,6 +217,17 @@ namespace MainCharacter
             Consumable();
 
             Attacking();
+
+            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
+            {
+                if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
+                Vector3 mousePosition = Input.mousePosition;
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                _ThrowWay.up = (worldPosition - _ThrowWay.position).normalized;
+                _ThrowWay.eulerAngles = new Vector3(0, 0, _ThrowWay.eulerAngles.z);
+            }
+            else if (_ThrowWay.gameObject.activeInHierarchy == true) _ThrowWay.gameObject.SetActive(false);
+
             if (_ChromaticAberration != null && !_Poisoned)
             {
                 if (Health <= 25) _ChromaticAberration.intensity.value = 1f;
