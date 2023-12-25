@@ -31,6 +31,7 @@ public class Spear : Weapons
 
     [HideInInspector] public int Stuck = 0;
 
+
     public enum ThrowStates
     {
         STATE_NONE,
@@ -136,7 +137,7 @@ public class Spear : Weapons
 
         else if (_other.isTrigger) return;
 
-        if (other.CompareTag("Player") && ThrowState != ThrowStates.STATE_THROWING)
+        if (other.CompareTag("Player") && ThrowState != ThrowStates.STATE_THROWING && Stuck <= 0)
         {
             GetBackToThePlayer(true);
             return;

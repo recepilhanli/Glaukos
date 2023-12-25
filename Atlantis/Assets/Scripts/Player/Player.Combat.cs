@@ -43,16 +43,16 @@ namespace MainCharacter
 
         bool _Poisoned = false;
 
-        public void PosionEffect()
+        public void PosionEffect(float time = 6f)
         {
-            StartCoroutine(PoisonCoroutine());
+            StartCoroutine(PoisonCoroutine(time));
         }
 
-        IEnumerator PoisonCoroutine()
+        IEnumerator PoisonCoroutine(float time)
         {
             _Poisoned = true;
             if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 1f;
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(time);
             _Poisoned = false;
             if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 0f;
             yield return null;

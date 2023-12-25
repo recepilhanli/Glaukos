@@ -18,13 +18,15 @@ public class Drowned : Entity, IEnemyAI
     [SerializeField] Animator _Animator;
 
     [SerializeField] GameObject _ExplodingBubble;
+    [SerializeField] GameObject _ExplodingPrefab;
+    [SerializeField] float _Health = 100f;
+
     bool _isEntitySeen = false;
 
     float DamageDuration = 0f;
 
     float _DamageForPerAttack = 1f;
 
-    float _Health = 100f;
 
     float _Right = 1;
 
@@ -33,6 +35,8 @@ public class Drowned : Entity, IEnemyAI
     float _RotateTime = 0f;
 
     bool _Exploding = false;
+
+    float damageDelay = 0f;
 
     public void Init(EntityProperties _properties)
     {
@@ -51,7 +55,7 @@ public class Drowned : Entity, IEnemyAI
 
     void Update()
     {
-       
+
 
         if (_Exploding)
         {
@@ -147,13 +151,17 @@ public class Drowned : Entity, IEnemyAI
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
 
-        if(_Exploding)
+        if (damageDelay > Time.time) return;
+        damageDelay = Time.time + 0.3f;
+
+        if (_Exploding)
         {
             OnDeath();
             return;
         }
 
         _Health -= _h;
+        Debug.Log($"{gameObject.name} took a damage. Health: {_Health} -> {_h}");
         if (_Health < 0) OnDeath();
 
         _HealthBar.value = _Health / 100;
@@ -165,6 +173,9 @@ public class Drowned : Entity, IEnemyAI
 
     public override void OnDeath()
     {
+        isDeath = true;
+
+        if (_Exploding) Instantiate(_ExplodingPrefab, transform.position, Quaternion.identity);
 
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
@@ -180,6 +191,7 @@ public class Drowned : Entity, IEnemyAI
 
     public void Explode()
     {
+        damageDelay = Time.time + 1.25f;
         _ExplodingBubble.SetActive(true);
         _Exploding = true;
         _HealthBar.gameObject.SetActive(false);
@@ -190,7 +202,7 @@ public class Drowned : Entity, IEnemyAI
 
     IEnumerator ExplodeEffect()
     {
-        yield return new WaitForSeconds(Random.Range(3.5f,6f));
+        yield return new WaitForSeconds(Random.Range(3.5f, 6f));
 
         if (isDeath) yield return null;
 
