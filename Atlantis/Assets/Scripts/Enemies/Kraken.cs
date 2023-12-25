@@ -285,7 +285,7 @@ public class Kraken : Entity, IEnemyAI
 
         if (type == AttackTypes.Attack_Rain)
         {
-            _Health -= _h / 6f;
+            _Health -= _h / 6.5f;
             Debug.Log("Rain Attack");
         }
 
