@@ -223,8 +223,8 @@ namespace MainCharacter
                 if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
                 Vector3 mousePosition = Input.mousePosition;
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                _ThrowWay.up = (worldPosition - _ThrowWay.position).normalized;
-                _ThrowWay.eulerAngles = new Vector3(0, 0, _ThrowWay.eulerAngles.z);
+                _ThrowWay.up = ((Vector2) worldPosition - (Vector2) _ThrowWay.position).normalized;
+                //_ThrowWay.eulerAngles = new Vector3(0, 0, _ThrowWay.eulerAngles.z);
             }
             else if (_ThrowWay.gameObject.activeInHierarchy == true) _ThrowWay.gameObject.SetActive(false);
 
