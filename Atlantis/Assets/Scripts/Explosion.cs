@@ -21,7 +21,7 @@ public class Explosion : MonoBehaviour
             }
         }
 
-       if(Vector2.Distance(transform.position, Player.Instance.transform.position) <= 15) Player.Instance.CameraShake(2.5f,1,1.25f,true);
+       if(Vector2.Distance(transform.position, Player.Instance.transform.position) <= 15) Player.Instance.CameraShake(8f,4f,0.85f,true);
 
         Destroy(gameObject,5f);
     }

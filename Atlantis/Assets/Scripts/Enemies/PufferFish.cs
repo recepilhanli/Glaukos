@@ -178,9 +178,6 @@ public class PufferFish : Entity, IEnemyAI
         _TrailRenderer.enabled = false;
         isDeath = true;
         gameObject.AddComponent<Destroyer>();
-        if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
-        Destroy(_HealthBar.gameObject);
-
     }
 
     public override EntityFlags GetEntityFlag()

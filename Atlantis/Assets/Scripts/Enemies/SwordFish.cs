@@ -171,7 +171,6 @@ public class SwordFish : Entity, IEnemyAI
 
     public void OnDetected(Entity _entity)
     {
-        Debug.Log("Detected");
         _MoveNormal = (_entity.transform.position - transform.position).normalized;
         _SeenDuration = Time.time + 3;
         _isEntitySeen = true;
