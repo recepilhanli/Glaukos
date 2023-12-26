@@ -9,15 +9,18 @@ using UnityEngine.UI;
 /// </summary>
 public class Menu : MonoBehaviour
 {
-    
+
     /// <summary>
     /// this is the continue button of the menu.
     /// </summary>
-    [SerializeField,Tooltip("Continue Button Of The Menu")] Button ContinueButton;
+    [SerializeField, Tooltip("Continue Button Of The Menu")] Button ContinueButton;
 
 
     private void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         Time.timeScale = 1f;
         if (PlayerPrefs.HasKey("g_Scene"))
         {
@@ -33,7 +36,7 @@ public class Menu : MonoBehaviour
         Debug.Log("New Level");
         SceneManager.LoadScene("CS_Prologue");
     }
-    
+
     /// <summary>
     /// This method is used to load the second level of the game.
     /// </summary>

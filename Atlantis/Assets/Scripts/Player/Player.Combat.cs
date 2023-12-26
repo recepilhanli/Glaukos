@@ -218,15 +218,7 @@ namespace MainCharacter
 
             Attacking();
 
-            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
-            {
-                if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
-                Vector3 mousePosition = Input.mousePosition;
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                _ThrowWay.up = ((Vector2) worldPosition - (Vector2) _ThrowWay.position).normalized;
-                //_ThrowWay.eulerAngles = new Vector3(0, 0, _ThrowWay.eulerAngles.z);
-            }
-            else if (_ThrowWay.gameObject.activeInHierarchy == true) _ThrowWay.gameObject.SetActive(false);
+            ThrowingWay();
 
             if (_ChromaticAberration != null && !_Poisoned)
             {
@@ -234,6 +226,23 @@ namespace MainCharacter
                 else _ChromaticAberration.intensity.value = 0f;
             }
         }
+
+
+        void ThrowingWay()
+        {
+            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
+            {
+                if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
+
+                Vector3 mousePosition = Input.mousePosition;
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                _ThrowWay.up = ((Vector2)worldPosition - (Vector2)_ThrowWay.position).normalized;
+                //_ThrowWay.eulerAngles = new Vector3(0, 0, _ThrowWay.eulerAngles.z);
+            }
+            else if (_ThrowWay.gameObject.activeInHierarchy == true) _ThrowWay.gameObject.SetActive(false);
+
+        }
+
 
         public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
         {
@@ -253,6 +262,10 @@ namespace MainCharacter
 
         public override void OnDeath()
         {
+            //reset position of the cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
+
             isDeath = true;
             AttackState(-1);
             StartCoroutine(DeathSequence());

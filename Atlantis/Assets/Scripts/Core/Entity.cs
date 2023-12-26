@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public abstract class Entity : MonoBehaviour
 {
 
     [Header("Entity Presets")]
-    [SerializeField] protected Slider _HealthBar = null;
+    [SerializeField,Tooltip("Health bar slider of the entity. (Can be null)")] protected Slider _HealthBar = null;
 
     [HideInInspector] public bool isDeath { get; protected set; } = false;
 
@@ -49,6 +50,8 @@ public abstract class Entity : MonoBehaviour
 
         Type_JellyFish,
         Type_SwordFish,
+
+        Type_PufferFish,
     }
 
 

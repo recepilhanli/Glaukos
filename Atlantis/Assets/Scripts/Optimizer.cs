@@ -15,8 +15,5 @@ public class Optimizer : MonoBehaviour
 #endif
     }
 
-    void Update()
-    {
-
-    }
+    
 }
