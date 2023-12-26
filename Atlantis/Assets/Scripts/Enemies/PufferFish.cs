@@ -46,6 +46,7 @@ public class PufferFish : Entity, IEnemyAI
 
     void Update()
     {
+
         if (isDeath)
         {
             transform.Translate(0, -1 * Time.fixedDeltaTime, 0);
@@ -61,7 +62,7 @@ public class PufferFish : Entity, IEnemyAI
             transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.5f;
             return;
         }
-        
+
         transform.localScale = new Vector3(Mathf.PingPong(Time.time * 1.5f, 1) + 2.25f, Mathf.PingPong(Time.time * 1.5f, 1) + 2.25f, 1);
 
         if (LevelManager.Instance.GravityScale != 0) OnDeath();
@@ -87,17 +88,8 @@ public class PufferFish : Entity, IEnemyAI
         }
         else
         {
-            if (Vector2.Distance(_entity.transform.position, transform.position) > _NoticeDistance)
-            {
-                _isEntitySeen = false;
-            }
-            else
-            {
-                if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, 1);
-                else Move(_entity.transform.position);
-
-
-            }
+            if (Vector2.Distance(_entity.transform.position, transform.position) < 2f) Attack(_entity, 1);
+            else Move(_entity.transform.position);
         }
     }
 
@@ -151,7 +143,29 @@ public class PufferFish : Entity, IEnemyAI
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
         if (isDeath || _Exploding) return;
+
+        WarnOthers();
         Explode();
+
+    }
+
+
+
+
+
+    void WarnOthers()
+    {
+        var entities = FindObjectsOfType<Entity>();
+        //warn other pufferfishes
+        foreach (var entity in entities)
+        {
+            if (entity == this) continue;
+            if (entity.Type != EntityType.Type_PufferFish) continue;
+            if (Vector2.Distance(transform.position, entity.transform.position) <= 30)
+            {
+                entity.GetComponent<PufferFish>()?.OnDetected(Player.Instance);
+            }
+        }
     }
 
     public override void OnDeath()
@@ -159,7 +173,7 @@ public class PufferFish : Entity, IEnemyAI
         if (isDeath) return;
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
-        Instantiate(ExplosionPrefab,transform.position,Quaternion.identity);
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
 
         _TrailRenderer.enabled = false;
         isDeath = true;

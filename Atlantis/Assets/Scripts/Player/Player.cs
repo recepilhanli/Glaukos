@@ -41,7 +41,7 @@ namespace MainCharacter
             Instance = this;
             _StartSpeed = _Speed;
             InitCamera();
-            Cursor.visible = false;
+            Cursor.visible = true;
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 
