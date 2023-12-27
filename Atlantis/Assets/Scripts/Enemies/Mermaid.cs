@@ -31,13 +31,15 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] GameObject _MermaidCanvas;
 
-
-
+    private float _Health = 200;
     private MermaidStates _currentState = MermaidStates.State_AttackNormal;
 
     private Vector2 m_Velocity = Vector2.zero;
 
     private static List<Entity> _UnrealMermaids = new List<Entity>();
+
+    bool _isEntitySeen = false;
+
 
     void Start()
     {
@@ -50,6 +52,12 @@ public class Mermaid : Entity, IEnemyAI
         {
             _currentState = MermaidStates.State_GoingClone;
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            OnDetected(Player.Instance);
+        }
+
 
 
         switch (_currentState)
@@ -92,7 +100,11 @@ public class Mermaid : Entity, IEnemyAI
 
     public void OnDetected(Entity _entity)
     {
+        _isEntitySeen = true;
+        Player.Instance.LockLensSize = true;
+        Player.Instance.CameraShake(1, .9f, 3f, true);
         _MermaidCanvas.SetActive(true);
+
     }
 
     /// <summary>
@@ -131,18 +143,27 @@ public class Mermaid : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
+        if (isDeath) return;
 
-        if (!_isRealMermaid)
+        if (!_isRealMermaid && type != AttackTypes.Attack_Rain)
         {
             if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
             UIManager.Instance.Fade(1, 1, 1, 2f);
             _UnrealMermaids.Remove(this);
+            Player.Instance.GiveFocusPoints(7.5f);
             Destroy(Instantiate(DustParticle, transform.position, Quaternion.identity), 2f);
             Destroy(gameObject);
             return;
         }
+        else if (!_isRealMermaid && type == AttackTypes.Attack_Rain)
+        {
+            StartCoroutine(DamageEffect());
+            return;
+        }
 
-        else if (_currentState == MermaidStates.State_AttackClone && _isRealMermaid)
+
+
+        else if (_currentState == MermaidStates.State_AttackClone && _isRealMermaid && type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rain)
         {
             if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
             foreach (var unreal in _UnrealMermaids)
@@ -157,20 +178,49 @@ public class Mermaid : Entity, IEnemyAI
             UIManager.Instance.Fade(1, 1, 1, 2f);
             _currentState = MermaidStates.State_AttackNormal;
         }
+        else StartCoroutine(DamageEffect());
 
+        if (type == AttackTypes.Attack_Standart)
+        {
+            _Health -= _h / 8f;
+            Player.Instance.GiveFocusPoints(5f);
+        }
+        else _Health -= _h / 12f;
+
+        _HealthBar.value = _Health / 100;
+
+        if (_Health <= 0) OnDeath();
 
     }
 
     public override void OnDeath()
     {
+        isDeath = true;
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
-
         Destroy(gameObject);
     }
 
     public override void Move(Vector2 pos)
     {
         _RigidBody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, 0.5f));
+    }
+
+    IEnumerator DamageEffect()
+    {
+        // int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
+        // PlaySound(randomindex);
+
+        var Renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = Color.red;
+        }
+        yield return new WaitForSeconds(0.2f);
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = Color.white;
+        }
+        yield return null;
     }
 
     public override EntityFlags GetEntityFlag()

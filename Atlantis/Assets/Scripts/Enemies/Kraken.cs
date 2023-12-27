@@ -299,6 +299,7 @@ public class Kraken : Entity, IEnemyAI
         if (_Health < 0) OnDeath();
 
         StartCoroutine(DamageEffect());
+        
     }
 
     public override void OnDeath()

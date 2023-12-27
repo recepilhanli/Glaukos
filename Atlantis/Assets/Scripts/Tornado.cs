@@ -45,13 +45,15 @@ public class Tornado : MonoBehaviour
         foreach (var enemy in Enemies)
         {
             if (enemy == null) continue;
-
-            if (Vector2.Distance(enemy.transform.position, transform.position) <= _AffectingDistance)
+            float dist = Vector2.Distance(enemy.transform.position, transform.position);
+            if (dist <= _AffectingDistance)
             {
                 Vector2 toPos = enemy.transform.position - transform.position;
                 toPos.y = 0;
-                if (enemy.Type != Entity.EntityType.Type_Shark) enemy.Move(-toPos * _TornadoSpeed);
-                if (_TornadoDamageTime <= Time.time) enemy.OnTakeDamage(5, Entity.AttackTypes.Attack_Tornado);
+                if (enemy.Type != Entity.EntityType.Type_Shark && enemy.Type != Entity.EntityType.Type_Mermaid) enemy.Move(-toPos * _TornadoSpeed);
+
+                if (_TornadoDamageTime <= Time.time && enemy.Type != Entity.EntityType.Type_Mermaid) enemy.OnTakeDamage(5, Entity.AttackTypes.Attack_Tornado);
+                else if (_TornadoDamageTime <= Time.time && dist < _AffectingDistance / 2) enemy.OnTakeDamage(30, Entity.AttackTypes.Attack_Tornado);
             }
         }
         if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;

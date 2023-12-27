@@ -15,10 +15,14 @@ public class JellyFish : Entity, IEnemyAI
     private Coroutine _JellyFishAttackCoroutine = null;
 
     [SerializeField] Rigidbody2D _RigidBody;
-
+    [SerializeField] GameObject _DustParticle;
     private float _YPos;
     private float _Val;
     private bool _Pong = false;
+
+    private List<SpriteRenderer> _Renderers = new List<SpriteRenderer>();
+
+
 
     IEnumerator JellyFishAttack()
     {
@@ -36,9 +40,15 @@ public class JellyFish : Entity, IEnemyAI
 
     }
 
-    
+
     void Start()
     {
+        var renderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (var renderer in renderers)
+        {
+            _Renderers.Add(renderer);
+        }
+
         _YPos = transform.position.y;
         Init(null);
     }
@@ -46,12 +56,22 @@ public class JellyFish : Entity, IEnemyAI
 
     void Update()
     {
-       if(_Pong)
+        if (isDeath)
+        {
+            foreach (var renderer in _Renderers)
+            {
+                renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, renderer.color.a - Time.deltaTime);
+            }
+            if (_Renderers[0].color.a <= 0) Destroy(gameObject);
+            return;
+        }
+
+        if (_Pong)
         {
             _Val += Time.deltaTime;
             if (_Val > 4) _Pong = false;
         }
-        else 
+        else
         {
             _Val -= Time.deltaTime;
             if (_Val < -4) _Pong = true;
@@ -86,8 +106,28 @@ public class JellyFish : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
-        if (type == AttackTypes.Attack_Tornado) Destroy(gameObject);
+        if (type == AttackTypes.Attack_Tornado)
+        {
+            OnDeath();
+        }
     }
+
+    public override void OnDeath()
+    {
+        if (isDeath) return;
+
+        foreach (var renderer in _Renderers)
+        {
+            renderer.color = Color.gray;
+        }
+
+
+        Instantiate(_DustParticle, transform.position, Quaternion.identity);
+
+        isDeath = true;
+        transform.up = Vector2.down;
+    }
+
 
 
     public override EntityFlags GetEntityFlag()
