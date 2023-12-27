@@ -334,5 +334,19 @@ namespace MainCharacter
             Instance.OnTakeDamage(dmg);
         }
 
+        public void DamageAndPoisonPlayer(float dmg)
+        {
+            Instance.PosionEffect();
+            Instance.SetSlow(true);
+            Instance.OnTakeDamage(dmg);
+            Instance.Invoke("SetDisableSlow", 2f);
+        }
+
+        void SetDisableSlow()
+        {
+            SetSlow(false);
+        }
+
+
     }
 }

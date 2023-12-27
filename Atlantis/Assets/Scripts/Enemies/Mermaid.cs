@@ -13,8 +13,9 @@ public class Mermaid : Entity, IEnemyAI
     /// <summary>
     /// Mermaid states
     /// </summary>
-    enum MermaidStates
+    public enum MermaidStates
     {
+        State_None,
         State_AttackNormal,
         State_AttackPoison,
         State_GoingClone,
@@ -31,6 +32,14 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] GameObject _MermaidCanvas;
 
+    [SerializeField] GameObject _WavePrefab;
+
+    [SerializeField] GameObject _PoisonPrefab;
+
+    [SerializeField] Transform _HeadTransform;
+
+
+
     private float _Health = 200;
     private MermaidStates _currentState = MermaidStates.State_AttackNormal;
 
@@ -40,6 +49,9 @@ public class Mermaid : Entity, IEnemyAI
 
     bool _isEntitySeen = false;
 
+    int _LastIndex = -1;
+
+    float _CloneDelay = 0f;
 
     void Start()
     {
@@ -48,24 +60,57 @@ public class Mermaid : Entity, IEnemyAI
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            _currentState = MermaidStates.State_GoingClone;
-        }
+        if (!_isRealMermaid) return;
+        float playerdist = Vector2.Distance(Player.Instance.transform.position, transform.position);
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            OnDetected(Player.Instance);
-        }
+        Debug.Log(playerdist);
 
+
+        if (!_isEntitySeen)
+        {
+            if (playerdist <= 10)
+            {
+                OnDetected(Player.Instance);
+            }
+            return;
+        }
 
 
         switch (_currentState)
         {
+            case MermaidStates.State_None:
+                {
+                    //add extra 10 seconds to clone delay
+                    if (_Health <= 120 && _CloneDelay + 10 <= Time.time)
+                    {
+                        _CloneDelay = Time.time + 10;
+                        SetState(MermaidStates.State_GoingClone);
+                    }
+                    if (playerdist <= 1.5f) SetState(MermaidStates.State_AttackNormal);
+                    else Move(Player.Instance.transform.position);
+                    break;
+                }
+
             case MermaidStates.State_AttackNormal:
-                break;
+                {
+                    if (playerdist <= 1.85f)
+                    {
+                        SetState(MermaidStates.State_AttackNormal);
+                        Move(Player.Instance.transform.position);
+                    }
+                    else SetState(MermaidStates.State_None);
+                    break;
+                }
+
             case MermaidStates.State_AttackPoison:
-                break;
+                {
+                    if (playerdist <= 2.5f)
+                    {
+                        SetState(MermaidStates.State_None);
+                    }
+                    break;
+                }
+
             case MermaidStates.State_GoingClone:
                 {
                     if (Vector2.Distance(_ClonePosition, transform.position) < 1)
@@ -79,11 +124,63 @@ public class Mermaid : Entity, IEnemyAI
                     break;
                 }
             case MermaidStates.State_AttackClone:
-                break;
+                {
+                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1, 1, 1);
+                    else transform.localScale = new Vector3(1, 1, 1);
+                    _CloneDelay = Time.time + 10;
+                    break;
+                }
             default:
                 break;
         }
     }
+
+
+    public void SetState(MermaidStates state)
+    {
+        if (_currentState == state || (_currentState == MermaidStates.State_GoingClone && state != MermaidStates.State_AttackClone)) return;
+
+        //animation states
+        const int anim_move = 0;
+        const int anim_scream = 1;
+        const int anim_poison = 2;
+        const int anim_normalattack = 3;
+
+        _currentState = state;
+        switch (state)
+        {
+            case MermaidStates.State_None:
+                {
+                    _Animator.SetInteger("State", anim_move);
+                    break;
+                }
+            case MermaidStates.State_GoingClone:
+                {
+                    _Animator.SetInteger("State", anim_move);
+                    break;
+                }
+            case MermaidStates.State_AttackNormal:
+                {
+                    _Animator.SetInteger("State", anim_normalattack);
+                    break;
+                }
+            case MermaidStates.State_AttackPoison:
+                {
+                    _Animator.SetInteger("State", anim_poison);
+                    break;
+                }
+
+            case MermaidStates.State_AttackClone:
+                {
+                    _Animator.SetInteger("State", anim_scream);
+                    break;
+                }
+            default:
+                break;
+        }
+
+    }
+
 
     public void Init(EntityProperties _properties)
     {
@@ -96,6 +193,19 @@ public class Mermaid : Entity, IEnemyAI
         Destroy(_MermaidCanvas);
     }
 
+    public void CreateWave()
+    {
+        var wave = Instantiate(_WavePrefab, _HeadTransform.position, Quaternion.identity);
+        wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
+        Destroy(wave, 3f);
+    }
+
+    public void CreatePosion()
+    {
+        var wave = Instantiate(_PoisonPrefab, _HeadTransform.position, Quaternion.identity);
+        wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
+        Destroy(wave, 3f);
+    }
 
 
     public void OnDetected(Entity _entity)
@@ -112,23 +222,38 @@ public class Mermaid : Entity, IEnemyAI
     /// </summary>
     void CreatUnrealMermaids()
     {
-        if (!_isRealMermaid || _UnrealMermaids.Count > 0) return;
+        if (!_isRealMermaid || _UnrealMermaids.Count > 0 || _currentState != MermaidStates.State_GoingClone) return;
 
-        _currentState = MermaidStates.State_AttackClone;
+        SetState(MermaidStates.State_AttackClone);
 
         _UnrealMermaids.Clear();
 
         for (int i = 0; i < 5; i++)
         {
             var unrealmermaid = Instantiate(gameObject).GetComponent<Mermaid>();
+            unrealmermaid.SetState(MermaidStates.State_AttackClone);
             unrealmermaid.InitUnrealMermaid();
             _UnrealMermaids.Add(unrealmermaid);
+
+            //fix being red bug
+            var renderers = unrealmermaid.GetComponentsInChildren<SpriteRenderer>();
+            foreach (var renderer in renderers)
+            {
+                renderer.color = Color.white;
+            }
+
             //making a circle with mermaids
             unrealmermaid.transform.position = transform.position + new Vector3(Mathf.Cos(i * 72 * Mathf.Deg2Rad), Mathf.Sin(i * 72 * Mathf.Deg2Rad), 0) * 5;
         }
 
         //exchange real mermaid to one of unreal mermaid's position
-        var temp = _UnrealMermaids[Random.Range(0, 5)];
+        int index = Random.Range(0, 5);
+        while (index == _LastIndex)
+        {
+            index = Random.Range(0, 5);
+        }
+        _LastIndex = index;
+        var temp = _UnrealMermaids[index];
         var pos = temp.transform.position;
         temp.transform.position = transform.position;
         transform.position = pos;
@@ -145,12 +270,19 @@ public class Mermaid : Entity, IEnemyAI
     {
         if (isDeath) return;
 
+        if (!_isEntitySeen)
+        {
+            OnDetected(Player.Instance);
+            return;
+        }
+
+
         if (!_isRealMermaid && type != AttackTypes.Attack_Rain)
         {
             if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
             UIManager.Instance.Fade(1, 1, 1, 2f);
             _UnrealMermaids.Remove(this);
-            Player.Instance.GiveFocusPoints(7.5f);
+            if (type != AttackTypes.Attack_Tornado) Player.Instance.GiveFocusPoints(-5f);
             Destroy(Instantiate(DustParticle, transform.position, Quaternion.identity), 2f);
             Destroy(gameObject);
             return;
@@ -176,7 +308,7 @@ public class Mermaid : Entity, IEnemyAI
             }
             _UnrealMermaids.Clear();
             UIManager.Instance.Fade(1, 1, 1, 2f);
-            _currentState = MermaidStates.State_AttackNormal;
+            SetState(MermaidStates.State_None);
         }
         else StartCoroutine(DamageEffect());
 
@@ -190,7 +322,19 @@ public class Mermaid : Entity, IEnemyAI
         _HealthBar.value = _Health / 100;
 
         if (_Health <= 0) OnDeath();
+        else if (_Health <= 160 && _CloneDelay <= Time.time)
+        {
+            _CloneDelay = Time.time + 12;
+            SetState(MermaidStates.State_GoingClone);
+        }
+        else if (_Health <= 180 && _currentState == MermaidStates.State_None && Random.Range(0, 10) <= 4) SetState(MermaidStates.State_AttackPoison);
+        else if (_currentState == MermaidStates.State_AttackPoison && Random.Range(0, 10) <= 5) SetState(MermaidStates.State_None);
 
+    }
+
+    public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
+    {
+        if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= 1.9) Player.Instance.OnTakeDamage(damage, type);
     }
 
     public override void OnDeath()
@@ -202,7 +346,13 @@ public class Mermaid : Entity, IEnemyAI
 
     public override void Move(Vector2 pos)
     {
-        _RigidBody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, 0.5f));
+        if (transform.position.x - pos.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+        else transform.localScale = new Vector3(1, 1, 1);
+
+        float speedMultiplier = 1f;
+        if (_Health <= 50) speedMultiplier = 0.4f;
+
+        _RigidBody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, 0.3f * speedMultiplier));
     }
 
     IEnumerator DamageEffect()
