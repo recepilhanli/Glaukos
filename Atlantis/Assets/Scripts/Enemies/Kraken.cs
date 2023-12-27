@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MainCharacter;
-using Unity.Mathematics;
-using UnityEditor.Build.Player;
 using UnityEngine.SceneManagement;
 
 
@@ -231,10 +229,7 @@ public class Kraken : Entity, IEnemyAI
 
     public void KrakenArea()
     {
-        _isEntitySeen = true;
-        Player.Instance.LockLensSize = true;
-        _KrakenCanvas.SetActive(true);
-        Player.Instance.CameraShake(1, .9f, 3f, true);
+        OnDetected(Player.Instance);
     }
 
 
@@ -263,6 +258,9 @@ public class Kraken : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         _isEntitySeen = true;
+        Player.Instance.LockLensSize = true;
+        _KrakenCanvas.SetActive(true);
+        Player.Instance.CameraShake(1, .9f, 3f, true);
 
     }
 
