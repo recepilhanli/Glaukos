@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 196990131}
   - component: {fileID: 196990130}
   m_Layer: 0
-  m_Name: sAhne
+  m_Name: SahneTimeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,7 +300,7 @@ PlayableDirector:
   - key: {fileID: 2454762597581828493, guid: fe04c5288c2a845459f72ca7fa4c7c48, type: 2}
     value: {fileID: 1843356580}
   - key: {fileID: 1959210350004626624, guid: fe04c5288c2a845459f72ca7fa4c7c48, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 941807817}
   - key: {fileID: 1053878770412983557, guid: fe04c5288c2a845459f72ca7fa4c7c48, type: 2}
     value: {fileID: 33868547}
   m_ExposedReferences:
@@ -318,7 +318,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &237674151
 GameObject:
@@ -703,7 +703,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &482230000
 GameObject:
@@ -961,10 +961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1098,7 +1098,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &790192736
 MonoBehaviour:
@@ -2615,7 +2615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 8b8d083b374b56b4a93e31f4d50b4050, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 8b8d083b374b56b4a93e31f4d50b4050, type: 3}
       propertyPath: m_LocalScale.x
@@ -3052,8 +3052,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 348345695}
   lines:
-  - "Sahilde yine kim unutu e\u015Fyalar\u0131n\u0131."
-  - Sorumsuz insanlar ..
+  - "Sahilde yine kim unuttu e\u015Fyalar\u0131n\u0131??"
+  - Sorumsuz insanlar..
   textSpeed: 0.1
   _StartOnAwake: 1
   _IsPlaying: 0
@@ -3866,7 +3866,7 @@ Transform:
   - {fileID: 1263072674}
   - {fileID: 363316553}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1671549088791303354
 Transform:
