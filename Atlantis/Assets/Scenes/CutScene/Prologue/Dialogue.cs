@@ -8,21 +8,26 @@ using UnityEngine.Events;
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
+    [SerializeField, Tooltip("it can be null")] Animator _Animator;
     public string[] lines;
     public float textSpeed;
     private int index;
 
     [SerializeField] bool _StartOnAwake = true;
     [SerializeField, ReadOnlyInspector] bool _IsPlaying = false;
-
-
     [SerializeField] UnityEvent OnDialogStart = new UnityEvent();
     [SerializeField] UnityEvent<int> OnLineChanged = new UnityEvent<int>();
     [SerializeField] UnityEvent OnDialogEnd = new UnityEvent();
 
+    private string[] CharacterNames = new string[2];
+
     void Start()
     {
+        CharacterNames[0] = string.Empty;
+        CharacterNames[1] = string.Empty;
+        GetCharacters();
         textComponent.text = string.Empty;
+
         if (_StartOnAwake) StartDialogue();
     }
 
@@ -61,6 +66,60 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+
+    void GetCharacters()
+    {
+        if (_Animator == null) return;
+
+
+
+        foreach (var item in lines)
+        {
+            string name = item.Split(':')[0];
+
+
+            if (CharacterNames[0] != string.Empty && name != string.Empty && CharacterNames[0] != name)
+            {
+                CharacterNames[1] = name;
+                Debug.Log("Last: " + name);
+                break;
+            }
+            else if (name != string.Empty)
+            {
+                CharacterNames[0] = name;
+            }
+
+        }
+
+        foreach (var item in CharacterNames)
+        {
+            Debug.Log(item);
+        }
+
+    }
+
+    void SwitchBetweenCharacters()
+    {
+        if (_Animator == null) return;
+
+        if (CharacterNames[0] != string.Empty && CharacterNames[1] != string.Empty)
+        {
+            string character = lines[index].Split(':')[0];
+
+            Debug.Log("Line Turn: " + character);
+
+            if (CharacterNames[0] == character)
+            {
+                _Animator.SetInteger("Character", 1);
+            }
+            else if (CharacterNames[1] == character)
+            {
+                _Animator.SetInteger("Character", 2);
+            }
+        }
+
+    }
+
     void NextLine()
     {
         if (index < lines.Length - 1)
@@ -68,6 +127,7 @@ public class Dialogue : MonoBehaviour
             index++;
             textComponent.text = string.Empty;
             OnLineChanged.Invoke(index);
+            SwitchBetweenCharacters();
             Debug.Log("Line Changed");
             StartCoroutine(TypeLine());
         }
