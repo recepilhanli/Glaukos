@@ -45,52 +45,24 @@ namespace MainCharacter
 
         bool _Poisoned = false;
 
-        public void PosionEffect(float time = 6f)
-        {
-            StartCoroutine(PoisonCoroutine(time));
-        }
+        public static int RemainingLifes { private set; get; } = 5;
 
-        IEnumerator PoisonCoroutine(float time)
-        {
-            _Poisoned = true;
-            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 1f;
-            yield return new WaitForSeconds(time);
-            _Poisoned = false;
-            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 0f;
-            yield return null;
-        }
 
+        public static void LoadRemaningLifes()
+        {
+            if (PlayerPrefs.HasKey(PerfTable.perf_RemainingLifes)) RemainingLifes = PlayerPrefs.GetInt(PerfTable.perf_RemainingLifes, 5);
+        }
+        public static void ResetRemainingLifes()
+        {
+            RemainingLifes = 5;
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt(PerfTable.perf_RemainingLifes, RemainingLifes);
+            PlayerPrefs.Save();
+        }
 
         void RageCombat()
         {
             StartCoroutine(Rage());
-        }
-
-        IEnumerator Rage()
-        {
-            CameraShake(3, 0.8f, 0.01f);
-            UIManager.Instance.Fade(0.35f, 1f, 0.9f);
-            UIManager.Instance.StopFading = true;
-            _LensSize = 9f;
-
-            foreach (var _re in _RageEffects)
-            {
-                _re.SetActive(true);
-            }
-            _Rage = true;
-
-
-            yield return new WaitForSeconds(10f);
-
-            UIManager.Instance.StopFading = false;
-            _Rage = false;
-            foreach (var _re in _RageEffects)
-            {
-                _re.SetActive(false);
-            }
-
-            _LensSize = 8f;
-            yield return null;
         }
 
 
@@ -262,30 +234,23 @@ namespace MainCharacter
 
         public override void OnDeath()
         {
+            if (isDeath) return;
+
+            RemainingLifes--;
+            PlayerPrefs.SetInt(PerfTable.perf_RemainingLifes, RemainingLifes);
+            PlayerPrefs.Save();
             //reset position of the cursor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.lockState = CursorLockMode.None;
+
+
 
             isDeath = true;
             AttackState(-1);
             StartCoroutine(DeathSequence());
         }
 
-        IEnumerator DeathSequence()
-        {
-            var _g = GameObject.Find("Global Light 2D");
-            if (_g != null) _g.GetComponent<Light2D>().intensity = 0.25f;
-            _LensSize = 4f;
-            _PlayerRenderer.color = new Color(0.3f, 0.3f, 0.3f);
-            transform.eulerAngles = new Vector3(0, 0, 90);
-            _Rigidbody.isKinematic = true;
-            _Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-            Time.timeScale = 0.4f;
-            yield return new WaitForSeconds(2f);
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("Death");
-            yield return null;
-        }
+
 
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
         {
@@ -324,6 +289,13 @@ namespace MainCharacter
         }
 
 
+
+
+        public void PosionEffect(float time = 6f)
+        {
+            StartCoroutine(PoisonCoroutine(time));
+        }
+
         public void GiveFocusPoints(float point)
         {
             Instance.Focus += point; //Instance using for events
@@ -345,6 +317,60 @@ namespace MainCharacter
         void SetDisableSlow()
         {
             SetSlow(false);
+        }
+
+        IEnumerator DeathSequence()
+        {
+            var _g = GameObject.Find("Global Light 2D");
+            if (_g != null) _g.GetComponent<Light2D>().intensity = 0.25f;
+            _LensSize = 4f;
+            _PlayerRenderer.color = new Color(0.3f, 0.3f, 0.3f);
+            transform.eulerAngles = new Vector3(0, 0, 90);
+            _Rigidbody.isKinematic = true;
+            _Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            Time.timeScale = 0.4f;
+            yield return new WaitForSeconds(2f);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Death");
+            yield return null;
+        }
+
+
+        IEnumerator PoisonCoroutine(float time)
+        {
+            _Poisoned = true;
+            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 1f;
+            yield return new WaitForSeconds(time);
+            _Poisoned = false;
+            if (_ChromaticAberration != null) _ChromaticAberration.intensity.value = 0f;
+            yield return null;
+        }
+
+        IEnumerator Rage()
+        {
+            CameraShake(3, 0.8f, 0.01f);
+            UIManager.Instance.Fade(0.35f, 1f, 0.9f);
+            UIManager.Instance.StopFading = true;
+            _LensSize = 9f;
+
+            foreach (var _re in _RageEffects)
+            {
+                _re.SetActive(true);
+            }
+            _Rage = true;
+
+
+            yield return new WaitForSeconds(10f);
+
+            UIManager.Instance.StopFading = false;
+            _Rage = false;
+            foreach (var _re in _RageEffects)
+            {
+                _re.SetActive(false);
+            }
+
+            _LensSize = 8f;
+            yield return null;
         }
 
 

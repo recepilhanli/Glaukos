@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using MainCharacter;
 
 /// <summary>
 /// This class is used to manage the menu scene.
@@ -18,14 +19,19 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+
+        Player.LoadRemaningLifes();
+
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
         Time.timeScale = 1f;
-        if (PlayerPrefs.HasKey("g_Scene"))
+        if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
         {
             ContinueButton.interactable = true;
         }
+
     }
 
     /// <summary>
@@ -66,8 +72,13 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void Continue()
     {
-        LevelManager.isLoadingGame = true;
-        string levelName = PlayerPrefs.GetString("g_Scene");
+
+        string levelName = "Presentation_Level_1";
+        if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
+        {
+            levelName = PlayerPrefs.GetString(PerfTable.perf_LastScene);
+            LevelManager.isLoadingGame = true;
+        }
         Loading.LoadScene(levelName);
     }
 

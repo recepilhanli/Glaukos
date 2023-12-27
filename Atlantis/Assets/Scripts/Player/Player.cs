@@ -42,6 +42,17 @@ namespace MainCharacter
             _StartSpeed = _Speed;
             InitCamera();
             Cursor.visible = true;
+            
+            if (PlayerPrefs.HasKey(PerfTable.perf_RemainingLifes))
+            {
+                RemainingLifes = PlayerPrefs.GetInt(PerfTable.perf_RemainingLifes);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(PerfTable.perf_RemainingLifes, 5);
+                RemainingLifes = 5;
+                PlayerPrefs.Save();
+            }
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 

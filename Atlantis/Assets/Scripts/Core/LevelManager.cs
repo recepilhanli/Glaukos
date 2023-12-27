@@ -86,14 +86,14 @@ public class LevelManager : MonoBehaviour
     public void SaveGame()
     {
         var pos = Player.Instance.transform.position;
-        PlayerPrefs.SetFloat("g_Pos_X", pos.x);
-        PlayerPrefs.SetFloat("g_Pos_Y", pos.y);
-        PlayerPrefs.SetFloat("g_Pos_Z", pos.z);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, pos.x);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosY, pos.y);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosZ, pos.z);
 
-        PlayerPrefs.SetFloat("g_Health", Player.Instance.Health);
-        PlayerPrefs.SetFloat("g_Focus", Player.Instance.Focus);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastHealth, Player.Instance.Health);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastFocus, Player.Instance.Focus);
 
-        PlayerPrefs.SetString("g_Scene", SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetString(PerfTable.perf_LastScene, SceneManager.GetActiveScene().name);
 
         PlayerPrefs.Save();
     }
@@ -106,12 +106,12 @@ public class LevelManager : MonoBehaviour
     public void LoadGame()
     {
         Vector3 pos = Vector3.zero;
-        pos.x = PlayerPrefs.GetFloat("g_Pos_X");
-        pos.y = PlayerPrefs.GetFloat("g_Pos_Y");
-        pos.z = PlayerPrefs.GetFloat("g_Pos_Z");
+        pos.x = PlayerPrefs.GetFloat(PerfTable.perf_LastPosX);
+        pos.y = PlayerPrefs.GetFloat(PerfTable.perf_LastPosY);
+        pos.z = PlayerPrefs.GetFloat(PerfTable.perf_LastPosZ);
 
-        Player.Instance.Health = PlayerPrefs.GetFloat("g_Health");
-        Player.Instance.Focus = PlayerPrefs.GetFloat("g_Focus");
+        Player.Instance.Health = PlayerPrefs.GetFloat(PerfTable.perf_LastHealth);
+        Player.Instance.Focus = PlayerPrefs.GetFloat(PerfTable.perf_LastFocus);
 
         Player.Instance.transform.position = pos;
         isLoadingGame = false;
