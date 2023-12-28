@@ -219,6 +219,8 @@ public class Mermaid : Entity, IEnemyAI
     {
         if (!_isRealMermaid || _UnrealMermaids.Count > 0 || _currentState != MermaidStates.State_GoingClone) return;
 
+        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
+
         SetState(MermaidStates.State_AttackClone);
 
         _UnrealMermaids.Clear();

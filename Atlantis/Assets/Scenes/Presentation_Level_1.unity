@@ -3071,7 +3071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.41832, y: 9.425549, z: -19.649723}
+  m_LocalPosition: {x: -26.90654, y: 9.419998, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7668,6 +7668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6381388047355952523, guid: a5a91d3720cc67a4aa7bb4da5a6687e6, type: 3}
+      propertyPath: _TitleChillClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f781b2fb9802d19459de487402d20d85, type: 3}
     - target: {fileID: 6381388047355952525, guid: a5a91d3720cc67a4aa7bb4da5a6687e6, type: 3}
       propertyPath: m_Name
       value: HudCanvas
@@ -19939,11 +19943,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41859928
+      value: 0.4185992
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.90817106
+      value: 0.9081711
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19951,15 +19955,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.055658918
+      value: 0.055659033
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9990535
+      value: 0.9990534
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.04350003
+      value: -0.043500155
       objectReference: {fileID: 0}
     - target: {fileID: 2587844265103170062, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19987,7 +19991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3538226353854414173, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.022755511
+      value: 0.022755513
       objectReference: {fileID: 0}
     - target: {fileID: 3538226353854414173, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -20019,7 +20023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.55101395
+      value: 0.5510139
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -20083,7 +20087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6398782648409746340, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.056845307
+      value: -0.0568454
       objectReference: {fileID: 0}
     - target: {fileID: 6861030160498466657, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_RootOrder
@@ -20195,7 +20199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07870908
+      value: 0.0787091
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z

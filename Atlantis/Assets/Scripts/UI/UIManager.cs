@@ -28,10 +28,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] Color UnavailableColor;
 
     [SerializeField] GameObject TitlePrefab;
+    [SerializeField] AudioClip _TitleChillClip;
 
     public bool StopFading = false;
 
     float fadeMultiplier;
+
+
     public void Fade(float r, float g, float b, float speed = 2)
     {
         if (StopFading) return;
@@ -81,7 +84,7 @@ public class UIManager : MonoBehaviour
         if (Player.Instance.isDeath)
         {
             var color = DeathFade.color;
-            color.a += Time.deltaTime/2;
+            color.a += Time.deltaTime / 2;
             DeathFade.color = color;
         }
     }
@@ -91,5 +94,6 @@ public class UIManager : MonoBehaviour
     {
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
+        AudioSource.PlayClipAtPoint(_TitleChillClip, Player.Instance.transform.position, 0.8f);
     }
 }
