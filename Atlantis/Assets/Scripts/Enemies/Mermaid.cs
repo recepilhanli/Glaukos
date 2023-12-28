@@ -64,7 +64,7 @@ public class Mermaid : Entity, IEnemyAI
 
         if (!_isEntitySeen)
         {
-            if (playerdist <= 10)
+            if (playerdist <= 12)
             {
                 OnDetected(Player.Instance);
             }
