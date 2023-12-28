@@ -144,6 +144,7 @@ public class PufferFish : Entity, IEnemyAI
     {
         if (isDeath || _Exploding) return;
 
+        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
         WarnOthers();
         Explode();
 
