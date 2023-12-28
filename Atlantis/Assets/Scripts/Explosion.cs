@@ -31,11 +31,11 @@ public class Explosion : MonoBehaviour
             if (distance < 10f)
             {
                 entity.OnTakeDamage(2 + 1 / distance * 100);
-                if (entity == Player.Instance) Player.Instance.PosionEffect(1.3f);
+                if (entity == Player.Instance) Player.Instance.PosionEffect(1.35f);
             }
         }
-
-        if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= 15) Player.Instance.CameraShake(6f, 2.5f, 0.85f, true);
+        float playerdist = Vector2.Distance(transform.position, Player.Instance.transform.position);
+        if (playerdist <= 16) Player.Instance.CameraShake(0.6f + Mathf.Clamp((1 / playerdist * 6), 0, 4f), 1.5f, 0.9f, true);
 
         Destroy(gameObject, 5f);
     }
