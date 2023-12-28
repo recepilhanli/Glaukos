@@ -243,7 +243,7 @@ namespace MainCharacter
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.lockState = CursorLockMode.None;
 
-
+            _ThrowWay.gameObject.SetActive(false);
 
             isDeath = true;
             AttackState(-1);

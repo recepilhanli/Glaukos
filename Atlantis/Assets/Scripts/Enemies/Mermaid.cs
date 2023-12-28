@@ -211,7 +211,7 @@ public class Mermaid : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         _isEntitySeen = true;
-        Player.Instance.LockLensSize = true;
+       // Player.Instance.LockLensSize = true;
         Player.Instance.CameraShake(1, .9f, 3f, true);
         _MermaidCanvas.SetActive(true);
 
