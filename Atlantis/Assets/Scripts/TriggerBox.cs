@@ -20,26 +20,35 @@ public class TriggerBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(_Tag))
+        var tags = _Tag.Split(';');
+        foreach (var tag in tags)
         {
-            TriggerEvent.Invoke();
-            Debug.Log("Triggered by: " + other.gameObject + " - " + other.gameObject.tag);
+            if (other.gameObject.CompareTag(tag))
+            {
+                TriggerEvent.Invoke();
+                Debug.Log("Triggered by: " + other.gameObject + " - " + other.gameObject.tag);
+            }
         }
     }
 
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(_Tag))
+        var tags = _Tag.Split(';');
+
+        foreach (var tag in tags)
         {
-            ExitTriggerEvent.Invoke();
-            Debug.Log("Exit by: " + other.gameObject + " - " + other.gameObject.tag);
+            if (other.gameObject.CompareTag(tag))
+            {
+                ExitTriggerEvent.Invoke();
+                Debug.Log("Exit Triggered by: " + other.gameObject + " - " + other.gameObject.tag);
+            }
         }
     }
 
     public void DestroyMe()
     {
-        Destroy(gameObject);
+        Destroy(gameObject,0.05f);
     }
 
 }
