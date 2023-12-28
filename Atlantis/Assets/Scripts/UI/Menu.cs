@@ -73,7 +73,7 @@ public class Menu : MonoBehaviour
     public void Continue()
     {
 
-        string levelName = "Presentation_Level_1";
+        string levelName = "Presentation_Level_3";
         if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
         {
             levelName = PlayerPrefs.GetString(PerfTable.perf_LastScene);

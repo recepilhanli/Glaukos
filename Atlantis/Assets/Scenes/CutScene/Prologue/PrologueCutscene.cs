@@ -52,7 +52,7 @@ public class PrologueCutscene : MonoBehaviour
         {
             _Director.Pause();
             _FadeFix?.gameObject.SetActive(true);
-            Loading.LoadScene("Presentation_Level_1");
+            Loading.LoadScene("Presentation_Level_3");
         }
 
         _Vignette.intensity.value = _Value;

@@ -39,8 +39,7 @@ public class Mermaid : Entity, IEnemyAI
     [SerializeField] Transform _HeadTransform;
 
 
-
-    private float _Health = 200;
+    [SerializeField] float _Health = 200;
     private MermaidStates _currentState = MermaidStates.State_AttackNormal;
 
     private Vector2 m_Velocity = Vector2.zero;
@@ -338,6 +337,7 @@ public class Mermaid : Entity, IEnemyAI
         isDeath = true;
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
         Destroy(gameObject);
+        SceneManager.LoadScene("Presentation_Level_1");
     }
 
     public override void Move(Vector2 pos)
