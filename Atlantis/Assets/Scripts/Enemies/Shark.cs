@@ -166,7 +166,7 @@ public class Shark : Entity, IEnemyAI
     {
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
-        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attack_Tornado)
+        if (_IgnoreEntitesDuration < Time.time && type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Explosion)
         {
             OnDetected(Player.Instance);
         }

@@ -27,9 +27,12 @@ public class Spear : Weapons
 
     [SerializeField] TrailRenderer _Trail;
 
+    [SerializeField] LayerMask SpearLayerMask;
+
     float _ThrowingTime = 0f;
 
     [HideInInspector] public int Stuck = 0;
+
 
 
     public enum ThrowStates
@@ -72,12 +75,19 @@ public class Spear : Weapons
         transform.SetParent(null);
         _ThrowedPosition = pos;
         _ThrowedPositionNormalized = (_ThrowedPosition - (Vector2)transform.position).normalized;
+
         transform.up = _ThrowedPositionNormalized;
 
         ThrowState = ThrowStates.STATE_THROWING;
 
         if (Player.Instance._Rigidbody.gravityScale == 0) BubbleEffect.SetActive(true);
 
+        var hit = Physics2D.Raycast(Player.Instance.transform.position, _ThrowedPositionNormalized, 1.4f, SpearLayerMask);
+        if(hit.collider != null)
+        {
+            CollisionReaction(hit.collider.gameObject);
+            Debug.Log("Hit something while throwing");
+        }
     }
 
     public void StopSpear()
