@@ -21,6 +21,8 @@ public class SwordFish : Entity, IEnemyAI
 
     [SerializeField] float MaxRoamingDistance = 40f;
 
+    [SerializeField] Rigidbody2D _RigidBody;
+
     [Space, SerializeField] TrailRenderer _TrailRenderer;
 
     [SerializeField] AudioSource _Source;
@@ -122,7 +124,7 @@ public class SwordFish : Entity, IEnemyAI
         transform.up = (Vector3)pos;
 
         float speed = (_isEntitySeen) ? _Properties.Speed * 40 : _Properties.Speed * 2.5f;
-        transform.position = Vector3.SmoothDamp(transform.position, transform.position + (Vector3)pos, ref m_Velocity, 1 / speed);
+        _RigidBody.MovePosition(Vector3.SmoothDamp(transform.position, transform.position + (Vector3)pos, ref m_Velocity, 1 / speed));
     }
 
     private void OnCollisionEnter2D(Collision2D other)

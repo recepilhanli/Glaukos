@@ -267,6 +267,7 @@ MonoBehaviour:
   _NoticeDistance: 20
   _SeenDuration: 1
   MaxRoamingDistance: 40
+  _RigidBody: {fileID: 7728628242072454875}
   _TrailRenderer: {fileID: 6960677867494228236}
   _Source: {fileID: 2694657176696116965}
   _Clips:
@@ -746,19 +747,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8662361113881484677, guid: 09148d46058ea6a46af5791d75548725, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.000000029802322
+      value: -0.000000059604645
       objectReference: {fileID: 0}
     - target: {fileID: -8662361113881484677, guid: 09148d46058ea6a46af5791d75548725, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.0000004246831
+      value: 0.000000007450581
       objectReference: {fileID: 0}
     - target: {fileID: -8662361113881484677, guid: 09148d46058ea6a46af5791d75548725, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.26000008
+      value: 0.26000005
       objectReference: {fileID: 0}
     - target: {fileID: -8662361113881484677, guid: 09148d46058ea6a46af5791d75548725, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.120000556
+      value: 0.12000002
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 09148d46058ea6a46af5791d75548725, type: 3}
       propertyPath: m_Name

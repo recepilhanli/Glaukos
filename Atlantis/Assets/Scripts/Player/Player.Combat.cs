@@ -298,8 +298,10 @@ namespace MainCharacter
 
         public void GiveFocusPoints(float point)
         {
-            Instance.Focus += point; //Instance using for events
-            Mathf.Clamp(Instance.Focus, 0, 100);
+            Instance.Focus += point; //Using Instance for events
+            Instance.Focus = Mathf.Clamp(Instance.Focus, 0, 100);
+            if (point < 0) UIManager.Instance.Fade(0, 0f, 0f);
+
         }
         public void DamagePlayer(float dmg)
         {
