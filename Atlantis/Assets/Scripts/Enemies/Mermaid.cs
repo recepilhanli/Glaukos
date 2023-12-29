@@ -22,9 +22,9 @@ public class Mermaid : Entity, IEnemyAI
         State_AttackClone,
     }
 
-    [SerializeField, ReadOnlyInspector] bool _isRealMermaid = true;
+    [Space, SerializeField, ReadOnlyInspector] bool _isRealMermaid = true;
 
-    [SerializeField, Tooltip("This is where the mermaid can clone herself")] Vector2 _ClonePosition;
+    [SerializeField, Tooltip("This is where the mermaid can clone herself")] float _CloneYAxis = 0f;
     [SerializeField] GameObject DustParticle;
 
     [Space, SerializeField] Animator _Animator;
@@ -99,7 +99,10 @@ public class Mermaid : Entity, IEnemyAI
 
             case MermaidStates.State_AttackPoison:
                 {
-                    if (playerdist <= 2.5f)
+                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1, 1, 1);
+                    else transform.localScale = new Vector3(1, 1, 1);
+
+                    if (playerdist <= 2.4f)
                     {
                         SetState(MermaidStates.State_None);
                     }
@@ -108,6 +111,8 @@ public class Mermaid : Entity, IEnemyAI
 
             case MermaidStates.State_GoingClone:
                 {
+                    Vector2 _ClonePosition = new Vector2(transform.position.x, _CloneYAxis);
+
                     if (Vector2.Distance(_ClonePosition, transform.position) < 1)
                     {
                         CreatUnrealMermaids();
