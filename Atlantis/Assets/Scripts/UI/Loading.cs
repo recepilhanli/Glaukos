@@ -14,7 +14,7 @@ public class Loading : MonoBehaviour
     {
         Debug.Log("Loading Scene: " + _sceneName);
         _LoadingSceneName = _sceneName;
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(PerfTable.perf_LevelLoading);
     }
 
     private void Update()

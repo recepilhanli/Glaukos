@@ -344,7 +344,7 @@ public class Mermaid : Entity, IEnemyAI
         isDeath = true;
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
         Destroy(gameObject);
-        SceneManager.LoadScene("Presentation_Level_1");
+        Player.Instance.BossKillReward(PerfTable.perf_Level2);
     }
 
     public override void Move(Vector2 pos)

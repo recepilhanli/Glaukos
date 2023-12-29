@@ -19,7 +19,12 @@ public class LevelManager : MonoBehaviour
 
     public static bool isLoadingGame = false;
     public static string LastScene = "Menu";
-    void Start()
+    public static int LoadIDForEnemies = -1;
+
+
+    private float _SaveGameTitleDelay = 0;
+
+    void Awake()
     {
         Instance = this;
 
@@ -37,6 +42,7 @@ public class LevelManager : MonoBehaviour
 
         if (isLoadingGame)
         {
+            LoadIDForEnemies = PlayerPrefs.GetInt(PerfTable.perf_LoadID);
             Invoke("LoadGame", 0.05f);
         }
         LastScene = SceneManager.GetActiveScene().name;
@@ -81,9 +87,9 @@ public class LevelManager : MonoBehaviour
 
 
 
-    #region  Temp Save-Load System
-
-    public void SaveGame()
+    #region  Save-Load System
+    //////////////////////////////////////////////////////////////////////////
+    public void SaveGame(bool showTitle)
     {
         var pos = Player.Instance.transform.position;
         PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, pos.x);
@@ -94,9 +100,53 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetFloat(PerfTable.perf_LastFocus, Player.Instance.Focus);
 
         PlayerPrefs.SetString(PerfTable.perf_LastScene, SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt(PerfTable.perf_LoadID, -1);
 
         PlayerPrefs.Save();
+
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Game Saved");
+
     }
+    //////////////////////////////////////////////////////////////////////////
+    public void SaveGame(int id)
+    {
+        var pos = Player.Instance.transform.position;
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, pos.x);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosY, pos.y);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosZ, pos.z);
+
+        PlayerPrefs.SetFloat(PerfTable.perf_LastHealth, Player.Instance.Health);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastFocus, Player.Instance.Focus);
+
+        PlayerPrefs.SetString(PerfTable.perf_LastScene, SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt(PerfTable.perf_LoadID, id);
+
+        PlayerPrefs.Save();
+
+        if (Time.time > _SaveGameTitleDelay) UIManager.Instance.ShowTitle("Game Saved");
+
+    }
+    //////////////////////////////////////////////////////////////////////////
+    public void SaveGame(bool showTitle = true, int id = -1)
+    {
+        var pos = Player.Instance.transform.position;
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, pos.x);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosY, pos.y);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastPosZ, pos.z);
+
+        PlayerPrefs.SetFloat(PerfTable.perf_LastHealth, Player.Instance.Health);
+        PlayerPrefs.SetFloat(PerfTable.perf_LastFocus, Player.Instance.Focus);
+
+        PlayerPrefs.SetString(PerfTable.perf_LastScene, SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt(PerfTable.perf_LoadID, id);
+
+        PlayerPrefs.Save();
+
+
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Game Saved");
+
+    }
+    //////////////////////////////////////////////////////////////////////////
 
     public void LoadScene(string sceneName)
     {
@@ -105,6 +155,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadGame()
     {
+        _SaveGameTitleDelay = Time.time + 5;
         Vector3 pos = Vector3.zero;
         pos.x = PlayerPrefs.GetFloat(PerfTable.perf_LastPosX);
         pos.y = PlayerPrefs.GetFloat(PerfTable.perf_LastPosY);
@@ -113,8 +164,9 @@ public class LevelManager : MonoBehaviour
         Player.Instance.Health = PlayerPrefs.GetFloat(PerfTable.perf_LastHealth);
         Player.Instance.Focus = PlayerPrefs.GetFloat(PerfTable.perf_LastFocus);
 
-        Player.Instance.transform.position = pos;
+        if (pos.x != 0) Player.Instance.transform.position = pos;
         isLoadingGame = false;
+        LoadIDForEnemies = -1;
     }
 
     #endregion

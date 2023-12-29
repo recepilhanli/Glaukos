@@ -40,7 +40,7 @@ public class Menu : MonoBehaviour
     public void GetFirstLevel()
     {
         Debug.Log("New Level");
-        SceneManager.LoadScene("CS_Prologue");
+        SceneManager.LoadScene(PerfTable.perf_LevelPrologue);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class Menu : MonoBehaviour
     public void Continue()
     {
 
-        string levelName = "Presentation_Level_3";
+        string levelName = PerfTable.perf_Level1;
         if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
         {
             levelName = PlayerPrefs.GetString(PerfTable.perf_LastScene);

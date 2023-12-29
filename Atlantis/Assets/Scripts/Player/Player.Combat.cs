@@ -333,9 +333,37 @@ namespace MainCharacter
             Time.timeScale = 0.4f;
             yield return new WaitForSeconds(2f);
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Death");
+            SceneManager.LoadScene(PerfTable.perf_LevelDeath);
             yield return null;
         }
+
+
+        public void BossKillReward(string nextScene)
+        {
+            Health = 100;
+            Focus = 100;
+            LevelManager.Instance.SaveGame(false);
+            PlayerPrefs.SetString(PerfTable.perf_LastScene, nextScene);
+            PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, 0);
+            PlayerPrefs.Save();
+            isDeath = true;
+            StartCoroutine(ThankSequence());
+        }
+
+        IEnumerator ThankSequence()
+        {
+            var _g = GameObject.Find("Global Light 2D");
+            if (_g != null) _g.GetComponent<Light2D>().intensity = 0.25f;
+            _LensSize = 4f;
+            _Rigidbody.isKinematic = true;
+            _Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            Time.timeScale = 0.4f;
+            yield return new WaitForSeconds(2f);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(PerfTable.perf_LevelThank);
+            yield return null;
+        }
+
 
 
         IEnumerator PoisonCoroutine(float time)
