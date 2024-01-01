@@ -83,7 +83,7 @@ public class Spear : Weapons
         if (Player.Instance._Rigidbody.gravityScale == 0) BubbleEffect.SetActive(true);
 
         var hit = Physics2D.Raycast(Player.Instance.transform.position, _ThrowedPositionNormalized, 1.4f, SpearLayerMask);
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             CollisionReaction(hit.collider.gameObject);
             Debug.Log("Hit something while throwing");
@@ -262,9 +262,8 @@ public class Spear : Weapons
             {
                 if (entity.isDeath) return;
                 Debug.LogWarning("Damage entity");
-                Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
 
-                if (attach && entity != null && ThrowState != ThrowStates.STATE_GETTING_BACK)
+                if (attach && ThrowState != ThrowStates.STATE_GETTING_BACK)
                 {
                     ThrowState = ThrowStates.STATE_OVERLAPPED;
                     transform.SetParent(entity.transform);
@@ -275,6 +274,8 @@ public class Spear : Weapons
                     }
                     else Instantiate(BloodEffectPrefab, pos, transform.rotation);
                 }
+
+                Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
 
             }
         }

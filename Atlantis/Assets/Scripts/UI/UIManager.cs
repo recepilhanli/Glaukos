@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     public void Fade(float r, float g, float b, float speed = 2)
     {
         if (StopFading) return;
-        var color = new Color(r, g, b, 0.6f);
+        var color = new Color(r, g, b, 0.5f);
         FadeImage.color = color;
         fadeMultiplier = speed / 1.3f;
     }
