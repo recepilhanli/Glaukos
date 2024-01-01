@@ -49,7 +49,7 @@ namespace MainCharacter
 
         void CameraUpdate()
         {
-            CameraSize();
+          if(TutorialDialogHandler.TutBlockThrow == false)  CameraSize();
         }
 
 

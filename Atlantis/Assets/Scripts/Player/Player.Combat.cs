@@ -101,7 +101,7 @@ namespace MainCharacter
             }
 
 
-            if (Input.GetKeyDown(_KeybindTable.RageKey) && Focus >= 85)
+            if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true))
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
                 GiveFocusPoints(-85);
@@ -113,7 +113,7 @@ namespace MainCharacter
         void Attacking()
         {
 
-            if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE) //call back
+            if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE && !TutorialDialogHandler.TutBlockGetBack) //call back
             {
                 if (Input.GetKeyDown(_KeybindTable.HeavyAttack))
                 {
@@ -126,7 +126,7 @@ namespace MainCharacter
 
                 }
 
-                if (Input.GetKeyDown(_KeybindTable.Attack))
+                if (Input.GetKeyDown(_KeybindTable.Attack) && !TutorialDialogHandler.TutBlockAttack1)
                 {
                     _PunchState = !_PunchState;
 
@@ -140,7 +140,7 @@ namespace MainCharacter
 
             if (Input.GetKeyDown(_KeybindTable.Attack))
             {
-                if (Input.GetKey(_KeybindTable.HeavyAttack))
+                if (Input.GetKey(_KeybindTable.HeavyAttack) && !TutorialDialogHandler.TutBlockThrow)
                 {
                     Debug.Log("Throw Spear");
                     AttackState(2);
@@ -157,7 +157,7 @@ namespace MainCharacter
                     CameraShake(2, 0.5f, 0.001f);
                     return;
                 }
-                AttackState(1);
+                if (!TutorialDialogHandler.TutBlockAttack2) AttackState(1);
 
 
                 _Source.clip = _Clips[1];
@@ -186,11 +186,14 @@ namespace MainCharacter
         {
             if (isDeath) return;
 
-            Consumable();
+            if (CanMove)
+            {
+                Consumable();
 
-            Attacking();
+                Attacking();
 
-            ThrowingWay();
+                if (TutorialDialogHandler.TutBlockThrow == false) ThrowingWay();
+            }
 
             if (_ChromaticAberration != null && !_Poisoned)
             {

@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class Dialogue : MonoBehaviour
 {
+    public static Dialogue PlayingInstance = null;
+    public bool Paused = false;
     public TextMeshProUGUI textComponent;
     [SerializeField, Tooltip("it can be null")] Animator _Animator;
     public string[] lines;
@@ -21,8 +23,13 @@ public class Dialogue : MonoBehaviour
 
     private string[] CharacterNames = new string[2];
 
+
+
+
     void Start()
     {
+        PlayingInstance = this;
+
         CharacterNames[0] = string.Empty;
         CharacterNames[1] = string.Empty;
         GetCharacters();
@@ -33,7 +40,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (!_IsPlaying) return;
+        if (!_IsPlaying || Paused) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,13 +48,23 @@ public class Dialogue : MonoBehaviour
             {
                 NextLine();
             }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
+            else GetCurrentLine();
         }
     }
+
+
+    public void GetCurrentLine()
+    {
+        StopAllCoroutines();
+        textComponent.text = lines[index];
+    }
+
+    public void GetLine(int index)
+    {
+        StopAllCoroutines();
+        textComponent.text = lines[index];
+    }
+
 
     public void StartDialogue()
     {
@@ -59,12 +76,22 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+
         foreach (char c in lines[index].ToCharArray())
         {
+
+            // //if it's paused, wait until it's unpaused
+            // while (Paused)
+            // {
+            //     yield return null;
+            // }
+            if (Paused) break;
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        yield return null;
     }
+
 
 
     void GetCharacters()
@@ -122,6 +149,8 @@ public class Dialogue : MonoBehaviour
 
     void NextLine()
     {
+        if (Paused) return;
+
         if (index < lines.Length - 1)
         {
             index++;
