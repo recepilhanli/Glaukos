@@ -120,8 +120,12 @@ public class JellyFish : Entity, IEnemyAI
         {
             renderer.color = Color.gray;
         }
-        
-        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
+
+        if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE)
+        {
+            Player.Instance._Spear.Stuck = 0;
+            Player.Instance._Spear.GetBackToThePlayer(false);
+        }
 
 
         Instantiate(_DustParticle, transform.position, Quaternion.identity);
