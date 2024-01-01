@@ -59,6 +59,16 @@ public class PufferFish : Entity, IEnemyAI
 
         else if (_Exploding)
         {
+            var children = GetComponentsInChildren<SpriteRenderer>();
+            foreach (var child in children)
+            {
+              if(child == Player.Instance._Spear)
+              {
+                child.transform.SetParent(null);
+                break;
+              }
+            }
+            
             transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.5f;
             return;
         }
