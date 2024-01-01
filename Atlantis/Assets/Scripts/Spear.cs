@@ -23,6 +23,8 @@ public class Spear : Weapons
     [HideInInspector] public Vector2 SpearOffset = Vector2.zero;
 
     [SerializeField] GameObject BloodEffectPrefab;
+    [SerializeField] GameObject ImpactEffectPrefab;
+
     [SerializeField] GameObject BubbleEffect;
 
     [SerializeField] TrailRenderer _Trail;
@@ -90,18 +92,16 @@ public class Spear : Weapons
         }
     }
 
-    public void StopSpear()
-    {
-        var spear = Player.Instance._Spear;
-        if (spear.ThrowState != ThrowStates.STATE_THROWING) return;
-        spear.ThrowState = ThrowStates.STATE_OVERLAPPED;
-        spear._ThrowingTime = 0;
-        spear._ThrowedPositionNormalized = Vector2.zero;
+    // public void StopSpear()
+    // {
+    //     var spear = Player.Instance._Spear;
+    //     if (spear.ThrowState != ThrowStates.STATE_THROWING) return;
+    //     spear.ThrowState = ThrowStates.STATE_OVERLAPPED;
+    //     spear._ThrowingTime = 0;
+    //     spear._ThrowedPositionNormalized = Vector2.zero;
 
-        Debug.Log("Spear stopped. " + gameObject);
-    }
-
-
+    //     Debug.Log("Spear stopped. " + gameObject);
+    // }
 
 
     public void GetBackToThePlayer(bool _instantly = false)
@@ -254,6 +254,8 @@ public class Spear : Weapons
 
         Debug.Log("Overallped");
 
+
+
         if (other.gameObject.CompareTag("Enemy"))
         {
             var entity = other.gameObject.GetComponent<Entity>();
@@ -286,6 +288,7 @@ public class Spear : Weapons
             if (prop != null) prop.Break();
         }
 
+        if (ThrowState != ThrowStates.STATE_GETTING_BACK) Instantiate(ImpactEffectPrefab, pos + transform.up * 1.5f, transform.rotation);
 
     }
 
