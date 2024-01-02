@@ -36,6 +36,12 @@ public class Loading : MonoBehaviour
                 SceneManager.LoadScene(_LoadingSceneName);
             }
         }
+        else if (_FadeImage.color.a > 0)
+        {
+            Color color = _FadeImage.color;
+            color.a -= Time.deltaTime;
+            _FadeImage.color = color;
+        }
 
 
 

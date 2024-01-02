@@ -17,6 +17,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
     private float TutCoolDown = 0f;
 
+    private bool _SkipingLastDialog = false;
 
     private void OnDestroy()
     {
@@ -127,12 +128,20 @@ public class TutorialDialogHandler : MonoBehaviour
                     TutBlockAttack2 = false;
                     TutBlockGetBack = false;
                     TutBlockThrow = false;
+
                     break;
                 }
             case 10:
                 {
+                    if (!_SkipingLastDialog)
+                    {
+                        Invoke("SkipLastDialog", 8f);
+                        _SkipingLastDialog = true;
+                    }
+
                     if (Input.GetKeyDown(KeyCode.Mouse0)) OnDialogChanged(++CurrentIndex);
                     TutBlockAttack2 = false;
+
                     break;
                 }
 
@@ -142,6 +151,11 @@ public class TutorialDialogHandler : MonoBehaviour
                 break;
         }
 
+    }
+
+    void SkipLastDialog()
+    {
+        OnDialogChanged(++CurrentIndex);
     }
 
     public void OnDialogChanged(int index)
@@ -162,12 +176,18 @@ public class TutorialDialogHandler : MonoBehaviour
         if (TutorialIndex >= 11)
         {
             Dialogue.PlayingInstance.gameObject.SetActive(false);
+            Invoke("GetFirstLevel", 4f);
             return;
         }
 
         Invoke("UnPasuePlayer", 0.5f);
         Dialogue.PlayingInstance.Paused = true;
         Dialogue.PlayingInstance.GetLine(index);
+    }
+
+    void GetFirstLevel()
+    {
+        Player.Instance.BossKillReward(PerfTable.perf_Level1);
     }
 
 

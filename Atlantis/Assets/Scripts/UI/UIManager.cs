@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        DeathFade.color = new Color(0, 0, 0, .95f);
     }
 
     void Update()
@@ -87,6 +88,13 @@ public class UIManager : MonoBehaviour
             color.a += Time.deltaTime / 2;
             DeathFade.color = color;
         }
+        else if (DeathFade.color.a > 0)
+        {
+            var color = DeathFade.color;
+            color.a -= Time.deltaTime / 2;
+            DeathFade.color = color;
+        }
+
     }
 
 
@@ -94,6 +102,6 @@ public class UIManager : MonoBehaviour
     {
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
-        LevelManager.PlaySound2D(_TitleChillClip,0.3f);
+        LevelManager.PlaySound2D(_TitleChillClip, 0.3f);
     }
 }

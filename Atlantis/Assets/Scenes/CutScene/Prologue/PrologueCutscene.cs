@@ -41,8 +41,8 @@ public class PrologueCutscene : MonoBehaviour
 
     void Update()
     {
-      
-        if (_Director.time  >= 5.3f && _ChromaticAberration.intensity.value == 0)
+
+        if (_Director.time >= 5.3f && _ChromaticAberration.intensity.value == 0)
         {
             _ChromaticAberration.intensity.value = 1;
         }
@@ -52,7 +52,7 @@ public class PrologueCutscene : MonoBehaviour
         {
             _Director.Pause();
             _FadeFix?.gameObject.SetActive(true);
-            Loading.LoadScene("Presentation_Level_3");
+            Loading.LoadScene(PerfTable.perf_LevelTutorial);
         }
 
         _Vignette.intensity.value = _Value;

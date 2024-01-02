@@ -18,6 +18,7 @@ public class PerfTable
     public const string perf_LevelDeath = "Death";
     public const string perf_LevelThank = "Thank";
 
+    public const string perf_LevelTutorial = "Tutorial";
     public const string perf_Level1 = "Presentation_Level_3";
     public const string perf_Level2 = "Presentation_Level_1";
     public const string perf_Level3 = "Presentation_Level_2";
