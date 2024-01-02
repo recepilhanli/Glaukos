@@ -13,6 +13,10 @@ public class Tornado : MonoBehaviour
 
     [SerializeField, Range(0, 50)] float _AffectingDistance = 10;
 
+    [SerializeField] ParticleSystem _Particle;
+
+    [SerializeField] SpriteRenderer _Renderer;
+
     private float _LifeTime;
     private Vector3 m_Velocity = Vector3.zero;
 
@@ -38,6 +42,18 @@ public class Tornado : MonoBehaviour
 
     void Update()
     {
+        if (_LifeTime < Time.time)
+        {
+            var main = _Particle.main;
+            main.startColor = Color.Lerp(main.startColor.color, Color.clear, Time.deltaTime * 2);
+            if (main.startColor.color.a <= 0.1f) _Particle.Stop();
+
+            //fade out and destroy
+            _Renderer.color = Color.Lerp(_Renderer.color, Color.clear, Time.deltaTime * 2);
+            if (_Renderer.color.a <= 0.1f) Destroy(gameObject);
+            return;
+        }
+        
         Player.Instance.CameraShake(1, 0.5f);
         _Body.velocity = Vector3.SmoothDamp(_Body.velocity, transform.right * Time.deltaTime * _TornadoSpeed, ref m_Velocity, .085f);
 
@@ -58,7 +74,7 @@ public class Tornado : MonoBehaviour
         }
         if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;
 
-        if (_LifeTime < Time.time) Destroy(gameObject);
+
 
     }
 }
