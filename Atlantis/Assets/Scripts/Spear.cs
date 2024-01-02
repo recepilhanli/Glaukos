@@ -92,16 +92,17 @@ public class Spear : Weapons
         }
     }
 
-    // public void StopSpear()
-    // {
-    //     var spear = Player.Instance._Spear;
-    //     if (spear.ThrowState != ThrowStates.STATE_THROWING) return;
-    //     spear.ThrowState = ThrowStates.STATE_OVERLAPPED;
-    //     spear._ThrowingTime = 0;
-    //     spear._ThrowedPositionNormalized = Vector2.zero;
+    //for events
+    public void StopSpear()
+    {
+        var spear = Player.Instance._Spear;
+        if (spear.ThrowState != ThrowStates.STATE_THROWING) return;
+        spear.ThrowState = ThrowStates.STATE_OVERLAPPED;
+        spear._ThrowingTime = 0;
+        spear._ThrowedPositionNormalized = Vector2.zero;
 
-    //     Debug.Log("Spear stopped. " + gameObject);
-    // }
+        Debug.Log("Spear stopped. " + gameObject);
+    }
 
 
     public void GetBackToThePlayer(bool _instantly = false)

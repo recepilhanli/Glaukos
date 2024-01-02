@@ -2939,7 +2939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.903217, y: 9.430788, z: -19.649723}
+  m_LocalPosition: {x: -27.112991, y: 9.422238, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20717,6 +20717,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: _Tag
+      value: Weapon;Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
