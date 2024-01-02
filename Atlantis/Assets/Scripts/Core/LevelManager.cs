@@ -86,6 +86,16 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    public static void PlaySound2D(AudioClip _clip,float _volume)
+    {
+        //Play Chill Sound Clip
+        var obj = new GameObject("TitleSound");
+        var audio = obj.AddComponent<AudioSource>();
+        audio.volume = _volume;
+        audio.clip = _clip;
+        audio.Play();
+        Destroy(obj, 5f);
+    }
 
     #region  Save-Load System
     //////////////////////////////////////////////////////////////////////////

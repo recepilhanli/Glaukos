@@ -94,13 +94,6 @@ public class UIManager : MonoBehaviour
     {
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
-
-        //Play Chill Sound Clip
-        var obj = new GameObject("TitleSound");
-        var audio = obj.AddComponent<AudioSource>();
-        audio.volume = .6f;
-        audio.clip = _TitleChillClip;
-        audio.Play();
-        Destroy(obj, 5f);
+        LevelManager.PlaySound2D(_TitleChillClip,0.3f);
     }
 }
