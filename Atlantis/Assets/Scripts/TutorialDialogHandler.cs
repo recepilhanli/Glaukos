@@ -44,7 +44,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
     private void Update()
     {
-        if (TutorialIndex == -1 || TutorialIndex >= 10) return;
+        if (TutorialIndex == -1 || TutorialIndex >= 11) return;
         if (Player.Instance.CanMove == false) return;
         if (TutCoolDown >= Time.time) return;
 
@@ -129,6 +129,13 @@ public class TutorialDialogHandler : MonoBehaviour
                     TutBlockThrow = false;
                     break;
                 }
+            case 10:
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0)) OnDialogChanged(++CurrentIndex);
+                    TutBlockAttack2 = false;
+                    break;
+                }
+
 
 
             default:
@@ -139,20 +146,20 @@ public class TutorialDialogHandler : MonoBehaviour
 
     public void OnDialogChanged(int index)
     {
-        if (TutorialIndex >= 10) return;
+        if (TutorialIndex >= 11) return;
 
 
         CurrentIndex = index;
         Debug.Log("OnDialogChanged: " + index);
 
-        const int _StartIndex = 17; // Baslangic Indexi (Tutorial) -> Start index of tutorial
+        const int _StartIndex = 20; // Baslangic Indexi (Tutorial) -> Start index of tutorial
 
         if (index < _StartIndex) return; //wait for the conversation
 
         TutorialIndex = index - _StartIndex;
 
 
-        if (TutorialIndex >= 10)
+        if (TutorialIndex >= 11)
         {
             Dialogue.PlayingInstance.gameObject.SetActive(false);
             return;
