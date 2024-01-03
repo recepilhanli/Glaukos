@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23968a853fada8d4d86f6ef4c31e7b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToDisableAfterDialog: {fileID: 640955246}
 --- !u!1 &78782650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,7 +2895,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670050093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.127121, y: 1.5125899, z: -20}
+  m_LocalPosition: {x: -26.9345, y: 1.50895, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3332,7 +3333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931029432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.949573, y: 9.668509, z: -19.649723}
+  m_LocalPosition: {x: 11.142195, y: 9.664868, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
