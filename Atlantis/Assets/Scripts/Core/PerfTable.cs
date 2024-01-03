@@ -22,4 +22,7 @@ public class PerfTable
     public const string perf_Level1 = "Presentation_Level_3";
     public const string perf_Level2 = "Presentation_Level_1";
     public const string perf_Level3 = "Presentation_Level_2";
+    public const string perf_Level4 = "Presentation_Level_4";
+    public const string perf_LevelFinal = "Presentation_Level_Final";
+
 }

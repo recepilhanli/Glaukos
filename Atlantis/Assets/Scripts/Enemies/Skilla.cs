@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MainCharacter;
-
+using UnityEngine.UI;
+using TMPro;
 /// <summary>
 /// Skilla Boss Class
 /// </summary>
@@ -17,6 +18,7 @@ public class Skilla : Entity, IEnemyAI
         State_Grabbed, //biting whilw grabbing
         State_AttackPoison,
         State_CallEnemies,
+        State_Spelling,
     }
 
 
@@ -29,17 +31,47 @@ public class Skilla : Entity, IEnemyAI
     [Space(15), SerializeField] List<GameObject> _CallableEnemies = new List<GameObject>();
     [SerializeField] GameObject _PoisonPrefab;
     [SerializeField, ReadOnlyInspector] SkillaStates _CurrentState = SkillaStates.State_NONE;
+
+    [SerializeField] GameObject _CallEnemyParticle;
+    [SerializeField] GameObject _SpellingParticle;
+
+    [SerializeField] GameObject _Canvas;
+
+    [SerializeField] Image _SpellImage;
+
+    [Space(15), SerializeField] GameObject GrabGO;
+    [SerializeField] Slider _GrabBar;
+    [SerializeField] TextMeshProUGUI _GrabText;
+
+
+    private float _GrabTime = 0f;
+    private float _GrabDelay = 0f;
+
     private bool _isEntitySeen = false;
     private Vector2 m_Velocity = Vector2.zero;
 
+    private int TotalCalledEnemies = 0;
+    private float CallEnemyCooldown = 0;
+
+    private float _SpellParticleCooldown = 0;
+
+    private float _ChasingTime = 0;
+
+    private float _SpellDelay = 0;
+
+
     void Start()
     {
-
+        Init(null);
     }
-
 
     void Update()
     {
+        if (CallEnemyCooldown != 0 && CallEnemyCooldown < Time.time)
+        {
+            CallEnemyCooldown = 0;
+            TotalCalledEnemies = 0;
+        }
 
         if (!_isEntitySeen)
         {
@@ -52,20 +84,9 @@ public class Skilla : Entity, IEnemyAI
 
         if (isDeath) return;
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SetState(SkillaStates.State_CallEnemies);
-        }
+        //??? bug (temp)
+        if (!_HealthBar.gameObject.activeInHierarchy) _HealthBar.gameObject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            SetState(SkillaStates.State_Grabbing);
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SetState(SkillaStates.State_NONE);
-        }
 
         float dist = Vector2.Distance(transform.position, Player.Instance.transform.position);
 
@@ -77,6 +98,11 @@ public class Skilla : Entity, IEnemyAI
                     if (dist <= 1.9f)
                     {
                         SetState(SkillaStates.State_AttackNormal);
+                    }
+                    else if (_ChasingTime < Time.time && _ChasingTime != 0)
+                    {
+                        Debug.Log("Set random state after endless chasing");
+                        RandomState();
                     }
                     break;
                 }
@@ -107,6 +133,49 @@ public class Skilla : Entity, IEnemyAI
                     Move(pos);
                     Player.Instance.transform.localPosition = Vector3.zero;
                     _Animator.SetTrigger("Bite");
+
+                    if (_GrabBar.value >= 0) _GrabBar.value -= Time.deltaTime / 4;
+
+                    if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
+                    {
+                        Player.Instance.CameraShake(2, 1, .3f);
+                        _GrabBar.value += .175f;
+                    }
+
+                    if (_GrabBar.value >= 1) SetState(SkillaStates.State_NONE);
+
+                    string mouse0 = "<sprite=2>";
+                    string mouse1 = "<sprite=3>";
+
+
+                    if (Time.time > _GrabTime)
+                    {
+                        _GrabText.text = (_GrabText.text == mouse0) ? mouse1 : mouse0;
+                        _GrabTime = Time.time + .2f;
+                    }
+
+                    break;
+                }
+            case SkillaStates.State_Spelling:
+                {
+                    Vector2 pos = transform.position;
+                    pos.y = Mathf.PingPong(Time.time * 2, 5);
+                    Move(pos);
+                    //ping pong spell image alpha black faster
+                    _SpellImage.color = new Color(0, 0, 0, Mathf.PingPong(Time.time * 6, 2) - 1);
+
+
+                    _Health += Time.deltaTime * 5;
+                    _HealthBar.value = _Health / 100f;
+                    Player.Instance.OnTakeDamage(Time.deltaTime * 3);
+
+                    if (_SpellParticleCooldown < Time.time)
+                    {
+                        Instantiate(_SpellingParticle, transform.position, Quaternion.identity);
+                        _SpellParticleCooldown = Time.time + .6f;
+                    }
+
+                    if (_Health >= 200) SetState(SkillaStates.State_NONE);
                     break;
                 }
             case SkillaStates.State_AttackPoison:
@@ -134,26 +203,53 @@ public class Skilla : Entity, IEnemyAI
     public void CallRandonEnemy()
     {
         if (_CallableEnemies.Count == 0) return;
+
+        if (CallEnemyCooldown != 0 && CallEnemyCooldown > Time.time)
+        {
+            SetState(SkillaStates.State_AttackPoison);
+            return;
+        }
+
         int rand = Random.Range(0, _CallableEnemies.Count);
         var enemy = Instantiate(_CallableEnemies[rand], transform.position, Quaternion.identity).GetComponent<Entity>();
         if (enemy != null) StartCoroutine(EnemyCoroutine(enemy));
+        StartCoroutine(CallEffect());
+
+        //get all renderers of enemy and change color to alpha white
+        var Renderers = enemy.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = new Color(.2f, 1f, .2f, 0.6f);
+        }
+
+        //change scale of the shark
+        var shark = enemy.GetComponent<Shark>();
+        if (shark != null)
+        {
+            enemy.transform.localScale = Vector3.one * 1.75f;
+            shark.OnTakeDamage(20);
+        }
+
+
+        TotalCalledEnemies++;
+        if (TotalCalledEnemies >= 3)
+        {
+            CallEnemyCooldown = Time.time + 15;
+        }
+        Instantiate(_CallEnemyParticle, transform.position, Quaternion.identity);
     }
 
-    IEnumerator EnemyCoroutine(Entity enemy)
-    {
-        yield return new WaitForSeconds(12);
-        if (enemy != null) enemy.OnDeath();
-        yield return null;
-    }
 
     public void Init(EntityProperties _properties)
     {
-
+        Type = EntityType.Type_Skilla;
     }
 
     public void OnDetected(Entity _entity)
     {
+        SetState(SkillaStates.State_NONE);
         _isEntitySeen = true;
+        _Canvas.SetActive(true);
     }
 
     public void SetState(SkillaStates state)
@@ -162,13 +258,26 @@ public class Skilla : Entity, IEnemyAI
 
         if (_CurrentState == SkillaStates.State_Grabbed)
         {
+            _GrabDelay = Time.time + 10f;
+            GrabGO.SetActive(false);
+            _GrabBar.value = 0;
             Player.Instance.transform.SetParent(null);
             Player.Instance.CanMove = true;
             Player.Instance.transform.rotation = Quaternion.identity;
             Player.Instance.transform.transform.eulerAngles = Vector3.zero;
             Player.Instance.transform.localScale = new Vector3(.75F, .75F, .75F);
         }
+        else if (_CurrentState == SkillaStates.State_Spelling)
+        {
+            _SpellDelay = Time.time + 15f;
+            _SpellImage.color = new Color(0, 0, 0, 0);
+            Player.Instance.SetSlow(false);
+        }
+        else if (_CurrentState == SkillaStates.State_NONE) _ChasingTime = 0;
 
+
+        if (state == SkillaStates.State_Spelling && _Health > 200) state = SkillaStates.State_Grabbing;
+        if (state == SkillaStates.State_Grabbed && _GrabDelay > Time.time) state = SkillaStates.State_AttackNormal;
         _CurrentState = state;
 
 
@@ -184,6 +293,7 @@ public class Skilla : Entity, IEnemyAI
         {
             case SkillaStates.State_NONE:
                 {
+                    _ChasingTime = Time.time + 12;
                     _Animator.SetInteger("State", anim_move);
                     break;
                 }
@@ -194,6 +304,7 @@ public class Skilla : Entity, IEnemyAI
                 }
             case SkillaStates.State_Grabbed:
                 {
+                    GrabGO.SetActive(true);
                     Player.Instance.transform.SetParent(_AttachingBone);
                     Player.Instance.CanMove = false;
                     Player.Instance.transform.localPosition = Vector3.zero;
@@ -217,6 +328,13 @@ public class Skilla : Entity, IEnemyAI
                     _Animator.SetInteger("State", anim_poisonattack);
                     break;
                 }
+            case SkillaStates.State_Spelling:
+                {
+                    _Animator.SetInteger("State", anim_move);
+                    Player.Instance.SetSlow(true);
+                    break;
+                }
+
 
             default: break;
         }
@@ -231,7 +349,13 @@ public class Skilla : Entity, IEnemyAI
         float speedMultiplier = 1f;
         if (_Health <= 50) speedMultiplier = 0.4f;
 
-        _Rigidbody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, 0.3f * speedMultiplier));
+
+
+        float multiplier = .275f;
+        if (_CurrentState == SkillaStates.State_Grabbing) multiplier = .1f;
+        else if (_CurrentState == SkillaStates.State_Spelling) multiplier = .15f;
+
+        _Rigidbody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, multiplier * speedMultiplier));
     }
 
     public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)
@@ -242,23 +366,98 @@ public class Skilla : Entity, IEnemyAI
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
 
-
         if (isDeath) return;
+
+        StartCoroutine(DamageEffect());
+
         _Health -= _h / 8;
+        _HealthBar.value = _Health / 100f;
         if (_Health <= 0)
         {
             OnDeath();
+            return;
         }
 
+        else if (_CurrentState == SkillaStates.State_NONE && Vector2.Distance(Player.Instance.transform.position, transform.position) >= 3 && Random.Range(0, 3) <= 1) RandomState();
+        if (_CurrentState == SkillaStates.State_AttackPoison && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
+        if (_CurrentState == SkillaStates.State_Grabbing && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
+        else if (_CurrentState == SkillaStates.State_Spelling && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time) SetState(SkillaStates.State_NONE);
     }
+
+    void RandomState()
+    {
+        //set random state
+
+        if (_SpellDelay < Time.time && _CurrentState != SkillaStates.State_Spelling && _Health <= 200)
+        {
+            _SpellDelay = Time.time + 1;
+            SetState(SkillaStates.State_Spelling);
+            Debug.Log("Spelling");
+            return;
+        }
+
+        int rand = Random.Range(0, 3);
+        if (rand == 0) SetState(SkillaStates.State_CallEnemies);
+        else if (rand == 1) SetState(SkillaStates.State_Grabbing);
+        else if (rand == 2) SetState(SkillaStates.State_AttackPoison);
+    }
+
 
     public override void OnDeath()
     {
+        if (isDeath) return;
         isDeath = true;
+        Player.Instance.BossKillReward(PerfTable.perf_LevelFinal);
+
     }
 
     public override EntityFlags GetEntityFlag()
     {
         return EntityFlags.Flag_Enemy;
     }
+
+
+    IEnumerator EnemyCoroutine(Entity enemy)
+    {
+        yield return new WaitForSeconds(12);
+        if (enemy != null) enemy.OnDeath();
+        yield return null;
+    }
+
+    IEnumerator DamageEffect()
+    {
+        // int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
+        // PlaySound(randomindex);
+
+        var Renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = new Color(1f, .1f, .1f);
+        }
+        yield return new WaitForSeconds(0.2f);
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = new Color(.85f, .85f, .85f);
+        }
+        yield return null;
+    }
+
+    IEnumerator CallEffect()
+    {
+        // int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
+        // PlaySound(randomindex);
+
+        var Renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = new Color(.1f, 1f, .1f);
+        }
+        yield return new WaitForSeconds(0.2f);
+        foreach (var _renderer in Renderers)
+        {
+            _renderer.color = new Color(.85f, .85f, .85f);
+        }
+        yield return null;
+    }
+
 }

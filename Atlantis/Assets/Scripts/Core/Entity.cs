@@ -54,6 +54,8 @@ public abstract class Entity : MonoBehaviour
         Type_PufferFish,
 
         Type_Mermaid,
+        
+        Type_Skilla,
     }
 
 

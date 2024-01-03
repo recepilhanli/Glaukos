@@ -181,7 +181,7 @@ public class Shark : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-        StartCoroutine(DamageEffect());
+        StartCoroutine(DamageEffect(_Renderer.color));
     }
 
     public override void OnDeath()
@@ -202,14 +202,15 @@ public class Shark : Entity, IEnemyAI
         return EntityFlags.Flag_Enemy;
     }
 
-    IEnumerator DamageEffect()
+
+    IEnumerator DamageEffect(Color oldColor)
     {
         int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
         PlaySound(randomindex);
 
         _Renderer.color = Color.red;
         yield return new WaitForSeconds(0.2f);
-        _Renderer.color = Color.white;
+        _Renderer.color = oldColor;
         yield return null;
     }
 }
