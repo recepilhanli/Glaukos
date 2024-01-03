@@ -10,6 +10,7 @@ public class TutorialDialogHandler : MonoBehaviour
     public static bool TutBlockThrow = false;
     public static bool TutBlockAttack1 = false;
     public static bool TutBlockAttack2 = false;
+    public GameObject objectToDisableAfterDialog;
 
 
     private int TutorialIndex = -1;
@@ -177,6 +178,10 @@ public class TutorialDialogHandler : MonoBehaviour
         {
             Dialogue.PlayingInstance.gameObject.SetActive(false);
             Invoke("GetFirstLevel", 4f);
+            if (objectToDisableAfterDialog != null)
+            {
+                objectToDisableAfterDialog.SetActive(false);
+            }
             return;
         }
 

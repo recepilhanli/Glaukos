@@ -818,11 +818,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41859928
+      value: 0.4185992
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.90817106
+      value: 0.9081711
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -830,15 +830,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.055658918
+      value: 0.055659033
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9990535
+      value: 0.9990534
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.04350003
+      value: -0.043500155
       objectReference: {fileID: 0}
     - target: {fileID: 2587844265103170062, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -938,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.55101395
+      value: 0.5510139
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1018,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6398782648409746340, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.056845307
+      value: -0.0568454
       objectReference: {fileID: 0}
     - target: {fileID: 6491881259610161771, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -1246,7 +1246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07870908
+      value: 0.0787091
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2722,6 +2722,32 @@ Transform:
   m_Father: {fileID: 1437707709}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640955246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 27624e2dc471856419bc08e86f9f2bea, type: 3}
+  m_PrefabInstance: {fileID: 1342841857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &640955247
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640955246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3050b50913b23e14cbe139d0e79345f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &670050093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2868,7 +2894,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670050093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.66681, y: 1.52279, z: -20}
+  m_LocalPosition: {x: -27.127121, y: 1.5125899, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3306,7 +3332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931029432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.409885, y: 9.678708, z: -19.649723}
+  m_LocalPosition: {x: 10.949573, y: 9.668509, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4100,7 +4126,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437707709}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250172371
 GameObject:
@@ -4415,10 +4441,10 @@ Transform:
   m_Children:
   - {fileID: 1781230518}
   - {fileID: 1926214491}
+  - {fileID: 1199464747}
   - {fileID: 1608456683}
   - {fileID: 1876522673}
   - {fileID: 1690796738}
-  - {fileID: 1199464747}
   - {fileID: 753415353}
   - {fileID: 1024717514}
   - {fileID: 1733712670}
@@ -5956,83 +5982,81 @@ MonoBehaviour:
   textComponent: {fileID: 33409305}
   _Animator: {fileID: 53771493}
   lines:
-  - "Mavi I\u015F\u0131k:  G\xFC\xE7lerimin yeni vekili sen misin ?"
+  - "Glaukos:  G\xFC\xE7lerimin yeni vekili sen misin ?"
   - "Polyphemus Aetherion: Sen kimsin ? Nerdeyim ben ? Elimdeki bu m\u0131zrakta
     ne ..."
-  - "Mavi I\u015F\u0131k:  Soru sormay\u0131 b\u0131rakta beni dinle. Neden burda
-    old\u011Funu ve nas\u0131l geldi\u011Fini bilmiyor musun ?"
+  - "Glaukos:  Soru sormay\u0131 b\u0131rakta beni dinle. Neden burda old\u011Funu
+    ve nas\u0131l geldi\u011Fini bilmiyor musun ?"
   - "Polyphemus Aetherion: Hay\u0131r. Sahilde bir sand\u0131k buldum i\xE7inde ye\u015Fil
     \u0131\u015F\u0131k sa\xE7an bi ta\u015F vard\u0131 ta\u015Fa dokununca bay\u0131ld\u0131m
     ve salak sa\xE7ma bir r\xFCya g\xF6rd\xFCm sonras\u0131nda kendimi burda buldum."
-  - "Mavi I\u015F\u0131k: Lanet olsun Hekate, Sorumsuz kad\u0131n."
-  - "Mavi I\u015F\u0131k: \u015Eimdi beni iyi dinle biraz \xF6nce g\xF6rd\xFC\u011F\xFCn
-    r\xFCya asl\u0131nda benim kendi hayat\u0131md\u0131 ve lanet y\xFCz\xFCnden
-    kendimi bu ta\u015Fa hapsetmek zorunda kald\u0131m . Zaten r\xFCyanda g\xF6rd\xFCklerin
+  - "Glaukos: Lanet olsun Hekate, Sorumsuz kad\u0131n."
+  - "Glaukos: \u015Eimdi beni iyi dinle biraz \xF6nce g\xF6rd\xFC\u011F\xFCn r\xFCya
+    asl\u0131nda benim kendi hayat\u0131md\u0131 ve lanet y\xFCz\xFCnden kendimi
+    bu ta\u015Fa hapsetmek zorunda kald\u0131m . Zaten r\xFCyanda g\xF6rd\xFCklerin
     sayesinde benim ya\u015Fad\u0131klar\u0131ma hakimsin."
   - "Polyphemus Aetherion: Diyelim ki dediklerin do\u011Fru. O zaman sen bir tanr\u0131s\u0131n
     ve senin g\xFC\xE7lerini ald\u0131\u011F\u0131m i\xE7in bende mi bir tanr\u0131
     oluyorum."
-  - "Mavi I\u015F\u0131k:  Say\u0131l\u0131r \u015Fimdilik g\xFC\xE7lerimin bir k\u0131sm\u0131na
+  - "Glaukos:  Say\u0131l\u0131r \u015Fimdilik g\xFC\xE7lerimin bir k\u0131sm\u0131na
     sahipsin ayn\u0131 zamanda g\xFC\xE7lerim ile birlikte bana yap\u0131lan lanetlere
     de sahipsin."
   - "Polyphemus Aetherion: Lanet tam olarak ne r\xFCyamda bir \u015Feyler g\xF6rd\xFCm
     ama tam olarak anlamad\u0131m."
-  - "Mavi I\u015F\u0131k: \xDCzerinde \u015Fu an 2 lanet var biri \xF6ld\xFC\u011F\xFCn
-    zaman bilincini o g\xFCn\xFCn sabah\u0131na geri g\xF6nderir yani ayn\u0131 g\xFCn\xFC
+  - "Glaukos: \xDCzerinde \u015Fu an 2 lanet var biri \xF6ld\xFC\u011F\xFCn zaman
+    bilincini o g\xFCn\xFCn sabah\u0131na geri g\xF6nderir yani ayn\u0131 g\xFCn\xFC
     bir daha ya\u015Fars\u0131n."
   - "Polyphemus Aetherion: Bu nas\u0131l lanet tam tersi bir \xF6d\xFCl gibi duruyor."
-  - "Mavi I\u015F\u0131k: S\xF6z\xFCm\xFC bitirmeme izin verirsen anlars\u0131n lanetin
-    2.k\u0131sm\u0131na gelelim geri f\xF6n\xFC\u015F yetene\u011Fini her kulland\u0131\u011F\u0131nda
+  - "Glaukos: S\xF6z\xFCm\xFC bitirmeme izin verirsen anlars\u0131n lanetin 2.k\u0131sm\u0131na
+    gelelim geri f\xF6n\xFC\u015F yetene\u011Fini her kulland\u0131\u011F\u0131nda
     bedenin Nereidler denen deniz insanlar\u0131n\u0131n bedenine d\xF6n\xFC\u015Fmeye
     ba\u015Flar."
   - "Polyphemus Aetherion: Bence \xF6l\xFCms\xFCzl\xFCk i\xE7in k\xFC\xE7\xFCk bir
     bedel."
-  - "Mavi I\u015F\u0131k: Bende ba\u015Fta \xF6yle d\xFC\u015F\xFCn\xFCyordum ama
-    d\xF6n\xFC\u015Fen tek \u015Fey bedenin de\u011Fil ruhun bilincin her \u015Feyin
-    o yarat\u0131klara d\xF6ner ve bir hayvandan fark\u0131n kalmaz."
+  - "Glaukos: Bende ba\u015Fta \xF6yle d\xFC\u015F\xFCn\xFCyordum ama d\xF6n\xFC\u015Fen
+    tek \u015Fey bedenin de\u011Fil ruhun bilincin her \u015Feyin o yarat\u0131klara
+    d\xF6ner ve bir hayvandan fark\u0131n kalmaz."
   - "Polyphemus Aetherion: Desene her iyi \u015Feyin bir bedeli var."
-  - "Mavi I\u015F\u0131k: Aynen \xF6yle \u015Fimdi gelelim nas\u0131l hayata kalaca\u011F\u0131na
+  - "Glaukos: Aynen \xF6yle \u015Fimdi gelelim nas\u0131l hayata kalaca\u011F\u0131na
     denizlerde \xE7ok fazla d\xFC\u015Fman\u0131m var ta\u015F\u0131n biri taraf\u0131ndan
     kullan\u0131ld\u0131\u011F\u0131n\u0131 \xF6\u011Frenirseler senin pe\u015Fine
     d\xFC\u015Ferle o y\xFCzden kendi ismini kullanamazs\u0131n benim ismimi kullanacaks\u0131n."
   - "Polyphemus Aetherion: Normalde tam tersi olmas\u0131 laz\u0131m de\u011Fil mi
     ?"
-  - "Mavi I\u015F\u0131k: Burda korumaya \xE7al\u0131\u015Ft\u0131\u011F\u0131m\u0131z
-    ki\u015Fi sen de\u011Filsin ailen bu g\xFCnden sonra kendi ad\u0131n\u0131 ve
-    aileni kimseye anlatamazs\u0131n yoksa seni yakalamak i\xE7in onlar\u0131n pe\u015Fine
-    d\xFC\u015Ferler. "
+  - "Glaukos: Burda korumaya \xE7al\u0131\u015Ft\u0131\u011F\u0131m\u0131z ki\u015Fi
+    sen de\u011Filsin ailen bu g\xFCnden sonra kendi ad\u0131n\u0131 ve aileni kimseye
+    anlatamazs\u0131n yoksa seni yakalamak i\xE7in onlar\u0131n pe\u015Fine d\xFC\u015Ferler. "
   - "Polyphemus Aetherion: Anlad\u0131m bu konuda hakl\u0131s\u0131n ama bu m\u0131zra\u011F\u0131
     nas\u0131l kulanaca\u011F\u0131m\u0131 ve tanr\u0131sal g\xFC\xE7lerimi bilmiyorum
     birazda onlar\u0131 anlatsan."
-  - "Mavi I\u015F\u0131k:  Anlad\u0131m o zaman e\u011Fitime ba\u015Flayal\u0131m.
-    Sana s\xF6ylediklerimi harfiyen uygula."
-  - "Mavi I\u015F\u0131k:  <sprite=8>  ve  <sprite=9> tu\u015Flar\u0131na basarak
-    yukar\u0131 ve a\u015Fa\u011F\u0131 y\xFCzebilirsin."
-  - "Mavi I\u015F\u0131k:  <sprite=7>  ve  <sprite=6> tu\u015Flar\u0131na basarak
-    sa\u011F ve sol tarafa do\u011Fru y\xFCzebilirsin."
-  - "Mavi I\u015F\u0131k:  <sprite=2>  tu\u015Funa basarak h\u0131zl\u0131-yak\u0131n
-    sald\u0131r\u0131da bulunabilirsin."
-  - "Mavi I\u015F\u0131k:  <sprite=3>  tu\u015Funa basarak a\u011F\u0131r-yak\u0131n
-    sald\u0131r\u0131da bulunabilirsin."
-  - "Mavi I\u015F\u0131k: \xD6nce  <sprite=3>  tu\u015Funa basarak  sonra <sprite=2>
-    tu\u015Funa basarak m\u0131zra\u011F\u0131n\u0131 f\u0131rlatabilirsin."
-  - "Mavi I\u015F\u0131k:  <sprite=3>  tu\u015Funa basarak  f\u0131rlatt\u0131\u011F\u0131n
-    m\u0131zra\u011F\u0131 \xE7a\u011F\u0131rabilirsin."
-  - "Mavi I\u015F\u0131k:  <sprite=5> tu\u015Funa basarak m\u0131zra\u011F\u0131n
-    sendeyken can\u0131n\u0131 doldurabilirsin. Fakat bu odaklanma puan\u0131n\u0131n
-    azalmas\u0131na neden olacakt\u0131r."
-  - "Mavi I\u015F\u0131k:  <sprite=0> tu\u015Funa basarak hortum sald\u0131r\u0131s\u0131
+  - "Glaukos:  Anlad\u0131m o zaman e\u011Fitime ba\u015Flayal\u0131m. Sana s\xF6ylediklerimi
+    harfiyen uygula."
+  - "Glaukos:  <sprite=8>  ve  <sprite=9> tu\u015Flar\u0131na basarak yukar\u0131
+    ve a\u015Fa\u011F\u0131 y\xFCzebilirsin."
+  - "Glaukos:  <sprite=7>  ve  <sprite=6> tu\u015Flar\u0131na basarak sa\u011F ve
+    sol tarafa do\u011Fru y\xFCzebilirsin."
+  - "Glaukos:  <sprite=2>  tu\u015Funa basarak h\u0131zl\u0131-yak\u0131n sald\u0131r\u0131da
+    bulunabilirsin."
+  - "Glaukos:  <sprite=3>  tu\u015Funa basarak a\u011F\u0131r-yak\u0131n sald\u0131r\u0131da
+    bulunabilirsin."
+  - "Glaukos: \xD6nce  <sprite=3>  tu\u015Funa basarak  sonra <sprite=2> tu\u015Funa
+    basarak m\u0131zra\u011F\u0131n\u0131 f\u0131rlatabilirsin."
+  - "Glaukos:  <sprite=3>  tu\u015Funa basarak  f\u0131rlatt\u0131\u011F\u0131n m\u0131zra\u011F\u0131
+    \xE7a\u011F\u0131rabilirsin."
+  - "Glaukos:  <sprite=5> tu\u015Funa basarak m\u0131zra\u011F\u0131n sendeyken can\u0131n\u0131
+    doldurabilirsin. Fakat bu odaklanma puan\u0131n\u0131n azalmas\u0131na neden
+    olacakt\u0131r."
+  - "Glaukos:  <sprite=0> tu\u015Funa basarak hortum sald\u0131r\u0131s\u0131 yetene\u011Fini
+    kullanabilirsin. Bu da sahip oldu\u011Fun  odaklanma puan\u0131n\u0131 azalt\u0131cakt\u0131r."
+  - "Glaukos:  <sprite=1> tu\u015Funa basarak m\u0131zrak ya\u011Fmuru sald\u0131r\u0131s\u0131
     yetene\u011Fini kullanabilirsin. Bu da sahip oldu\u011Fun  odaklanma puan\u0131n\u0131
     azalt\u0131cakt\u0131r."
-  - "Mavi I\u015F\u0131k:  <sprite=1> tu\u015Funa basarak m\u0131zrak ya\u011Fmuru
-    sald\u0131r\u0131s\u0131 yetene\u011Fini kullanabilirsin. Bu da sahip oldu\u011Fun 
-    odaklanma puan\u0131n\u0131 azalt\u0131cakt\u0131r."
-  - "Mavi I\u015F\u0131k:  <sprite=4> tu\u015Funa basarak \xF6fke modunu a\xE7abilirsin.
-    Bu mod ile \xE7ok h\u0131zl\u0131 hareket edersin, hasar almazs\u0131n ve att\u0131\u011F\u0131n
+  - "Glaukos:  <sprite=4> tu\u015Funa basarak \xF6fke modunu a\xE7abilirsin. Bu mod
+    ile \xE7ok h\u0131zl\u0131 hareket edersin, hasar almazs\u0131n ve att\u0131\u011F\u0131n
     her sald\u0131r\u0131 sana odaklanma puan\u0131 olarak de\u011Fil, can olarak
     d\xF6ner. Ve evet, bu da odaklanma puan\u0131n\u0131 d\xFC\u015F\xFCr\xFCr."
-  - "Mavi I\u015F\u0131k:  Fena de\u011Fil en az\u0131ndan laneti kald\u0131rana
-    kadar i\u015Fimizi g\xF6r\xFCr. Yola \xE7\u0131kmaya ba\u015Flasan iyi olur."
+  - "Glaukos:  Fena de\u011Fil en az\u0131ndan laneti kald\u0131rana kadar i\u015Fimizi
+    g\xF6r\xFCr. Yola \xE7\u0131kmaya ba\u015Flasan iyi olur."
   textSpeed: 0.03
   _StartOnAwake: 1
   _IsPlaying: 0
