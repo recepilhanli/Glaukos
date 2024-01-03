@@ -9,7 +9,7 @@ public class SkillaAnimationHandler : MonoBehaviour
 
     public void Attack(float dmg)
     {
-        _Skilla.Attack(Player.Instance, dmg);
+        _Skilla.Attack(Player.Instance, dmg/1.3f);
     }
 
     public void PoisonAttack()
