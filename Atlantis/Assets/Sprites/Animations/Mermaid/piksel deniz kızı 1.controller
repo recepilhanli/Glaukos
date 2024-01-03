@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -151,7 +151,7 @@ AnimatorController:
   m_Name: "piksel deniz k\u0131z\u0131 1"
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: state
+  - m_Name: State
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -179,7 +179,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -230,7 +230,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -282,7 +282,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2783826831506013304}
@@ -307,7 +307,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1446710314094383167}
@@ -332,7 +332,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: state
+    m_ConditionEvent: State
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4825244650429408617}
