@@ -610,6 +610,9 @@ MonoBehaviour:
   _WavePrefab: {fileID: 1713865838459048409, guid: cb3cd732841127b4caf7f55a86229422, type: 3}
   _PoisonPrefab: {fileID: 1713865838459048409, guid: 1cb78783858a63e49a1f50de3fc31841, type: 3}
   _HeadTransform: {fileID: 4488621624204275946}
+  _HeadRenderer: {fileID: 7930680073735630579}
+  _MermaidRegularSprite: {fileID: -4669375548798798266, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
+  _MermaidScreamSprite: {fileID: -265241220097112179, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
   _Health: 200
 --- !u!60 &8329717249427178434
 PolygonCollider2D:
@@ -2103,7 +2106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1477891578466496902, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1452542481724514246, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
       propertyPath: m_Layer
@@ -3506,5 +3509,10 @@ MonoBehaviour:
 --- !u!4 &4488621624204275946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 311580695235782034, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
+  m_PrefabInstance: {fileID: 4186163371393996152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7930680073735630579 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6059402989128858507, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
   m_PrefabInstance: {fileID: 4186163371393996152}
   m_PrefabAsset: {fileID: 0}

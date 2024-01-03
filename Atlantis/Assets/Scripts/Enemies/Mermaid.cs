@@ -38,6 +38,10 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] Transform _HeadTransform;
 
+    [SerializeField] SpriteRenderer _HeadRenderer;
+    [SerializeField] Sprite _MermaidRegularSprite;
+    [SerializeField] Sprite _MermaidScreamSprite;
+
 
     [SerializeField] float _Health = 200;
     private MermaidStates _currentState = MermaidStates.State_AttackNormal;
@@ -51,6 +55,7 @@ public class Mermaid : Entity, IEnemyAI
     private int _LastIndex = -1;
 
     private float _CloneDelay = 0f;
+
 
     void Start()
     {
@@ -173,6 +178,7 @@ public class Mermaid : Entity, IEnemyAI
             case MermaidStates.State_AttackClone:
                 {
                     _Animator.SetInteger("State", anim_scream);
+                    _HeadRenderer.sprite = _MermaidScreamSprite;
                     break;
                 }
             default:
@@ -310,6 +316,7 @@ public class Mermaid : Entity, IEnemyAI
             }
             _UnrealMermaids.Clear();
             UIManager.Instance.Fade(1, 1, 1, 2f);
+            _HeadRenderer.sprite = _MermaidRegularSprite;
             SetState(MermaidStates.State_None);
         }
         else StartCoroutine(DamageEffect());
