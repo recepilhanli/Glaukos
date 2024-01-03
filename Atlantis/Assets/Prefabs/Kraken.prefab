@@ -737,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HealthBar: {fileID: 8309807111134278847}
+  SpamCount: 0
   _Properties: {fileID: 11400000, guid: afed176ef9cabb949b018a0afec9dcb4, type: 2}
   _DeathSprite: {fileID: -8479213735533173706, guid: 468307e2603e2a74d8a0fc42edd26d02, type: 3}
   _Source: {fileID: 2694657176696116965}
@@ -749,6 +750,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cdaaf73197bb7a74bb085cd94afccfba, type: 3}
   - {fileID: 8300000, guid: 22eab4df0bfb76b439118c30d20e43b9, type: 3}
   - {fileID: 8300000, guid: a9fe83366307d414ea5aec26a348f3ea, type: 3}
+  - {fileID: 8300000, guid: 323bcbc4a07be3749a19d8ef3d51aec2, type: 3}
+  - {fileID: 8300000, guid: 35613fbd7564cde4daf0b2f11aa7e6db, type: 3}
+  - {fileID: 8300000, guid: d9655024181b0a7459cfabceab9a1fef, type: 3}
   _Health: 100
 --- !u!50 &7728628242072454875
 Rigidbody2D:

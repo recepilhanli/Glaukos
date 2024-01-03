@@ -74,6 +74,7 @@ public class Kraken : Entity, IEnemyAI
     void Update()
     {
         if (!_isEntitySeen) return;
+        if (isDeath) return;
         if (SpearDamage && Player.Instance._Spear.ThrowState == Spear.ThrowStates.STATE_NONE) SpearDamage = false;
 
 
@@ -154,6 +155,7 @@ public class Kraken : Entity, IEnemyAI
 
                     if (InkDuration < Time.time)
                     {
+                        LevelManager.PlaySound2D(_Clips[4], 0.5f);
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
                         InkDuration = Time.time + 2.5f;
 
@@ -167,7 +169,7 @@ public class Kraken : Entity, IEnemyAI
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 5, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.right * 12, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 5, Quaternion.identity);
-
+                            LevelManager.PlaySound2D(_Clips[5], 0.5f);
                         }
                         else
                         {
@@ -257,6 +259,8 @@ public class Kraken : Entity, IEnemyAI
 
     public void OnDetected(Entity _entity)
     {
+        if (_isEntitySeen) return;
+        LevelManager.PlaySound2D(_Clips[3], 1);
         _isEntitySeen = true;
         Player.Instance.LockLensSize = true;
         _KrakenCanvas.SetActive(true);
@@ -299,7 +303,7 @@ public class Kraken : Entity, IEnemyAI
         if (_Health < 0) OnDeath();
 
         StartCoroutine(DamageEffect());
-        
+
     }
 
     public override void OnDeath()
@@ -320,7 +324,7 @@ public class Kraken : Entity, IEnemyAI
 
     IEnumerator DamageEffect()
     {
-        int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
+        int randomindex = UnityEngine.Random.Range(1, 3);
         PlaySound(randomindex);
 
         var Renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();

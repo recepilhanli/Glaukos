@@ -37,6 +37,8 @@ namespace MainCharacter
 
         [SerializeField] List<GameObject> _RageEffects = new List<GameObject>();
 
+        [SerializeField] AudioClip _RewardClip;
+
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
 
         public bool _Rage { get; private set; } = false;
@@ -46,6 +48,7 @@ namespace MainCharacter
         bool _Poisoned = false;
 
         public static int RemainingLifes { private set; get; } = 5;
+
 
 
         public static void LoadRemaningLifes()
@@ -344,8 +347,9 @@ namespace MainCharacter
         }
 
 
-        public void BossKillReward(string nextScene)
+        public void BossKillReward(string nextScene, bool sound = true)
         {
+            if (sound) LevelManager.PlaySound2D(_RewardClip, .4f);
             Health = 100;
             Focus = 100;
             LevelManager.Instance.SaveGame(false);

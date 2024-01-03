@@ -61,7 +61,7 @@ public class Shark : Entity, IEnemyAI
 
     void Update()
     {
-        _isEntitySeen = false;
+
         if (isDeath)
         {
             transform.Translate(0, -1 * Time.fixedDeltaTime, 0);

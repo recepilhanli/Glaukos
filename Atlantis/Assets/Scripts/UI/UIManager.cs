@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 
     public bool StopFading = false;
 
-    float fadeMultiplier;
+    private float fadeMultiplier;
 
 
     public void Fade(float r, float g, float b, float speed = 2)
@@ -46,26 +46,49 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        DeathFade.color = new Color(0, 0, 0, .95f);
+        if (DeathFade != null) DeathFade.color = new Color(0, 0, 0, .95f);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Player.Instance != null)
         {
-            if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
-            else SceneManager.LoadScene("Menu");
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
+                else SceneManager.LoadScene("Menu");
+            }
+
+            if (FocusBar != null) FocusBar.value = Player.Instance.Focus / 100;
+            if (FocusBar != null) HealthBar.value = Player.Instance.Health / 100;
+
+
+            if (Player.Instance.Focus >= 10 && Focus_HealthIcon.activeInHierarchy == false) Focus_HealthIcon.SetActive(true);
+            else if (Player.Instance.Focus < 10 && Focus_HealthIcon.activeInHierarchy == true) Focus_HealthIcon.SetActive(false);
+
+            if (Player.Instance.Focus >= 85 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
+            else if (Player.Instance.Focus < 85 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
+
+            if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
+            else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;
+
+            if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
+            else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
+
+            if (Player.Instance.isDeath)
+            {
+                var color = DeathFade.color;
+                color.a += Time.deltaTime / 2;
+                DeathFade.color = color;
+            }
+            else if (DeathFade.color.a > 0)
+            {
+                var color = DeathFade.color;
+                color.a -= Time.deltaTime / 2;
+                DeathFade.color = color;
+            }
         }
-
-        FocusBar.value = Player.Instance.Focus / 100;
-        HealthBar.value = Player.Instance.Health / 100;
-
-
-        if (Player.Instance.Focus >= 10 && Focus_HealthIcon.activeInHierarchy == false) Focus_HealthIcon.SetActive(true);
-        else if (Player.Instance.Focus < 10 && Focus_HealthIcon.activeInHierarchy == true) Focus_HealthIcon.SetActive(false);
-
-        if (Player.Instance.Focus >= 85 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
-        else if (Player.Instance.Focus < 85 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
 
         if (FadeImage.color.a != 0 && !StopFading)
         {
@@ -73,26 +96,6 @@ public class UIManager : MonoBehaviour
             color.a -= Time.deltaTime * fadeMultiplier;
             color.a = Mathf.Clamp(color.a, 0, 1);
             FadeImage.color = color;
-        }
-
-
-        if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
-        else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;
-
-        if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
-        else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
-
-        if (Player.Instance.isDeath)
-        {
-            var color = DeathFade.color;
-            color.a += Time.deltaTime / 2;
-            DeathFade.color = color;
-        }
-        else if (DeathFade.color.a > 0)
-        {
-            var color = DeathFade.color;
-            color.a -= Time.deltaTime / 2;
-            DeathFade.color = color;
         }
 
     }

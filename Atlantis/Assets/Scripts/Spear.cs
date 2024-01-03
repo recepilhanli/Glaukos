@@ -31,6 +31,8 @@ public class Spear : Weapons
 
     [SerializeField] LayerMask SpearLayerMask;
 
+    [SerializeField] AudioClip _SperStuckClip;
+
     float _ThrowingTime = 0f;
 
     [HideInInspector] public int Stuck = 0;
@@ -137,6 +139,7 @@ public class Spear : Weapons
                 UIManager.Instance.Fade(1, 1, 1, 3);
                 Stuck--;
                 transform.Rotate(0, 0, UnityEngine.Random.Range(-30, 30));
+                LevelManager.PlaySound2D(_SperStuckClip, 1f);
                 return;
             }
             _Trail.enabled = true;

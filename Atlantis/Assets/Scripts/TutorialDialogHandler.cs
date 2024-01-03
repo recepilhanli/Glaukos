@@ -192,7 +192,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
     void GetFirstLevel()
     {
-        Player.Instance.BossKillReward(PerfTable.perf_Level1);
+        Player.Instance.BossKillReward(PerfTable.perf_Level1,false);
     }
 
 

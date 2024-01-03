@@ -43,6 +43,7 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField] Slider _GrabBar;
     [SerializeField] TextMeshProUGUI _GrabText;
 
+    [SerializeField] AudioClip _WelcomingClip;
 
     private float _GrabTime = 0f;
     private float _GrabDelay = 0f;
@@ -254,6 +255,8 @@ public class Skilla : Entity, IEnemyAI
 
     public void OnDetected(Entity _entity)
     {
+        if (_isEntitySeen) return;
+        LevelManager.PlaySound2D(_WelcomingClip, .6f);
         SetState(SkillaStates.State_NONE);
         Player.Instance.LockLensSize = true;
         _isEntitySeen = true;
@@ -418,7 +421,7 @@ public class Skilla : Entity, IEnemyAI
     {
         if (isDeath) return;
         isDeath = true;
-        Player.Instance.BossKillReward(PerfTable.perf_LevelFinal);
+        Player.Instance.BossKillReward("ToBe");
 
     }
 

@@ -42,6 +42,7 @@ public class Mermaid : Entity, IEnemyAI
     [SerializeField] Sprite _MermaidRegularSprite;
     [SerializeField] Sprite _MermaidScreamSprite;
 
+    [SerializeField] AudioSource _ScreamingSource;
 
     [SerializeField] float _Health = 200;
     private MermaidStates _currentState = MermaidStates.State_AttackNormal;
@@ -268,7 +269,7 @@ public class Mermaid : Entity, IEnemyAI
 
         UIManager.Instance.Fade(1, 1, 1, 1f);
         Player.Instance.CameraShake(2, 1, 0.95f, true);
-
+        _ScreamingSource.Play();
 
     }
 
@@ -305,6 +306,7 @@ public class Mermaid : Entity, IEnemyAI
 
         else if (_currentState == MermaidStates.State_AttackClone && _isRealMermaid && type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rain)
         {
+            _ScreamingSource.Stop();
             if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
             foreach (var unreal in _UnrealMermaids)
             {
