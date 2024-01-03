@@ -310,7 +310,7 @@ public class Kraken : Entity, IEnemyAI
         gameObject.AddComponent<Destroyer>();
         if (HealthBarCoroutine != null) StopCoroutine(HealthBarCoroutine);
         Destroy(_HealthBar.gameObject);
-        SceneManager.LoadScene("Thank");
+        Player.Instance.BossKillReward(PerfTable.perf_Level4);
     }
 
     public override EntityFlags GetEntityFlag()

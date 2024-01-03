@@ -107,8 +107,12 @@ public class Spear : Weapons
 
     public void GetBackToThePlayer(bool _instantly = false)
     {
+
+
         if (_instantly)
         {
+            transform.SetParent(null);
+            transform.localScale = new Vector3(0.486f, 0.486f, 0.486f);
             transform.SetParent(Player.Instance._RightHand);
             transform.localPosition = SpearOffset;
             ThrowState = 0;
@@ -137,6 +141,7 @@ public class Spear : Weapons
             }
             _Trail.enabled = true;
             transform.SetParent(null);
+            transform.localScale = new Vector3(0.486f, 0.486f, 0.486f);
             ThrowState = ThrowStates.STATE_GETTING_BACK;
         }
     }
