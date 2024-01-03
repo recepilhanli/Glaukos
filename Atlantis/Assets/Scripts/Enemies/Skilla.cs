@@ -369,8 +369,8 @@ public class Skilla : Entity, IEnemyAI
         if (isDeath) return;
 
         StartCoroutine(DamageEffect());
-
-        _Health -= _h / 8;
+        if (type == AttackTypes.Attack_Standart) Player.Instance.GiveFocusPoints(5f);
+        _Health -= _h / 9.5f;
         _HealthBar.value = _Health / 100f;
         if (_Health <= 0)
         {
