@@ -154,6 +154,13 @@ public class Skilla : Entity, IEnemyAI
                         _GrabTime = Time.time + .2f;
                     }
 
+
+                    if (_SpellParticleCooldown < Time.time)
+                    {
+                        Instantiate(_SpellingParticle, transform.position, Quaternion.identity);
+                        _SpellParticleCooldown = Time.time + .6f;
+                    }
+                    
                     break;
                 }
             case SkillaStates.State_Spelling:
