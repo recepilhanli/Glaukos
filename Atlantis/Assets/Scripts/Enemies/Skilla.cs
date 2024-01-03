@@ -160,7 +160,7 @@ public class Skilla : Entity, IEnemyAI
                         Instantiate(_SpellingParticle, transform.position, Quaternion.identity);
                         _SpellParticleCooldown = Time.time + .6f;
                     }
-                    
+
                     break;
                 }
             case SkillaStates.State_Spelling:
@@ -255,6 +255,7 @@ public class Skilla : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         SetState(SkillaStates.State_NONE);
+        Player.Instance.LockLensSize = true;
         _isEntitySeen = true;
         _Canvas.SetActive(true);
     }
@@ -374,7 +375,10 @@ public class Skilla : Entity, IEnemyAI
     {
 
         if (isDeath) return;
-
+        if (!_isEntitySeen)
+        {
+            OnDetected(Player.Instance);
+        }
         StartCoroutine(DamageEffect());
         if (type == AttackTypes.Attack_Standart) Player.Instance.GiveFocusPoints(5f);
         _Health -= _h / 9.5f;

@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Game Saved");
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
 
     }
     //////////////////////////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        if (Time.time > _SaveGameTitleDelay) UIManager.Instance.ShowTitle("Game Saved");
+        if (Time.time > _SaveGameTitleDelay) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
 
     }
     //////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.Save();
 
 
-        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Game Saved");
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
 
     }
     //////////////////////////////////////////////////////////////////////////
