@@ -186,26 +186,29 @@ namespace MainCharacter
         {
             if (isDeath) return;
 
+
             if (CanMove)
             {
                 Consumable();
 
                 Attacking();
 
-                if (TutorialDialogHandler.TutBlockThrow == false) ThrowingWay();
+                if (_ChromaticAberration != null && !_Poisoned)
+                {
+                    if (Health <= 25) _ChromaticAberration.intensity.value = 1f;
+                    else _ChromaticAberration.intensity.value = 0f;
+                }
             }
 
-            if (_ChromaticAberration != null && !_Poisoned)
-            {
-                if (Health <= 25) _ChromaticAberration.intensity.value = 1f;
-                else _ChromaticAberration.intensity.value = 0f;
-            }
+            if (TutorialDialogHandler.TutBlockThrow == false) ThrowingWay();
+
+
         }
 
 
         void ThrowingWay()
         {
-            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
+            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
             {
                 if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
 

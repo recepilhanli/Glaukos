@@ -125,6 +125,9 @@ public class Spear : Weapons
         }
         else
         {
+            var obj = Instantiate(ImpactEffectPrefab, transform.position + transform.up * 1.5f, transform.rotation);
+            obj.transform.up = -transform.up;
+
             if (Stuck > 0)
             {
                 UIManager.Instance.Fade(1, 1, 1, 3);
@@ -275,8 +278,9 @@ public class Spear : Weapons
                         Stuck = 3;
                         UIManager.Instance.Fade(1, 1, 1, 4);
                     }
-                    else Instantiate(BloodEffectPrefab, pos, transform.rotation);
+
                 }
+                if (entity.Type != Entity.EntityType.Type_JellyFish) Instantiate(BloodEffectPrefab, pos, transform.rotation);
 
                 Player.Instance.Attack(entity, damage, Entity.AttackTypes.Attack_Standart);
 
@@ -289,7 +293,8 @@ public class Spear : Weapons
             if (prop != null) prop.Break();
         }
 
-        if (ThrowState != ThrowStates.STATE_GETTING_BACK) Instantiate(ImpactEffectPrefab, pos + transform.up * 1.5f, transform.rotation);
+        Instantiate(ImpactEffectPrefab, pos + transform.up * 1.5f, transform.rotation);
+
 
     }
 

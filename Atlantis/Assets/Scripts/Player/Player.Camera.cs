@@ -36,6 +36,13 @@ namespace MainCharacter
             _PostProcess.profile.TryGet(out _ChromaticAberration);
         }
 
+
+        public void SetLensSize(float _size,bool force = false)
+        {
+            _LensSize = _size;
+            if(force) _VirtualCamera.m_Lens.OrthographicSize = _size;
+        }
+
         void CameraSize()
         {
             if (LockLensSize) _LensSize = 10f;

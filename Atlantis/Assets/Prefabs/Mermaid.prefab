@@ -602,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HealthBar: {fileID: 9125372922930830918}
   _isRealMermaid: 1
-  _ClonePosition: {x: -30.53, y: 9.72}
+  _CloneYAxis: 0
   DustParticle: {fileID: 4098933781849635944, guid: 5c6d9ce9a06b8b441a16a2023a0a30d9, type: 3}
   _Animator: {fileID: 6851366768624078468}
   _RigidBody: {fileID: 1129742015436304085}
@@ -610,6 +610,7 @@ MonoBehaviour:
   _WavePrefab: {fileID: 1713865838459048409, guid: cb3cd732841127b4caf7f55a86229422, type: 3}
   _PoisonPrefab: {fileID: 1713865838459048409, guid: 1cb78783858a63e49a1f50de3fc31841, type: 3}
   _HeadTransform: {fileID: 4488621624204275946}
+  _Health: 200
 --- !u!60 &8329717249427178434
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -669,7 +670,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &7710391664352621860
 GameObject:

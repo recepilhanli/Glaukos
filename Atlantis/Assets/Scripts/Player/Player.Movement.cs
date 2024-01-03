@@ -72,7 +72,7 @@ namespace MainCharacter
 
 
 
-            PlayerAnimator.SetBool("swimming", (LevelManager.Instance.GravityScale == 0));
+         //   PlayerAnimator.SetBool("swimming", (LevelManager.Instance.GravityScale == 0));
 
             Move(targetVelocity);
         }

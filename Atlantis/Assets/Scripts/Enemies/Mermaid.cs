@@ -46,11 +46,11 @@ public class Mermaid : Entity, IEnemyAI
 
     private static List<Entity> _UnrealMermaids = new List<Entity>();
 
-    bool _isEntitySeen = false;
+    private bool _isEntitySeen = false;
 
-    int _LastIndex = -1;
+    private int _LastIndex = -1;
 
-    float _CloneDelay = 0f;
+    private float _CloneDelay = 0f;
 
     void Start()
     {
@@ -99,8 +99,8 @@ public class Mermaid : Entity, IEnemyAI
 
             case MermaidStates.State_AttackPoison:
                 {
-                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1, 1, 1);
-                    else transform.localScale = new Vector3(1, 1, 1);
+                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1.3f, 1.3f, 1.3f);
+                    else transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
                     if (playerdist <= 2.4f)
                     {
@@ -125,8 +125,8 @@ public class Mermaid : Entity, IEnemyAI
                 }
             case MermaidStates.State_AttackClone:
                 {
-                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1, 1, 1);
-                    else transform.localScale = new Vector3(1, 1, 1);
+                    if ((transform.position.x - Player.Instance.transform.position.x) < 0) transform.localScale = new Vector3(-1.3f, 1.3f, 1.3f);
+                    else transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                     _CloneDelay = Time.time + 10;
                     break;
                 }
@@ -213,7 +213,7 @@ public class Mermaid : Entity, IEnemyAI
         _isEntitySeen = true;
         // Player.Instance.LockLensSize = true;
         Player.Instance.CameraShake(1, .9f, 3f, true);
-        if(_MermaidCanvas != null) _MermaidCanvas.SetActive(true);
+        if (_MermaidCanvas != null) _MermaidCanvas.SetActive(true);
 
     }
 
@@ -349,8 +349,8 @@ public class Mermaid : Entity, IEnemyAI
 
     public override void Move(Vector2 pos)
     {
-        if (transform.position.x - pos.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-        else transform.localScale = new Vector3(1, 1, 1);
+        if (transform.position.x - pos.x < 0) transform.localScale = new Vector3(-1.3f, 1.3f, 1.3f);
+        else transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
         float speedMultiplier = 1f;
         if (_Health <= 50) speedMultiplier = 0.4f;

@@ -42,7 +42,11 @@ namespace MainCharacter
             _StartSpeed = _Speed;
             InitCamera();
             Cursor.visible = true;
-            
+
+            Physics2D.IgnoreLayerCollision(30, 6, true);
+            Physics2D.IgnoreLayerCollision(6, 30, true);
+
+
             if (PlayerPrefs.HasKey(PerfTable.perf_RemainingLifes))
             {
                 RemainingLifes = PlayerPrefs.GetInt(PerfTable.perf_RemainingLifes);
@@ -59,11 +63,11 @@ namespace MainCharacter
         void Update()
         {
             CameraUpdate();
-            if (CanMove)
-            {
-                Movement();
-                Combat();
-            }
+            
+            Combat();
+
+            if (CanMove) Movement();
+
             else _Rigidbody.velocity = Vector2.zero;
         }
 
