@@ -69,6 +69,18 @@ namespace MainCharacter
         }
 
 
+        void Deformation()
+        {
+            if (RemainingLifes < 3)
+            {
+                //get all sprite renderers
+                var _srs = gameObject.GetComponentsInChildren<SpriteRenderer>();
+                foreach (var _sr in _srs)
+                {
+                    if (!_sr.gameObject.CompareTag("Weapon")) _sr.color = new Color(.7f, 1, .7f);
+                }
+            }
+        }
 
 
         void Consumable()

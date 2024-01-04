@@ -32,6 +32,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
     IEnumerator Start()
     {
+        Player.ResetRemainingLifes();
         TutBlockGetBack = true;
         TutBlockThrow = true;
         TutBlockAttack1 = true;

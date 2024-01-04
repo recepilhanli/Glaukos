@@ -57,13 +57,15 @@ namespace MainCharacter
                 RemainingLifes = 5;
                 PlayerPrefs.Save();
             }
+
+            //  Deformation();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 
         void Update()
         {
             CameraUpdate();
-            
+
             Combat();
 
             if (CanMove) Movement();
