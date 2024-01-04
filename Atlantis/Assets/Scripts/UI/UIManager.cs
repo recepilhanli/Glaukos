@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MainCharacter;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,16 +17,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider HealthBar;
     [SerializeField] Slider FocusBar;
 
-    [SerializeField] GameObject Focus_HealthIcon;
-    [SerializeField] GameObject Focus_RageIcon;
-
     [SerializeField] Image FadeImage;
     [SerializeField] Image DeathFade;
 
-    [SerializeField] Image[] Consumables = new Image[3];
+
+    [SerializeField] Image[] Consumables = new Image[2];
+    [SerializeField] TextMeshProUGUI _RemainingLifeText;
 
     [SerializeField] Color AvailableColor;
     [SerializeField] Color UnavailableColor;
+
+    [SerializeField] Image FocusFillImage;
+    [SerializeField] Color FocusNormalColor;
+    [SerializeField] Color FocusRageColor;
 
     [SerializeField] GameObject TitlePrefab;
     [SerializeField] AudioClip _TitleChillClip;
@@ -63,12 +67,10 @@ public class UIManager : MonoBehaviour
             if (FocusBar != null) FocusBar.value = Player.Instance.Focus / 100;
             if (FocusBar != null) HealthBar.value = Player.Instance.Health / 100;
 
+            if (_RemainingLifeText.text == string.Empty) _RemainingLifeText.text = Player.RemainingLifes.ToString();
 
-            if (Player.Instance.Focus >= 10 && Focus_HealthIcon.activeInHierarchy == false) Focus_HealthIcon.SetActive(true);
-            else if (Player.Instance.Focus < 10 && Focus_HealthIcon.activeInHierarchy == true) Focus_HealthIcon.SetActive(false);
-
-            if (Player.Instance.Focus >= 85 && Focus_RageIcon.activeInHierarchy == false) Focus_RageIcon.SetActive(true);
-            else if (Player.Instance.Focus < 85 && Focus_RageIcon.activeInHierarchy == true) Focus_RageIcon.SetActive(false);
+            if (Player.Instance.Focus >= 85) FocusFillImage.color = FocusRageColor;
+            else FocusFillImage.color = FocusNormalColor;
 
             if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
             else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;
