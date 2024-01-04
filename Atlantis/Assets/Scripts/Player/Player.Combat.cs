@@ -73,11 +73,16 @@ namespace MainCharacter
         {
             if (RemainingLifes < 3)
             {
+                var DefColor = new Color(.7f, 1, .7f);
+
+                if (RemainingLifes == 2) DefColor = new Color(.5f, 1, .5f);
+                else DefColor = new Color(.3f, 1, .35f);
+
                 //get all sprite renderers
                 var _srs = gameObject.GetComponentsInChildren<SpriteRenderer>();
                 foreach (var _sr in _srs)
                 {
-                    if (!_sr.gameObject.CompareTag("Weapon")) _sr.color = new Color(.7f, 1, .7f);
+                    if (!_sr.gameObject.CompareTag("Weapon")) _sr.color = DefColor;
                 }
             }
         }

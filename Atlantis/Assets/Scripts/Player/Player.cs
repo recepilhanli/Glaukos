@@ -58,7 +58,7 @@ namespace MainCharacter
                 PlayerPrefs.Save();
             }
 
-            //  Deformation();
+            Deformation();
             //Cursor.SetCursor(_CursorTexture,Vector2.zero,CursorMode.ForceSoftware);
         }
 
