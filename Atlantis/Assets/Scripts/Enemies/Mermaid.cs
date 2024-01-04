@@ -45,7 +45,7 @@ public class Mermaid : Entity, IEnemyAI
     [SerializeField] AudioSource _ScreamingSource;
 
     [SerializeField] float _Health = 200;
-    private MermaidStates _currentState = MermaidStates.State_AttackNormal;
+    [SerializeField, ReadOnlyInspector] MermaidStates _currentState = MermaidStates.State_AttackNormal;
 
     private Vector2 m_Velocity = Vector2.zero;
 
@@ -75,6 +75,9 @@ public class Mermaid : Entity, IEnemyAI
             }
             return;
         }
+
+
+
 
 
         switch (_currentState)
@@ -119,7 +122,7 @@ public class Mermaid : Entity, IEnemyAI
                 {
                     Vector2 _ClonePosition = new Vector2(transform.position.x, _CloneYAxis);
 
-                    if (Vector2.Distance(_ClonePosition, transform.position) < 1)
+                    if (Vector2.Distance(_ClonePosition, transform.position) < 1.5f)
                     {
                         CreatUnrealMermaids();
                     }
@@ -229,7 +232,11 @@ public class Mermaid : Entity, IEnemyAI
     /// </summary>
     void CreatUnrealMermaids()
     {
-        if (!_isRealMermaid || _UnrealMermaids.Count > 0 || _currentState != MermaidStates.State_GoingClone) return;
+        if (!_isRealMermaid || _UnrealMermaids.Count > 0 || _currentState != MermaidStates.State_GoingClone)
+        {
+            _currentState = MermaidStates.State_AttackPoison;
+            return;
+        }
 
         if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
 
