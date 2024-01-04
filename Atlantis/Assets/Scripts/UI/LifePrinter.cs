@@ -16,7 +16,7 @@ public class LifePrinter : MonoBehaviour
         {
             Player.ResetRemainingLifes();
             _ContinueButton.SetActive(false);
-            _TMP.text = "<color=red>Your body turned into a fish!";
+            _TMP.text = "<color=red>Geri kalan hayatinda artik bir baliksin!";
             return;
         }
         string color = "<color=green>";

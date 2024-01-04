@@ -14,7 +14,7 @@ public class PlayerLife : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Life: " + _Life + " PlayerLife: " + Player.RemainingLifes);
-        if (_Life <= Player.RemainingLifes)
+        if (_Life < Player.RemainingLifes)
         {
             Destroy(gameObject);
         }
