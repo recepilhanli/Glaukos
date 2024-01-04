@@ -252,7 +252,7 @@ namespace MainCharacter
             if (_Rage)
             {
                 Health += damage;
-                Mathf.Clamp(Health, 0, 100);
+                Health = Mathf.Clamp(Health, 0, 100);
                 CameraShake(2f, 0.6f, 0.025f);
             }
             else CameraShake(1.75f, 0.5f, 0.02f);
