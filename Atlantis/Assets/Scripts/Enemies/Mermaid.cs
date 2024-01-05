@@ -333,7 +333,7 @@ public class Mermaid : Entity, IEnemyAI
         if (type == AttackTypes.Attack_Standart)
         {
             _Health -= _h / 8f;
-            Player.Instance.GiveFocusPoints(5f);
+            if (!Player.Instance._Rage) Player.Instance.GiveFocusPoints(5f);
         }
         else _Health -= _h / 12f;
 

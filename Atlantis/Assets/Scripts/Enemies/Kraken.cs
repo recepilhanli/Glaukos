@@ -293,7 +293,7 @@ public class Kraken : Entity, IEnemyAI
 
         else if (type == AttackTypes.Attack_Standart)
         {
-            Player.Instance.Focus += _h / 7.5f;
+            if (Player.Instance._Rage) Player.Instance.Focus += _h / 7.5f;
             _Health -= _h / 10f;
             Debug.Log("Standart Attack");
         }
