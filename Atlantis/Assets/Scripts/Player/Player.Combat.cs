@@ -283,6 +283,7 @@ namespace MainCharacter
             if (_Rage || isDeath) return;
 
             Health -= _h;
+            Health = Mathf.Clamp(Health,0, 100);
             if (Health <= 0) OnDeath();
 
             Focus -= _h / 2;
