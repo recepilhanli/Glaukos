@@ -201,13 +201,13 @@ public class Kraken : Entity, IEnemyAI
             if (Player.Instance._Spear.ThrowState == Spear.ThrowStates.STATE_NONE || SpearDamage) return;
             Player.Instance._Spear.ThrowState = Spear.ThrowStates.STATE_OVERLAPPED;
             Player.Instance._Spear.transform.SetParent(_transform);
-            OnTakeDamage(15);
+            Player.Instance.Attack(this,15);
             SpearDamage = true;
         }
         else if (tag == "Harmful")
         {
             Destroy(_hitTransform.gameObject);
-            OnTakeDamage(2f, AttackTypes.Attack_Rapid);
+            Player.Instance.Attack(this, 2, AttackTypes.Attack_Rapid);
             Debug.Log("harmful");
         }
         else //player
@@ -293,7 +293,7 @@ public class Kraken : Entity, IEnemyAI
 
         else if (type == AttackTypes.Attack_Standart)
         {
-            Player.Instance.Focus += _h / 7.5f;
+            if (!Player.Instance._Rage) Player.Instance.Focus += _h / 7.5f;
             _Health -= _h / 10f;
             Debug.Log("Standart Attack");
         }

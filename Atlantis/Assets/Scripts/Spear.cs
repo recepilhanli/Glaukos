@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.EventSystems.EventTrigger;
 
 /// <summary>
 /// this class is for the spear weapon
@@ -32,6 +33,8 @@ public class Spear : Weapons
     [SerializeField] LayerMask SpearLayerMask;
 
     [SerializeField] AudioClip _SperStuckClip;
+
+    [SerializeField] AudioClip _SpearImpacClip;
 
     float _ThrowingTime = 0f;
 
@@ -294,6 +297,7 @@ public class Spear : Weapons
 
             }
         }
+        else LevelManager.PlaySound2D(_SpearImpacClip, 1f);
 
         if (other.gameObject.CompareTag("Props"))
         {
@@ -302,7 +306,7 @@ public class Spear : Weapons
         }
 
         Instantiate(ImpactEffectPrefab, pos + transform.up * 1.5f, transform.rotation);
-
+     
 
     }
 
