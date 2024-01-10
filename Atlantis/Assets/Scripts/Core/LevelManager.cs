@@ -183,7 +183,7 @@ public class LevelManager : MonoBehaviour
 
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(LevelManager))]
 public class LevelEditorGUI : Editor
 {
@@ -229,3 +229,4 @@ public class LevelEditorGUI : Editor
 
     }
 }
+#endif

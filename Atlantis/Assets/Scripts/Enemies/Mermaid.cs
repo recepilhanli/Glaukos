@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MainCharacter;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 /// <summary>
 /// Mermaid enemy boss class
@@ -397,3 +398,4 @@ public class Mermaid : Entity, IEnemyAI
         return EntityFlags.Flag_Enemy;
     }
 }
+

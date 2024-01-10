@@ -92,6 +92,7 @@ namespace MainCharacter
         }
     }
 
+#if UNITY_EDITOR
     /// <summary>
     /// this class is used to manage the editor of the player.
     /// </summary>
@@ -112,5 +113,6 @@ namespace MainCharacter
 
         }
     }
+#endif
 
 } //namespace

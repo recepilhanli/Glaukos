@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ReadOnlyInspector))]
 public class ReadOnlyInspectorDrawer : PropertyDrawer
 {
@@ -14,7 +16,13 @@ public class ReadOnlyInspectorDrawer : PropertyDrawer
    }
 }
 
-
 public class ReadOnlyInspector : PropertyAttribute
 {
 }
+
+#else
+// Dummy class for build without UnityEditor
+internal class ReadOnlyInspectorAttribute : System.Attribute
+{
+}
+#endif

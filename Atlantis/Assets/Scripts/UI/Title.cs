@@ -50,7 +50,7 @@ public class Title : MonoBehaviour
 
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(Title))]
 public class TitleEditorGUI : Editor
 {
@@ -71,3 +71,4 @@ public class TitleEditorGUI : Editor
 
     }
 }
+#endif
