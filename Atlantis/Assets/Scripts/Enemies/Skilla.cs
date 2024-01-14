@@ -201,7 +201,7 @@ public class Skilla : Entity, IEnemyAI
                     Player.Instance.PosionEffect();
                     _Health += Time.deltaTime * 5;
                     _HealthBar.value = _Health / 100f;
-                    Player.Instance.Focus -= Time.deltaTime * 5;
+                    Player.Instance.Focus -= Time.deltaTime * 8;
 
                     if (_SpellParticleCooldown < Time.time)
                     {
@@ -307,6 +307,12 @@ public class Skilla : Entity, IEnemyAI
         else if (_CurrentState == SkillaStates.State_SpellingHealth)
         {
             _SpellDelay = Time.time + 15f;
+            _SpellImage.color = new Color(0, 0, 0, 0);
+            Player.Instance.SetSlow(false);
+        }
+        else if (_CurrentState == SkillaStates.State_SpellingFocus)
+        {
+            _SpellFocusDelay = Time.time + 20f;
             _SpellImage.color = new Color(0, 0, 0, 0);
             Player.Instance.SetSlow(false);
         }
