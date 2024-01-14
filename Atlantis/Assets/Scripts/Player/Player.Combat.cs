@@ -40,6 +40,7 @@ namespace MainCharacter
 
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
 
+        [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
 
         bool _PunchState = false;
@@ -373,7 +374,8 @@ namespace MainCharacter
             PlayerPrefs.SetString(PerfTable.perf_LastScene, nextScene);
             PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, 0);
             PlayerPrefs.Save();
-            isDeath = true;
+         //   isDeath = true;
+            RewardSequence = true;
             StartCoroutine(ThankSequence());
         }
 

@@ -65,7 +65,8 @@ public class UIManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
+                if (Player.Instance.RewardSequence) SceneManager.LoadScene(PerfTable.perf_LevelThank);
+                else if (Player.Instance.isDeath) SceneManager.LoadScene(PerfTable.perf_LevelDeath);
                 else if (PauseMenu.instance != null) PauseMenu.instance.TogglePause(!PauseMenu.instance.isPaused);
             }
 
@@ -87,7 +88,7 @@ public class UIManager : MonoBehaviour
             if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
             else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
 
-            if (Player.Instance.isDeath)
+            if (Player.Instance.isDeath || Player.Instance.RewardSequence)
             {
                 var color = DeathFade.color;
                 color.a += Time.deltaTime / 2;
