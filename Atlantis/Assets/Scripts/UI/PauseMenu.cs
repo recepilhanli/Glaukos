@@ -8,8 +8,10 @@ public class PauseMenu : MonoBehaviour
 
 
     [SerializeField] private GameObject _QuitScreen;
+    [SerializeField] AudioClip _ButtonSound;
 
-    public bool isPaused {get; private set;} = false;
+
+    public bool isPaused { get; private set; } = false;
     void Awake()
     {
         instance = this;
@@ -18,6 +20,7 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause(bool toggle)
     {
+        LevelManager.PlaySound2D(_ButtonSound, 1f);
         isPaused = toggle;
         if (toggle)
         {
@@ -29,16 +32,18 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1;
             gameObject.SetActive(false);
         }
-          _QuitScreen.SetActive(false);
+        _QuitScreen.SetActive(false);
     }
 
     public void QuitScreen(bool toggle)
     {
+        LevelManager.PlaySound2D(_ButtonSound, 1f);
         _QuitScreen.SetActive(toggle);
     }
 
     public void Quit()
     {
+        LevelManager.PlaySound2D(_ButtonSound, 1f);
         Application.Quit();
     }
 

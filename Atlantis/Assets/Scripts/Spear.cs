@@ -40,7 +40,7 @@ public class Spear : Weapons
 
     [HideInInspector] public int Stuck = 0;
 
-
+   
 
     public enum ThrowStates
     {

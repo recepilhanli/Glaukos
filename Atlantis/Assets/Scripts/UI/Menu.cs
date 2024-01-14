@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     [SerializeField, Tooltip("Continue Button Of The Menu")] Button ContinueButton;
 
-
+    [SerializeField] AudioClip _ButtonSound;
     private void Start()
     {
 
@@ -39,6 +39,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetFirstLevel()
     {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("New Level");
         SceneManager.LoadScene(PerfTable.perf_LevelPrologue);
     }
@@ -48,6 +49,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetDevLevel()
     {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Loading.LoadScene("DeveloperScene");
     }
 
@@ -56,6 +58,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         SceneManager.LoadScene("Menu");
     }
 
@@ -64,6 +67,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void Quit()
     {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Application.Quit();
     }
 
@@ -72,7 +76,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void Continue()
     {
-
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         string levelName = PerfTable.perf_Level1;
         if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
         {
