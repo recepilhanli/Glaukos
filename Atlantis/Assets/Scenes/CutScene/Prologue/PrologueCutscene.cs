@@ -28,10 +28,12 @@ public class PrologueCutscene : MonoBehaviour
 
     [SerializeField] Transform _Player;
 
-    void Start()
+    IEnumerator Start()
     {
         _PostProcessVolume.profile.TryGet(out _Vignette);
         _PostProcessVolume.profile.TryGet(out _ChromaticAberration);
+        yield return new WaitForSeconds(.085f);
+        _Director.Pause();
     }
 
     private void LateUpdate()

@@ -8,6 +8,7 @@ public class LifePrinter : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _TMP;
     [SerializeField] GameObject _ContinueButton;
+    [SerializeField] GameObject _BackToMenuButton;
     void Start()
     {
         if (!PlayerPrefs.HasKey(PerfTable.perf_LastScene)) _ContinueButton.SetActive(true);
@@ -16,6 +17,7 @@ public class LifePrinter : MonoBehaviour
         {
             Player.ResetRemainingLifes();
             _ContinueButton.SetActive(false);
+            _BackToMenuButton.SetActive(true);
             _TMP.text = "<color=red>Geri kalan hayatinda artik bir baliksin!";
             return;
         }

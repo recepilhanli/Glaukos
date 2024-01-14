@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ContinueButton: {fileID: 1684497703}
+  _ButtonSound: {fileID: 0}
 --- !u!114 &761882985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TMP: {fileID: 639144591}
   _ContinueButton: {fileID: 1684497701}
+  _BackToMenuButton: {fileID: 1765377226}
 --- !u!1 &914388753
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1765377227
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1104,8 +1106,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286348543
+  m_fontColor: {r: 1, g: 0.48584908, b: 0.48584908, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
