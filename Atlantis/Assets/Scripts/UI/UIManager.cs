@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
-                else SceneManager.LoadScene("Menu");
+                else if(PauseMenu.instance != null) PauseMenu.instance.TogglePause(!PauseMenu.instance.isPaused);
             }
 
             if (FocusBar != null) FocusBar.value = Player.Instance.Focus / 100;

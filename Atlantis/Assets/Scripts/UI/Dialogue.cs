@@ -41,6 +41,10 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         if (!_IsPlaying || Paused) return;
+        if (PauseMenu.instance != null)
+        {
+            if (PauseMenu.instance.isPaused) return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -85,6 +89,16 @@ public class Dialogue : MonoBehaviour
             // {
             //     yield return null;
             // }
+
+            if (PauseMenu.instance != null)
+            {
+                while (PauseMenu.instance.isPaused)
+                {
+                    yield return null;
+                }
+            }
+
+
             if (Paused) break;
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);

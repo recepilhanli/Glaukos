@@ -32,8 +32,6 @@ namespace MainCharacter
 
         [ContextMenu("Call Start Function")]
 
-
-
         void Start()
         {
             Type = EntityType.Type_Player;
@@ -64,6 +62,11 @@ namespace MainCharacter
 
         void Update()
         {
+            if (PauseMenu.instance != null)
+            {
+                if (PauseMenu.instance.isPaused) return;
+            }
+
             CameraUpdate();
 
             Combat();
