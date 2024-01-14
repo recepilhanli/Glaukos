@@ -39,6 +39,7 @@ namespace MainCharacter
         [SerializeField] AudioClip _RewardClip;
 
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
+        [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _HeartBeat;
 
         [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
@@ -206,6 +207,18 @@ namespace MainCharacter
         {
             if (isDeath) return;
 
+            if (Health <= 25 && !_HeartBeat.isPlaying)
+            {
+                _ColorAdjustments.colorFilter.value = new Color(1, 0.5f, 0.5f, 1);
+                _ColorAdjustments.saturation.value = -30;
+                _HeartBeat.Play();
+            }
+            else if (Health > 25 && _HeartBeat.isPlaying)
+            {
+                _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
+                _ColorAdjustments.saturation.value = 0;
+                _HeartBeat.Stop();
+            }
 
             if (CanMove)
             {
@@ -283,7 +296,7 @@ namespace MainCharacter
             if (_Rage || isDeath) return;
 
             Health -= _h;
-            Health = Mathf.Clamp(Health,0, 100);
+            Health = Mathf.Clamp(Health, 0, 100);
             if (Health <= 0) OnDeath();
 
             Focus -= _h / 2;
@@ -374,7 +387,7 @@ namespace MainCharacter
             PlayerPrefs.SetString(PerfTable.perf_LastScene, nextScene);
             PlayerPrefs.SetFloat(PerfTable.perf_LastPosX, 0);
             PlayerPrefs.Save();
-         //   isDeath = true;
+            //   isDeath = true;
             RewardSequence = true;
             StartCoroutine(ThankSequence());
         }

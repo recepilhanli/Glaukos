@@ -28,18 +28,23 @@ namespace MainCharacter
         private ChromaticAberration _ChromaticAberration;
 
 
+        private ColorAdjustments _ColorAdjustments;
+
         void InitCamera()
         {
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
             _Perlin = _VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
             _PostProcess.profile.TryGet(out _ChromaticAberration);
+            _PostProcess.profile.TryGet(out _ColorAdjustments);
+
+
         }
 
 
-        public void SetLensSize(float _size,bool force = false)
+        public void SetLensSize(float _size, bool force = false)
         {
             _LensSize = _size;
-            if(force) _VirtualCamera.m_Lens.OrthographicSize = _size;
+            if (force) _VirtualCamera.m_Lens.OrthographicSize = _size;
         }
 
         void CameraSize()

@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
             if (Player.Instance.Focus >= 85) FocusFillImage.color = FocusRageColor;
             else FocusFillImage.color = FocusNormalColor;
 
-            if (Player.Instance.Health <= 20) HealthFillImage.color = _HealthWarnColor;
+            if (Player.Instance.Health <= 35) HealthFillImage.color = _HealthWarnColor;
             else HealthFillImage.color = _HealthNormalColor;
 
 
