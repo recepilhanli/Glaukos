@@ -18,7 +18,8 @@ public class Skilla : Entity, IEnemyAI
         State_Grabbed, //biting whilw grabbing
         State_AttackPoison,
         State_CallEnemies,
-        State_Spelling,
+        State_SpellingHealth,
+        State_SpellingFocus,
     }
 
 
@@ -33,7 +34,8 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField, ReadOnlyInspector] SkillaStates _CurrentState = SkillaStates.State_NONE;
 
     [SerializeField] GameObject _CallEnemyParticle;
-    [SerializeField] GameObject _SpellingParticle;
+    [SerializeField] GameObject _SpellingHealthParticle;
+    [SerializeField] GameObject _SpellingFocusParticle;
 
     [SerializeField] GameObject _Canvas;
 
@@ -55,6 +57,8 @@ public class Skilla : Entity, IEnemyAI
     private float CallEnemyCooldown = 0;
 
     private float _SpellParticleCooldown = 0;
+
+    private float _SpellFocusDelay = 0;
 
     private float _ChasingTime = 0;
 
@@ -158,13 +162,13 @@ public class Skilla : Entity, IEnemyAI
 
                     if (_SpellParticleCooldown < Time.time)
                     {
-                        Instantiate(_SpellingParticle, transform.position, Quaternion.identity);
+                        Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
                         _SpellParticleCooldown = Time.time + .6f;
                     }
 
                     break;
                 }
-            case SkillaStates.State_Spelling:
+            case SkillaStates.State_SpellingHealth:
                 {
                     Vector2 pos = transform.position;
                     pos.y = Mathf.PingPong(Time.time * 2, 5);
@@ -179,11 +183,33 @@ public class Skilla : Entity, IEnemyAI
 
                     if (_SpellParticleCooldown < Time.time)
                     {
-                        Instantiate(_SpellingParticle, transform.position, Quaternion.identity);
+                        Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
                         _SpellParticleCooldown = Time.time + .6f;
                     }
 
                     if (_Health >= 200) SetState(SkillaStates.State_NONE);
+                    break;
+                }
+            case SkillaStates.State_SpellingFocus:
+                {
+                    Vector2 pos = transform.position;
+                    pos.y = Mathf.PingPong(Time.time * 2, 5);
+                    Move(pos);
+                    //ping pong spell image alpha black faster
+                    _SpellImage.color = new Color(0, 0, 0, Mathf.PingPong(Time.time * 6, 2) - 1);
+
+                    Player.Instance.PosionEffect();
+                    _Health += Time.deltaTime * 5;
+                    _HealthBar.value = _Health / 100f;
+                    Player.Instance.Focus -= Time.deltaTime * 5;
+
+                    if (_SpellParticleCooldown < Time.time)
+                    {
+                        Instantiate(_SpellingFocusParticle, transform.position, Quaternion.identity);
+                        _SpellParticleCooldown = Time.time + .6f;
+                    }
+
+                    if (Player.Instance.Focus <= 10) SetState(SkillaStates.State_NONE);
                     break;
                 }
             case SkillaStates.State_AttackPoison:
@@ -278,7 +304,7 @@ public class Skilla : Entity, IEnemyAI
             Player.Instance.transform.transform.eulerAngles = Vector3.zero;
             Player.Instance.transform.localScale = new Vector3(.75F, .75F, .75F);
         }
-        else if (_CurrentState == SkillaStates.State_Spelling)
+        else if (_CurrentState == SkillaStates.State_SpellingHealth)
         {
             _SpellDelay = Time.time + 15f;
             _SpellImage.color = new Color(0, 0, 0, 0);
@@ -287,7 +313,9 @@ public class Skilla : Entity, IEnemyAI
         else if (_CurrentState == SkillaStates.State_NONE) _ChasingTime = 0;
 
 
-        if (state == SkillaStates.State_Spelling && _Health > 200) state = SkillaStates.State_Grabbing;
+        if (state == SkillaStates.State_SpellingHealth && _Health > 200) state = SkillaStates.State_Grabbing;
+        else if (state == SkillaStates.State_SpellingFocus && Player.Instance.Focus > 40) state = SkillaStates.State_Grabbing;
+
         if (state == SkillaStates.State_Grabbed && _GrabDelay > Time.time) state = SkillaStates.State_AttackNormal;
         _CurrentState = state;
 
@@ -339,14 +367,18 @@ public class Skilla : Entity, IEnemyAI
                     _Animator.SetInteger("State", anim_poisonattack);
                     break;
                 }
-            case SkillaStates.State_Spelling:
+            case SkillaStates.State_SpellingHealth:
                 {
                     _Animator.SetInteger("State", anim_move);
                     Player.Instance.SetSlow(true);
                     break;
                 }
-
-
+            case SkillaStates.State_SpellingFocus:
+                {
+                    _Animator.SetInteger("State", anim_move);
+                    Player.Instance.SetSlow(true);
+                    break;
+                }
             default: break;
         }
     }
@@ -364,7 +396,7 @@ public class Skilla : Entity, IEnemyAI
 
         float multiplier = .275f;
         if (_CurrentState == SkillaStates.State_Grabbing) multiplier = .1f;
-        else if (_CurrentState == SkillaStates.State_Spelling) multiplier = .15f;
+        else if (_CurrentState == SkillaStates.State_SpellingHealth) multiplier = .15f;
 
         _Rigidbody.MovePosition(Vector2.SmoothDamp(transform.position, pos, ref m_Velocity, multiplier * speedMultiplier));
     }
@@ -395,26 +427,39 @@ public class Skilla : Entity, IEnemyAI
         else if (_CurrentState == SkillaStates.State_NONE && Vector2.Distance(Player.Instance.transform.position, transform.position) >= 3 && Random.Range(0, 3) <= 1) RandomState();
         if (_CurrentState == SkillaStates.State_AttackPoison && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
         if (_CurrentState == SkillaStates.State_Grabbing && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
-        else if (_CurrentState == SkillaStates.State_Spelling && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time) SetState(SkillaStates.State_NONE);
+        else if ((_CurrentState == SkillaStates.State_SpellingHealth || _CurrentState == SkillaStates.State_SpellingFocus) && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time) SetState(SkillaStates.State_NONE);
     }
 
     void RandomState()
     {
         //set random state
 
-        if (_SpellDelay < Time.time && _CurrentState != SkillaStates.State_Spelling && _Health <= 200)
+        if (_SpellDelay < Time.time && _CurrentState != SkillaStates.State_SpellingHealth && _Health <= 200)
         {
             _SpellDelay = Time.time + 1;
-            SetState(SkillaStates.State_Spelling);
-            Debug.Log("Spelling");
+            SetState(SkillaStates.State_SpellingHealth);
+            Debug.Log("Spelling Health");
             return;
         }
 
         int rand = Random.Range(0, 3);
         if (rand == 0) SetState(SkillaStates.State_CallEnemies);
         else if (rand == 1) SetState(SkillaStates.State_Grabbing);
-        else if (rand == 2) SetState(SkillaStates.State_AttackPoison);
+        else if (rand == 2)
+        {
+            if (_SpellFocusDelay < Time.time && _CurrentState != SkillaStates.State_SpellingFocus && Player.Instance.Focus >= 50)
+            {
+                _SpellFocusDelay = Time.time + 10;
+                SetState(SkillaStates.State_SpellingFocus);
+                Debug.Log("Spelling Focus");
+                return;
+            }
+            SetState(SkillaStates.State_AttackPoison);
+        }
+
     }
+
+
 
 
     public override void OnDeath()
