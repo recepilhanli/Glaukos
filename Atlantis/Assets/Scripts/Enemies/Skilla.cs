@@ -314,7 +314,7 @@ public class Skilla : Entity, IEnemyAI
 
 
         if (state == SkillaStates.State_SpellingHealth && _Health > 200) state = SkillaStates.State_Grabbing;
-        else if (state == SkillaStates.State_SpellingFocus && Player.Instance.Focus > 40) state = SkillaStates.State_Grabbing;
+        else if (state == SkillaStates.State_SpellingFocus && Player.Instance.Focus <= 15) state = SkillaStates.State_Grabbing;
 
         if (state == SkillaStates.State_Grabbed && _GrabDelay > Time.time) state = SkillaStates.State_AttackNormal;
         _CurrentState = state;
@@ -447,14 +447,15 @@ public class Skilla : Entity, IEnemyAI
         else if (rand == 1) SetState(SkillaStates.State_Grabbing);
         else if (rand == 2)
         {
-            if (_SpellFocusDelay < Time.time && _CurrentState != SkillaStates.State_SpellingFocus && Player.Instance.Focus >= 50)
+            rand = Random.Range(0, 1);
+            if (_SpellFocusDelay < Time.time && _CurrentState != SkillaStates.State_SpellingFocus && Player.Instance.Focus >= 40 && rand == 0)
             {
+                _SpellDelay = Time.time + 2;
                 _SpellFocusDelay = Time.time + 10;
                 SetState(SkillaStates.State_SpellingFocus);
                 Debug.Log("Spelling Focus");
-                return;
             }
-            SetState(SkillaStates.State_AttackPoison);
+            else SetState(SkillaStates.State_AttackPoison);
         }
 
     }
