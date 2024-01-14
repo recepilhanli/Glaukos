@@ -51,6 +51,16 @@ public class Spear : Weapons
         STATE_GETTING_BACK,
     }
 
+    public void Destroy() //overload
+    {
+        if(ThrowState == ThrowStates.STATE_GETTING_BACK || ThrowState == ThrowStates.STATE_OVERLAPPED)
+        {
+            GetBackToThePlayer(true);
+            return;
+        }
+        Destroy(gameObject);
+    }
+
 
     public void CreateSpearRain()
     {
