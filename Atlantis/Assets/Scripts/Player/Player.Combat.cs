@@ -287,6 +287,7 @@ namespace MainCharacter
             isDeath = true;
             AttackState(-1);
             StartCoroutine(DeathSequence());
+            _ColorAdjustments.saturation.value = -100;
         }
 
 
