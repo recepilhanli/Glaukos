@@ -148,7 +148,11 @@ public class Mermaid : Entity, IEnemyAI
 
     public void SetState(MermaidStates state)
     {
-        if (_currentState == state || (_currentState == MermaidStates.State_GoingClone && state != MermaidStates.State_AttackClone)) return;
+        if (_isRealMermaid)
+        {
+            if ((_currentState == state) || (_currentState == MermaidStates.State_GoingClone && state != MermaidStates.State_AttackClone)) return;
+        }
+        else if (state != MermaidStates.State_AttackClone) return; //unreal mermaid can only scream
 
         //animation states
         const int anim_move = 0;
@@ -184,6 +188,7 @@ public class Mermaid : Entity, IEnemyAI
                 {
                     _Animator.SetInteger("State", anim_scream);
                     _HeadRenderer.sprite = _MermaidScreamSprite;
+                    Debug.Log("Scream");
                     break;
                 }
             default:
@@ -248,8 +253,8 @@ public class Mermaid : Entity, IEnemyAI
         for (int i = 0; i < 5; i++)
         {
             var unrealmermaid = Instantiate(gameObject).GetComponent<Mermaid>();
-            unrealmermaid.SetState(MermaidStates.State_AttackClone);
             unrealmermaid.InitUnrealMermaid();
+            unrealmermaid.SetState(MermaidStates.State_AttackClone);
             _UnrealMermaids.Add(unrealmermaid);
 
             //fix being red bug

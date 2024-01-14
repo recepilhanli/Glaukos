@@ -39,7 +39,6 @@ public class Collectable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player c");
             OnPlayerCollectItemEvent.Invoke();
             Destroy(gameObject);
         }
