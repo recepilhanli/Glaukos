@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] Color UnavailableColor;
 
     [SerializeField] Image FocusFillImage;
+    [SerializeField] Image HealthFillImage;
+
+    [SerializeField] Color _HealthNormalColor;
+    [SerializeField] Color _HealthWarnColor;
+
     [SerializeField] Color FocusNormalColor;
     [SerializeField] Color FocusRageColor;
 
@@ -61,7 +66,7 @@ public class UIManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (Player.Instance.isDeath) SceneManager.LoadScene("Death");
-                else if(PauseMenu.instance != null) PauseMenu.instance.TogglePause(!PauseMenu.instance.isPaused);
+                else if (PauseMenu.instance != null) PauseMenu.instance.TogglePause(!PauseMenu.instance.isPaused);
             }
 
             if (FocusBar != null) FocusBar.value = Player.Instance.Focus / 100;
@@ -71,6 +76,10 @@ public class UIManager : MonoBehaviour
 
             if (Player.Instance.Focus >= 85) FocusFillImage.color = FocusRageColor;
             else FocusFillImage.color = FocusNormalColor;
+
+            if (Player.Instance.Health <= 20) HealthFillImage.color = _HealthWarnColor;
+            else HealthFillImage.color = _HealthNormalColor;
+
 
             if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
             else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;

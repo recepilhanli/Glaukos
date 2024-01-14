@@ -1217,6 +1217,9 @@ MonoBehaviour:
   AvailableColor: {r: 0.85882354, g: 0, b: 0.08235294, a: 0.6431373}
   UnavailableColor: {r: 0.27058825, g: 0.3019608, b: 0.40392157, a: 0.5019608}
   FocusFillImage: {fileID: 6471498518390023467}
+  HealthFillImage: {fileID: 3945597313358435389}
+  _HealthNormalColor: {r: 0, g: 0.5019608, b: 0.8666667, a: 0.77254903}
+  _HealthWarnColor: {r: 0.9411765, g: 0.177, b: 0.206, a: 0.77254903}
   FocusNormalColor: {r: 0.007843138, g: 0.4627451, b: 0.20392157, a: 1}
   FocusRageColor: {r: 0.36078432, g: 0.03137255, b: 0.6313726, a: 1}
   TitlePrefab: {fileID: 2203206373051066635, guid: 892337612c3d8dd419a5aeaa760991d2, type: 3}
