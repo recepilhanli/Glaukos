@@ -13,7 +13,11 @@ public class Optimizer : MonoBehaviour
 #else
         Debug.unityLogger.logEnabled = false;
 #endif
+
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
-    
+
 }

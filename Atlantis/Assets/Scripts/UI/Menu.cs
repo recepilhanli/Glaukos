@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using MainCharacter;
+using UnityEditor.EditorTools;
 
 /// <summary>
 /// This class is used to manage the menu scene.
@@ -17,6 +18,8 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Continue Button Of The Menu")] Button ContinueButton;
 
     [SerializeField] AudioClip _ButtonSound;
+
+    [SerializeField, Tooltip("Can be null")] GameObject _TutorialPanel;
     private void Start()
     {
 
@@ -42,6 +45,37 @@ public class Menu : MonoBehaviour
         if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("New Level");
         SceneManager.LoadScene(PerfTable.perf_LevelPrologue);
+    }
+
+    /// <summary>
+    /// This method is used to skip the tutorial.
+    /// </summary>
+    public void SkipTutorial()
+    {
+        Player.ResetRemainingLifes();
+        PlayerPrefs.SetString(PerfTable.perf_LastScene, PerfTable.perf_Level1);
+
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        Debug.Log("Skip New Level");
+        Loading.LoadScene(PerfTable.perf_Level1);
+    }
+
+    /// <summary>
+    /// This method is used to open the tutorial panel.
+    /// </summary>
+    public void OpenTutorialPanel()
+    {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        _TutorialPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// This method is used to close the tutorial panel.
+    /// </summary>
+    public void CloseTutorialPanel()
+    {
+        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        _TutorialPanel?.SetActive(false);
     }
 
     /// <summary>
@@ -87,5 +121,13 @@ public class Menu : MonoBehaviour
     }
 
 
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseTutorialPanel();
+        }
+    }
 
 }

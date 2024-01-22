@@ -2,13 +2,131 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
+using TMPro;
+using System.Collections;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Unity.VisualScripting;
 public class Loading : MonoBehaviour
 {
 
-    private static string _LoadingSceneName = "Loading";
+    private static string _LoadingSceneName = PerfTable.perf_Level1;
+    private static string _LastScene = string.Empty;
+
     private bool _LoadingFade = false;
 
     [SerializeField] Image _FadeImage;
+    [SerializeField] TextMeshProUGUI _LoadingText;
+
+    private static AsyncOperationHandle<SceneInstance> loadHandle;
+
+
+    void Awake()
+    {
+        Time.timeScale = 1f;
+        _LoadingText.text = (_LastScene == _LoadingSceneName) ? "[Devam Etmek Icin F Tusuna Basin.]" : "[Yukleniyor: 0%]";
+        StartCoroutine(LoadSceneAsync());
+    }
+
+
+    IEnumerator LoadSceneAsync()
+    {
+
+        while (_LoadingSceneName == _LastScene)
+        {
+            while (_FadeImage.color.a > 0)
+            {
+                Color color = _FadeImage.color;
+                color.a -= Time.deltaTime * 3;
+                _FadeImage.color = color;
+                yield return null;
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && !_LoadingFade)
+            {
+                _LoadingFade = true;
+            }
+
+            if (_LoadingFade)
+            {
+                while (_FadeImage.color.a < 1)
+                {
+                    Color color = _FadeImage.color;
+                    color.a += Time.deltaTime * 4;
+                    _FadeImage.color = color;
+                    yield return null;
+                }
+
+                yield return loadHandle = Addressables.LoadSceneAsync("Assets/Scenes/" + _LoadingSceneName + ".unity", LoadSceneMode.Additive, false);
+                yield return loadHandle.Result.ActivateAsync();
+                Debug.Log("Activated Last Scene: " + _LoadingSceneName);
+                SceneManager.UnloadSceneAsync(PerfTable.perf_LevelLoading);
+            }
+            
+            yield return null;
+        }
+
+
+        while (_FadeImage.color.a > 0)
+        {
+            Color color = _FadeImage.color;
+            color.a -= Time.deltaTime;
+            _FadeImage.color = color;
+            yield return null;
+        }
+
+
+        if (loadHandle.IsValid())
+        {
+            Addressables.UnloadSceneAsync(loadHandle, true);
+            Debug.Log("Unloading the old scene..");
+        }
+
+        while (loadHandle.IsValid())
+        {
+            yield return null;
+        }
+
+        Debug.Log("Loading the scene..");
+        loadHandle = Addressables.LoadSceneAsync("Assets/Scenes/" + _LoadingSceneName + ".unity", LoadSceneMode.Additive, false);
+
+        while (!loadHandle.IsDone)
+        {
+            _LoadingText.text = "[Yukleniyor: " + (loadHandle.PercentComplete * 100).ToString("F0") + "%]";
+            yield return null;
+        }
+
+        _LoadingText.text = "[Devam Etmek Icin F Tusuna Basin.]";
+
+        while (!_LoadingFade)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _LoadingFade = true;
+            }
+            yield return null;
+        }
+
+        _LoadingText.text = string.Empty;
+
+        while (_FadeImage.color.a < 1)
+        {
+            Color color = _FadeImage.color;
+            color.a += Time.deltaTime;
+            _FadeImage.color = color;
+            yield return null;
+        }
+
+
+        yield return loadHandle.Result.ActivateAsync();
+        Debug.Log("Activated Scene: " + _LoadingSceneName);
+        SceneManager.UnloadSceneAsync(PerfTable.perf_LevelLoading);
+        _LastScene = _LoadingSceneName;
+        yield return null;
+
+    }
+
 
     public static void LoadScene(string _sceneName)
     {
@@ -16,36 +134,5 @@ public class Loading : MonoBehaviour
         _LoadingSceneName = _sceneName;
         SceneManager.LoadScene(PerfTable.perf_LevelLoading);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("Loading Scene: " + _LoadingSceneName);
-            _LoadingFade = true;
-        }
-
-
-        if (_LoadingFade)
-        {
-            Color color = _FadeImage.color;
-            color.a += Time.deltaTime;
-            _FadeImage.color = color;
-            if (color.a >= 1)
-            {
-                SceneManager.LoadScene(_LoadingSceneName);
-            }
-        }
-        else if (_FadeImage.color.a > 0)
-        {
-            Color color = _FadeImage.color;
-            color.a -= Time.deltaTime;
-            _FadeImage.color = color;
-        }
-
-
-
-    }
-
 
 }

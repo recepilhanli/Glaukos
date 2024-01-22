@@ -4,6 +4,8 @@ using UnityEngine;
 using MainCharacter;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEngine.AddressableAssets;
+
 
 /// <summary>
 /// Mermaid enemy boss class
@@ -33,7 +35,7 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] GameObject _MermaidCanvas;
 
-    [SerializeField] GameObject _WavePrefab;
+    private static GameObject _WavePrefab;
 
     [SerializeField] GameObject _PoisonPrefab;
 
@@ -62,6 +64,20 @@ public class Mermaid : Entity, IEnemyAI
     void Start()
     {
         Init(null);
+
+        Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/Adressable/Wave.prefab").Completed += (handle) =>
+        {
+            _WavePrefab = handle.Result;
+        };
+
+    }
+
+    void OnDestroy()
+    {
+        if (_isRealMermaid)
+        {
+            Addressables.ReleaseInstance(_WavePrefab);
+        }
     }
 
     void Update()
@@ -211,9 +227,16 @@ public class Mermaid : Entity, IEnemyAI
 
     public void CreateWave()
     {
-        var wave = Instantiate(_WavePrefab, _HeadTransform.position, Quaternion.identity);
-        wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
-        Destroy(wave, 3f);
+        try
+        {
+            var wave = Instantiate(_WavePrefab, _HeadTransform.position, Quaternion.identity);
+            wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
+            Destroy(wave, 3f);
+        }
+        catch
+        {
+            Debug.Log("Error?");
+        }
     }
 
     public void CreatePosion()

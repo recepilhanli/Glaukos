@@ -28,6 +28,14 @@ public class PrologueCutscene : MonoBehaviour
 
     [SerializeField] Transform _Player;
 
+
+    private bool canSkip = false;
+
+    public void SetSkip()
+    {
+        canSkip = true;
+    }   
+
     IEnumerator Start()
     {
         _PostProcessVolume.profile.TryGet(out _Vignette);
@@ -50,7 +58,7 @@ public class PrologueCutscene : MonoBehaviour
         }
 
 
-        if (_Director.duration - _Director.time <= 0.1f)
+        if (_Director.duration - _Director.time <= 0.11f && _Director.state == PlayState.Playing)
         {
             _Director.Pause();
             _FadeFix?.gameObject.SetActive(true);
