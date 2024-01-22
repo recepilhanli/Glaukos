@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using MainCharacter;
-using UnityEditor.EditorTools;
 
 /// <summary>
 /// This class is used to manage the menu scene.
