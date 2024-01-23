@@ -17,6 +17,11 @@ public class TriggerBox : MonoBehaviour
         if (TriggerEvent == null) TriggerEvent = new UnityEvent();
     }
 
+    private void OnDestroy()
+    {
+        TriggerEvent.RemoveAllListeners();
+        ExitTriggerEvent.RemoveAllListeners();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -48,7 +53,7 @@ public class TriggerBox : MonoBehaviour
 
     public void DestroyMe()
     {
-        Destroy(gameObject,0.05f);
+        Destroy(gameObject, 0.05f);
     }
 
 }
