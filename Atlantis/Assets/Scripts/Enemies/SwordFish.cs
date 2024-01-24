@@ -45,7 +45,7 @@ public class SwordFish : Entity, IEnemyAI
 
     private float _StartY = 0;
 
-
+    private Color oldColor = Color.white;
 
     public void Init(EntityProperties _properties)
     {
@@ -55,10 +55,13 @@ public class SwordFish : Entity, IEnemyAI
         _StartY = transform.position.y;
     }
 
-    void Start()
+    IEnumerator Start()
     {
         Init(_Properties);
         _TrailRenderer.enabled = false;
+        yield return new WaitForSeconds(0.6f);
+        oldColor = _Renderer.color;
+        yield return null;
     }
 
 
@@ -218,7 +221,7 @@ public class SwordFish : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-        StartCoroutine(DamageEffect(_Renderer.color));
+        StartCoroutine(DamageEffect());
     }
 
 
@@ -226,7 +229,7 @@ public class SwordFish : Entity, IEnemyAI
     {
         return EntityFlags.Flag_Enemy;
     }
-    IEnumerator DamageEffect(Color oldColor)
+    IEnumerator DamageEffect()
     {
         int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
         PlaySound(randomindex);

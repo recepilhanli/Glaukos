@@ -34,14 +34,15 @@ public class Shark : Entity, IEnemyAI
 
     Vector2 _RoamingPos = Vector2.zero;
 
-    float _DamageForPerAttack = 1f;
+    private float _DamageForPerAttack = 1f;
 
-    float _Health = 100f;
+    private float _Health = 100f;
 
-    float _IgnoreEntitesDuration = 0;
+    private float _IgnoreEntitesDuration = 0;
 
-    bool _isEntitySeen = false;
+    private bool _isEntitySeen = false;
 
+    private Color oldColor = Color.white;
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
@@ -50,11 +51,14 @@ public class Shark : Entity, IEnemyAI
     }
 
 
-    void Start()
+    IEnumerator Start()
     {
         Init(_Properties);
         _RegularSprite = _Renderer.sprite;
         _TrailRenderer.enabled = false;
+        yield return new WaitForSeconds(0.6f);
+        oldColor = _Renderer.color;
+        yield return null;
     }
 
 
@@ -181,7 +185,7 @@ public class Shark : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-        StartCoroutine(DamageEffect(_Renderer.color));
+        StartCoroutine(DamageEffect());
     }
 
     public override void OnDeath()
@@ -203,7 +207,7 @@ public class Shark : Entity, IEnemyAI
     }
 
 
-    IEnumerator DamageEffect(Color oldColor)
+    IEnumerator DamageEffect()
     {
         int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
         PlaySound(randomindex);

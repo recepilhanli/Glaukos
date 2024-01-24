@@ -56,7 +56,7 @@ public class Menu : MonoBehaviour
 
         if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("Skip New Level");
-        Loading.LoadScene(PerfTable.perf_Level2);
+        Loading.LoadScene(PerfTable.perf_Level1);
     }
 
     /// <summary>

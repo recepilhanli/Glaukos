@@ -494,7 +494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -8.3838, y: 15}
+  m_AnchoredPosition: {x: -8.383789, y: 15}
   m_SizeDelta: {x: 363.9704, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &494256432
@@ -604,7 +604,6 @@ GameObject:
   m_Component:
   - component: {fileID: 525699121}
   - component: {fileID: 525699120}
-  - component: {fileID: 525699119}
   - component: {fileID: 525699122}
   m_Layer: 0
   m_Name: Main Camera
@@ -613,14 +612,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &525699119
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525699118}
-  m_Enabled: 1
 --- !u!20 &525699120
 Camera:
   m_ObjectHideFlags: 0
@@ -691,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0

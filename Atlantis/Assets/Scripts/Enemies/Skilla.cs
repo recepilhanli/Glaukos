@@ -236,41 +236,49 @@ public class Skilla : Entity, IEnemyAI
 
     public void CallRandonEnemy()
     {
-        if (_CallableEnemies.Count == 0) return;
-
-        if (CallEnemyCooldown != 0 && CallEnemyCooldown > Time.time)
+        try
         {
-            SetState(SkillaStates.State_AttackPoison);
-            return;
+
+            if (_CallableEnemies.Count == 0) return;
+
+            if (CallEnemyCooldown != 0 && CallEnemyCooldown > Time.time)
+            {
+                SetState(SkillaStates.State_AttackPoison);
+                return;
+            }
+
+            int rand = Random.Range(0, _CallableEnemies.Count);
+            var enemy = Instantiate(_CallableEnemies[rand], transform.position, Quaternion.identity).GetComponent<Entity>();
+            if (enemy != null) StartCoroutine(EnemyCoroutine(enemy));
+            StartCoroutine(CallEffect());
+
+            //get all renderers of enemy and change color to alpha white
+            var Renderers = enemy.GetComponentsInChildren<SpriteRenderer>();
+            foreach (var _renderer in Renderers)
+            {
+                _renderer.color = new Color(1f, 1f, 1f, 0.8f);
+            }
+
+            //change scale of the shark
+            var shark = enemy.GetComponent<Shark>();
+            if (shark != null)
+            {
+                enemy.transform.localScale = Vector3.one * 1.75f;
+                shark.OnTakeDamage(20);
+            }
+
+
+            TotalCalledEnemies++;
+            if (TotalCalledEnemies >= 3)
+            {
+                CallEnemyCooldown = Time.time + 15;
+            }
+            Instantiate(_CallEnemyParticle, transform.position, Quaternion.identity);
         }
-
-        int rand = Random.Range(0, _CallableEnemies.Count);
-        var enemy = Instantiate(_CallableEnemies[rand], transform.position, Quaternion.identity).GetComponent<Entity>();
-        if (enemy != null) StartCoroutine(EnemyCoroutine(enemy));
-        StartCoroutine(CallEffect());
-
-        //get all renderers of enemy and change color to alpha white
-        var Renderers = enemy.GetComponentsInChildren<SpriteRenderer>();
-        foreach (var _renderer in Renderers)
+        catch
         {
-            _renderer.color = new Color(.2f, 1f, .2f, 0.6f);
+            Debug.Log("Skilla Call Enemy Error");
         }
-
-        //change scale of the shark
-        var shark = enemy.GetComponent<Shark>();
-        if (shark != null)
-        {
-            enemy.transform.localScale = Vector3.one * 1.75f;
-            shark.OnTakeDamage(20);
-        }
-
-
-        TotalCalledEnemies++;
-        if (TotalCalledEnemies >= 3)
-        {
-            CallEnemyCooldown = Time.time + 15;
-        }
-        Instantiate(_CallEnemyParticle, transform.position, Quaternion.identity);
     }
 
 
