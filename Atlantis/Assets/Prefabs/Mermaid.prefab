@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0.49081326, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -608,7 +608,6 @@ MonoBehaviour:
   _Animator: {fileID: 6851366768624078468}
   _RigidBody: {fileID: 1129742015436304085}
   _MermaidCanvas: {fileID: 8179270613644295952}
-  _WavePrefab: {fileID: 1713865838459048409, guid: cb3cd732841127b4caf7f55a86229422, type: 3}
   _PoisonPrefab: {fileID: 1713865838459048409, guid: 1cb78783858a63e49a1f50de3fc31841, type: 3}
   _HeadTransform: {fileID: 4488621624204275946}
   _HeadRenderer: {fileID: 7930680073735630579}
@@ -616,6 +615,7 @@ MonoBehaviour:
   _MermaidScreamSprite: {fileID: -265241220097112179, guid: 4e5266707e59d5a4581ae80aa0b058fd, type: 3}
   _ScreamingSource: {fileID: 6976422325011572109}
   _Health: 200
+  _currentState: 1
 --- !u!60 &8329717249427178434
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.5377358, g: 0.53012633, b: 0.53012633, a: 0.65882355}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -897,7 +897,6 @@ GameObject:
   - component: {fileID: 3506829970371334362}
   - component: {fileID: 5337010428126334808}
   - component: {fileID: 5607194308902806372}
-  - component: {fileID: 4906656058794363429}
   m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
@@ -970,23 +969,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &4906656058794363429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8179270613644295952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1001 &4186163371393996152
 PrefabInstance:
   m_ObjectHideFlags: 0

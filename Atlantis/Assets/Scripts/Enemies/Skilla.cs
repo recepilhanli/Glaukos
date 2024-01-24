@@ -162,7 +162,15 @@ public class Skilla : Entity, IEnemyAI
 
                     if (_SpellParticleCooldown < Time.time)
                     {
-                        Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                        try
+                        {
+                            Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                        }
+
+                        catch
+                        {
+                            Debug.Log("Skilla Spell Particle Error");
+                        }
                         _SpellParticleCooldown = Time.time + .6f;
                     }
 
@@ -183,7 +191,14 @@ public class Skilla : Entity, IEnemyAI
 
                     if (_SpellParticleCooldown < Time.time)
                     {
-                        Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                        try
+                        {
+                            Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                        }
+                        catch
+                        {
+                            Debug.Log("Skilla Spell Particle Error");
+                        }
                         _SpellParticleCooldown = Time.time + .6f;
                     }
 
@@ -205,7 +220,15 @@ public class Skilla : Entity, IEnemyAI
 
                     if (_SpellParticleCooldown < Time.time)
                     {
-                        Instantiate(_SpellingFocusParticle, transform.position, Quaternion.identity);
+                        try
+                        {
+
+                            Instantiate(_SpellingFocusParticle, transform.position, Quaternion.identity);
+                        }
+                        catch
+                        {
+                            Debug.Log("Skilla Spell Particle Error");
+                        }
                         _SpellParticleCooldown = Time.time + .6f;
                     }
 
