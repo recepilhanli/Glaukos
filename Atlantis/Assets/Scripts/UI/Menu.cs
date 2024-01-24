@@ -18,6 +18,8 @@ public class Menu : MonoBehaviour
 
     [SerializeField] AudioClip _ButtonSound;
 
+    [SerializeField, Tooltip("Can be null")] Slider _VolumeSlider;
+
     [SerializeField, Tooltip("Can be null")] GameObject _TutorialPanel;
     private void Start()
     {
@@ -120,6 +122,15 @@ public class Menu : MonoBehaviour
     }
 
 
+
+    public void ChangeVolume()
+    {
+        AudioListener.volume = _VolumeSlider.value;
+    }
+    public void ChangeVolume(float value)
+    {
+        AudioListener.volume = value;
+    }
 
     void Update()
     {

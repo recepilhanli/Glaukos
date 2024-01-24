@@ -25,8 +25,6 @@ public class SwordFish : Entity, IEnemyAI
 
     [Space, SerializeField] TrailRenderer _TrailRenderer;
 
-    [SerializeField] AudioSource _Source;
-
     [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
 
     Vector3 m_Velocity = Vector3.zero;
@@ -47,6 +45,7 @@ public class SwordFish : Entity, IEnemyAI
 
     private Color oldColor = Color.white;
 
+    private float _AttackSoundDelay = 0;
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
@@ -153,7 +152,11 @@ public class SwordFish : Entity, IEnemyAI
         _IgnoreEntitesDuration = 2f + Time.time;
         Invoke("SetCalm", 3f);
 
-        PlaySound(0);
+        if (_AttackSoundDelay < Time.time)
+        {
+            _AttackSoundDelay = Time.time + .15f;
+            PlaySound(0);
+        }
     }
 
     /// <summary>
@@ -169,8 +172,7 @@ public class SwordFish : Entity, IEnemyAI
     void PlaySound(int index)
     {
         if (isDeath) return;
-        _Source.clip = _Clips[index];
-        _Source.Play();
+        LevelManager.PlaySound2D(_Clips[index], .3f);
     }
 
 

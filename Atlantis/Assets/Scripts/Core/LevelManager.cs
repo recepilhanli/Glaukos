@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public static void PlaySound2D(AudioClip _clip,float _volume)
+    public static void PlaySound2D(AudioClip _clip, float _volume)
     {
         //Play Chill Sound Clip
         var obj = new GameObject("TitleSound");
@@ -171,7 +171,9 @@ public class LevelManager : MonoBehaviour
         pos.y = PlayerPrefs.GetFloat(PerfTable.perf_LastPosY);
         pos.z = PlayerPrefs.GetFloat(PerfTable.perf_LastPosZ);
 
-        Player.Instance.Health = PlayerPrefs.GetFloat(PerfTable.perf_LastHealth);
+        float h = PlayerPrefs.GetFloat(PerfTable.perf_LastHealth);
+        if (h < 25) h = 25;
+        Player.Instance.Health = h;
         Player.Instance.Focus = PlayerPrefs.GetFloat(PerfTable.perf_LastFocus);
 
         if (pos.x != 0) Player.Instance.transform.position = pos;

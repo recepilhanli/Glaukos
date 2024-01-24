@@ -26,8 +26,6 @@ public class Shark : Entity, IEnemyAI
 
     private Sprite _RegularSprite;
 
-    [SerializeField] AudioSource _Source;
-
     [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
 
     Vector3 m_Velocity = Vector3.zero;
@@ -56,7 +54,7 @@ public class Shark : Entity, IEnemyAI
         Init(_Properties);
         _RegularSprite = _Renderer.sprite;
         _TrailRenderer.enabled = false;
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.1f);
         oldColor = _Renderer.color;
         yield return null;
     }
@@ -152,8 +150,7 @@ public class Shark : Entity, IEnemyAI
     void PlaySound(int index)
     {
         if (isDeath) return;
-        _Source.clip = _Clips[index];
-        _Source.Play();
+        LevelManager.PlaySound2D(_Clips[index], .3f);
     }
 
 
