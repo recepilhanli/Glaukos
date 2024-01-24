@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
     public static void PlaySound2D(AudioClip _clip, float _volume)
     {
         //Play Chill Sound Clip
-        var obj = new GameObject("TitleSound");
+        var obj = new GameObject("2D Sound");
         var audio = obj.AddComponent<AudioSource>();
         audio.volume = _volume;
         audio.clip = _clip;
@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle(Translation.Translations["Checkpoint"].Get());
 
     }
     //////////////////////////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        if (Time.time > _SaveGameTitleDelay) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
+        if (Time.time > _SaveGameTitleDelay) UIManager.Instance.ShowTitle(Translation.Translations["Checkpoint"].Get());
 
     }
     //////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.Save();
 
 
-        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle("Oyun Kaydedildi");
+        if (Time.time > _SaveGameTitleDelay && showTitle) UIManager.Instance.ShowTitle(Translation.Translations["Checkpoint"].Get());
 
     }
     //////////////////////////////////////////////////////////////////////////

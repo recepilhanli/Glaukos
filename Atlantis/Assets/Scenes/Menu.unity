@@ -1242,6 +1242,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393681888}
   m_CullTransparentMesh: 1
+--- !u!1 &414570962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414570964}
+  - component: {fileID: 414570963}
+  m_Layer: 0
+  m_Name: Localization
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &414570963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414570962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3f0f9405d804b448c7efa3e71d0206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translateObjects:
+  - key: Menu_Start
+    text: {fileID: 336890208}
+  - key: Menu_Quit
+    text: {fileID: 1201299753}
+  - key: Menu_TutorialQuestion
+    text: {fileID: 422873230}
+  - key: Yes
+    text: {fileID: 393681890}
+  - key: No
+    text: {fileID: 668355914}
+--- !u!4 &414570964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414570962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 574.3541, y: 272.90472, z: -5.9097943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &422873228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,6 +4185,8 @@ MonoBehaviour:
   _ButtonSound: {fileID: 8300000, guid: ee41a89ddc714344aae8fce94a322682, type: 3}
   _VolumeSlider: {fileID: 56801141}
   _TutorialPanel: {fileID: 252794267}
+  _LocalizationListener: {fileID: 414570963}
+  _Dropdown: {fileID: 2031416038}
 --- !u!1 &1926067422
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,7 +4479,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1925966502}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: DropDownValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &2031416039
 MonoBehaviour:

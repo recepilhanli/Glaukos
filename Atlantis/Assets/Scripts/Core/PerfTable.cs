@@ -3,6 +3,7 @@ public class PerfTable
 {
     private PerfTable() { }
 
+    public const string perf_Language = "g_Language";
     public const string perf_RemainingLifes = "g_RemainingLifes";
     public const string perf_LastScene = "g_Scene";
     public const string perf_LoadID = "g_LoadID";
@@ -24,5 +25,6 @@ public class PerfTable
     public const string perf_Level3 = "Presentation_Level_2";
     public const string perf_Level4 = "Presentation_Level_4";
     public const string perf_LevelFinal = "Presentation_Level_Final";
+
 
 }

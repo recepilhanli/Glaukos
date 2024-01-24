@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using MainCharacter;
+using TMPro;
+using System;
+
 
 /// <summary>
 /// This class is used to manage the menu scene.
@@ -21,11 +24,15 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Can be null")] Slider _VolumeSlider;
 
     [SerializeField, Tooltip("Can be null")] GameObject _TutorialPanel;
-    private void Start()
+
+    [SerializeField] LocalizationListener _LocalizationListener;
+
+    [SerializeField] TMP_Dropdown _Dropdown;
+
+
+    void Start()
     {
-
         Player.LoadRemaningLifes();
-
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -36,7 +43,27 @@ public class Menu : MonoBehaviour
             ContinueButton.interactable = true;
         }
 
+        if (_Dropdown != null)
+        {
+            if (PlayerPrefs.HasKey(PerfTable.perf_Language))
+            {
+                string lang = PlayerPrefs.GetString(PerfTable.perf_Language);
+                if (lang == "TR")
+                {
+                    _Dropdown.value = 1;
+                }
+                else
+                {
+                    _Dropdown.value = 0;
+                }
+            }
+            else
+            {
+                _Dropdown.value = 0;
+            }
+        }
     }
+
 
     /// <summary>
     /// This method is used to load the first level of the game.
@@ -75,8 +102,11 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void CloseTutorialPanel()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
-        _TutorialPanel?.SetActive(false);
+        if (_TutorialPanel != null)
+        {
+            LevelManager.PlaySound2D(_ButtonSound, 1f);
+            _TutorialPanel.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -122,14 +152,39 @@ public class Menu : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// This method is used to change the language of the tutorial panel.
+    /// </summary>
     public void ChangeVolume()
     {
         AudioListener.volume = _VolumeSlider.value;
     }
+
+    /// <summary>
+    /// This method is used to change the language of the tutorial panel.
+    /// </summary>
     public void ChangeVolume(float value)
     {
         AudioListener.volume = value;
+    }
+
+    public void DropDownValueChanged()
+    {
+        int value = _Dropdown.value;
+        if (value == 0)
+        {
+            PlayerPrefs.SetString(PerfTable.perf_Language, "EN");
+            Debug.Log("EN");
+        }
+        else if (value == 1)
+        {
+            PlayerPrefs.SetString(PerfTable.perf_Language, "TR");
+            Debug.Log("TR");
+        }
+
+        PlayerPrefs.Save();
+
+        _LocalizationListener.Localize();
     }
 
     void Update()
@@ -139,5 +194,7 @@ public class Menu : MonoBehaviour
             CloseTutorialPanel();
         }
     }
+
+
 
 }
