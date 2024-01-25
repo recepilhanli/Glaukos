@@ -819,11 +819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41859928
+      value: 0.4185992
       objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.90817106
+      value: 0.9081711
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -831,15 +831,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341352513583796278, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.05565897
+      value: 0.055659097
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9990535
+      value: 0.9990534
       objectReference: {fileID: 0}
     - target: {fileID: 2523798814373414182, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.04350003
+      value: -0.043500155
       objectReference: {fileID: 0}
     - target: {fileID: 2587844265103170062, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -939,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.55101395
+      value: 0.5510139
       objectReference: {fileID: 0}
     - target: {fileID: 4344724987588721718, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6398782648409746340, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.055502906
+      value: -0.05550302
       objectReference: {fileID: 0}
     - target: {fileID: 6491881259610161771, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -1247,7 +1247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.08004942
+      value: 0.08004943
       objectReference: {fileID: 0}
     - target: {fileID: 8217184592214042412, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2927,7 +2927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670050093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.535496, y: 1.5767899, z: -20}
+  m_LocalPosition: {x: -30.123863, y: 1.5690699, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3441,7 +3441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931029432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.541198, y: 9.732708, z: -19.649723}
+  m_LocalPosition: {x: 7.9528313, y: 9.724988, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6091,55 +6091,24 @@ MonoBehaviour:
   textComponent: {fileID: 33409305}
   _Animator: {fileID: 53771493}
   lines:
-  - "Glaukos:  G\xFC\xE7lerimin yeni vekili sen misin ?"
-  - "Polyphemus Aetherion: Sen kimsin ? Nerdeyim ben ? Elimdeki bu m\u0131zrakta
-    ne ..."
-  - "Glaukos:  Soru sormay\u0131 b\u0131rakta beni dinle. Neden burda old\u011Funu
-    ve nas\u0131l geldi\u011Fini bilmiyor musun ?"
-  - "Polyphemus Aetherion: Hay\u0131r. Sahilde bir sand\u0131k buldum i\xE7inde ye\u015Fil
-    \u0131\u015F\u0131k sa\xE7an bi ta\u015F vard\u0131 ta\u015Fa dokununca bay\u0131ld\u0131m
-    ve salak sa\xE7ma bir r\xFCya g\xF6rd\xFCm sonras\u0131nda kendimi burda buldum."
-  - "Glaukos: Lanet olsun Hekate, Sorumsuz kad\u0131n."
-  - "Glaukos: \u015Eimdi beni iyi dinle biraz \xF6nce g\xF6rd\xFC\u011F\xFCn r\xFCya
-    asl\u0131nda benim kendi hayat\u0131md\u0131 ve lanet y\xFCz\xFCnden kendimi
-    bu ta\u015Fa hapsetmek zorunda kald\u0131m . Zaten r\xFCyanda g\xF6rd\xFCklerin
-    sayesinde benim ya\u015Fad\u0131klar\u0131ma hakimsin."
-  - "Polyphemus Aetherion: Diyelim ki dediklerin do\u011Fru. O zaman sen bir tanr\u0131s\u0131n
-    ve senin g\xFC\xE7lerini ald\u0131\u011F\u0131m i\xE7in bende mi bir tanr\u0131
-    oluyorum."
-  - "Glaukos:  Say\u0131l\u0131r \u015Fimdilik g\xFC\xE7lerimin bir k\u0131sm\u0131na
-    sahipsin ayn\u0131 zamanda g\xFC\xE7lerim ile birlikte bana yap\u0131lan lanetlere
-    de sahipsin."
-  - "Polyphemus Aetherion: Lanet tam olarak ne r\xFCyamda bir \u015Feyler g\xF6rd\xFCm
-    ama tam olarak anlamad\u0131m."
-  - "Glaukos: \xDCzerinde \u015Fu an 2 lanet var biri \xF6ld\xFC\u011F\xFCn zaman
-    bilincini o g\xFCn\xFCn sabah\u0131na geri g\xF6nderir yani ayn\u0131 g\xFCn\xFC
-    bir daha ya\u015Fars\u0131n."
-  - "Polyphemus Aetherion: Bu nas\u0131l lanet tam tersi bir \xF6d\xFCl gibi duruyor."
-  - "Glaukos: S\xF6z\xFCm\xFC bitirmeme izin verirsen anlars\u0131n lanetin 2.k\u0131sm\u0131na
-    gelelim geri f\xF6n\xFC\u015F yetene\u011Fini her kulland\u0131\u011F\u0131nda
-    bedenin Nereidler denen deniz insanlar\u0131n\u0131n bedenine d\xF6n\xFC\u015Fmeye
-    ba\u015Flar."
-  - "Polyphemus Aetherion: Bence \xF6l\xFCms\xFCzl\xFCk i\xE7in k\xFC\xE7\xFCk bir
-    bedel."
-  - "Glaukos: Bende ba\u015Fta \xF6yle d\xFC\u015F\xFCn\xFCyordum ama d\xF6n\xFC\u015Fen
-    tek \u015Fey bedenin de\u011Fil ruhun bilincin her \u015Feyin o yarat\u0131klara
-    d\xF6ner ve bir hayvandan fark\u0131n kalmaz."
-  - "Polyphemus Aetherion: Desene her iyi \u015Feyin bir bedeli var."
-  - "Glaukos: Aynen \xF6yle \u015Fimdi gelelim nas\u0131l hayata kalaca\u011F\u0131na
-    denizlerde \xE7ok fazla d\xFC\u015Fman\u0131m var ta\u015F\u0131n biri taraf\u0131ndan
-    kullan\u0131ld\u0131\u011F\u0131n\u0131 \xF6\u011Frenirseler senin pe\u015Fine
-    d\xFC\u015Ferle o y\xFCzden kendi ismini kullanamazs\u0131n benim ismimi kullanacaks\u0131n."
-  - "Polyphemus Aetherion: Normalde tam tersi olmas\u0131 laz\u0131m de\u011Fil mi
-    ?"
-  - "Glaukos: Burda korumaya \xE7al\u0131\u015Ft\u0131\u011F\u0131m\u0131z ki\u015Fi
-    sen de\u011Filsin ailen bu g\xFCnden sonra kendi ad\u0131n\u0131 ve aileni kimseye
-    anlatamazs\u0131n yoksa seni yakalamak i\xE7in onlar\u0131n pe\u015Fine d\xFC\u015Ferler. "
-  - "Polyphemus Aetherion: Anlad\u0131m bu konuda hakl\u0131s\u0131n ama bu m\u0131zra\u011F\u0131
-    nas\u0131l kulanaca\u011F\u0131m\u0131 ve tanr\u0131sal g\xFC\xE7lerimi bilmiyorum
-    birazda onlar\u0131 anlatsan."
-  - "Glaukos:  Anlad\u0131m o zaman e\u011Fitime ba\u015Flayal\u0131m. Sana s\xF6ylediklerimi
-    harfiyen uygula."
+  - "Glaukos: Yeni g\xFC\xE7lerimin temsilcisi sen misin? "
+  - "Polyphemus Aetherion: Ah, ba\u015F\u0131m... Sen kimsin? Buras\u0131 neresi?
+    Elimdeki bu m\u0131zrak ne?"
+  - "Glaukos: Soru sormay\u0131 b\u0131rak ve beni dinle. Neden burada oldu\u011Funu
+    ve nas\u0131l geldi\u011Fini bilmiyor musun?"
+  - "Polyphemus Aetherion: E\u011Fer biraz \xF6nce ya\u015Fad\u0131klar\u0131m ger\xE7ekse,
+    az \xE7ok biliyorum."
+  - "Glaukos: Evet, ger\xE7ekti. Biraz \xF6nce ya\u015Fad\u0131\u011F\u0131n her
+    \u015Fey, benim ya\u015Fad\u0131klar\u0131m\u0131n ayn\u0131s\u0131yd\u0131."
+  - "Glaukos: \u015Eimdi beni iyi dinle, \u015Fimdilik tek amac\u0131n laneti kald\u0131rmak.
+    Bunun i\xE7in Deniz K\u0131z\u0131, Kraken ve Scylla'y\u0131 yenmen gerekiyor.
+    Benim hat\u0131ralar\u0131ma sahip oldu\u011Fun i\xE7in onlar\u0131 bulman \xE7ocuk
+    oyunca\u011F\u0131 olacak."
+  - "Polyphemus Aetherion: Anlad\u0131m, ama bu yarat\u0131klarla nas\u0131l ba\u015Fa
+    \xE7\u0131kaca\u011F\u0131m?"
+  - "Glaukos: \u015Eimdilik g\xFC\xE7lerimin bir k\u0131sm\u0131na sahipsin. Sana
+    bunlar\u0131 nas\u0131l kullanaca\u011F\u0131n\u0131 g\xF6sterece\u011Fim. Ama
+    sak\u0131n unutma, sadece be\u015F defa \xF6lme hakk\u0131n var."
   - "Glaukos:  <sprite=8>  ve  <sprite=9> tu\u015Flar\u0131na basarak yukar\u0131
     ve a\u015Fa\u011F\u0131 y\xFCzebilirsin."
   - "Glaukos:  <sprite=7>  ve  <sprite=6> tu\u015Flar\u0131na basarak sa\u011F ve

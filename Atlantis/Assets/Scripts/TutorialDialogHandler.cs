@@ -168,7 +168,7 @@ public class TutorialDialogHandler : MonoBehaviour
         CurrentIndex = index;
         Debug.Log("OnDialogChanged: " + index);
 
-        const int _StartIndex = 20; // Baslangic Indexi (Tutorial) -> Start index of tutorial
+        const int _StartIndex = 8; // Baslangic Indexi (Tutorial) -> Start index of tutorial
 
         if (index < _StartIndex) return; //wait for the conversation
 
