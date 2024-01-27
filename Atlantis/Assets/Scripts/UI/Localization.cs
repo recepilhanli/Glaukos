@@ -35,6 +35,9 @@ public class Translation
         {"Level_3_present", new Translation("Kraken's Cave", "Kraken'in Magarası") },
         {"Level_5_present", new Translation("Now or Never", "Ya Şimdi Ya Da Asla") },
 
+        {"Loading", new Translation("Loading", "Yukleniyor") },
+        {"LoadingCompleted", new Translation("[For Continue Press F Key]", "[Devam Etmek Icin F Tusuna Basin]") },
+
 
 
         {"Yes", new Translation("Yes", "Evet") },

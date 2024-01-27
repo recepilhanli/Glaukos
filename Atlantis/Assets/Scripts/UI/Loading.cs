@@ -25,7 +25,7 @@ public class Loading : MonoBehaviour
     void Awake()
     {
         Time.timeScale = 1f;
-        _LoadingText.text = (_LastScene == _LoadingSceneName) ? "[Devam Etmek Icin F Tusuna Basin.]" : "[Yukleniyor: 0%]";
+       _LoadingText.text = "[" + Translation.Translations["Loading"].Get() +"]";
         StartCoroutine(LoadSceneAsync());
     }
 
@@ -93,11 +93,11 @@ public class Loading : MonoBehaviour
 
         while (!loadHandle.IsDone)
         {
-            _LoadingText.text = "[Yukleniyor: " + (loadHandle.PercentComplete * 100).ToString("F0") + "%]";
+            _LoadingText.text = "[" + Translation.Translations["Loading"].Get() + " " + (loadHandle.PercentComplete * 100).ToString("F0") + "%]";
             yield return null;
         }
 
-        _LoadingText.text = "[Devam Etmek Icin F Tusuna Basin.]";
+        _LoadingText.text = Translation.Translations["LoadingCompleted"].Get();
 
         while (!_LoadingFade)
         {
