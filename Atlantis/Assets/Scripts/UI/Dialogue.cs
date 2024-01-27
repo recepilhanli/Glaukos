@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEditor;
 using UnityEngine.Events;
+using UnityEditor.Localization.Editor;
 
 public class Dialogue : MonoBehaviour
 {
@@ -28,6 +29,17 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
+        
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string[] temp = lines[i].Split('$');
+            if (temp.Length > 1)
+            {
+                lines[i] = Translation.Translations[temp[1]].Get();
+                Debug.Log(lines[i] + " / " + temp[1]);
+            }
+        }
+
         PlayingInstance = this;
 
         CharacterNames[0] = string.Empty;
@@ -36,6 +48,8 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
 
         if (_StartOnAwake) StartDialogue();
+
+
     }
 
     void Update()

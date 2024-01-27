@@ -115,6 +115,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowTitle(string text)
     {
+        var split = text.Split('$');
+        if (split.Length > 1)
+        {
+            text = Translation.Translations[split[1]].Get();
+        }
+        
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
         LevelManager.PlaySound2D(_TitleChillClip, 0.3f);

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5591179854110521404}
   - component: {fileID: 2255026623262081004}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: ExplTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1148,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5868273404825824774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1823,7 +1823,7 @@ GameObject:
   - component: {fileID: 2391640445085847047}
   - component: {fileID: 73212890718781809}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ContinueTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2197,7 +2197,7 @@ GameObject:
   - component: {fileID: 310214189020896560}
   - component: {fileID: 2036789577585237727}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: QuitTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2284,7 +2284,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2528,7 +2528,7 @@ GameObject:
   - component: {fileID: 6412235343322274632}
   - component: {fileID: 2973024055742859512}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ExitTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2990,8 +2990,9 @@ GameObject:
   - component: {fileID: 7349846126505328318}
   - component: {fileID: 1213288901815846538}
   - component: {fileID: 7565363224468965098}
+  - component: {fileID: 3050567177407593496}
   m_Layer: 5
-  m_Name: Box
+  m_Name: Box&Localizaton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3058,6 +3059,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3050567177407593496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337830142138113916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3f0f9405d804b448c7efa3e71d0206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translateObjects:
+  - key: Menu_Paused
+    text: {fileID: 2036789577585237727}
+  - key: Menu_GQuit2
+    text: {fileID: 6410225931043349548}
+  - key: Menu_GQuitD
+    text: {fileID: 2255026623262081004}
+  - key: Menu_Continue
+    text: {fileID: 73212890718781809}
+  - key: Yes
+    text: {fileID: 541735736186418528}
+  - key: No
+    text: {fileID: 6156754612730981042}
+  - key: Menu_GQuit1
+    text: {fileID: 2973024055742859512}
+  DestroyOnAwake: 1
 --- !u!1 &6733372513722599736
 GameObject:
   m_ObjectHideFlags: 0

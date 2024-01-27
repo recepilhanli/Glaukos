@@ -17,6 +17,7 @@ public class LocalizationListener : MonoBehaviour
 {
     public List<TranslateObject> translateObjects = new List<TranslateObject>();
 
+    [SerializeField] bool DestroyOnAwake = false;
     public void Localize()
     {
         foreach (var item in translateObjects)
@@ -25,9 +26,11 @@ public class LocalizationListener : MonoBehaviour
         }
     }
 
+
     void Awake()
     {
         Localize();
+        if (DestroyOnAwake) Destroy(this);
     }
 
 }

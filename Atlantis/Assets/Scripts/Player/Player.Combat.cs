@@ -59,7 +59,15 @@ namespace MainCharacter
         public static void ResetRemainingLifes()
         {
             RemainingLifes = 5;
-            PlayerPrefs.DeleteAll();
+
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastFocus);
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastHealth);
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastScene);
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastPosX);
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastPosY);
+            PlayerPrefs.DeleteKey(PerfTable.perf_LastPosZ);
+
+
             PlayerPrefs.SetInt(PerfTable.perf_RemainingLifes, RemainingLifes);
             PlayerPrefs.Save();
         }
@@ -294,7 +302,15 @@ namespace MainCharacter
 
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
         {
-            if (_Rage || isDeath) return;
+            if (isDeath) return;
+            
+            else if (_Rage)
+            {
+                Health -= _h / 3f;
+                Health = Mathf.Clamp(Health, 0, 100);
+                if (Health <= 0) OnDeath();
+                return;
+            }
 
             Health -= _h;
             Health = Mathf.Clamp(Health, 0, 100);

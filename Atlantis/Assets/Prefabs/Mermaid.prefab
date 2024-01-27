@@ -484,6 +484,7 @@ GameObject:
   - component: {fileID: 1596994950996341915}
   - component: {fileID: 8204192314180941170}
   - component: {fileID: 8115469271335570601}
+  - component: {fileID: 700739824878201231}
   m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
@@ -552,6 +553,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &700739824878201231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100268398683584777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3f0f9405d804b448c7efa3e71d0206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translateObjects:
+  - key: Mermaid
+    text: {fileID: 6258619012224735830}
+  - key: Mermaid
+    text: {fileID: 8611462124042277609}
+  DestroyOnAwake: 1
 --- !u!1 &7114884927029054593
 GameObject:
   m_ObjectHideFlags: 0
