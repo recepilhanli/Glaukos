@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Enemies
+  m_EditorClassIdentifier: 
+  m_GroupName: Enemies
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 9ebbbb68a7bdabf47add40d4c9162872
+  m_SerializeEntries:
+  - m_GUID: 7ea66f665fa9aae4abd84058cf184083
+    m_Address: Assets/Prefabs/SkillaEnemies/Shark.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5796c18fd228a7a439813749af7dbabd
+    m_Address: Assets/Prefabs/SkillaEnemies/swordfish.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7eea0bd889afbf44bbd0feb9334b2282
+    m_Address: Assets/Prefabs/SkillaEnemies/PufferFish.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 16338ca9a15d9184ba3bf21167c5c43b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b00fc7d4e21b4424282741c7532ef0b9, type: 2}
+    - {fileID: 11400000, guid: 629f5b19dbc5ceb47a9964d79e307e95, type: 2}

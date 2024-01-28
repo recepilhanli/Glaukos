@@ -43,7 +43,7 @@ public class SwordFish : Entity, IEnemyAI
 
     private float _StartY = 0;
 
-    private Color oldColor = Color.white;
+    private Color oldColor = Color.black;
 
     private float _AttackSoundDelay = 0;
     public void Init(EntityProperties _properties)
@@ -223,7 +223,7 @@ public class SwordFish : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-        StartCoroutine(DamageEffect());
+       if (oldColor != Color.black)  StartCoroutine(DamageEffect());
     }
 
 

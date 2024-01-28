@@ -40,7 +40,7 @@ public class Shark : Entity, IEnemyAI
 
     private bool _isEntitySeen = false;
 
-    private Color oldColor = Color.white;
+    private Color oldColor = Color.black;
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
@@ -182,7 +182,7 @@ public class Shark : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-        StartCoroutine(DamageEffect());
+        if (oldColor != Color.black) StartCoroutine(DamageEffect());
     }
 
     public override void OnDeath()

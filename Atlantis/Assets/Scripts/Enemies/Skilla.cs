@@ -4,6 +4,7 @@ using UnityEngine;
 using MainCharacter;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.AddressableAssets;
 /// <summary>
 /// Skilla Boss Class
 /// </summary>
@@ -29,7 +30,7 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField] Animator _Animator;
     [SerializeField] Transform _AttachingBone;
     [SerializeField] Transform _HeadTransform;
-    [Space(15), SerializeField] List<GameObject> _CallableEnemies = new List<GameObject>();
+
     [SerializeField] GameObject _PoisonPrefab;
     [SerializeField, ReadOnlyInspector] SkillaStates _CurrentState = SkillaStates.State_NONE;
 
@@ -46,6 +47,8 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField] TextMeshProUGUI _GrabText;
 
     [SerializeField] AudioClip _WelcomingClip;
+
+    private List<GameObject> _CallableEnemies = new List<GameObject>();
 
     private float _GrabTime = 0f;
     private float _GrabDelay = 0f;
@@ -67,7 +70,34 @@ public class Skilla : Entity, IEnemyAI
 
     void Start()
     {
+        LoadAllEnemies();
         Init(null);
+    }
+
+    void LoadAllEnemies()
+    {
+        Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/SkillaEnemies/Shark.prefab").Completed += (obj) =>
+        {
+            _CallableEnemies.Add(obj.Result);
+        };
+
+        Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/SkillaEnemies/swordfish.prefab").Completed += (obj) =>
+        {
+            _CallableEnemies.Add(obj.Result);
+        };
+
+        Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/SkillaEnemies/PufferFish.prefab").Completed += (obj) =>
+        {
+            _CallableEnemies.Add(obj.Result);
+        };
+    }
+
+    void OnDestroy()
+    {
+        foreach (var enemy in _CallableEnemies)
+        {
+            Addressables.ReleaseInstance(enemy);
+        }
     }
 
     void Update()
@@ -259,6 +289,12 @@ public class Skilla : Entity, IEnemyAI
 
     public void CallRandonEnemy()
     {
+        if(_CallableEnemies.Count == 0)
+        {
+            SetState(SkillaStates.State_AttackPoison);
+            Debug.Log("Skilla Call Enemy Error");
+        }
+        
         try
         {
 
@@ -464,10 +500,10 @@ public class Skilla : Entity, IEnemyAI
         else if (_CurrentState == SkillaStates.State_NONE && Vector2.Distance(Player.Instance.transform.position, transform.position) >= 3 && Random.Range(0, 3) <= 1) RandomState();
         if (_CurrentState == SkillaStates.State_AttackPoison && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
         if (_CurrentState == SkillaStates.State_Grabbing && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
-        else if ((_CurrentState == SkillaStates.State_SpellingHealth || _CurrentState == SkillaStates.State_SpellingFocus) && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time) 
+        else if ((_CurrentState == SkillaStates.State_SpellingHealth || _CurrentState == SkillaStates.State_SpellingFocus) && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time)
         {
-        LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .6f);
-        SetState(SkillaStates.State_NONE);
+            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .6f);
+            SetState(SkillaStates.State_NONE);
         }
     }
 
