@@ -38,6 +38,11 @@ public class Translation
         {"Loading", new Translation("Loading", "Yukleniyor") },
         {"LoadingCompleted", new Translation("[For Continue Press F Key]", "[Devam Etmek Icin F Tusuna Basin]") },
 
+        {"Thank_1", new Translation("Encounter successfully completed!", "Karşılaşma başarıyla tamamlandı!") },
+        {"Thank_2", new Translation("Next Level", "Bir Sonraki Seviye") },
+
+
+
 
 
         {"Yes", new Translation("Yes", "Evet") },
