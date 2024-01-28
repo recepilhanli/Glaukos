@@ -356,6 +356,7 @@ public class Mermaid : Entity, IEnemyAI
             UIManager.Instance.Fade(1, 1, 1, 2f);
             _HeadRenderer.sprite = _MermaidRegularSprite;
             SetState(MermaidStates.State_None);
+            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .4f);
         }
         else StartCoroutine(DamageEffect());
 
