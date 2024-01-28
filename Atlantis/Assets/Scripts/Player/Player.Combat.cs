@@ -116,7 +116,9 @@ namespace MainCharacter
                 GiveFocusPoints(-25);
                 _Spear.CreateTornado();
                 UIManager.Instance.Fade(1, 1, 1);
-                CameraShake(2.0f, 0.5f, 0.01f);
+                AttackState(4);
+                LevelManager.PlaySound2D(_Spear.SpearTalent1, .5f);
+                CameraShake(3.0f, 0.6f, 0.01f);
             }
 
 
@@ -126,7 +128,9 @@ namespace MainCharacter
                 GiveFocusPoints(-40);
                 _Spear.CreateSpearRain();
                 UIManager.Instance.Fade(1, 1, 1);
-                CameraShake(2.0f, 0.5f, 0.01f);
+                AttackState(5);
+                LevelManager.PlaySound2D(_Spear.SpearTalent2, .5f);
+                CameraShake(3.0f, 0.6f, 0.01f);
             }
 
 
@@ -303,7 +307,7 @@ namespace MainCharacter
         public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
         {
             if (isDeath) return;
-            
+
             else if (_Rage)
             {
                 Health -= _h / 3f;

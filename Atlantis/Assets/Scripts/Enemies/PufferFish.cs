@@ -20,6 +20,8 @@ public class PufferFish : Entity, IEnemyAI
 
     [SerializeField] Sprite _ExplodingSprite;
 
+    [SerializeField] AudioClip _InflateClip;
+
     private Sprite _RegularSprite;
 
     Vector3 m_Velocity = Vector3.zero;
@@ -62,13 +64,13 @@ public class PufferFish : Entity, IEnemyAI
             var children = GetComponentsInChildren<SpriteRenderer>();
             foreach (var child in children)
             {
-              if(child == Player.Instance._Spear)
-              {
-                child.transform.SetParent(null);
-                break;
-              }
+                if (child == Player.Instance._Spear)
+                {
+                    child.transform.SetParent(null);
+                    break;
+                }
             }
-            
+
             transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.5f;
             return;
         }
@@ -137,6 +139,7 @@ public class PufferFish : Entity, IEnemyAI
     IEnumerator ExplodeCoroutine()
     {
         _Exploding = true;
+        LevelManager.PlaySound2D(_InflateClip, .35f);
         yield return new WaitForSeconds(0.5f + Random.Range(0, 0.5f));
         _Renderer.sprite = _ExplodingSprite;
         _TrailRenderer.enabled = false;

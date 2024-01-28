@@ -32,15 +32,22 @@ public class Spear : Weapons
 
     [SerializeField] LayerMask SpearLayerMask;
 
-    [SerializeField] AudioClip _SperStuckClip;
+    [Space(2), Header("Sounds"), SerializeField] AudioClip _SperStuckClip;
 
     [SerializeField] AudioClip _SpearImpacClip;
 
-    float _ThrowingTime = 0f;
+    public AudioClip SpearTalent1;
+
+    public AudioClip SpearTalent2;
+
+    public AudioClip SpearThrowSound;
+    public AudioClip SpearImpactSound2;
+
+    private float _ThrowingTime = 0f;
 
     [HideInInspector] public int Stuck = 0;
 
-   
+
 
     public enum ThrowStates
     {
@@ -53,7 +60,7 @@ public class Spear : Weapons
 
     public void Destroy() //overload
     {
-        if(ThrowState == ThrowStates.STATE_GETTING_BACK || ThrowState == ThrowStates.STATE_OVERLAPPED)
+        if (ThrowState == ThrowStates.STATE_GETTING_BACK || ThrowState == ThrowStates.STATE_OVERLAPPED)
         {
             GetBackToThePlayer(true);
             return;
@@ -105,6 +112,7 @@ public class Spear : Weapons
             CollisionReaction(hit.collider.gameObject);
             Debug.Log("Hit something while throwing");
         }
+        LevelManager.PlaySound2D(SpearThrowSound, .5f);
     }
 
     //for events
@@ -297,6 +305,7 @@ public class Spear : Weapons
                     if (entity.Type == Entity.EntityType.Type_JellyFish)
                     {
                         Stuck = 3;
+                        LevelManager.PlaySound2D(_SperStuckClip, 1.25f);
                         UIManager.Instance.Fade(1, 1, 1, 4);
                     }
 
@@ -307,7 +316,7 @@ public class Spear : Weapons
 
             }
         }
-        else LevelManager.PlaySound2D(_SpearImpacClip, 1f);
+        else LevelManager.PlaySound2D(_SpearImpacClip, .4f);
 
         if (other.gameObject.CompareTag("Props"))
         {
@@ -316,7 +325,7 @@ public class Spear : Weapons
         }
 
         Instantiate(ImpactEffectPrefab, pos + transform.up * 1.5f, transform.rotation);
-     
+
 
     }
 
