@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor;
 using UnityEngine.Events;
-using UnityEditor.Localization.Editor;
 
 public class Dialogue : MonoBehaviour
 {

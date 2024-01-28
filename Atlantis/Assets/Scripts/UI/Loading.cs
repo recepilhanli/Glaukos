@@ -25,7 +25,7 @@ public class Loading : MonoBehaviour
     void Awake()
     {
         Time.timeScale = 1f;
-       _LoadingText.text = "[" + Translation.Translations["Loading"].Get() +"]";
+        _LoadingText.text = "[" + Translation.Translations["Loading"].Get() + "]";
         StartCoroutine(LoadSceneAsync());
     }
 
@@ -42,6 +42,7 @@ public class Loading : MonoBehaviour
                 _FadeImage.color = color;
                 yield return null;
             }
+            _LoadingText.text = Translation.Translations["LoadingCompleted"].Get();
 
             if (Input.GetKeyDown(KeyCode.F) && !_LoadingFade)
             {
@@ -63,7 +64,7 @@ public class Loading : MonoBehaviour
                 Debug.Log("Activated Last Scene: " + _LoadingSceneName);
                 SceneManager.UnloadSceneAsync(PerfTable.perf_LevelLoading);
             }
-            
+
             yield return null;
         }
 
