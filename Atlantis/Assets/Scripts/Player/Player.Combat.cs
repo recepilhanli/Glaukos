@@ -310,7 +310,7 @@ namespace MainCharacter
 
             else if (_Rage)
             {
-                Health -= _h / 3f;
+                Health -= _h / 3.5f;
                 Health = Mathf.Clamp(Health, 0, 100);
                 if (Health <= 0) OnDeath();
                 return;
