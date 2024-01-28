@@ -24,11 +24,13 @@ public class PauseMenu : MonoBehaviour
         isPaused = toggle;
         if (toggle)
         {
+            AudioListener.pause = true;
             Time.timeScale = 0;
             gameObject.SetActive(true);
         }
         else
         {
+             AudioListener.pause = false;
             Time.timeScale = 1;
             gameObject.SetActive(false);
         }

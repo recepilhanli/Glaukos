@@ -93,6 +93,7 @@ public class LevelManager : MonoBehaviour
         var audio = obj.AddComponent<AudioSource>();
         audio.volume = _volume;
         audio.clip = _clip;
+        if (AudioListener.pause) audio.ignoreListenerPause = true;
         audio.Play();
         Destroy(obj, 5f);
     }
