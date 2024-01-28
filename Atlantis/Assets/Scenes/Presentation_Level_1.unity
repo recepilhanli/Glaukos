@@ -7585,7 +7585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.874405, y: 9.452088, z: -19.649723}
+  m_LocalPosition: {x: -30.352242, y: 9.457238, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45642,6 +45642,10 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.224455
       objectReference: {fileID: 0}
+    - target: {fileID: 1044242285479217394, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1942440976827067433, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.41859928
@@ -45841,6 +45845,14 @@ PrefabInstance:
     - target: {fileID: 5886961462482940030, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_Bounds.m_Extent.y
       value: 0.17874384
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293835786830162572, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293835786830162572, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[0]
+      value: 1124846765
       objectReference: {fileID: 0}
     - target: {fileID: 6398782648409746340, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
       propertyPath: m_LocalRotation.z
