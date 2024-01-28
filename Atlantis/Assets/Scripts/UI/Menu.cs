@@ -71,8 +71,9 @@ public class Menu : MonoBehaviour
     public void GetFirstLevel()
     {
         if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
-        Debug.Log("New Level");
+        Debug.Log("First Level");
         SceneManager.LoadScene(PerfTable.perf_LevelPrologue);
+        PlayerPrefs.SetInt(PerfTable.perf_Tutorial, 1);
     }
 
     /// <summary>
@@ -94,6 +95,11 @@ public class Menu : MonoBehaviour
     public void OpenTutorialPanel()
     {
         if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (!PlayerPrefs.HasKey(PerfTable.perf_Tutorial))
+        {
+            GetFirstLevel();
+            return;
+        }
         _TutorialPanel.SetActive(true);
     }
 
