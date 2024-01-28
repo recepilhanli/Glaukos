@@ -148,7 +148,7 @@ namespace MainCharacter
 
             if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE && !TutorialDialogHandler.TutBlockGetBack) //call back
             {
-                if (Input.GetKeyDown(_KeybindTable.HeavyAttack))
+                if (Input.GetKeyDown(_KeybindTable.ThrowKey))
                 {
                     if (_Spear.Stuck == 0)
                     {
@@ -159,7 +159,7 @@ namespace MainCharacter
 
                 }
 
-                if (Input.GetKeyDown(_KeybindTable.Attack) && !TutorialDialogHandler.TutBlockAttack1)
+                if ((Input.GetKeyDown(_KeybindTable.Attack) || Input.GetKeyDown(_KeybindTable.HeavyAttack)) && !TutorialDialogHandler.TutBlockAttack1)
                 {
                     _PunchState = !_PunchState;
 
@@ -173,7 +173,7 @@ namespace MainCharacter
 
             if (Input.GetKeyDown(_KeybindTable.Attack))
             {
-                if (Input.GetKey(_KeybindTable.HeavyAttack) && !TutorialDialogHandler.TutBlockThrow)
+                if (Input.GetKey(_KeybindTable.ThrowKey) && !TutorialDialogHandler.TutBlockThrow)
                 {
                     Debug.Log("Throw Spear");
                     AttackState(2);
@@ -198,7 +198,7 @@ namespace MainCharacter
             }
 
 
-            if (Input.GetKeyUp(_KeybindTable.HeavyAttack) && _VirtualCamera.m_Lens.OrthographicSize < 8.75f)
+            if (Input.GetKeyUp(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
             {
                 AttackState(3);
                 _Source.clip = _Clips[0];
@@ -206,11 +206,6 @@ namespace MainCharacter
                 _LensSize = 8;
             }
 
-
-            if (Input.GetKeyUp(_KeybindTable.SpecialAttack))
-            {
-                Debug.Log("Special Attack");
-            }
 
         }
 
@@ -253,7 +248,7 @@ namespace MainCharacter
 
         void ThrowingWay()
         {
-            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.HeavyAttack) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
+            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.ThrowKey) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
             {
                 if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
 

@@ -52,7 +52,7 @@ namespace MainCharacter
             if (LockLensSize) _LensSize = 10f;
             else if (!LockLensSize)
             {
-                if (Input.GetKey(_KeybindTable.HeavyAttack) && !isDeath && !_Rage) _LensSize = 9;
+                if (Input.GetKey(_KeybindTable.ThrowKey) && !isDeath && !_Rage) _LensSize = 9;
                 else if (!_Rage && !isDeath) _LensSize = 8;
             }
             _VirtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(_VirtualCamera.m_Lens.OrthographicSize, _LensSize, Time.deltaTime * 10);

@@ -171,6 +171,11 @@ public class Drowned : Entity, IEnemyAI
         StartCoroutine(DamageEffect());
     }
 
+    private void OnDestroy()
+    {
+        if (Player.Instance != null) Player.Instance._Spear.GetBackToThePlayer(false);
+    }
+
     public override void OnDeath()
     {
         isDeath = true;
