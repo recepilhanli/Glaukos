@@ -74,6 +74,9 @@ public class Mermaid : Entity, IEnemyAI
 
     void OnDestroy()
     {
+        
+        Player.Instance._Spear.GetBackToThePlayer(false);
+
         if (_isRealMermaid)
         {
             Addressables.ReleaseInstance(_WavePrefab);
