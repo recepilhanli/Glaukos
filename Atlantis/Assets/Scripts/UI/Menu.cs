@@ -45,6 +45,13 @@ public class Menu : MonoBehaviour
 
         if (_Dropdown != null)
         {
+            if (PlayerPrefs.HasKey(PerfTable.perf_Volume)) _VolumeSlider.value = PlayerPrefs.GetFloat(PerfTable.perf_Volume, 1f);
+            else
+            {
+                 PlayerPrefs.SetFloat(PerfTable.perf_Volume, 1f);
+                 PlayerPrefs.Save();
+            }
+
             if (PlayerPrefs.HasKey(PerfTable.perf_Language))
             {
                 string lang = PlayerPrefs.GetString(PerfTable.perf_Language);
@@ -83,6 +90,7 @@ public class Menu : MonoBehaviour
     {
         Player.ResetRemainingLifes();
         PlayerPrefs.SetString(PerfTable.perf_LastScene, PerfTable.perf_Level1);
+        PlayerPrefs.Save();
 
         if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("Skip New Level");
@@ -164,6 +172,8 @@ public class Menu : MonoBehaviour
     public void ChangeVolume()
     {
         AudioListener.volume = _VolumeSlider.value;
+        PlayerPrefs.SetFloat(PerfTable.perf_Volume, AudioListener.volume);
+        PlayerPrefs.Save();
     }
 
     /// <summary>

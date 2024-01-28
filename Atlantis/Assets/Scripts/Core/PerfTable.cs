@@ -13,6 +13,8 @@ public class PerfTable
     public const string perf_LastHealth = "g_Health";
     public const string perf_LastFocus = "g_Focus";
 
+    public const string perf_Volume = "Volume";
+
 
     public const string perf_LevelPrologue = "CS_Prologue";
     public const string perf_LevelLoading = "Loading";

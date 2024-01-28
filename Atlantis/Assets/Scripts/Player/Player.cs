@@ -1,6 +1,7 @@
 
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 //this is the base player script
 namespace MainCharacter
@@ -30,6 +31,8 @@ namespace MainCharacter
         public LayerMask BossMask;
         [SerializeField] Texture2D _CursorTexture;
 
+        [SerializeField] Slider _VolumeSlider;
+
         [ContextMenu("Call Start Function")]
 
         void Start()
@@ -43,7 +46,7 @@ namespace MainCharacter
 
             Physics2D.IgnoreLayerCollision(30, 6, true);
             Physics2D.IgnoreLayerCollision(6, 30, true);
-
+            _VolumeSlider.value = PlayerPrefs.GetFloat(PerfTable.perf_Volume, 1f);
 
             if (PlayerPrefs.HasKey(PerfTable.perf_RemainingLifes))
             {
@@ -92,6 +95,13 @@ namespace MainCharacter
         public override EntityFlags GetEntityFlag()
         {
             return _Flag;
+        }
+
+        public void ChangeVolume()
+        {
+            AudioListener.volume = _VolumeSlider.value;
+            PlayerPrefs.SetFloat(PerfTable.perf_Volume, AudioListener.volume);
+            PlayerPrefs.Save();
         }
     }
 
