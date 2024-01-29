@@ -92,7 +92,7 @@ public class Translation
         "Glaukos:  <sprite=10>  tuşuna basarak ağır-yakın saldırıda bulunabilirsin.")},
 
         {"tut_d_12", new Translation("Glaukos: First, press the  <sprite=3>  key, then press the  <sprite=2>  key to throw your spear.",
-        "Glaukos: Önce  <sprite=3>  tuşuna basarak  sonra <sprite=2> tuşuna basarak mızrağını fırlatabilirsin.")},
+        "Glaukos: Önce  <sprite=3>  tuşuna basarak  sonra  <sprite=2>  tuşuna basarak mızrağını fırlatabilirsin.")},
 
         {"tut_d_13", new Translation("Glaukos: Press the  <sprite=3>  key to recall the spear you've thrown.",
         "Glaukos:  <sprite=3>  tuşuna basarak  fırlattığın mızrağı çağırabilirsin.")},

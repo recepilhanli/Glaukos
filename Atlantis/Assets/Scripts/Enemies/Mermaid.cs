@@ -64,6 +64,9 @@ public class Mermaid : Entity, IEnemyAI
 
     private float _CloneDelay = 0f;
 
+    private bool _ShowedUnrealMermaidSequence = false;
+
+    private float _ChaseDelay = 0f;
 
     void Start()
     {
@@ -115,7 +118,11 @@ public class Mermaid : Entity, IEnemyAI
                         SetState(MermaidStates.State_GoingClone);
                     }
                     if (playerdist <= 1.5f) SetState(MermaidStates.State_AttackNormal);
-                    else Move(Player.Instance.transform.position);
+                    else
+                    {
+                        if (_ChaseDelay <= Time.time) SetState(MermaidStates.State_AttackPoison);
+                        Move(Player.Instance.transform.position);
+                    }
                     break;
                 }
 
@@ -187,6 +194,7 @@ public class Mermaid : Entity, IEnemyAI
         {
             case MermaidStates.State_None:
                 {
+                    _ChaseDelay = Time.time + 3.5f;
                     _Animator.SetInteger("State", anim_move);
                     break;
                 }
@@ -208,6 +216,7 @@ public class Mermaid : Entity, IEnemyAI
 
             case MermaidStates.State_AttackClone:
                 {
+                    _ShowedUnrealMermaidSequence = true;
                     _Animator.SetInteger("State", anim_scream);
                     _HeadRenderer.sprite = _MermaidScreamSprite;
                     Debug.Log("Scream");
@@ -329,6 +338,13 @@ public class Mermaid : Entity, IEnemyAI
     {
         if (isDeath) return;
 
+
+        if (!_ShowedUnrealMermaidSequence && _Health <= 30)
+        {
+            SetState(MermaidStates.State_AttackClone);
+            return;
+        }
+
         if (!_isEntitySeen)
         {
             OnDetected(Player.Instance);
@@ -346,7 +362,7 @@ public class Mermaid : Entity, IEnemyAI
             Destroy(gameObject);
             return;
         }
-   
+
 
         else if (_currentState == MermaidStates.State_AttackClone && _isRealMermaid && type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rain)
         {
