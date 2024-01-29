@@ -30,12 +30,15 @@ namespace MainCharacter
 
         private ColorAdjustments _ColorAdjustments;
 
+        private FilmGrain _FilmGrain;
+
         void InitCamera()
         {
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
             _Perlin = _VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
             _PostProcess.profile.TryGet(out _ChromaticAberration);
             _PostProcess.profile.TryGet(out _ColorAdjustments);
+            _PostProcess.profile.TryGet(out _FilmGrain);
 
 
         }

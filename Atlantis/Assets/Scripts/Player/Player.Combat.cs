@@ -93,7 +93,7 @@ namespace MainCharacter
 
         public void PlayFocusClip()
         {
-           LevelManager.PlaySound2D(Instance.FocusClip, .5f);
+            LevelManager.PlaySound2D(Instance.FocusClip, .5f);
         }
 
 
@@ -229,6 +229,26 @@ namespace MainCharacter
 
         }
 
+        public void FlowEffect(bool toggle)
+        {
+            if (toggle)
+            {
+                _ColorAdjustments.colorFilter.value = new Color(0.2f, 1f, 0.2f, 1);
+                _ColorAdjustments.saturation.value = -20;
+                _FilmGrain.intensity.value = 0.75f;
+                _HeartBeat.Stop();
+                
+            }
+            else
+            {
+                _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
+                _ColorAdjustments.saturation.value = 0;
+                _FilmGrain.intensity.value = 0.3f;
+                _HeartBeat.Stop();
+            }
+
+        }
+
 
         void Combat()
         {
@@ -238,12 +258,14 @@ namespace MainCharacter
             {
                 _ColorAdjustments.colorFilter.value = new Color(1, 0.5f, 0.5f, 1);
                 _ColorAdjustments.saturation.value = -30;
+                _FilmGrain.intensity.value = 0.8f;
                 _HeartBeat.Play();
             }
             else if (Health > 25 && _HeartBeat.isPlaying)
             {
                 _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
                 _ColorAdjustments.saturation.value = 0;
+                _FilmGrain.intensity.value = 0.3f;
                 _HeartBeat.Stop();
             }
 

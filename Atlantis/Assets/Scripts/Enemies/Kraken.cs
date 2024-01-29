@@ -23,6 +23,8 @@ public class Kraken : Entity, IEnemyAI
         State_Grab,
         State_InkAttack,
         State_GrabAndShake,
+        State_Flow,
+
     }
 
     private Kraken_AnimStates _LastState = Kraken_AnimStates.State_Idle;
@@ -43,6 +45,11 @@ public class Kraken : Entity, IEnemyAI
     [SerializeField] GameObject InkPrefabNoFollowing;
 
     [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
+
+    [SerializeField] AudioSource _VacuumSource;
+
+    [SerializeField] AudioSource _BossMusicSource;
+
     Vector3 m_Velocity = Vector3.zero;
 
     [SerializeField] float _Health = 100f;
@@ -57,11 +64,18 @@ public class Kraken : Entity, IEnemyAI
 
     float GrabDuration = 0;
     float InkDuration = 0;
+    float FlowDuration = 0;
+    int flowCount = 0;
+
+    List<GameObject> Mines = new List<GameObject>();
+
 
     public void Init(EntityProperties _properties)
     {
         _Health = _properties.Health;
         Type = EntityType.Type_Kraken;
+
+        Mines = new List<GameObject>(GameObject.FindGameObjectsWithTag("Props"));
     }
 
     void Start()
@@ -85,7 +99,7 @@ public class Kraken : Entity, IEnemyAI
             SetAnimState(Kraken_AnimStates.State_Grab);
         }
 
-        else if (dist <= 22.5f && AnimWaitDuration < Time.time)
+        else if (dist <= 22.25f && AnimWaitDuration < Time.time)
         {
             AnimWaitDuration = Time.time + 2;
             int randomindex = UnityEngine.Random.Range(0, 5);
@@ -93,22 +107,56 @@ public class Kraken : Entity, IEnemyAI
             if (randomindex == 2) SetAnimState(Kraken_AnimStates.State_Attack3);
             if (randomindex == 3) SetAnimState(Kraken_AnimStates.State_Attack4);
             else SetAnimState(Kraken_AnimStates.State_Attack1);
+
+            if (dist < 19f && _LastState == Kraken_AnimStates.State_Flow)
+            {
+                SetAnimState(Kraken_AnimStates.State_Grab);
+            }
         }
 
-        else if (dist > 22.5f && AnimWaitDuration < Time.time)
+        else if (dist > 22.25f && AnimWaitDuration < Time.time)
         {
             AnimWaitDuration = Time.time + 1.25f;
-            SetAnimState(Kraken_AnimStates.State_InkAttack);
+            SetAnimState(Kraken_AnimStates.State_Flow);
+        }
+
+
+
+        if (_LastState == Kraken_AnimStates.State_Flow)
+        {
+            Player.Instance.CameraShake(4, 1.5f, 1);
+            foreach (var mine in Mines)
+            {
+                if (mine == null) continue;
+                mine.transform.position += Vector3.right * 25 * Time.deltaTime;
+                Player.Instance.Move(Vector3.right * 2);
+            }
+            if(Player.Instance.Focus > 20) Player.Instance.Focus -= 5 * Time.deltaTime;
         }
 
     }
 
     public void SetAnimState(Kraken_AnimStates state)
     {
-        if (_LastState == state && state != Kraken_AnimStates.State_InkAttack)
+        if (_LastState == state && state != Kraken_AnimStates.State_InkAttack && state != Kraken_AnimStates.State_Flow)
         {
             AnimWaitDuration -= Time.deltaTime * 3;
             return;
+        }
+
+        if (state == Kraken_AnimStates.State_Flow && _LastState != Kraken_AnimStates.State_Flow)
+        {
+            if (FlowDuration < Time.time) FlowDuration = Time.time + 15f;
+            else
+            {
+                state = Kraken_AnimStates.State_InkAttack;
+                Debug.Log("Cancel Flow because of delay");
+            }
+        }
+        else if (_LastState == Kraken_AnimStates.State_Flow && state != Kraken_AnimStates.State_Flow)
+        {
+            Player.Instance.FlowEffect(false);
+            _VacuumSource.Stop();
         }
 
         _LastState = state;
@@ -149,6 +197,17 @@ public class Kraken : Entity, IEnemyAI
                     _Animator.SetTrigger("grab");
                     break;
                 }
+
+            case Kraken_AnimStates.State_Flow:
+                {
+                    flowCount = 0;
+                    _Animator.ResetTrigger("flow");
+                    _Animator.SetTrigger("flow");
+                    Player.Instance.FlowEffect(true);
+                    _VacuumSource.Play();
+                    break;
+                }
+
 
             case Kraken_AnimStates.State_InkAttack:
                 {
@@ -201,7 +260,7 @@ public class Kraken : Entity, IEnemyAI
             if (Player.Instance._Spear.ThrowState == Spear.ThrowStates.STATE_NONE || SpearDamage) return;
             Player.Instance._Spear.ThrowState = Spear.ThrowStates.STATE_OVERLAPPED;
             Player.Instance._Spear.transform.SetParent(_transform);
-            Player.Instance.Attack(this,15);
+            Player.Instance.Attack(this, 15);
             SpearDamage = true;
         }
         else if (tag == "Harmful")
@@ -265,12 +324,27 @@ public class Kraken : Entity, IEnemyAI
         Player.Instance.LockLensSize = true;
         _KrakenCanvas.SetActive(true);
         Player.Instance.CameraShake(1, .9f, 3f, true);
-
+        FlowDuration = Time.time + 15;
+        _BossMusicSource.Play();
     }
+
+
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
-        if (type == AttackTypes.Attack_Tornado) return;
+
+        if (type == AttackTypes.Attack_Explosion) return;
+
+        if (type == AttackTypes.Attack_Tornado)
+        {
+            if (_LastState == Kraken_AnimStates.State_Flow)
+            {
+                SetAnimState(Kraken_AnimStates.State_InkAttack);
+                Debug.Log("Cancel Flow because of damage");
+            }
+            return;
+        }
+
         Debug.Log("Kraken Takes damage");
         if (isDeath) return;
         _IgnoreEntitesDuration -= 0.5f;
@@ -281,6 +355,13 @@ public class Kraken : Entity, IEnemyAI
         if (type != AttackTypes.Attack_Rain && type != AttackTypes.Attack_Rapid && !Player.Instance._Rage) Player.Instance.Focus += 5;
 
 
+
+        if (_LastState == Kraken_AnimStates.State_Flow)
+        {
+            flowCount++;
+            if (flowCount >= 3) SetAnimState(Kraken_AnimStates.State_InkAttack);
+            return;
+        }
 
 
 

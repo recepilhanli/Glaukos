@@ -30,7 +30,7 @@ public class Explosion : MonoBehaviour
             float distance = Vector2.Distance(transform.position, entity.transform.position);
             if (distance < 8f)
             {
-                entity.OnTakeDamage(2 + 1 / distance * 100);
+                entity.OnTakeDamage(2 + 1 / distance * 100,Entity.AttackTypes.Attack_Explosion);
                 if (entity == Player.Instance) Player.Instance.PosionEffect(1.35f);
             }
         }

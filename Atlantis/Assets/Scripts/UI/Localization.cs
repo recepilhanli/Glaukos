@@ -41,10 +41,9 @@ public class Translation
         {"Thank_1", new Translation("Encounter successfully completed!", "Karşılaşma başarıyla tamamlandı!") },
         {"Thank_2", new Translation("Next Level", "Bir Sonraki Seviye") },
 
+        {"Past", new Translation("Glaukos: Remember the past and do not make mistake..", "Glaukos: Geçmişi hatırla ve bir daha hata yapma..") },        
 
-
-
-
+        {"Okay", new Translation("Okay", "Tamam") },
         {"Yes", new Translation("Yes", "Evet") },
         {"No", new Translation("No", "Hayır") },
 

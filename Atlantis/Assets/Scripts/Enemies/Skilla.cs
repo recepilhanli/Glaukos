@@ -46,7 +46,7 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField] Slider _GrabBar;
     [SerializeField] TextMeshProUGUI _GrabText;
 
-    [SerializeField] AudioClip _WelcomingClip;
+    [SerializeField] AudioSource _BossMusicSource;
 
     private List<GameObject> _CallableEnemies = new List<GameObject>();
 
@@ -349,7 +349,7 @@ public class Skilla : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         if (_isEntitySeen) return;
-        LevelManager.PlaySound2D(_WelcomingClip, .6f);
+        _BossMusicSource.Play();
         SetState(SkillaStates.State_NONE);
         Player.Instance.LockLensSize = true;
         _isEntitySeen = true;
