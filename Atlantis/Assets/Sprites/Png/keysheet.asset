@@ -138,6 +138,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: keysheet_s
     m_HashCode: -1959452108
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 10
+    m_Scale: 1.5
+    m_Name: keysheet_wmb
+    m_HashCode: 755397535
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -299,5 +305,21 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: -142276138, guid: ba9de872f31cdbd4ba8a18a6e9f858fa, type: 3}
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 9
+      m_Height: 14
+      m_HorizontalBearingX: -4.5
+      m_HorizontalBearingY: 7
+      m_HorizontalAdvance: 9
+    m_GlyphRect:
+      m_X: 5
+      m_Y: 26
+      m_Width: 9
+      m_Height: 14
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 273207750, guid: ba9de872f31cdbd4ba8a18a6e9f858fa, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
