@@ -349,6 +349,7 @@ public class Skilla : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         if (_isEntitySeen) return;
+        _BossMusicSource.ignoreListenerPause = true;
         _BossMusicSource.Play();
         SetState(SkillaStates.State_NONE);
         Player.Instance.LockLensSize = true;

@@ -129,7 +129,7 @@ public class Kraken : Entity, IEnemyAI
             {
                 if (mine == null) continue;
                 mine.transform.position += Vector3.right * 25 * Time.deltaTime;
-                Player.Instance.Move(Vector3.right * 2);
+                Player.Instance.Move(Vector3.right * 12);
             }
             if(Player.Instance.Focus > 20) Player.Instance.Focus -= 5 * Time.deltaTime;
         }
@@ -325,6 +325,7 @@ public class Kraken : Entity, IEnemyAI
         _KrakenCanvas.SetActive(true);
         Player.Instance.CameraShake(1, .9f, 3f, true);
         FlowDuration = Time.time + 15;
+        _BossMusicSource.ignoreListenerPause = true;
         _BossMusicSource.Play();
     }
 
@@ -340,6 +341,7 @@ public class Kraken : Entity, IEnemyAI
             if (_LastState == Kraken_AnimStates.State_Flow)
             {
                 SetAnimState(Kraken_AnimStates.State_InkAttack);
+                FlowDuration = Time.time + 25;
                 Debug.Log("Cancel Flow because of damage");
             }
             return;
