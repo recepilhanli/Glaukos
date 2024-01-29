@@ -82,7 +82,7 @@ public class Mermaid : Entity, IEnemyAI
     void OnDestroy()
     {
 
-        if (Player.Instance != null) Player.Instance._Spear.GetBackToThePlayer(false);
+        if (Player.Instance != null && !_isRealMermaid) Player.Instance._Spear.GetBackToThePlayer(false);
 
         if (_isRealMermaid)
         {

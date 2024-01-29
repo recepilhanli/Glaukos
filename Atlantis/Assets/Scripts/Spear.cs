@@ -60,17 +60,6 @@ public class Spear : Weapons
         STATE_GETTING_BACK,
     }
 
-    public void Destroy() //overload
-    {
-        if (ThrowState == ThrowStates.STATE_GETTING_BACK || ThrowState == ThrowStates.STATE_OVERLAPPED)
-        {
-            GetBackToThePlayer(true);
-            return;
-        }
-        Destroy(gameObject);
-    }
-
-
     public void CreateSpearRain()
     {
         Transform _transform = Player.Instance.transform;
@@ -221,6 +210,13 @@ public class Spear : Weapons
 
     void Update()
     {
+
+        if (Player.Instance == null || this != Player.Instance._Spear) // ????
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (ThrowState != ThrowStates.STATE_THROWING && ThrowState != ThrowStates.STATE_FLOATING && ThrowState != ThrowStates.STATE_GETTING_BACK) return;
 
         if (Vector2.Distance(Player.Instance.transform.position, transform.position) <= 1.5f && ThrowState == ThrowStates.STATE_GETTING_BACK)

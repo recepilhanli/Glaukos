@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MainCharacter;
+using UnityEngine.SceneManagement;
 
 public class Drowned : Entity, IEnemyAI
 {

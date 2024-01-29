@@ -1,6 +1,7 @@
 
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //this is the base player script
@@ -77,6 +78,30 @@ namespace MainCharacter
             if (CanMove) Movement();
 
             else _Rigidbody.velocity = Vector2.zero;
+
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                Loading.LoadScene(PerfTable.perf_Level1);
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                Loading.LoadScene(PerfTable.perf_Level2);
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                Loading.LoadScene(PerfTable.perf_Level3);
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                Loading.LoadScene(PerfTable.perf_Level4);
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SceneManager.LoadScene("Menu");
+            }
+
+#endif
         }
 
         /// <summary>
