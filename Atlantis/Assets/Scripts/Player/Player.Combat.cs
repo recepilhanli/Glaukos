@@ -72,6 +72,12 @@ namespace MainCharacter
             PlayerPrefs.Save();
         }
 
+        public void GetSpearInteractionClip()
+        {
+            LevelManager.PlaySound2D(_Spear.SpearImpactSound2, .5f);
+        }
+
+
         void RageCombat()
         {
             StartCoroutine(Rage());

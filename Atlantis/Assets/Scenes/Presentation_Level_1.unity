@@ -7585,7 +7585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.1968, y: 9.455568, z: -19.649723}
+  m_LocalPosition: {x: -30.308086, y: 9.456768, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15522,6 +15522,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &874859087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6861030160498466658, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+  m_PrefabInstance: {fileID: 6861030160068836351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22aabfb5a791a3f48a5f6e9c2942b1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &880640728
 GameObject:
   m_ObjectHideFlags: 0
@@ -46360,7 +46371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -46368,6 +46383,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
@@ -46379,7 +46398,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8039700185385053528, guid: 3346fee2ed11e09408f5037df4071e61, type: 3}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 874859087}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
@@ -46387,9 +46414,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1862365147}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 874859087}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OpenTheGate
@@ -46399,8 +46434,20 @@ PrefabInstance:
       value: StopSpear
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: GetSpearInteractionClip
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: CloseTheGate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: GetSpearInteractionClip
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -46411,11 +46458,27 @@ PrefabInstance:
       value: Spear, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: Spear, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Gate, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MainCharacter.Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
       propertyPath: TriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519722792586741825, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
+      propertyPath: ExitTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7602816767246784290, guid: c7b767789518ebf488c1698d7a09ff91, type: 3}
