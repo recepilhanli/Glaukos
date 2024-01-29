@@ -142,6 +142,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6861030160498466658, guid: 6188a4e6575b6da4fa269264dbe50cb4, type: 3}
+        m_TargetAssemblyTypeName: MainCharacter.Player, Assembly-CSharp
+        m_MethodName: PlayFocusClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8199329364931134016
 MonoBehaviour:
   m_ObjectHideFlags: 0

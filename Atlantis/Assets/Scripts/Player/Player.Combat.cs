@@ -37,6 +37,7 @@ namespace MainCharacter
         [SerializeField] List<GameObject> _RageEffects = new List<GameObject>();
 
         [SerializeField] AudioClip _RewardClip;
+        public AudioClip FocusClip;
 
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
         [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _HeartBeat;
@@ -89,6 +90,12 @@ namespace MainCharacter
         {
             LevelManager.PlaySound2D(_Spear.HitClips[Random.Range(0, _Spear.HitClips.Count)], .3f);
         }
+
+        public void PlayFocusClip()
+        {
+           LevelManager.PlaySound2D(Instance.FocusClip, .5f);
+        }
+
 
 
         void Deformation()
