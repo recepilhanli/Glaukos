@@ -169,6 +169,7 @@ public class Drowned : Entity, IEnemyAI
         if (type != AttackTypes.Attack_Tornado && !Player.Instance._Rage) Player.Instance.Focus += 4;
 
         StartCoroutine(DamageEffect());
+        Player.Instance.PlayHitClip();
     }
 
     private void OnDestroy()

@@ -150,6 +150,7 @@ public class PufferFish : Entity, IEnemyAI
     public void Explode()
     {
         if (_Exploding) return;
+        Player.Instance.PlayHitClip();
         StartCoroutine(ExplodeCoroutine());
     }
 

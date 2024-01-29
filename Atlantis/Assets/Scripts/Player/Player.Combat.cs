@@ -52,6 +52,8 @@ namespace MainCharacter
 
 
 
+
+
         public static void LoadRemaningLifes()
         {
             if (PlayerPrefs.HasKey(PerfTable.perf_RemainingLifes)) RemainingLifes = PlayerPrefs.GetInt(PerfTable.perf_RemainingLifes, 5);
@@ -81,6 +83,11 @@ namespace MainCharacter
         void RageCombat()
         {
             StartCoroutine(Rage());
+        }
+
+        public void PlayHitClip()
+        {
+            LevelManager.PlaySound2D(_Spear.HitClips[Random.Range(0, _Spear.HitClips.Count)], .3f);
         }
 
 

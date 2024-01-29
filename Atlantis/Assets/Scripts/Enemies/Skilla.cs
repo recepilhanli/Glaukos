@@ -289,12 +289,12 @@ public class Skilla : Entity, IEnemyAI
 
     public void CallRandonEnemy()
     {
-        if(_CallableEnemies.Count == 0)
+        if (_CallableEnemies.Count == 0)
         {
             SetState(SkillaStates.State_AttackPoison);
             Debug.Log("Skilla Call Enemy Error");
         }
-        
+
         try
         {
 
@@ -505,6 +505,8 @@ public class Skilla : Entity, IEnemyAI
             LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .6f);
             SetState(SkillaStates.State_NONE);
         }
+
+        Player.Instance.PlayHitClip();
     }
 
     void RandomState()

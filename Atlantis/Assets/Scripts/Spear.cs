@@ -36,6 +36,8 @@ public class Spear : Weapons
 
     [SerializeField] AudioClip _SpearImpacClip;
 
+    public List<AudioClip> HitClips = new List<AudioClip>();
+
     public AudioClip SpearTalent1;
 
     public AudioClip SpearTalent2;

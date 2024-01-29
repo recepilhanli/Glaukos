@@ -402,6 +402,8 @@ public class Mermaid : Entity, IEnemyAI
         else if (_Health <= 180 && _currentState == MermaidStates.State_None && Random.Range(0, 10) <= 4) SetState(MermaidStates.State_AttackPoison);
         else if (_currentState == MermaidStates.State_AttackPoison && Random.Range(0, 10) <= 5) SetState(MermaidStates.State_None);
 
+
+        Player.Instance.PlayHitClip();
     }
 
     public override void Attack(Entity entity, float damage, AttackTypes type = AttackTypes.Attack_Standart)

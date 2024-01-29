@@ -25,7 +25,6 @@ public class SwordFish : Entity, IEnemyAI
 
     [Space, SerializeField] TrailRenderer _TrailRenderer;
 
-    [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
 
     Vector3 m_Velocity = Vector3.zero;
 
@@ -172,7 +171,7 @@ public class SwordFish : Entity, IEnemyAI
     void PlaySound(int index)
     {
         if (isDeath) return;
-        LevelManager.PlaySound2D(_Clips[index], .3f);
+         Player.Instance.PlayHitClip();
     }
 
 
@@ -223,7 +222,7 @@ public class SwordFish : Entity, IEnemyAI
         transform.position -= pos * 1.5f;
 
 
-       if (oldColor != Color.black)  StartCoroutine(DamageEffect());
+        if (oldColor != Color.black) StartCoroutine(DamageEffect());
     }
 
 
@@ -233,9 +232,7 @@ public class SwordFish : Entity, IEnemyAI
     }
     IEnumerator DamageEffect()
     {
-        int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
-        PlaySound(randomindex);
-
+        Player.Instance.PlayHitClip();
         _Renderer.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         _Renderer.color = oldColor;
