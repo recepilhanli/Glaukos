@@ -66,15 +66,45 @@ public class Tornado : MonoBehaviour
             {
                 Vector2 toPos = enemy.transform.position - transform.position;
                 toPos.y = 0;
-                if (enemy.Type != Entity.EntityType.Type_Shark && enemy.Type != Entity.EntityType.Type_Mermaid  && enemy.Type != Entity.EntityType.Type_Skilla && enemy.Type != Entity.EntityType.Type_SwordFish && enemy.Type != Entity.EntityType.Type_PufferFish) enemy.Move(-toPos * _TornadoSpeed);
-                if (enemy.Type == Entity.EntityType.Type_SwordFish && !enemy.isDeath && dist < _AffectingDistance / 1.5f) enemy.Move((enemy.transform.position - transform.position).normalized);
-                if (_TornadoDamageTime <= Time.time && enemy.Type != Entity.EntityType.Type_Mermaid) enemy.OnTakeDamage(5, Entity.AttackTypes.Attack_Tornado);
-                else if (_TornadoDamageTime <= Time.time && dist < _AffectingDistance / 2) enemy.OnTakeDamage(30, Entity.AttackTypes.Attack_Tornado);
+                if (_TornadoDamageTime <= Time.time && dist < _AffectingDistance / Random.Range(1.5f,2.5f)) enemy.OnTakeDamage(15, Entity.AttackTypes.Attack_Tornado);
+
+                switch (enemy.Type)
+                {
+
+                    case Entity.EntityType.Type_SwordFish:
+                        {
+                            enemy.Move((enemy.transform.position - transform.position).normalized);
+                            break;
+                        }
+                    case Entity.EntityType.Type_Drowned:
+                        {
+                            enemy.Move(-toPos * _TornadoSpeed);
+                            break;
+                        }
+
+                    case Entity.EntityType.Type_JellyFish:
+                        {
+
+                            break;
+                        }
+
+                    case Entity.EntityType.Type_Mermaid:
+                        {
+                            if (_TornadoDamageTime <= Time.time) enemy.OnTakeDamage(5, Entity.AttackTypes.Attack_Tornado);
+                            enemy.Move(transform.position);
+                            break;
+                        }
+
+                    default: break;
+
+                }
             }
         }
-        if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;
 
+
+        if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;
 
 
     }
 }
+

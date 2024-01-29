@@ -47,8 +47,12 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] AudioSource _ScreamingSource;
 
+    [SerializeField] AudioSource _BossMusicSource;
+
     [SerializeField] float _Health = 200;
     [SerializeField, ReadOnlyInspector] MermaidStates _currentState = MermaidStates.State_AttackNormal;
+
+
 
     private Vector2 m_Velocity = Vector2.zero;
 
@@ -89,7 +93,7 @@ public class Mermaid : Entity, IEnemyAI
 
         if (!_isEntitySeen)
         {
-            if (playerdist <= 12)
+            if (playerdist <= 15)
             {
                 OnDetected(Player.Instance);
             }
@@ -164,7 +168,6 @@ public class Mermaid : Entity, IEnemyAI
         }
     }
 
-
     public void SetState(MermaidStates state)
     {
         if (_isRealMermaid)
@@ -225,6 +228,7 @@ public class Mermaid : Entity, IEnemyAI
     public void InitUnrealMermaid()
     {
         _isRealMermaid = false;
+        Destroy(_BossMusicSource.gameObject);
         Destroy(_MermaidCanvas);
     }
 
@@ -257,6 +261,11 @@ public class Mermaid : Entity, IEnemyAI
         Player.Instance.CameraShake(1, .9f, 3f, true);
         if (_MermaidCanvas != null) _MermaidCanvas.SetActive(true);
 
+        if (_BossMusicSource != null)
+        {
+            _BossMusicSource.ignoreListenerPause = true;
+            _BossMusicSource.Play();
+        }
     }
 
     /// <summary>
@@ -279,9 +288,11 @@ public class Mermaid : Entity, IEnemyAI
         for (int i = 0; i < 5; i++)
         {
             var unrealmermaid = Instantiate(gameObject).GetComponent<Mermaid>();
+
             unrealmermaid.InitUnrealMermaid();
             unrealmermaid.SetState(MermaidStates.State_AttackClone);
             _UnrealMermaids.Add(unrealmermaid);
+
 
             //fix being red bug
             var renderers = unrealmermaid.GetComponentsInChildren<SpriteRenderer>();
@@ -325,7 +336,7 @@ public class Mermaid : Entity, IEnemyAI
         }
 
 
-        if (!_isRealMermaid && type != AttackTypes.Attack_Rain)
+        if (!_isRealMermaid)
         {
             if (Player.Instance._Spear.ThrowState != Spear.ThrowStates.STATE_NONE) Player.Instance._Spear.GetBackToThePlayer(false);
             UIManager.Instance.Fade(1, 1, 1, 2f);
@@ -335,13 +346,7 @@ public class Mermaid : Entity, IEnemyAI
             Destroy(gameObject);
             return;
         }
-        else if (!_isRealMermaid && type == AttackTypes.Attack_Rain)
-        {
-            StartCoroutine(DamageEffect());
-            return;
-        }
-
-
+   
 
         else if (_currentState == MermaidStates.State_AttackClone && _isRealMermaid && type != AttackTypes.Attack_Tornado && type != AttackTypes.Attack_Rain)
         {

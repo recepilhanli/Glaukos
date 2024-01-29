@@ -76,7 +76,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
             case 3:
                 {
-                    if (Input.GetKeyDown(KeyCode.Mouse1)) OnDialogChanged(++CurrentIndex);
+                    if (Input.GetKeyDown(KeyCode.Mouse2)) OnDialogChanged(++CurrentIndex);
                     TutBlockAttack2 = true;
                     TutBlockThrow = false;
                     break;

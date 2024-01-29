@@ -54,8 +54,8 @@ public class Translation
         {"Checkpoint", new Translation("Checkpoint Reached","Kayit Noktasi Alindi")},
 
         //Prologue Dialogue
-        {"pro_d_0", new Translation("Who forgot their belongings again?","Sahilde yine kim unuttu eşyalarını??")},
-        {"pro_d_1", new Translation("Ah, irresponsible people..","Sorumsuz insanlar..")},
+        {"pro_d_0", new Translation("Polyphemus Aetherion: Who forgot their belongings again?","Polyphemus Aetherion: Sahilde yine kim unuttu eşyalarını??")},
+        {"pro_d_1", new Translation("Polyphemus Aetherion: Ah, irresponsible people..","Polyphemus Aetherion: Sorumsuz insanlar..")},
 
         //Tutorial Dialogue
         {"tut_d_0", new Translation("Glaukos: Are you new heir of my powers?","Glaukos: Güçlerimin yeni temsilcisi sen misin?")},
@@ -88,8 +88,8 @@ public class Translation
         {"tut_d_10", new Translation("Glaukos: Press the  <sprite=2>  key to perform a quick-close attack.",
         "Glaukos:  <sprite=2>  tuşuna basarak hızlı-yakın saldırıda bulunabilirsin.")},
 
-        {"tut_d_11", new Translation("Glaukos: Press the  <sprite=3>  key to perform a heavy-close attack.",
-        "Glaukos:  <sprite=3>  tuşuna basarak ağır-yakın saldırıda bulunabilirsin.")},
+        {"tut_d_11", new Translation("Glaukos: Press the  <sprite=10>  key to perform a heavy-close attack.",
+        "Glaukos:  <sprite=10>  tuşuna basarak ağır-yakın saldırıda bulunabilirsin.")},
 
         {"tut_d_12", new Translation("Glaukos: First, press the  <sprite=3>  key, then press the  <sprite=2>  key to throw your spear.",
         "Glaukos: Önce  <sprite=3>  tuşuna basarak  sonra <sprite=2> tuşuna basarak mızrağını fırlatabilirsin.")},
