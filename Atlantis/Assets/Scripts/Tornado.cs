@@ -24,6 +24,8 @@ public class Tornado : MonoBehaviour
 
     Entity[] Enemies = null;
 
+    List<GameObject> _Mines = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -36,6 +38,12 @@ public class Tornado : MonoBehaviour
 
         var player = Player.Instance;
         transform.eulerAngles = player.transform.eulerAngles;
+
+        var minegos = GameObject.FindGameObjectsWithTag("Props");
+        foreach (var mine in minegos)
+        {
+            if (mine.name.Contains("Mine")) _Mines.Add(mine);
+        }
 
     }
 
@@ -66,7 +74,7 @@ public class Tornado : MonoBehaviour
             {
                 Vector2 toPos = enemy.transform.position - transform.position;
                 toPos.y = 0;
-                if (_TornadoDamageTime <= Time.time && dist < _AffectingDistance / Random.Range(1.5f,2.5f)) enemy.OnTakeDamage(15, Entity.AttackTypes.Attack_Tornado);
+                if (_TornadoDamageTime <= Time.time && dist < _AffectingDistance / Random.Range(1.5f, 2.5f)) enemy.OnTakeDamage(15, Entity.AttackTypes.Attack_Tornado);
 
                 switch (enemy.Type)
                 {
@@ -78,7 +86,7 @@ public class Tornado : MonoBehaviour
                         }
                     case Entity.EntityType.Type_Drowned:
                         {
-                            enemy.Move(-toPos * _TornadoSpeed);
+                            enemy.Move(-toPos * _TornadoSpeed * 1.25f);
                             break;
                         }
 
@@ -100,6 +108,18 @@ public class Tornado : MonoBehaviour
                 }
             }
         }
+
+        foreach (var mine in _Mines)
+        {
+            if (mine == null) continue;
+            float dist = Vector2.Distance(mine.transform.position, transform.position);
+            if (dist <= _AffectingDistance * 2)
+            {
+                Vector2 toPos = mine.transform.position - transform.position;
+                mine.transform.position -= (Vector3)toPos.normalized * Time.deltaTime * 10;
+            }
+        }
+
 
 
         if (_TornadoDamageTime < Time.time) _TornadoDamageTime = Time.time + 1f;
