@@ -32,6 +32,7 @@ namespace MainCharacter
 
         private FilmGrain _FilmGrain;
 
+        private Vignette _Vignette;
         void InitCamera()
         {
             _VirtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
@@ -39,7 +40,7 @@ namespace MainCharacter
             _PostProcess.profile.TryGet(out _ChromaticAberration);
             _PostProcess.profile.TryGet(out _ColorAdjustments);
             _PostProcess.profile.TryGet(out _FilmGrain);
-
+            _PostProcess.profile.TryGet(out _Vignette);
 
         }
 

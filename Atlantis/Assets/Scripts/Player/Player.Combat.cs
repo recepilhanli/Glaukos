@@ -21,6 +21,8 @@ namespace MainCharacter
     public partial class Player : Entity
     {
 
+        public static int RemainingLifes { private set; get; } = 5;
+
         [Space]
         [Header("Combat")]
 
@@ -37,6 +39,9 @@ namespace MainCharacter
         [SerializeField] List<GameObject> _RageEffects = new List<GameObject>();
 
         [SerializeField] AudioClip _RewardClip;
+
+        public AudioClip RageNotificationClip;
+
         public AudioClip FocusClip;
 
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
@@ -45,14 +50,9 @@ namespace MainCharacter
         [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
 
-        bool _PunchState = false;
+        private bool _PunchState = false;
 
-        bool _Poisoned = false;
-
-        public static int RemainingLifes { private set; get; } = 5;
-
-
-
+        private bool _Poisoned = false;
 
 
         public static void LoadRemaningLifes()
@@ -237,7 +237,7 @@ namespace MainCharacter
                 _ColorAdjustments.saturation.value = -20;
                 _FilmGrain.intensity.value = 0.75f;
                 _HeartBeat.Stop();
-                
+
             }
             else
             {
@@ -481,6 +481,8 @@ namespace MainCharacter
             CameraShake(3, 0.8f, 0.01f);
             UIManager.Instance.Fade(0.35f, 1f, 0.9f);
             UIManager.Instance.StopFading = true;
+            _Vignette.smoothness.value = 0.5f;
+            _FilmGrain.intensity.value = 0.75f;
             _LensSize = 9f;
 
             foreach (var _re in _RageEffects)
@@ -498,8 +500,10 @@ namespace MainCharacter
             {
                 _re.SetActive(false);
             }
-
+            _FilmGrain.intensity.value = 0.3f;
+            _Vignette.smoothness.value = 0f;
             _LensSize = 8f;
+
             yield return null;
         }
 

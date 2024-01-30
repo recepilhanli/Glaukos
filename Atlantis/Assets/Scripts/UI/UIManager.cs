@@ -75,8 +75,16 @@ public class UIManager : MonoBehaviour
 
             if (_RemainingLifeText.text == string.Empty) _RemainingLifeText.text = Player.RemainingLifes.ToString();
 
-            if (Player.Instance.Focus >= 85) FocusFillImage.color = FocusRageColor;
-            else FocusFillImage.color = FocusNormalColor;
+            if (Player.Instance.Focus >= 85 && FocusFillImage.color != FocusRageColor)
+            {
+                FocusFillImage.color = FocusRageColor;
+                if (Time.time > 5)
+                {
+                    Fade(0.5f, 0, 0.5f, 2f);
+                    LevelManager.PlaySound2D(Player.Instance.RageNotificationClip, 0.6f);
+                }
+            }
+            else if (Player.Instance.Focus < 85 && FocusFillImage.color != FocusNormalColor) FocusFillImage.color = FocusNormalColor;
 
             if (Player.Instance.Health <= 35) HealthFillImage.color = _HealthWarnColor;
             else HealthFillImage.color = _HealthNormalColor;
@@ -120,7 +128,7 @@ public class UIManager : MonoBehaviour
         {
             text = Translation.Translations[split[1]].Get();
         }
-        
+
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
         LevelManager.PlaySound2D(_TitleChillClip, 0.3f);

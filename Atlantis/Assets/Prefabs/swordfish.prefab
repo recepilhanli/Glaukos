@@ -86,7 +86,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 0.25
   m_WholeNumbers: 0
-  m_Value: 0.25
+  m_Value: 0.149
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -168,7 +168,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0.596, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -268,13 +268,6 @@ MonoBehaviour:
   MaxRoamingDistance: 20
   _RigidBody: {fileID: 7728628242072454875}
   _TrailRenderer: {fileID: 6960677867494228236}
-  _Clips:
-  - {fileID: 8300000, guid: 29087d7031d2abc4991376b3c22a770a, type: 3}
-  - {fileID: 8300000, guid: e2a4dc134d559e64ba37dc1339fd52f2, type: 3}
-  - {fileID: 8300000, guid: 2fe440d2ae3a07041aed13ecfb7986df, type: 3}
-  - {fileID: 8300000, guid: 77e16104b41b88d4598eb278a1d8b756, type: 3}
-  - {fileID: 8300000, guid: cf0ec74e225a45a4bb440dc1ec9388b9, type: 3}
-  - {fileID: 8300000, guid: 9b6c52dc63fcf6d45892aea2d2b717f2, type: 3}
   _RoamingPos: {x: 0, y: 0}
 --- !u!50 &7728628242072454875
 Rigidbody2D:
@@ -540,7 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
