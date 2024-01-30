@@ -131,7 +131,7 @@ public class Kraken : Entity, IEnemyAI
                 mine.transform.position += Vector3.right * 25 * Time.deltaTime;
                 Player.Instance.Move(Vector3.right * 12);
             }
-            if(Player.Instance.Focus > 20) Player.Instance.Focus -= 5 * Time.deltaTime;
+            if (Player.Instance.Focus > 20) Player.Instance.Focus -= 5 * Time.deltaTime;
         }
 
     }
@@ -362,6 +362,8 @@ public class Kraken : Entity, IEnemyAI
         {
             flowCount++;
             if (flowCount >= 3) SetAnimState(Kraken_AnimStates.State_InkAttack);
+            StartCoroutine(DamageEffect());
+            UIManager.Instance.Fade(1,1,1);
             return;
         }
 
