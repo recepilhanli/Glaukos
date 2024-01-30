@@ -547,7 +547,7 @@ public class Skilla : Entity, IEnemyAI
     {
         if (isDeath) return;
         isDeath = true;
-        Player.Instance.BossKillReward("ToBe");
+        Player.Instance.BossKillReward("Credits");
 
     }
 
