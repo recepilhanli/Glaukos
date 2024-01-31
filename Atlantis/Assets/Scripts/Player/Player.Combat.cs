@@ -530,8 +530,8 @@ namespace MainCharacter
 
             if (SceneManager.GetActiveScene().name != PerfTable.perf_Level4)
             {
-                _Vignette.smoothness.value = 0f;
-                _Vignette.intensity.value = .465f;
+                _Vignette.intensity.value = .47f;
+                _Vignette.smoothness.value = 0.18f;
                 _FilmGrain.intensity.value = 0.3f;
             }
             else
