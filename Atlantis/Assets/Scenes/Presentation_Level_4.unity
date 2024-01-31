@@ -3210,7 +3210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866763016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.3865833, y: -2.6248899, z: -19.649723}
+  m_LocalPosition: {x: -2.7336025, y: -2.6259499, z: -19.649723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3724,6 +3724,10 @@ PrefabInstance:
     - target: {fileID: 8051311918692809148, guid: b18c329a19fd6d54fa01a271d63dc0a0, type: 3}
       propertyPath: m_Name
       value: Skilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051311918692809148, guid: b18c329a19fd6d54fa01a271d63dc0a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b18c329a19fd6d54fa01a271d63dc0a0, type: 3}

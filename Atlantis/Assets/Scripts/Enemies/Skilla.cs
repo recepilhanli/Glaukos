@@ -41,12 +41,17 @@ public class Skilla : Entity, IEnemyAI
     [SerializeField] GameObject _Canvas;
 
     [SerializeField] Image _SpellImage;
+    [SerializeField] AudioClip _SpellClip;
 
     [Space(15), SerializeField] GameObject GrabGO;
     [SerializeField] Slider _GrabBar;
     [SerializeField] TextMeshProUGUI _GrabText;
 
     [SerializeField] AudioSource _BossMusicSource;
+
+    [SerializeField] AudioClip _ThrowClip;
+
+    
 
     private List<GameObject> _CallableEnemies = new List<GameObject>();
 
@@ -195,6 +200,7 @@ public class Skilla : Entity, IEnemyAI
                         try
                         {
                             Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                            LevelManager.PlaySound2D(_SpellClip, .6f);
                         }
 
                         catch
@@ -224,6 +230,7 @@ public class Skilla : Entity, IEnemyAI
                         try
                         {
                             Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
+                            LevelManager.PlaySound2D(_SpellClip, .6f);
                         }
                         catch
                         {
@@ -254,6 +261,7 @@ public class Skilla : Entity, IEnemyAI
                         {
 
                             Instantiate(_SpellingFocusParticle, transform.position, Quaternion.identity);
+                            LevelManager.PlaySound2D(_SpellClip, .6f);
                         }
                         catch
                         {
@@ -284,6 +292,8 @@ public class Skilla : Entity, IEnemyAI
         var wave = Instantiate(_PoisonPrefab, _HeadTransform.position, Quaternion.identity);
         wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
         Destroy(wave, 3f);
+
+        LevelManager.PlaySound2D(_ThrowClip, .6f);
     }
 
 
@@ -332,6 +342,7 @@ public class Skilla : Entity, IEnemyAI
             {
                 CallEnemyCooldown = Time.time + 15;
             }
+            LevelManager.PlaySound2D(_SpellClip, .6f);
             Instantiate(_CallEnemyParticle, transform.position, Quaternion.identity);
         }
         catch
