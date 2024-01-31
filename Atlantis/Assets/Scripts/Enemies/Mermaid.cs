@@ -364,6 +364,7 @@ public class Mermaid : Entity, IEnemyAI
             Destroy(Instantiate(DustParticle, transform.position, Quaternion.identity), 2f);
             Destroy(gameObject);
             Player.Instance.PlayHarmClip();
+            Player.Instance.PosionEffect();
             return;
         }
 
