@@ -527,9 +527,21 @@ namespace MainCharacter
 
             _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
             _ColorAdjustments.saturation.value = 0;
-            _Vignette.smoothness.value = 0f;
-            _Vignette.intensity.value = .465f;
-            _FilmGrain.intensity.value = 0.3f;
+
+            if (SceneManager.GetActiveScene().name != PerfTable.perf_Level4)
+            {
+                _Vignette.smoothness.value = 0f;
+                _Vignette.intensity.value = .465f;
+                _FilmGrain.intensity.value = 0.3f;
+            }
+            else
+            {
+                _Vignette.smoothness.value = 0.353f;
+                _Vignette.intensity.value = 0.537f;
+                _FilmGrain.intensity.value = 0.9f;
+            }
+
+
             _LensSize = 8f;
             _RageSource.Stop();
             yield return null;
