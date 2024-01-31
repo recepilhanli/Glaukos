@@ -287,7 +287,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -80.26}
-  m_SizeDelta: {x: 238.7717, y: 24.8035}
+  m_SizeDelta: {x: 416.7071, y: 24.8035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639144591
 MonoBehaviour:
@@ -555,6 +555,7 @@ MonoBehaviour:
   _ButtonSound: {fileID: 0}
   _VolumeSlider: {fileID: 0}
   _TutorialPanel: {fileID: 0}
+  _Cursor: {fileID: 0}
   _LocalizationListener: {fileID: 0}
   _Dropdown: {fileID: 0}
 --- !u!114 &761882985
