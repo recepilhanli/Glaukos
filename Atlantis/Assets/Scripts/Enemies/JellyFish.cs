@@ -79,7 +79,7 @@ public class JellyFish : Entity, IEnemyAI
 
         transform.position = new Vector3(transform.position.x, _YPos + _Val, 0);
 
-        if (Vector2.Distance(transform.position, Player.Instance.transform.position) < 2f && _JellyFishAttackCoroutine == null)
+        if (Vector2.Distance(transform.position, Player.Instance.transform.position) < 2f && _JellyFishAttackCoroutine == null & !Player.Instance._Rage)
         {
             isPlayerInJellyFish = true;
             _JellyFishAttackCoroutine = StartCoroutine(JellyFishAttack());
@@ -106,10 +106,13 @@ public class JellyFish : Entity, IEnemyAI
 
     public override void OnTakeDamage(float _h, AttackTypes type = AttackTypes.Attack_Standart)
     {
-        if (type == AttackTypes.Attack_Tornado)
+        if (type == AttackTypes.Attack_Tornado || (type == AttackTypes.Attack_Standart && Player.Instance._Rage && Player.Instance._Spear.ThrowState == Spear.ThrowStates.STATE_NONE))
         {
             OnDeath();
+            return;
         }
+
+
     }
 
     public override void OnDeath()
@@ -126,7 +129,6 @@ public class JellyFish : Entity, IEnemyAI
             Player.Instance._Spear.Stuck = 0;
             Player.Instance._Spear.GetBackToThePlayer(false);
         }
-
 
         Instantiate(_DustParticle, transform.position, Quaternion.identity);
 

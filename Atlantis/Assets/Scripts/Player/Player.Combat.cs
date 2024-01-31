@@ -41,11 +41,16 @@ namespace MainCharacter
         [SerializeField] AudioClip _RewardClip;
 
         public AudioClip RageNotificationClip;
-
         public AudioClip FocusClip;
+        public AudioClip HarmClip;
+
+        public AudioClip CanUseClip;
+        [SerializeField] AudioClip _CannotUseClip;
+
 
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
         [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _HeartBeat;
+        [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _RageSource;
 
         [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
@@ -96,6 +101,10 @@ namespace MainCharacter
             LevelManager.PlaySound2D(Instance.FocusClip, .5f);
         }
 
+        public void PlayHarmClip()
+        {
+            LevelManager.PlaySound2D(Instance.HarmClip, 1f);
+        }
 
 
         void Deformation()
@@ -119,9 +128,8 @@ namespace MainCharacter
 
         void Consumable()
         {
-            if (_Spear.ThrowState != Spear.ThrowStates.STATE_NONE) return;
 
-            if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100)
+            if (Input.GetKeyDown(_KeybindTable.HealKey) && Focus >= 10 && Health != 100 && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
                 GiveFocusPoints(-10);
@@ -129,8 +137,11 @@ namespace MainCharacter
                 Health = Mathf.Clamp(Health, 0, 100);
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
             }
+            else if (Input.GetKeyDown(_KeybindTable.HealKey)) LevelManager.PlaySound2D(_CannotUseClip, .05f);
 
-            if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25)
+
+
+            if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25 && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
                 GiveFocusPoints(-25);
@@ -140,9 +151,10 @@ namespace MainCharacter
                 LevelManager.PlaySound2D(_Spear.SpearTalent1, .5f);
                 CameraShake(3.0f, 0.6f, 0.01f);
             }
+            else if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25) LevelManager.PlaySound2D(_CannotUseClip, .05f);
 
 
-            if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40)
+            if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40 && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
                 GiveFocusPoints(-40);
@@ -152,14 +164,15 @@ namespace MainCharacter
                 LevelManager.PlaySound2D(_Spear.SpearTalent2, .5f);
                 CameraShake(3.0f, 0.6f, 0.01f);
             }
+            else if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40) LevelManager.PlaySound2D(_CannotUseClip, .05f);
 
-
-            if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true))
+            if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
             {
                 Focus = Mathf.Clamp(Focus, 0, 100);
                 GiveFocusPoints(-85);
                 RageCombat();
             }
+            else if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true)) LevelManager.PlaySound2D(_CannotUseClip, .05f);
 
         }
 
@@ -253,6 +266,13 @@ namespace MainCharacter
         void Combat()
         {
             if (isDeath) return;
+
+            if (_Rage)
+            {
+                //ping pong vignette smothless
+                _Vignette.smoothness.value = Mathf.PingPong(Time.time, .5f) + 0.2f;
+            }
+
 
             if (Health <= 25 && !_HeartBeat.isPlaying)
             {
@@ -481,10 +501,11 @@ namespace MainCharacter
             CameraShake(3, 0.8f, 0.01f);
             UIManager.Instance.Fade(0.35f, 1f, 0.9f);
             UIManager.Instance.StopFading = true;
-            _Vignette.smoothness.value = 0.5f;
             _FilmGrain.intensity.value = 0.75f;
+            _ColorAdjustments.colorFilter.value = new Color(1, 0.75f, 0.75f, 1);
+            _ColorAdjustments.saturation.value = -30;
             _LensSize = 9f;
-
+            _RageSource.Play();
             foreach (var _re in _RageEffects)
             {
                 _re.SetActive(true);
@@ -500,10 +521,13 @@ namespace MainCharacter
             {
                 _re.SetActive(false);
             }
-            _FilmGrain.intensity.value = 0.3f;
-            _Vignette.smoothness.value = 0f;
-            _LensSize = 8f;
 
+            _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
+            _ColorAdjustments.saturation.value = 0;
+            _Vignette.smoothness.value = 0f;
+            _FilmGrain.intensity.value = 0.3f;
+            _LensSize = 8f;
+            _RageSource.Stop();
             yield return null;
         }
 

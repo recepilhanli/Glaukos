@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
             if (Player.Instance.Focus >= 85 && FocusFillImage.color != FocusRageColor)
             {
                 FocusFillImage.color = FocusRageColor;
-                if (Time.time > 5)
+                if (Time.timeSinceLevelLoad > 5)
                 {
                     Fade(0.5f, 0, 0.5f, 2f);
                     LevelManager.PlaySound2D(Player.Instance.RageNotificationClip, 0.6f);
@@ -90,10 +90,19 @@ public class UIManager : MonoBehaviour
             else HealthFillImage.color = _HealthNormalColor;
 
 
-            if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor) Consumables[1].color = AvailableColor;
+            if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor)
+            {
+                if (Time.timeSinceLevelLoad > 5) LevelManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
+                Consumables[1].color = AvailableColor;
+            }
+
             else if (Player.Instance.Focus < 40 && Consumables[1].color != UnavailableColor) Consumables[1].color = UnavailableColor;
 
-            if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor) Consumables[0].color = AvailableColor;
+            if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor)
+            {
+                if (Time.timeSinceLevelLoad > 5) LevelManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
+                Consumables[0].color = AvailableColor;
+            }
             else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
 
             if (Player.Instance.isDeath || Player.Instance.RewardSequence)

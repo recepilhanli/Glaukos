@@ -49,6 +49,8 @@ public class Mermaid : Entity, IEnemyAI
 
     [SerializeField] AudioSource _BossMusicSource;
 
+    [SerializeField] AudioClip _PoisonClip;
+
     [SerializeField] float _Health = 200;
     [SerializeField, ReadOnlyInspector] MermaidStates _currentState = MermaidStates.State_AttackNormal;
 
@@ -257,6 +259,7 @@ public class Mermaid : Entity, IEnemyAI
 
     public void CreatePosion()
     {
+        LevelManager.PlaySound2D(_PoisonClip, .6f);
         var wave = Instantiate(_PoisonPrefab, _HeadTransform.position, Quaternion.identity);
         wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
         Destroy(wave, 3f);
@@ -360,6 +363,7 @@ public class Mermaid : Entity, IEnemyAI
             if (type != AttackTypes.Attack_Tornado) Player.Instance.GiveFocusPoints(-5f);
             Destroy(Instantiate(DustParticle, transform.position, Quaternion.identity), 2f);
             Destroy(gameObject);
+            Player.Instance.PlayHarmClip();
             return;
         }
 

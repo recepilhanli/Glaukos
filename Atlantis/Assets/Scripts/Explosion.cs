@@ -37,6 +37,6 @@ public class Explosion : MonoBehaviour
         float playerdist = Vector2.Distance(transform.position, Player.Instance.transform.position);
         if (playerdist <= 16) Player.Instance.CameraShake(0.6f + Mathf.Clamp((1 / playerdist * 6), 0, 4f), 1.5f, 0.9f, true);
 
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 15f);
     }
 }
