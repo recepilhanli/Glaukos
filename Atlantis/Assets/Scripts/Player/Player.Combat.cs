@@ -528,6 +528,7 @@ namespace MainCharacter
             _ColorAdjustments.colorFilter.value = new Color(1, 1, 1, 1);
             _ColorAdjustments.saturation.value = 0;
             _Vignette.smoothness.value = 0f;
+            _Vignette.intensity.value = .465f;
             _FilmGrain.intensity.value = 0.3f;
             _LensSize = 8f;
             _RageSource.Stop();
