@@ -514,7 +514,7 @@ public class Skilla : Entity, IEnemyAI
         if (_CurrentState == SkillaStates.State_Grabbing && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
         else if ((_CurrentState == SkillaStates.State_SpellingHealth || _CurrentState == SkillaStates.State_SpellingFocus) && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time)
         {
-            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .6f);
+            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .75f);
             SetState(SkillaStates.State_NONE);
         }
 

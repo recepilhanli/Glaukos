@@ -86,6 +86,17 @@ public class Translation
         {"tut_d_7", new Translation("Glaukos: For now, you have some of my powers. I will show you how to use them. But remember, you only have five lives, so be careful not to forget that.",
         "Glaukos: Şimdilik güçlerimin bir kısmına sahipsin. Sana bunları nasıl kullanacağını göstereceğim. Ama sakın unutma, sadece beş defa ölme hakkın var.")},
 
+
+
+       {"tut_d_7_1", new Translation("Glaukos: The blue section represents your health, while the 'remaining' text indicates your remaining lives. As you lose lives, you'll consume them, and when you run out, the loop resets.",
+        "Glaukos:  Bu mavi bölüm canını gösterir 'kalan' yazısı ise kalan hayatını, hayatlarını öldükçe harcarsın ve hepsini bitirdiğinde döngü başa sarar.")},
+
+        {"tut_d_7_2", new Translation("Glaukos: The green section represents your focus points. You can earn focus by breaking objects or hitting creatures, which allows you to use your abilities.",
+        "Glaukos: Bu yeşil kısım focus puanını gösterir focusu eşya kırarak veya yaratıklara vurarak kazanabilirsin bu da yeteneklerini kullanmanı sağlar.")},
+
+        {"tut_d_7_3", new Translation("Glaukos: This section shows your abilities. When the focus bar turns purple, you can use the rage ability. I will show this at the end of the training.",
+        "Glaukos: Bu bölümde yeteneklerini gösterir, focus barın mor olunca rage yeteneğini kullanabilirsin eğtimin sonunda buna değineceğim.")},
+
         {"tut_d_8", new Translation("Glaukos: Press the <sprite=8>  and  <sprite=9> keys to swim upward and downward.",
         "Glaukos:  <sprite=8>  ve  <sprite=9> tuşlarına basarak yukarı ve aşağı yüzebilirsin.")},
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using MainCharacter;
-using UnityEditor.Localization.Editor;
+
 
 public class LifePrinter : MonoBehaviour
 {

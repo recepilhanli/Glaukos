@@ -128,6 +128,18 @@ namespace MainCharacter
             PlayerPrefs.SetFloat(PerfTable.perf_Volume, AudioListener.volume);
             PlayerPrefs.Save();
         }
+
+        public void ToggleVolume()
+        {
+            if (_VolumeSlider.value != 0)
+            {
+                _VolumeSlider.value = 0;
+            }
+            else
+            {
+                _VolumeSlider.value = 1;
+            }
+        }
     }
 
 #if UNITY_EDITOR

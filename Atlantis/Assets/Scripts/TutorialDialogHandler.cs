@@ -12,6 +12,11 @@ public class TutorialDialogHandler : MonoBehaviour
     public static bool TutBlockAttack2 = false;
     public GameObject objectToDisableAfterDialog;
 
+    [SerializeField] GameObject _TutorialBlock1;
+
+    [SerializeField] GameObject _TutorialBlock2;
+
+    [SerializeField] GameObject _TutorialBlock3;
 
     private int TutorialIndex = -1;
     private int CurrentIndex = 0;
@@ -51,18 +56,22 @@ public class TutorialDialogHandler : MonoBehaviour
         if (Player.Instance.CanMove == false) return;
         if (TutCoolDown >= Time.time) return;
 
+
+
+
         switch (TutorialIndex)
         {
             case 0:
                 {
-                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) OnDialogChanged(++CurrentIndex);
+                    if (Input.GetAxis("Vertical") != 0) OnDialogChanged(++CurrentIndex);
                     break;
                 }
 
             case 1:
                 {
-                    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) OnDialogChanged(++CurrentIndex);
+                    if (Input.GetAxis("Horizontal") != 0) OnDialogChanged(++CurrentIndex);
                     TutBlockAttack1 = false;
+                    TutBlockThrow = true;
                     break;
                 }
 
@@ -70,15 +79,19 @@ public class TutorialDialogHandler : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Mouse0)) OnDialogChanged(++CurrentIndex);
                     TutBlockAttack2 = false;
+                    TutBlockThrow = true;
                     break;
                 }
 
 
             case 3:
                 {
-                    if (Input.GetKeyDown(KeyCode.Mouse2)) OnDialogChanged(++CurrentIndex);
+                    if (Input.GetKeyDown(KeyCode.Mouse2))
+                    {
+                        OnDialogChanged(++CurrentIndex);
+                        TutBlockThrow = false;
+                    }
                     TutBlockAttack2 = true;
-                    TutBlockThrow = false;
                     break;
                 }
 
@@ -165,10 +178,36 @@ public class TutorialDialogHandler : MonoBehaviour
         if (TutorialIndex >= 11) return;
 
 
+
+        if (index == 8)
+        {
+            _TutorialBlock1.SetActive(true);
+        }
+        if (index == 9)
+        {
+            Player.Instance.Focus = 35;
+            _TutorialBlock2.SetActive(true);
+            _TutorialBlock1.SetActive(false);
+        }
+        if (index == 10)
+        {
+            Player.Instance.Focus = 70;
+            _TutorialBlock2.SetActive(false);
+            _TutorialBlock3.SetActive(true);
+        }
+        if (index == 11)
+        {
+            Player.Instance.Focus = 0;
+            _TutorialBlock1.SetActive(false);
+            _TutorialBlock2.SetActive(false);
+            _TutorialBlock3.SetActive(false);
+        }
+
+
         CurrentIndex = index;
         Debug.Log("OnDialogChanged: " + index);
 
-        const int _StartIndex = 8; // Baslangic Indexi (Tutorial) -> Start index of tutorial
+        const int _StartIndex = 11; // Baslangic Indexi (Tutorial) -> Start index of tutorial
 
         if (index < _StartIndex) return; //wait for the conversation
 
@@ -193,7 +232,7 @@ public class TutorialDialogHandler : MonoBehaviour
 
     void GetFirstLevel()
     {
-        Player.Instance.BossKillReward(PerfTable.perf_Level1,false);
+        Player.Instance.BossKillReward(PerfTable.perf_Level1, false);
     }
 
 

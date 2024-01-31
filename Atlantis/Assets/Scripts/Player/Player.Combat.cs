@@ -54,6 +54,8 @@ namespace MainCharacter
         [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _RageSource;
 
 
+
+
         [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
 
@@ -313,6 +315,7 @@ namespace MainCharacter
 
         void ThrowingWay()
         {
+            if (TutorialDialogHandler.TutBlockThrow) return;
             if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.ThrowKey) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
             {
                 if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);

@@ -85,6 +85,7 @@ public class Spear : Weapons
 
     public void Throw(Vector2 pos)
     {
+        if (TutorialDialogHandler.TutBlockThrow) return;
         _ThrowingTime = 0.75f + Time.time;
         _Trail.enabled = true;
         transform.SetParent(null);

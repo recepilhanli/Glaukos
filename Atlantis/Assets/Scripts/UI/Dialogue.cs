@@ -11,7 +11,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField, Tooltip("it can be null")] Animator _Animator;
     public string[] lines;
     public float textSpeed;
-    private int index;
+    [HideInInspector] public int index {get; private set;} = 0;
 
     [SerializeField] bool _StartOnAwake = true;
     [SerializeField, ReadOnlyInspector] bool _IsPlaying = false;
