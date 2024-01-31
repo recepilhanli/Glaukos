@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using MainCharacter;
+using UnityEditor.Localization.Editor;
 
 public class LifePrinter : MonoBehaviour
 {
@@ -12,13 +13,13 @@ public class LifePrinter : MonoBehaviour
     void Start()
     {
         if (!PlayerPrefs.HasKey(PerfTable.perf_LastScene)) _ContinueButton.SetActive(true);
-
+        _TMP.text = Translation.Translations["RemainingLife"].Get();
         if (Player.RemainingLifes <= 0)
         {
             Player.ResetRemainingLifes();
             _ContinueButton.SetActive(false);
             _BackToMenuButton.SetActive(true);
-            _TMP.text = "<color=red>Geri kalan hayatinda artik bir baliksin!";
+            _TMP.text = Translation.Translations["DeathMessage2"].Get();
             return;
         }
         string color = "<color=green>";
@@ -30,7 +31,7 @@ public class LifePrinter : MonoBehaviour
         {
             color = "<color=yellow>";
         }
-        string extra = color + Player.RemainingLifes.ToString();
+        string extra = color + " " + Player.RemainingLifes.ToString();
         _TMP.text += extra;
         Destroy(this);
     }

@@ -41,13 +41,21 @@ public class Translation
         {"Thank_1", new Translation("Encounter successfully completed!", "Karşılaşma başarıyla tamamlandı!") },
         {"Thank_2", new Translation("Next Level", "Bir Sonraki Seviye") },
 
-        {"Past", new Translation("Glaukos: Remember the past and do not make mistake..", "Glaukos: Geçmişi hatırla ve bir daha hata yapma..") },        
+        {"Past", new Translation("Glaukos: Remember the past and do not make mistake..", "Glaukos: Geçmişi hatırla ve bir daha hata yapma..") },
 
         {"Okay", new Translation("Okay", "Tamam") },
         {"Yes", new Translation("Yes", "Evet") },
         {"No", new Translation("No", "Hayır") },
 
         {"Mermaid", new Translation("Mermaid", "Deniz Kızı") },
+
+        //Death Scene
+        {"DeathMessage1", new Translation("You got lost in the depths of the sea!","Denizin derinliklerinde kayboldun!")},
+        {"DeathMessage2", new Translation("<color=red>You are now a fish for the rest of your life!","<color=red>Geri kalan hayatinda artik bir baliksin!")},
+        {"RemainingLife", new Translation("Remaining Life:","Kalan Hayat:")},
+        {"LastCheckpoint", new Translation("Last Checkpoint","Son Yükleme Noktası")},
+
+        {"Remaining", new Translation("Remaining:","Kalan:")},    
 
         //Level Manager
         {"Checkpoint", new Translation("Checkpoint Reached","Kayit Noktasi Alindi")},
