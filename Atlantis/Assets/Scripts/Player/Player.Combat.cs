@@ -40,6 +40,7 @@ namespace MainCharacter
 
         [SerializeField] AudioClip _RewardClip;
 
+        [SerializeField] AudioClip _HealClip;
         public AudioClip RageNotificationClip;
         public AudioClip FocusClip;
         public AudioClip HarmClip;
@@ -51,6 +52,7 @@ namespace MainCharacter
         [SerializeField, Tooltip("Spear's way")] Transform _ThrowWay;
         [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _HeartBeat;
         [SerializeField, Tooltip("When the player's health low this source will be playing")] AudioSource _RageSource;
+
 
         [HideInInspector] public bool RewardSequence = false;
         public bool _Rage { get; private set; } = false;
@@ -136,6 +138,7 @@ namespace MainCharacter
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
+                LevelManager.PlaySound2D(_HealClip, .6f);
             }
             else if (Input.GetKeyDown(_KeybindTable.HealKey)) LevelManager.PlaySound2D(_CannotUseClip, .05f);
 
