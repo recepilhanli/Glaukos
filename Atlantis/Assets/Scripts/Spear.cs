@@ -302,7 +302,8 @@ public class Spear : Weapons
                     transform.SetParent(entity.transform);
                     if (entity.Type == Entity.EntityType.Type_JellyFish)
                     {
-                        Stuck = 3;
+                        if (!Player.Instance._Rage) Stuck = 3;
+                        else Stuck = 1;
                         LevelManager.PlaySound2D(_SperStuckClip, 1.25f);
                         UIManager.Instance.Fade(1, 1, 1, 4);
                     }
