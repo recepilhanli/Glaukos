@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] Image[] Consumables = new Image[2];
     [SerializeField] TextMeshProUGUI _RemainingLifeText;
+    [SerializeField] TextMeshProUGUI _RemainingLifeWordText;
 
     [SerializeField] Color AvailableColor;
     [SerializeField] Color UnavailableColor;
@@ -56,6 +57,8 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         if (DeathFade != null) DeathFade.color = new Color(0, 0, 0, .95f);
+
+        _RemainingLifeWordText.text = Translation.Translations["Remaining"].Get();
     }
 
     void Update()

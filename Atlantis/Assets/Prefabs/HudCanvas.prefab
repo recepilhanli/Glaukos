@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f606acff46c60684ba188372eba26b10, type: 2}
   m_sharedMaterial: {fileID: 3461541575633474987, guid: f606acff46c60684ba188372eba26b10, type: 2}
@@ -1150,7 +1150,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1214,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 3253906371786465320}
   - {fileID: 4216287791685324834}
   _RemainingLifeText: {fileID: 4996646481113293979}
+  _RemainingLifeWordText: {fileID: 8681782846185055055}
   AvailableColor: {r: 0.85882354, g: 0, b: 0.08235294, a: 0.6431373}
   UnavailableColor: {r: 0.27058825, g: 0.3019608, b: 0.40392157, a: 0.5019608}
   FocusFillImage: {fileID: 6471498518390023467}
@@ -1572,7 +1573,7 @@ GameObject:
   - component: {fileID: 2189926555989007146}
   - component: {fileID: 8681782846185055055}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: LifeWordText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1653,8 +1654,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.2
-  m_fontSizeBase: 25.2
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
