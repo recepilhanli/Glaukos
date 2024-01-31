@@ -24,10 +24,12 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Can be null")] Slider _VolumeSlider;
 
     [SerializeField, Tooltip("Can be null")] GameObject _TutorialPanel;
+    [SerializeField, Tooltip("Can be null")] Texture2D _Cursor;
 
-    [SerializeField] LocalizationListener _LocalizationListener;
+    [SerializeField, Tooltip("Can be null")] LocalizationListener _LocalizationListener;
 
-    [SerializeField] TMP_Dropdown _Dropdown;
+    [SerializeField, Tooltip("Can be null")] TMP_Dropdown _Dropdown;
+
 
 
     void Start()
@@ -45,6 +47,8 @@ public class Menu : MonoBehaviour
 
         if (_Dropdown != null)
         {
+            //set cursor
+            Cursor.SetCursor(_Cursor, Vector2.zero, CursorMode.ForceSoftware);
             if (PlayerPrefs.HasKey(PerfTable.perf_Volume)) _VolumeSlider.value = PlayerPrefs.GetFloat(PerfTable.perf_Volume, 1f);
             else
             {
