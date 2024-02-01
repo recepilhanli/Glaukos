@@ -316,7 +316,7 @@ namespace MainCharacter
         void ThrowingWay()
         {
             if (TutorialDialogHandler.TutBlockThrow) return;
-            if (_VirtualCamera.m_Lens.OrthographicSize >= 9 && Input.GetKey(_KeybindTable.ThrowKey) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
+            if (Input.GetKey(_KeybindTable.ThrowKey) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE && CanMove == true)
             {
                 if (_ThrowWay.gameObject.activeInHierarchy == false) _ThrowWay.gameObject.SetActive(true);
 
