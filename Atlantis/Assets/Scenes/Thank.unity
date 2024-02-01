@@ -291,6 +291,7 @@ MonoBehaviour:
   _ButtonSound: {fileID: 0}
   _VolumeSlider: {fileID: 0}
   _TutorialPanel: {fileID: 0}
+  _Cursor: {fileID: 0}
   _LocalizationListener: {fileID: 0}
   _Dropdown: {fileID: 0}
 --- !u!1 &914388753
@@ -1089,10 +1090,10 @@ RectTransform:
   m_Father: {fileID: 1810719101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34}
-  m_SizeDelta: {x: 413.9563, y: 156.9782}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 25.56}
+  m_SizeDelta: {x: 583.7858, y: 156.9782}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2013083838
 MonoBehaviour:
