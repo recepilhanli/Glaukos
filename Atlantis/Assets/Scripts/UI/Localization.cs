@@ -54,6 +54,7 @@ public class Translation
         {"DeathMessage2", new Translation("<color=red>You are now a fish for the rest of your life!","<color=red>Geri kalan hayatinda artik bir baliksin!")},
         {"RemainingLife", new Translation("Remaining Life:","Kalan Hayat:")},
         {"LastCheckpoint", new Translation("Last Checkpoint","Son Yükleme Noktası")},
+        {"ReturnMainMenu", new Translation("Return To Main Menu","Ana Menüye Dön")},
 
         {"Remaining", new Translation("Remaining:","Kalan:")},    
 
