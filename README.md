@@ -52,5 +52,8 @@ To play Glaukos, follow these steps:
 ## Gameplay
 In Glaukos, you navigate through levels, fighting various enemies and bosses. You have a total of 5 lives, and losing all lives will restart the game. Utilize the spear throwing and recalling mechanic to defeat enemies and progress through the game. Master your abilities, including Rage, Spear Rain, and Whirlwind, to enhance your combat effectiveness.
 
+For a preview of the gameplay, check out this video:
+[![Glaukos Gameplay](https://img.youtube.com/vi/66FfYAR7wkg/0.jpg)](https://youtu.be/66FfYAR7wkg)
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
