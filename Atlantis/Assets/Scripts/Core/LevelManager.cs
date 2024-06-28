@@ -85,19 +85,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
-    public static void PlaySound2D(AudioClip _clip, float _volume)
-    {
-        //Play Chill Sound Clip
-        var obj = new GameObject("2D Sound");
-        var audio = obj.AddComponent<AudioSource>();
-        audio.volume = _volume;
-        audio.clip = _clip;
-        if (AudioListener.pause) audio.ignoreListenerPause = true;
-        audio.Play();
-        Destroy(obj, 5f);
-    }
-
+  
     #region  Save-Load System
     //////////////////////////////////////////////////////////////////////////
     public void SaveGame(bool showTitle)

@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause(bool toggle)
     {
-        if (Time.timeSinceLevelLoad > 5) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (Time.timeSinceLevelLoad > 5) SoundManager.PlaySound2D(_ButtonSound, 1f);
         isPaused = toggle;
         if (toggle)
         {
@@ -39,13 +39,13 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitScreen(bool toggle)
     {
-        LevelManager.PlaySound2D(_ButtonSound, 1f);
+        SoundManager.PlaySound2D(_ButtonSound, 1f);
         _QuitScreen.SetActive(toggle);
     }
 
     public void Quit()
     {
-        LevelManager.PlaySound2D(_ButtonSound, 1f);
+        SoundManager.PlaySound2D(_ButtonSound, 1f);
         Application.Quit();
     }
 

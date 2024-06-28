@@ -139,7 +139,7 @@ public class PufferFish : Entity, IEnemyAI
     IEnumerator ExplodeCoroutine()
     {
         _Exploding = true;
-        LevelManager.PlaySound2D(_InflateClip, .35f);
+        SoundManager.PlaySound2D(_InflateClip, .35f);
         yield return new WaitForSeconds(0.5f + Random.Range(0, 0.5f));
         _Renderer.sprite = _ExplodingSprite;
         _TrailRenderer.enabled = false;

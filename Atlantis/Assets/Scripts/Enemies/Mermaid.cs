@@ -259,7 +259,7 @@ public class Mermaid : Entity, IEnemyAI
 
     public void CreatePosion()
     {
-        LevelManager.PlaySound2D(_PoisonClip, .6f);
+        SoundManager.PlaySound2D(_PoisonClip, .6f);
         var wave = Instantiate(_PoisonPrefab, _HeadTransform.position, Quaternion.identity);
         wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
         Destroy(wave, 3f);
@@ -385,7 +385,7 @@ public class Mermaid : Entity, IEnemyAI
             UIManager.Instance.Fade(1, 1, 1, 2f);
             _HeadRenderer.sprite = _MermaidRegularSprite;
             SetState(MermaidStates.State_None);
-            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .4f);
+            SoundManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .4f);
         }
         else StartCoroutine(DamageEffect());
 

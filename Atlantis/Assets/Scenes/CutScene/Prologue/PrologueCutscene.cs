@@ -34,7 +34,7 @@ public class PrologueCutscene : MonoBehaviour
     public void SetSkip()
     {
         canSkip = true;
-    }   
+    }
 
     IEnumerator Start()
     {
@@ -51,6 +51,7 @@ public class PrologueCutscene : MonoBehaviour
 
     void Update()
     {
+        
 
         if (_Director.time >= 5.3f && _ChromaticAberration.intensity.value == 0)
         {
@@ -65,6 +66,6 @@ public class PrologueCutscene : MonoBehaviour
             Loading.LoadScene(PerfTable.perf_LevelTutorial);
         }
 
-        _Vignette.intensity.value = _Value;
+      if(_Director.time > .25f)  _Vignette.intensity.value = _Value;
     }
 }

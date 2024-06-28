@@ -104,7 +104,7 @@ public class Spear : Weapons
             CollisionReaction(hit.collider.gameObject);
             Debug.Log("Hit something while throwing");
         }
-        LevelManager.PlaySound2D(SpearThrowSound, .5f);
+        SoundManager.PlaySound2D(SpearThrowSound, .5f);
     }
 
     //for events
@@ -152,7 +152,7 @@ public class Spear : Weapons
                 UIManager.Instance.Fade(1, 1, 1, 3);
                 Stuck--;
                 transform.Rotate(0, 0, UnityEngine.Random.Range(-30, 30));
-                LevelManager.PlaySound2D(_SperStuckClip, 1f);
+                SoundManager.PlaySound2D(_SperStuckClip, 1f);
                 return;
             }
             _Trail.enabled = true;
@@ -305,7 +305,7 @@ public class Spear : Weapons
                     {
                         if (!Player.Instance._Rage) Stuck = 3;
                         else Stuck = 1;
-                        LevelManager.PlaySound2D(_SperStuckClip, 1.25f);
+                        SoundManager.PlaySound2D(_SperStuckClip, 1.25f);
                         UIManager.Instance.Fade(1, 1, 1, 4);
                     }
 
@@ -316,7 +316,7 @@ public class Spear : Weapons
 
             }
         }
-        else LevelManager.PlaySound2D(_SpearImpacClip, .4f);
+        else SoundManager.PlaySound2D(_SpearImpacClip, .4f);
 
         if (other.gameObject.CompareTag("Props"))
         {

@@ -21,11 +21,13 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -88,7 +90,6 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
@@ -370,7 +371,6 @@ ScriptedImporter:
     - {x: 11, y: 12}
     - {x: 0, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 105}
     spritePosition: {x: 13, y: 80}
   - name: Katman 4 kopya 2
@@ -682,7 +682,6 @@ ScriptedImporter:
     - {x: 12, y: 13}
     - {x: 13, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 59}
     spritePosition: {x: 13, y: 86}
   - name: Katman 5 kopya 2
@@ -1063,7 +1062,6 @@ ScriptedImporter:
     - {x: 15, y: 16}
     - {x: 16, y: 17}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 84}
     spritePosition: {x: 41, y: 103}
   - name: Katman 5 kopya 2
@@ -1555,7 +1553,6 @@ ScriptedImporter:
     - {x: 15, y: 17}
     - {x: 6, y: 26}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 127}
     spritePosition: {x: 9, y: 102}
   - name: Katman 6 kopya 2
@@ -1943,7 +1940,6 @@ ScriptedImporter:
     - {x: 10, y: 11}
     - {x: 0, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 161}
     spritePosition: {x: 52, y: 91}
   - name: Katman 6 kopya 2
@@ -2257,7 +2253,6 @@ ScriptedImporter:
     - {x: 11, y: 14}
     - {x: 0, y: 13}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 36, y: 143}
     spritePosition: {x: 47, y: 100}
   - name: Katman 7 kopya
@@ -2529,7 +2524,6 @@ ScriptedImporter:
     - {x: 7, y: 8}
     - {x: 5, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 65, y: 143}
     spritePosition: {x: 54, y: 84}
   - name: Katman 8 kopya
@@ -2813,7 +2807,6 @@ ScriptedImporter:
     - {x: 0, y: 10}
     - {x: 3, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 65, y: 105}
     spritePosition: {x: 50, y: 80}
   - name: Katman 9 kopya
@@ -3150,7 +3143,6 @@ ScriptedImporter:
     - {x: 11, y: 12}
     - {x: 0, y: 14}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 67, y: 59}
     spritePosition: {x: 22, y: 72}
   - name: Ton/Doygunluk 2 kopya 4
@@ -3471,7 +3463,6 @@ ScriptedImporter:
     - {x: 15, y: 16}
     - {x: 16, y: 17}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 182}
     spritePosition: {x: 33, y: 81}
   - name: Ton/Doygunluk 2 kopya 6
@@ -3792,7 +3783,6 @@ ScriptedImporter:
     - {x: 15, y: 16}
     - {x: 16, y: 17}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 214}
     spritePosition: {x: 32, y: 81}
   - name: Katman 10
@@ -4361,7 +4351,6 @@ ScriptedImporter:
     - {x: 19, y: 22}
     - {x: 0, y: 21}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 137}
     spritePosition: {x: 50, y: 44}
   - name: Ton/Doygunluk 2 kopya 3
@@ -5114,7 +5103,6 @@ ScriptedImporter:
     - {x: 33, y: 34}
     - {x: 34, y: 35}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
     spritePosition: {x: 31, y: 7}
   - name: Katman 3
@@ -5481,7 +5469,6 @@ ScriptedImporter:
     - {x: 19, y: 20}
     - {x: 20, y: 21}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 59}
     spritePosition: {x: 29, y: 54}
   - name: Ton/Doygunluk 2 kopya 5
@@ -5880,7 +5867,6 @@ ScriptedImporter:
     - {x: 17, y: 18}
     - {x: 0, y: 20}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 99}
     spritePosition: {x: 11, y: 50}
   - name: Katman 1
@@ -5902,7 +5888,6 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 74, y: 127}
     spritePosition: {x: 0, y: 126}
   characterData:
@@ -6846,6 +6831,7 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -6853,10 +6839,12 @@ ScriptedImporter:
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   platformSettings:
   - name: DefaultTexturePlatform
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6868,6 +6856,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Standalone
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6879,6 +6868,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Server
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6890,6 +6880,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Android
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6901,6 +6892,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: iPhone
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6912,6 +6904,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: WebGL
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6931,6 +6924,8 @@ ScriptedImporter:
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -7199,6 +7194,9 @@ ScriptedImporter:
     isVisible: 0
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 
   prefabAssetName: 

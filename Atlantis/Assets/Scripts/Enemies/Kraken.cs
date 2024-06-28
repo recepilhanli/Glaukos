@@ -214,7 +214,7 @@ public class Kraken : Entity, IEnemyAI
 
                     if (InkDuration < Time.time)
                     {
-                        LevelManager.PlaySound2D(_Clips[4], 0.5f);
+                        SoundManager.PlaySound2D(_Clips[4], 0.5f);
                         Instantiate(InkPrefab, transform.position, Quaternion.identity);
                         InkDuration = Time.time + 2.5f;
 
@@ -228,7 +228,7 @@ public class Kraken : Entity, IEnemyAI
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.up * 5, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.right * 12, Quaternion.identity);
                             Instantiate(InkPrefabNoFollowing, transform.position + Vector3.down * 5, Quaternion.identity);
-                            LevelManager.PlaySound2D(_Clips[5], 0.5f);
+                            SoundManager.PlaySound2D(_Clips[5], 0.5f);
                         }
                         else
                         {
@@ -319,7 +319,7 @@ public class Kraken : Entity, IEnemyAI
     public void OnDetected(Entity _entity)
     {
         if (_isEntitySeen) return;
-        LevelManager.PlaySound2D(_Clips[3], 1);
+        SoundManager.PlaySound2D(_Clips[3], 1);
         _isEntitySeen = true;
         Player.Instance.LockLensSize = true;
         _KrakenCanvas.SetActive(true);

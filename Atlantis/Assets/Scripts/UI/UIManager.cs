@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
                 if (Time.timeSinceLevelLoad > 5)
                 {
                     Fade(0.5f, 0, 0.5f, 2f);
-                    LevelManager.PlaySound2D(Player.Instance.RageNotificationClip, 0.6f);
+                    SoundManager.PlaySound2D(Player.Instance.RageNotificationClip, 0.6f);
                 }
             }
             else if (Player.Instance.Focus < 85 && FocusFillImage.color != FocusNormalColor) FocusFillImage.color = FocusNormalColor;
@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
 
             if (Player.Instance.Focus >= 40 && Consumables[1].color != AvailableColor)
             {
-                if (Time.timeSinceLevelLoad > 5) LevelManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
+                if (Time.timeSinceLevelLoad > 5) SoundManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
                 Consumables[1].color = AvailableColor;
             }
 
@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
 
             if (Player.Instance.Focus >= 25 && Consumables[0].color != AvailableColor)
             {
-                if (Time.timeSinceLevelLoad > 5) LevelManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
+                if (Time.timeSinceLevelLoad > 5) SoundManager.PlaySound2D(Player.Instance.CanUseClip, .45f);
                 Consumables[0].color = AvailableColor;
             }
             else if (Player.Instance.Focus < 25 && Consumables[0].color != UnavailableColor) Consumables[0].color = UnavailableColor;
@@ -143,6 +143,6 @@ public class UIManager : MonoBehaviour
 
         var go = Instantiate(TitlePrefab);
         go.GetComponent<Title>().ShowTitle(text, .4f);
-        LevelManager.PlaySound2D(_TitleChillClip, 0.3f);
+        SoundManager.PlaySound2D(_TitleChillClip, 0.3f);
     }
 }

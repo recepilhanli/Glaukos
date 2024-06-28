@@ -200,7 +200,7 @@ public class Skilla : Entity, IEnemyAI
                         try
                         {
                             Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
-                            LevelManager.PlaySound2D(_SpellClip, .6f);
+                            SoundManager.PlaySound2D(_SpellClip, .6f);
                         }
 
                         catch
@@ -230,7 +230,7 @@ public class Skilla : Entity, IEnemyAI
                         try
                         {
                             Instantiate(_SpellingHealthParticle, transform.position, Quaternion.identity);
-                            LevelManager.PlaySound2D(_SpellClip, .6f);
+                            SoundManager.PlaySound2D(_SpellClip, .6f);
                         }
                         catch
                         {
@@ -261,7 +261,7 @@ public class Skilla : Entity, IEnemyAI
                         {
 
                             Instantiate(_SpellingFocusParticle, transform.position, Quaternion.identity);
-                            LevelManager.PlaySound2D(_SpellClip, .6f);
+                            SoundManager.PlaySound2D(_SpellClip, .6f);
                         }
                         catch
                         {
@@ -293,7 +293,7 @@ public class Skilla : Entity, IEnemyAI
         wave.transform.up = (Player.Instance.transform.position - transform.position).normalized;
         Destroy(wave, 3f);
 
-        LevelManager.PlaySound2D(_ThrowClip, .6f);
+        SoundManager.PlaySound2D(_ThrowClip, .6f);
     }
 
 
@@ -342,7 +342,7 @@ public class Skilla : Entity, IEnemyAI
             {
                 CallEnemyCooldown = Time.time + 15;
             }
-            LevelManager.PlaySound2D(_SpellClip, .6f);
+            SoundManager.PlaySound2D(_SpellClip, .6f);
             Instantiate(_CallEnemyParticle, transform.position, Quaternion.identity);
         }
         catch
@@ -514,7 +514,7 @@ public class Skilla : Entity, IEnemyAI
         if (_CurrentState == SkillaStates.State_Grabbing && Random.Range(0, 5) <= 2) SetState(SkillaStates.State_NONE);
         else if ((_CurrentState == SkillaStates.State_SpellingHealth || _CurrentState == SkillaStates.State_SpellingFocus) && Random.Range(0, 3) <= 1 && _SpellDelay <= Time.time)
         {
-            LevelManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .75f);
+            SoundManager.PlaySound2D(Player.Instance._Spear.SpearImpactSound2, .75f);
             SetState(SkillaStates.State_NONE);
         }
 
@@ -558,7 +558,7 @@ public class Skilla : Entity, IEnemyAI
     {
         if (isDeath) return;
         isDeath = true;
-        Player.Instance.BossKillReward("Credits");
+        Player.Instance.BossKillReward("FinalScene");
 
     }
 

@@ -81,7 +81,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetFirstLevel()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("First Level");
         PlayerPrefs.SetInt(PerfTable.perf_Tutorial, 1);
         PlayerPrefs.DeleteKey(PerfTable.perf_LoadID);
@@ -100,7 +100,7 @@ public class Menu : MonoBehaviour
         PlayerPrefs.DeleteKey(PerfTable.perf_LoadID);
         PlayerPrefs.Save();
 
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         Debug.Log("Skip New Level");
         Loading.LoadScene(PerfTable.perf_Level1);
     }
@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void OpenTutorialPanel()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         if (!PlayerPrefs.HasKey(PerfTable.perf_Tutorial))
         {
             GetFirstLevel();
@@ -126,7 +126,7 @@ public class Menu : MonoBehaviour
     {
         if (_TutorialPanel != null)
         {
-            LevelManager.PlaySound2D(_ButtonSound, 1f);
+            SoundManager.PlaySound2D(_ButtonSound, 1f);
             _TutorialPanel.SetActive(false);
         }
     }
@@ -136,7 +136,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GetDevLevel()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         Loading.LoadScene("DeveloperScene");
     }
 
@@ -145,7 +145,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         SceneManager.LoadScene("Menu");
     }
 
@@ -154,7 +154,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void Quit()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         Application.Quit();
     }
 
@@ -163,7 +163,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void Continue()
     {
-        if (_ButtonSound != null) LevelManager.PlaySound2D(_ButtonSound, 1f);
+        if (_ButtonSound != null) SoundManager.PlaySound2D(_ButtonSound, 1f);
         string levelName = PerfTable.perf_Level1;
         if (PlayerPrefs.HasKey(PerfTable.perf_LastScene))
         {

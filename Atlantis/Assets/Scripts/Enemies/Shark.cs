@@ -26,8 +26,6 @@ public class Shark : Entity, IEnemyAI
 
     private Sprite _RegularSprite;
 
-    [SerializeField] List<AudioClip> _Clips = new List<AudioClip>();
-
     Vector3 m_Velocity = Vector3.zero;
 
     Vector2 _RoamingPos = Vector2.zero;
@@ -136,7 +134,7 @@ public class Shark : Entity, IEnemyAI
         _IgnoreEntitesDuration = 2f + Time.time;
         _isEntitySeen = false;
         Invoke("SetRegulerSprite", 2f);
-        PlaySound(0);
+        SoundManager.PlaySound2D("sharkbite");
     }
 
 
@@ -147,11 +145,7 @@ public class Shark : Entity, IEnemyAI
         _Renderer.sprite = _RegularSprite;
     }
 
-    void PlaySound(int index)
-    {
-        if (isDeath) return;
-        LevelManager.PlaySound2D(_Clips[index], .3f);
-    }
+
 
 
     public void OnDetected(Entity _entity)
@@ -206,8 +200,7 @@ public class Shark : Entity, IEnemyAI
 
     IEnumerator DamageEffect()
     {
-        int randomindex = UnityEngine.Random.Range(1, _Clips.Count);
-        PlaySound(randomindex);
+        Player.Instance.PlayHitClip();
 
         _Renderer.color = Color.red;
         yield return new WaitForSeconds(0.2f);

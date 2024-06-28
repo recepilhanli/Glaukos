@@ -20,7 +20,7 @@ namespace MainCharacter
     /// </summary>
     public partial class Player : Entity
     {
-
+        private static readonly string[] HIT_CLIPS = { "damage1", "damage2", "damage3", "damage4", "damage5", "damage6", "damage7", "damage8", "damage9", "damage10" };
         public static int RemainingLifes { private set; get; } = 5;
 
         [Space]
@@ -86,7 +86,7 @@ namespace MainCharacter
 
         public void GetSpearInteractionClip()
         {
-            LevelManager.PlaySound2D(_Spear.SpearImpactSound2, .5f);
+            SoundManager.PlaySound2D(_Spear.SpearImpactSound2, .5f);
         }
 
 
@@ -97,17 +97,17 @@ namespace MainCharacter
 
         public void PlayHitClip()
         {
-            LevelManager.PlaySound2D(_Spear.HitClips[Random.Range(0, _Spear.HitClips.Count)], .3f);
+            SoundManager.PlaySound2D(HIT_CLIPS[Random.Range(0, HIT_CLIPS.Length)], Random.Range(.25f, .35f));
         }
 
         public void PlayFocusClip()
         {
-            LevelManager.PlaySound2D(Instance.FocusClip, .5f);
+            SoundManager.PlaySound2D(Instance.FocusClip, .5f);
         }
 
         public void PlayHarmClip()
         {
-            LevelManager.PlaySound2D(Instance.HarmClip, 1f);
+            SoundManager.PlaySound2D(Instance.HarmClip, 1f);
         }
 
 
@@ -140,9 +140,9 @@ namespace MainCharacter
                 Health += 5;
                 Health = Mathf.Clamp(Health, 0, 100);
                 UIManager.Instance.Fade(0, 0.9f, 0.1f);
-                LevelManager.PlaySound2D(_HealClip, .6f);
+                SoundManager.PlaySound2D(_HealClip, .6f);
             }
-            else if (Input.GetKeyDown(_KeybindTable.HealKey)) LevelManager.PlaySound2D(_CannotUseClip, .05f);
+            else if (Input.GetKeyDown(_KeybindTable.HealKey)) SoundManager.PlaySound2D(_CannotUseClip, .05f);
 
 
 
@@ -153,10 +153,10 @@ namespace MainCharacter
                 _Spear.CreateTornado();
                 UIManager.Instance.Fade(1, 1, 1);
                 AttackState(4);
-                LevelManager.PlaySound2D(_Spear.SpearTalent1, .5f);
+                SoundManager.PlaySound2D(_Spear.SpearTalent1, .5f);
                 CameraShake(3.0f, 0.6f, 0.01f);
             }
-            else if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25) LevelManager.PlaySound2D(_CannotUseClip, .05f);
+            else if (Input.GetKeyDown(_KeybindTable.Using_Item_1) && Focus >= 25) SoundManager.PlaySound2D(_CannotUseClip, .05f);
 
 
             if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40 && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
@@ -166,10 +166,10 @@ namespace MainCharacter
                 _Spear.CreateSpearRain();
                 UIManager.Instance.Fade(1, 1, 1);
                 AttackState(5);
-                LevelManager.PlaySound2D(_Spear.SpearTalent2, .5f);
+                SoundManager.PlaySound2D(_Spear.SpearTalent2, .5f);
                 CameraShake(3.0f, 0.6f, 0.01f);
             }
-            else if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40) LevelManager.PlaySound2D(_CannotUseClip, .05f);
+            else if (Input.GetKeyDown(_KeybindTable.Using_Item_2) && Focus >= 40) SoundManager.PlaySound2D(_CannotUseClip, .05f);
 
             if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true) && _Spear.ThrowState == Spear.ThrowStates.STATE_NONE)
             {
@@ -177,7 +177,7 @@ namespace MainCharacter
                 GiveFocusPoints(-85);
                 RageCombat();
             }
-            else if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true)) LevelManager.PlaySound2D(_CannotUseClip, .05f);
+            else if (Input.GetKeyDown(_KeybindTable.RageKey) && ((Focus >= 85 && TutorialDialogHandler.SetFullFocus == false) || TutorialDialogHandler.SetFullFocus == true)) SoundManager.PlaySound2D(_CannotUseClip, .05f);
 
         }
 
@@ -464,7 +464,7 @@ namespace MainCharacter
 
         public void BossKillReward(string nextScene, bool sound = true)
         {
-            if (sound) LevelManager.PlaySound2D(_RewardClip, .4f);
+            if (sound) SoundManager.PlaySound2D(_RewardClip, .4f);
             Health = 100;
             Focus = 100;
             LevelManager.Instance.SaveGame(false);
